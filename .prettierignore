@@ -1,0 +1,7 @@
+.next
+node_modules
+pnpm-lock.yaml
+src/generated
+# The five specification documents are the client's, not ours. Prettier
+# reflows markdown tables and swaps emphasis markers; leave them untouched.
+docs

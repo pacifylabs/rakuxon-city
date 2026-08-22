@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* Design tokens — 04_DESIGN_SYSTEM.md §10, translated from the Tailwind v3
+   config block to the v4 @theme syntax. Values are unchanged; only the
+   declaration form differs. This block is the source of truth for colour and
+   type: nothing in the app hard-codes a hex value or a font size. */
+@theme {
+  /* §2 Colour */
+  --color-canvas: #f1f4ef;
+  --color-surface: #ffffff;
+
+  --color-ink: #171a16;
+  --color-ink-secondary: #5c635b;
+  --color-ink-muted: #8e948c;
+
+  --color-accent: #3e7350;
+  --color-accent-hover: #325d41;
+  --color-accent-tint: #e7efe8;
+
+  --color-hairline: #e2e7df;
+  --color-deep: #101310;
+
+  /* §2 Status — quiet by design, they appear on every card */
+  --color-status-available: #3e7350;
+  --color-status-available-bg: #e7efe8;
+  --color-status-reserved: #8a6a1f;
+  --color-status-reserved-bg: #f6efdd;
+  --color-status-sold: #6b6f69;
+  --color-status-sold-bg: #edefeb;
+
+  /* §6 Forms — inline error text */
+  --color-error: #a33a2d;
+
+  /* §3 Typography */
+  --font-display: var(--font-instrument-sans), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+
+  --text-display-xl: 4rem;
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.03em;
+
+  --text-display-l: 3rem;
+  --text-display-l--line-height: 1.1;
+  --text-display-l--letter-spacing: -0.025em;
+
+  --text-display-m: 2.25rem;
+  --text-display-m--line-height: 1.15;
+  --text-display-m--letter-spacing: -0.02em;
+
+  --text-heading: 1.5rem;
+  --text-heading--line-height: 1.25;
+  --text-heading--letter-spacing: -0.01em;
+
+  --text-body-l: 1.0625rem;
+  --text-body-l--line-height: 1.6;
+
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.6;
+
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.04em;
+
+  /* §5 Radii and elevation. `lift` is used exactly twice on the whole site. */
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-image-l: 16px;
+  --shadow-lift: 0 2px 12px rgba(23, 26, 22, 0.06);
+}
+
+/* §3 Mobile type scale. Display steps drop one notch below `lg`; body sizes
+   hold. Redefining the token rather than restating sizes at each call site
+   keeps §10 the only place these numbers live. */
+@media (width < 64rem) {
+  :root {
+    --text-display-xl: 2.5rem;
+    --text-display-l: 2rem;
+    --text-display-m: 1.625rem;
+  }
+}
+
+@layer base {
+  /* §11 — the canvas tint is the identity. The page is never white. */
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  /* §3 — only 400 and 500 exist. Headings inherit regular weight and take
+     their authority from size, so browser default bolding is cancelled here. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  /* §3 — prices, areas and counts align in columns. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
