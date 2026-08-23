@@ -16,6 +16,9 @@ before changing anything:
 | `docs/04_design_system.md`           | Palette, type, components, Tailwind theme     |
 | `docs/reference/05_reference-ui.png` | The client-approved reference layout          |
 
+Open questions, placeholder content and launch gates are tracked in
+[`TODO.md`](TODO.md).
+
 `docs/04_design_system.md` §10 is the source of truth for colour and type. It is
 translated into Tailwind v4 `@theme` tokens in `src/app/globals.css`; no component
 hard-codes a hex value or a font size. Font weight never exceeds 500, listing
