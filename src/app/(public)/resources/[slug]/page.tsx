@@ -5,7 +5,6 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { getArticle, getArticleSlugs } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { ArticleCategory } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -67,10 +66,6 @@ export default async function ArticlePage({
                 priority
                 sizes="(min-width: 1024px) 70vw, 100vw"
                 className="object-cover"
-              />
-              <StandInLabel
-                show={article.coverImage.isStandIn}
-                attribution={article.coverImage.attribution}
               />
             </figure>
           ) : null}

@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/badge";
 import { IconAction } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import { cn } from "@/lib/cn";
 import { formatArea } from "@/lib/format";
 import type {
@@ -97,12 +96,6 @@ export function ListingCard({
           <div className="size-full bg-accent-tint" />
         )}
 
-        <StandInLabel
-          compact
-          show={Boolean(listing.image?.isStandIn)}
-          context={listing.type === "LAND" ? "plot" : "property"}
-          attribution={listing.image?.attribution}
-        />
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5">

@@ -1,3 +1,9 @@
+"use client";
+
+import {
+  NotLiveNotice,
+  useNotLiveSubmit,
+} from "@/components/forms/not-live-notice";
 import {
   Checkbox,
   Field,
@@ -25,24 +31,13 @@ export function EnquiryForm({
   listingReference?: string;
   preview?: boolean;
 }) {
+  const { mailto, onSubmit } = useNotLiveSubmit("Property enquiry");
+
   return (
     <form
       className="flex flex-col gap-5"
-      // No action and no handler: there is nowhere for this to go yet.
-      onSubmit={undefined}
-      aria-describedby={preview ? "enquiry-preview-notice" : undefined}
+      onSubmit={preview ? onSubmit : undefined}
     >
-      {preview ? (
-        <p
-          id="enquiry-preview-notice"
-          className="rounded-control border border-hairline bg-accent-tint px-4 py-3 text-caption text-ink-secondary"
-        >
-          <span className="text-accent">Preview.</span> The enquiry system goes
-          live in the next phase of the build. Nothing typed here would reach us
-          yet, so the form is switched off rather than left to swallow it.
-        </p>
-      ) : null}
-
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" htmlFor="enquiry-name">
           <Input
@@ -50,7 +45,6 @@ export function EnquiryForm({
             name="name"
             autoComplete="name"
             placeholder="Your name"
-            disabled={preview}
           />
         </Field>
 
@@ -61,7 +55,6 @@ export function EnquiryForm({
             type="tel"
             autoComplete="tel"
             placeholder="0803 123 4567"
-            disabled={preview}
           />
         </Field>
 
@@ -72,17 +65,11 @@ export function EnquiryForm({
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            disabled={preview}
           />
         </Field>
 
         <Field label="What are you looking for?" htmlFor="enquiry-interest">
-          <Select
-            id="enquiry-interest"
-            name="interest"
-            defaultValue=""
-            disabled={preview}
-          >
+          <Select id="enquiry-interest" name="interest" defaultValue="">
             <option value="" disabled>
               Choose one
             </option>
@@ -100,7 +87,6 @@ export function EnquiryForm({
             name="reference"
             defaultValue={listingReference}
             readOnly
-            disabled={preview}
           />
         </Field>
       ) : null}
@@ -111,7 +97,6 @@ export function EnquiryForm({
           name="message"
           rows={4}
           placeholder="Tell us which estate you are interested in, and when you would like to inspect."
-          disabled={preview}
         />
       </Field>
 
@@ -119,7 +104,6 @@ export function EnquiryForm({
       <Checkbox
         id="enquiry-consent"
         name="consent"
-        disabled={preview}
         label={
           <>
             I have read the privacy policy and consent to Rakuxon City
@@ -128,19 +112,15 @@ export function EnquiryForm({
         }
       />
 
-      <div className="flex flex-wrap items-center gap-4">
+      {mailto ? <NotLiveNotice mailto={mailto} /> : null}
+
+      <div>
         <button
           type="submit"
-          disabled={preview}
-          className="min-h-11 rounded-full bg-accent px-6 py-3 text-body text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-45"
+          className="min-h-11 cursor-pointer rounded-full bg-accent px-6 py-3 text-body text-white transition-colors hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
         >
-          {preview ? "Coming soon" : "Send enquiry"}
+          Send enquiry
         </button>
-        {preview ? (
-          <p className="text-caption text-ink-muted">
-            Reach us on hello@rakuxoncity.com in the meantime.
-          </p>
-        ) : null}
       </div>
     </form>
   );

@@ -2,17 +2,27 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        // 06_FEATURE_VIDEO_TOURS.md §5 — the poster fallback for videos with no
-        // custom poster uploaded. Routing it through next/image rather than
-        // hotlinking also means a visitor who never presses play is never
-        // announced to Google, which is most of what the facade is for.
-        protocol: "https",
-        hostname: "i.ytimg.com",
-        pathname: "/vi/**",
-      },
-    ],
+    /*
+     * AVIF ahead of WebP.
+     *
+     * The homepage LCP is now the hero photograph, and under Lighthouse's
+     * simulated slow-4G it competes with 161KB of preloaded fonts for the
+     * opening bandwidth. AVIF typically lands 30–50% under WebP at the same
+     * visual quality, which is the largest saving available without touching
+     * the type stack that design system §3 fixes at two families.
+     *
+     * Next falls back to WebP automatically where the browser does not accept
+     * AVIF, so nothing is lost on older Android.
+     */
+    formats: ["image/avif", "image/webp"],
+
+    /*
+     * Optimised variants are cached for a year. They are immutable — the URL
+     * carries the source path, width and quality — so a short TTL only means
+     * re-encoding the same bytes on every cold hit, which is exactly the
+     * "slow on the deployed site" symptom.
+     */
+    minimumCacheTTL: 31_536_000,
   },
 };
 

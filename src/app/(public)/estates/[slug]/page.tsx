@@ -111,9 +111,41 @@ export default async function EstateDetailPage({
           </h1>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-6">
-            <p className="text-body-l text-ink-secondary lg:col-span-7">
-              {estate.description}
-            </p>
+            <div className="lg:col-span-7">
+              <p className="text-body-l text-ink-secondary">
+                {estate.description}
+              </p>
+
+              {/*
+                Figures read from the estate's own stock rather than typed in.
+                The description alone left this column short against the
+                amenities list beside it — the gap the client marked.
+              */}
+              <dl className="mt-8 grid grid-cols-3 gap-x-6 gap-y-2 border-t border-hairline pt-6">
+                <div>
+                  <dt className="text-caption text-ink-muted">Plots listed</dt>
+                  <dd className="tabular mt-1 text-display-m text-ink">
+                    {land.length}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-caption text-ink-muted">Homes listed</dt>
+                  <dd className="tabular mt-1 text-display-m text-ink">
+                    {homes.length}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-caption text-ink-muted">Available now</dt>
+                  <dd className="tabular mt-1 text-display-m text-accent">
+                    {
+                      [...land, ...homes].filter(
+                        (listing) => listing.status === "AVAILABLE",
+                      ).length
+                    }
+                  </dd>
+                </div>
+              </dl>
+            </div>
 
             {estate.amenities.length > 0 ? (
               <ul className="lg:col-span-5 lg:col-start-8">
@@ -246,13 +278,14 @@ export default async function EstateDetailPage({
 
       <Section className="pt-0 lg:pt-0">
         <Container>
-          <div className="max-w-2xl">
-            <LocationBlock
-              location={estate.location}
-              state={estate.state}
-              estateName={estate.name}
-            />
-          </div>
+          {/* Full width. Capped at max-w-2xl it stopped two thirds across the
+              page and read as an unfinished row. */}
+          <LocationBlock
+            location={estate.location}
+            state={estate.state}
+            estateName={estate.name}
+            layout="wide"
+          />
         </Container>
       </Section>
     </>

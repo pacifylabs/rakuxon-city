@@ -29,10 +29,14 @@ export function Spotlight({ listings }: { listings: ListingCardData[] }) {
           note="Sold listings stay visible. Stock that moves is the clearest evidence an estate is real."
         />
 
+        {/* The one autoplaying carousel on the site, at the client's request.
+            It pauses on hover and focus, never starts under reduced motion,
+            and stops for good on the first deliberate interaction. */}
         <Carousel
           label="spotlight listings"
           className="mt-12 lg:mt-16"
           itemClassName="w-[280px] sm:w-[320px] lg:w-[360px]"
+          autoPlay
         >
           {listings.map((listing) => (
             <ListingCard key={listing.slug} listing={listing} showAction />

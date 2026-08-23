@@ -57,6 +57,7 @@ export default async function HomePage() {
     collage,
     delivered,
     videos,
+    hero,
   ] = await Promise.all([
     getLaneCounts(),
     getFeaturedEstates(2),
@@ -66,11 +67,12 @@ export default async function HomePage() {
     getCollageImages(),
     getDeliveredEstateCount(),
     getFeaturedVideos(4),
+    getPlacement("homepage.hero"),
   ]);
 
   return (
     <>
-      <Hero counts={counts} />
+      <Hero counts={counts} image={hero} />
       <FeaturedEstate estates={estates} />
       <TwoLane counts={counts} />
       <TrustBand deliveredEstates={delivered} />

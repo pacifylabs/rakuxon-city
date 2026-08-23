@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import { getDeliveredEstateCount, getEstates } from "@/lib/content";
 import { getLaneCounts } from "@/lib/listings";
 import { getPlacement } from "@/lib/media";
@@ -46,17 +45,61 @@ export default async function AboutPage() {
             We sell land the way we would want it sold to us
           </h1>
 
-          <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-6">
-            <p className="max-w-[52ch] text-body-l text-ink-secondary lg:col-span-5">
-              {/* TODO: real figures — company story and history need client copy. */}
-              Rakuxon City develops and sells residential land and housing
-              across Lagos, Ogun and the Federal Capital Territory. We acquire
-              and title land ourselves, develop it into serviced estates, and
-              sell plots and completed homes directly to buyers.
-            </p>
+          {/*
+            `items-stretch`, and the text column carries enough copy to reach
+            the image's height. Centring a three-line paragraph against a tall
+            photograph left a void above and below it — the client's note was
+            that the two "do not align".
+          */}
+          <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-6">
+            <div className="flex flex-col justify-between gap-8 lg:col-span-5">
+              <div>
+                {/* TODO: real figures — company story and history need client copy. */}
+                <p className="max-w-[52ch] text-body-l text-ink-secondary">
+                  Rakuxon City develops and sells residential land and housing
+                  across Lagos, Ogun and the Federal Capital Territory. We
+                  acquire and title land ourselves, develop it into serviced
+                  estates, and sell plots and completed homes directly to
+                  buyers.
+                </p>
+                <p className="mt-6 max-w-[52ch] text-body text-ink-secondary">
+                  That order matters. Because we hold the title before we
+                  subdivide, we can tell you exactly what covers your plot and
+                  what does not — and we publish it on the listing rather than
+                  waiting to be asked.
+                </p>
+              </div>
+
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-hairline pt-8">
+                <div>
+                  <dt className="text-caption text-ink-muted">We sell</dt>
+                  <dd className="mt-1 text-body text-ink">
+                    Plots and completed homes
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-caption text-ink-muted">Directly</dt>
+                  <dd className="mt-1 text-body text-ink">
+                    No agents in between
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-caption text-ink-muted">Where</dt>
+                  <dd className="mt-1 text-body text-ink">
+                    Lagos, Ogun and the FCT
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-caption text-ink-muted">Payment</dt>
+                  <dd className="mt-1 text-body text-ink">
+                    Outright or on a plan
+                  </dd>
+                </div>
+              </dl>
+            </div>
 
             {hero ? (
-              <div className="relative aspect-16/10 overflow-hidden rounded-image-l lg:col-span-7">
+              <div className="relative aspect-16/10 overflow-hidden rounded-image-l lg:col-span-7 lg:aspect-auto lg:min-h-[26rem]">
                 <Image
                   src={hero.url}
                   alt={hero.alt}
@@ -64,10 +107,6 @@ export default async function AboutPage() {
                   sizes="(min-width: 1024px) 58vw, 100vw"
                   priority
                   className="object-cover"
-                />
-                <StandInLabel
-                  show={hero.isStandIn}
-                  attribution={hero.attribution}
                 />
               </div>
             ) : null}
@@ -154,11 +193,6 @@ export default async function AboutPage() {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    <StandInLabel
-                      show={Boolean(estate.image?.isStandIn)}
-                      attribution={estate.image?.attribution}
-                      compact
-                    />
                   </div>
 
                   <p className="mt-5 text-heading text-ink transition-colors group-hover:text-accent">

@@ -5,7 +5,6 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { formatMonthYear } from "@/lib/format";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { ArticleCategory } from "@/generated/prisma/enums";
 
 type Article = {
@@ -67,10 +66,6 @@ export function ResourcesTeaser({ articles }: { articles: Article[] }) {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    <StandInLabel
-                      show={Boolean(article.coverImage?.isStandIn)}
-                      attribution={article.coverImage?.attribution}
-                    />
                   </div>
 
                   <div className="mt-6 flex gap-6">

@@ -59,11 +59,11 @@ export function Header({
               width={logo.width}
               height={logo.height}
               priority
-              // Renders 32px tall. Without this the browser picks a candidate
-              // sized for the viewport and the mark becomes the heaviest asset
-              // on the page.
-              sizes="120px"
-              className="h-8 w-auto"
+              // Renders 40px tall on desktop, 32px on a phone. Without an
+              // explicit `sizes` the browser picks a candidate sized for the
+              // viewport and the mark becomes the heaviest asset on the page.
+              sizes="(min-width: 640px) 168px, 134px"
+              className="h-8 w-auto sm:h-10"
             />
           </Link>
 
@@ -95,7 +95,7 @@ export function Header({
                       <span
                         aria-hidden="true"
                         className={cn(
-                          "absolute -bottom-1 left-0 h-px w-full origin-left bg-accent transition-transform duration-200",
+                          "absolute -bottom-1 left-0 h-px w-full origin-left bg-gold transition-transform duration-200",
                           active ? "scale-x-100" : "scale-x-0",
                         )}
                       />

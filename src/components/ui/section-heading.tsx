@@ -61,7 +61,9 @@ export function SectionHeading({
 
           {action || note ? (
             <>
-              <hr className="mt-6 border-t border-hairline" />
+              {/* Gold rather than hairline: one of the few marks §11's new secondary
+                  is allowed to carry. Decorative, so no contrast floor applies. */}
+              <hr className="mt-6 border-t border-gold/40" />
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                 {action}
                 {note ? (

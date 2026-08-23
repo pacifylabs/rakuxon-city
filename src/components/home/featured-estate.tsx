@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowGlyph, ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 
 type Estate = {
   slug: string;
@@ -44,7 +43,17 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                   src={lead.image.url}
                   alt={lead.image.alt}
                   fill
-                  priority
+                  /*
+                   * Deliberately NOT `priority`.
+                   *
+                   * It carried it while the hero was type on bare canvas and
+                   * this was the page's LCP element. The hero now leads with a
+                   * photograph, so `priority` here preloaded the largest
+                   * payload on the page — 85KB, below the fold — in direct
+                   * competition with the real LCP image, which then sat ~2s in
+                   * Load Delay waiting for bandwidth.
+                   */
+                  loading="lazy"
                   sizes="(min-width: 1024px) 66vw, 100vw"
                   className="object-cover"
                 />
@@ -63,11 +72,6 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
               </figcaption>
 
               {/* Bottom-right: the lifted callout overlaps the bottom-left corner. */}
-              <StandInLabel
-                show={Boolean(lead.image?.isStandIn)}
-                attribution={lead.image?.attribution}
-                className="right-3 bottom-3 left-auto"
-              />
             </figure>
 
             {/* Elevation 1 of 2 — the callout overlapping the hero imagery. */}

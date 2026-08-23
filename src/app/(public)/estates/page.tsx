@@ -7,7 +7,6 @@ import { Container, Section } from "@/components/ui/container";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getEstates } from "@/lib/content";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { EstateStatus } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -59,10 +58,6 @@ export default async function EstatesPage() {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    <StandInLabel
-                      show={Boolean(estate.image?.isStandIn)}
-                      attribution={estate.image?.attribution}
-                    />
                   </div>
 
                   <div className="mt-6 flex flex-1 flex-col">

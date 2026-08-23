@@ -5,7 +5,6 @@ import { Container, Section } from "@/components/ui/container";
 import { Pagination } from "@/components/listings/pagination";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { StandInLabel } from "@/components/ui/stand-in-label";
 import { cn } from "@/lib/cn";
 import { getArticles } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
@@ -181,10 +180,6 @@ function LeadArticle({ article }: { article: ArticleRow }) {
         ) : (
           <div className="size-full bg-accent-tint" />
         )}
-        <StandInLabel
-          show={Boolean(article.coverImage?.isStandIn)}
-          attribution={article.coverImage?.attribution}
-        />
       </Link>
 
       <div className="lg:col-span-5">
@@ -234,11 +229,6 @@ function ArticleCard({ article }: { article: ArticleRow }) {
           ) : (
             <div className="size-full bg-accent-tint" />
           )}
-          <StandInLabel
-            show={Boolean(article.coverImage?.isStandIn)}
-            attribution={article.coverImage?.attribution}
-            compact
-          />
         </div>
 
         <p className="mt-5 text-caption text-ink-muted">

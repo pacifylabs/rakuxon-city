@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { Input } from "@/components/ui/field";
+import { NewsletterSignup } from "@/components/layout/newsletter-signup";
 
 /**
  * 04_DESIGN_SYSTEM.md §6 — a `deep` bar across the full width, with
@@ -40,6 +40,10 @@ const siteLinks = [
 const legalLinks = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
+  // CC BY requires attribution "in a manner reasonable to the medium". The
+  // on-image label is gone, so this link is what keeps 22 of the 25 stand-in
+  // photographs inside their licence.
+  { label: "Image credits", href: "/credits" },
 ];
 
 export function Footer() {
@@ -47,9 +51,18 @@ export function Footer() {
     <footer className="relative z-10 bg-deep">
       <Container>
         <div className="py-16 lg:py-20">
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            <div>
-              <p className="text-eyebrow text-canvas/75">Contact us</p>
+          {/*
+            12 columns, not four equal quarters. The contact column carries a
+            call to action and the newsletter carries a field, while the two
+            link columns are single words — equal quarters gave the widest space
+            to the content that needed least. 4 / 2 / 2 / 4 tracks the content.
+
+            Two columns at `sm`, four at `lg`, and the gold rule above the
+            bottom row ties it to the rest of the palette.
+          */}
+          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="text-eyebrow text-gold-on-deep">Contact us</p>
               <ul className="mt-5 space-y-3">
                 <li>
                   <a
@@ -81,14 +94,14 @@ export function Footer() {
               */}
               <Link
                 href="/invest"
-                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-canvas/30 px-5 text-body text-canvas transition-colors hover:border-canvas hover:bg-canvas/10 focus-visible:ring-2 focus-visible:ring-canvas focus-visible:outline-none"
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-gold-on-deep px-5 text-body text-gold-on-deep transition-colors hover:bg-gold-on-deep/10 focus-visible:ring-2 focus-visible:ring-gold-on-deep focus-visible:outline-none"
               >
                 Partner with us
               </Link>
             </div>
 
-            <nav aria-label="Footer">
-              <p className="text-eyebrow text-canvas/75">Explore</p>
+            <nav aria-label="Footer" className="lg:col-span-2">
+              <p className="text-eyebrow text-gold-on-deep">Explore</p>
               <ul className="mt-5 space-y-3">
                 {siteLinks.map((link) => (
                   <li key={link.href}>
@@ -103,8 +116,8 @@ export function Footer() {
               </ul>
             </nav>
 
-            <div>
-              <p className="text-eyebrow text-canvas/75">Share with us</p>
+            <div className="lg:col-span-2">
+              <p className="text-eyebrow text-gold-on-deep">Share with us</p>
               <ul className="mt-5 space-y-3">
                 {socials.map((social) => (
                   <li key={social.label}>
@@ -121,33 +134,14 @@ export function Footer() {
               </ul>
             </div>
 
-            <div>
-              <p className="text-eyebrow text-canvas/75">Newsletter</p>
-              {/* Not wired up until Phase 6. Disabled rather than accepting an
-                  address it would silently discard. */}
-              <div className="mt-5 flex flex-col gap-3">
-                <Input
-                  type="email"
-                  disabled
-                  aria-label="Email address"
-                  placeholder="Email address"
-                  className="border-canvas/20 bg-canvas/5 text-canvas placeholder:text-canvas/40 disabled:bg-canvas/5 disabled:text-canvas/40"
-                />
-                <button
-                  type="button"
-                  disabled
-                  className="min-h-11 shrink-0 cursor-not-allowed rounded-full border border-canvas/20 px-6 text-body text-canvas/40"
-                >
-                  Coming soon
-                </button>
-              </div>
-              <p className="mt-3 text-caption text-canvas/75">
-                Sign-up opens when the enquiry system goes live.
-              </p>
+            <div className="lg:col-span-4">
+              <p className="text-eyebrow text-gold-on-deep">Newsletter</p>
+              {/* Live-looking, and honest on press — see NewsletterSignup. */}
+              <NewsletterSignup />
             </div>
           </div>
 
-          <div className="mt-16 flex flex-col gap-4 border-t border-canvas/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-16 flex flex-col gap-4 border-t border-gold-on-deep/25 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-caption text-canvas/75">
               © {new Date().getFullYear()} Rakuxon City. All rights reserved.
             </p>

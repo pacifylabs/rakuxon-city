@@ -52,21 +52,55 @@ export function Gallery({
   if (images.length === 0) return null;
 
   const [lead, ...rest] = images;
+  const sideTiles = rest.slice(0, 2);
+
+  /*
+   * The mosaic only works when there is something to put beside the lead.
+   *
+   * Every listing currently carries exactly one photograph, and the old layout
+   * always reserved three columns and gave the lead two of them — so a
+   * single-image listing rendered two thirds of a row and a third of nothing.
+   * That empty third is the dead space the client marked on the detail page.
+   *
+   * So the shape follows the count: one image takes the full width at a wider
+   * ratio, two split the row, three or more get the mosaic as designed.
+   */
+  const layout =
+    sideTiles.length === 0
+      ? "single"
+      : sideTiles.length === 1
+        ? "pair"
+        : "mosaic";
 
   return (
     <div className={className}>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div
+        className={cn(
+          "grid gap-4",
+          layout === "pair" && "lg:grid-cols-2",
+          layout === "mosaic" && "lg:grid-cols-3",
+        )}
+      >
         <GalleryTile
           image={lead}
           onOpen={() => setOpen(0)}
-          className="lg:col-span-2 lg:row-span-2"
+          className={cn(
+            layout === "single" && "aspect-16/9",
+            layout === "mosaic" && "lg:col-span-2 lg:row-span-2",
+          )}
+          sizes={
+            layout === "single"
+              ? "(min-width: 1280px) 1200px, 100vw"
+              : "(min-width: 1024px) 60vw, 100vw"
+          }
           priority
         />
-        {rest.slice(0, 2).map((image, index) => (
+        {sideTiles.map((image, index) => (
           <GalleryTile
             key={image.url}
             image={image}
             onOpen={() => setOpen(index + 1)}
+            sizes="(min-width: 1024px) 30vw, 100vw"
           />
         ))}
       </div>
@@ -109,11 +143,14 @@ function GalleryTile({
   image,
   onOpen,
   className,
+  sizes,
   priority,
 }: {
   image: GalleryImage;
   onOpen: () => void;
   className?: string;
+  /** Set per layout — a full-width lead and a third-width tile differ a lot. */
+  sizes: string;
   priority?: boolean;
 }) {
   return (
@@ -131,7 +168,7 @@ function GalleryTile({
         alt={image.alt}
         fill
         priority={priority}
-        sizes="(min-width: 1024px) 60vw, 100vw"
+        sizes={sizes}
         className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.02]"
       />
     </button>

@@ -1,3 +1,9 @@
+"use client";
+
+import {
+  NotLiveNotice,
+  useNotLiveSubmit,
+} from "@/components/forms/not-live-notice";
 import {
   Checkbox,
   Field,
@@ -33,31 +39,16 @@ const interestLabels: Record<(typeof projectInterests)[number], string> = {
 };
 
 export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
+  const { mailto, onSubmit } = useNotLiveSubmit("Partnership enquiry");
+
   return (
     <form
       className="flex flex-col gap-5"
-      aria-describedby="investor-preview-notice"
+      onSubmit={preview ? onSubmit : undefined}
     >
-      {preview ? (
-        <p
-          id="investor-preview-notice"
-          className="rounded-control border border-hairline bg-accent-tint px-4 py-3 text-caption text-ink-secondary"
-        >
-          <span className="text-accent">Preview.</span> This form goes live in a
-          later phase of the build. Nothing entered here would reach us yet, so
-          it is switched off rather than left to swallow it. In the meantime,
-          write to partnerships@rakuxoncity.com.
-        </p>
-      ) : null}
-
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" htmlFor="investor-name">
-          <Input
-            id="investor-name"
-            name="name"
-            autoComplete="name"
-            disabled={preview}
-          />
+          <Input id="investor-name" name="name" autoComplete="name" />
         </Field>
 
         <Field
@@ -69,7 +60,6 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
             id="investor-organisation"
             name="organisation"
             autoComplete="organization"
-            disabled={preview}
           />
         </Field>
 
@@ -79,7 +69,6 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
             name="email"
             type="email"
             autoComplete="email"
-            disabled={preview}
           />
         </Field>
 
@@ -90,17 +79,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
             type="tel"
             autoComplete="tel"
             placeholder="0803 123 4567"
-            disabled={preview}
           />
         </Field>
 
         <Field label="Capital range" htmlFor="investor-band">
-          <Select
-            id="investor-band"
-            name="capitalBand"
-            defaultValue=""
-            disabled={preview}
-          >
+          <Select id="investor-band" name="capitalBand" defaultValue="">
             <option value="" disabled>
               Choose a range
             </option>
@@ -113,12 +96,7 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
         </Field>
 
         <Field label="Project type" htmlFor="investor-interest">
-          <Select
-            id="investor-interest"
-            name="projectInterest"
-            defaultValue=""
-            disabled={preview}
-          >
+          <Select id="investor-interest" name="projectInterest" defaultValue="">
             <option value="" disabled>
               Choose one
             </option>
@@ -137,24 +115,23 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
           name="message"
           rows={5}
           placeholder="Tell us about the kind of project you work on and what your involvement usually looks like."
-          disabled={preview}
         />
       </Field>
 
       <Checkbox
         id="investor-consent"
         name="consent"
-        disabled={preview}
         label="I have read the privacy policy and consent to Rakuxon City contacting me about this enquiry."
       />
+
+      {mailto ? <NotLiveNotice mailto={mailto} /> : null}
 
       <div>
         <button
           type="submit"
-          disabled={preview}
-          className="min-h-11 rounded-full bg-accent px-6 py-3 text-body text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-45"
+          className="min-h-11 cursor-pointer rounded-full bg-accent px-6 py-3 text-body text-white transition-colors hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
         >
-          {preview ? "Coming soon" : "Send enquiry"}
+          Send enquiry
         </button>
       </div>
     </form>

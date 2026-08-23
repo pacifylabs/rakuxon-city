@@ -33,6 +33,35 @@
   --color-hairline: #e2e7df;
   --color-deep: #101310;
 
+  /*
+   * DEVIATION from design system §11, which says "no second accent colour.
+   * Sage carries everything." Added at the client's instruction, and it
+   * settles TODO §1.1 — the supplied logo is navy and gold, so the palette was
+   * already fighting the brand mark it sits beside every page.
+   *
+   * Sampled from public/logo.png: the mark's gold is #C4933C, hue 38.4°.
+   * All three tokens hold that hue and differ only in value, so the family
+   * reads as one colour rather than three.
+   *
+   * Gold is a SECONDARY. Sage stays the action colour — buttons, links,
+   * badges, the play control. Gold marks: section rules, the active nav
+   * underline, the hero glyph, and accents on the deep footer.
+   *
+   * Which token to reach for is decided by contrast, not by taste:
+   *
+   *   --color-gold          3.10 on canvas, 3.44 on surface
+   *                         Non-text only. Clears WCAG 1.4.11's 3:1 for UI
+   *                         components and graphics. NEVER use it for text.
+   *   --color-gold-strong   4.60 on canvas, 5.11 on surface
+   *                         The text-safe one. Use wherever gold carries words.
+   *   --color-gold-on-deep  6.76 on deep
+   *                         The logo gold unmodified. Only on dark grounds —
+   *                         it is 2.50 on canvas and illegible there.
+   */
+  --color-gold: #ae8336;
+  --color-gold-strong: #8b682b;
+  --color-gold-on-deep: #c4933c;
+
   /* §2 Status — quiet by design, they appear on every card */
   --color-status-available: #3e7350;
   --color-status-available-bg: #e7efe8;

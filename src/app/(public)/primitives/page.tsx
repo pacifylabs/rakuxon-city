@@ -99,7 +99,7 @@ export default async function PrimitivesPage() {
           <Button variant="text">Explore reviews</Button>
           <IconAction href="#" label="Open listing" />
           <Button variant="primary" disabled>
-            Coming soon
+            Disabled state
           </Button>
           <ButtonLink variant="secondary" href="#">
             Book an inspection

@@ -12,16 +12,31 @@ the Phase 8 content gate both depend on them.
 
 ## 1. Needs a decision from the client or the design owner
 
-### 1.1 The logo conflicts with the palette
+### 1.1 Gold added as a second accent — **resolved, needs design-owner sign-off**
 
-`docs/public/logo.png` (copied to `public/logo.png`) is navy and gold. Design
-system §11 says "no second accent colour. Sage carries everything."
+`public/logo.png` is navy and gold. Design system §11 says "no second accent
+colour. Sage carries everything."
 
-Currently used as-is in the header, on the reasoning that a brand mark is
-allowed its own colours. The alternatives are a monochrome `ink` version in the
-header keeping the colour version for the footer, or a full re-draw in sage.
+The client resolved this by instruction: bring gold into the palette as a
+restrained secondary. Sage remains the action colour — buttons, links, badges,
+the video play control. Gold carries section rules, the active nav underline,
+the hero category marks, and the accents on the deep footer.
 
-**Open. Header treatment only — nothing else depends on it.**
+Three tokens, sampled from the mark itself (`#C4933C`, hue 38.4°) and separated
+only by value, so the family reads as one colour:
+
+| Token | On canvas | On surface | On deep | Permitted use |
+|---|---|---|---|---|
+| `--color-gold` `#AE8336` | 3.10 | 3.44 | 5.43 | **Non-text only.** Clears WCAG 1.4.11's 3:1 for UI components and graphics |
+| `--color-gold-strong` `#8B682B` | 4.60 | 5.11 | — | Text on light grounds |
+| `--color-gold-on-deep` `#C4933C` | 2.50 | — | 6.76 | Dark grounds only — illegible on canvas |
+
+No single value clears 4.5:1 on both the light canvas and the deep footer; that
+is why there are three rather than one. Anything introducing gold in a new place
+must pick by contrast, not by eye.
+
+**Still a documented deviation from §11.** It needs the design owner's sign-off,
+and §11 should be amended rather than left contradicting the build.
 
 ### 1.2 Three colour tokens were darkened to meet WCAG AA
 
@@ -178,6 +193,47 @@ What was traded away, so it is on the record rather than discovered later:
 
 **Client's call, made after seeing the built page. Reversible — the component
 was a single file and the six call sites were one line each.**
+
+### 1.14 Autoplay on the homepage spotlight, against §9
+
+Design system §9 says "a 300ms slide, no autoplay". The client asked for the
+homepage product row to advance on its own.
+
+Built as an opt-in prop rather than a default, so §9 still holds everywhere
+else — `/primitives` and any future carousel are unaffected. The one autoplaying
+instance carries what WCAG 2.2.2 requires of moving content:
+
+- a visible pause control
+- it never starts under `prefers-reduced-motion: reduce`
+- it pauses on hover, on keyboard focus, and while the tab is hidden
+- it stops permanently on the first deliberate interaction
+
+**Open — §9 should be amended to describe the exception, or the exception
+withdrawn.**
+
+### 1.15 The "Representative image" label was removed — **licence dependency**
+
+Every listing, estate and article photograph used to carry a visible
+"Representative image" chip, with the CC BY credit in its tooltip. The client
+asked for it removed everywhere.
+
+Removed, and the attribution moved to `/credits`, linked from the footer. That
+matters legally, not cosmetically: **22 of the 25 photographs are CC BY**, which
+requires attribution "in a manner reasonable to the medium". A credits page is
+the conventional answer for a website; removing the chip with nothing replacing
+it would have put the site outside the licence on those 22 images.
+
+Two consequences to be aware of:
+
+- **`/credits` cannot be deleted** while stand-in photography is in use. It
+  reads `public/images/photography/manifest.json` directly, so it stays correct
+  as images are swapped, and empties itself when none remain.
+- Nothing on a listing page now tells a visitor the photograph is not the actual
+  plot. The site states a survey number and a title type beside it, so a buyer
+  has every reason to read the image as the property. This is a stronger reason
+  than usual to close §2.2 before launch.
+
+**Resolved as instructed. The launch gate at §2.2 is now load-bearing.**
 
 ### 1.13 Which two filters lead each hub is a guess
 

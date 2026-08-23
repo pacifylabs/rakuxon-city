@@ -217,10 +217,13 @@ model Media {
   sizeBytes Int    @map("size_bytes")
 
   /// True while this image stands in for photography we do not have yet —
-  /// a designed placeholder, or a licensed photograph of somewhere else.
-  /// Anything rendering one shows a visible "Representative image" label, so
-  /// no visitor can mistake it for the actual plot. Clearing this flag on
-  /// upload is what removes the label, one image at a time.
+  /// a licensed photograph of somewhere else.
+  ///
+  /// These no longer carry an on-image label; the client asked for it removed,
+  /// and attribution moved to /credits, which is how CC BY expects a website
+  /// to credit. The flag stays because the Phase 7 admin needs to list which
+  /// images are still placeholders, and because clearing it on upload is what
+  /// will drop each one from the credits page.
   isStandIn   Boolean @default(false) @map("is_stand_in")
   /// Required by CC BY and similar licences. Rendered beside the image and
   /// collected into IMAGE_CREDITS.md.
