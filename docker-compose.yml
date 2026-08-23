@@ -1,0 +1,29 @@
+# Local development database. Disposable: the schema and seed are portable, so
+# pointing DATABASE_URL at Neon or Supabase later is a one-line change.
+#
+#   docker compose up -d
+#   pnpm db:migrate && pnpm db:seed
+#
+# Host port 55432 because a system Postgres already holds 5432 on this machine.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: rakuxon-city-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rakuxon
+      POSTGRES_PASSWORD: rakuxon_dev
+      POSTGRES_DB: rakuxon_city
+    ports:
+      - "55432:5432"
+    volumes:
+      - rakuxon-city-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rakuxon -d rakuxon_city"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  rakuxon-city-pgdata:

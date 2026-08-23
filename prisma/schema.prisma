@@ -1,7 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Rakuxon City — data model.
+// Source of truth: docs/02_prd.md §5. Read it before changing anything here.
+//
+// Shape worth understanding before you edit: `Listing` is a shared base for
+// both product tracks, with `LandDetail` and `HomeDetail` hanging off it 1:1.
+// Filters, forms and validation stay clean that way, and a third product type
+// later costs one table rather than a migration across a wide nullable one.
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +13,482 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum ListingType {
+  LAND @map("land")
+  HOME @map("home")
+
+  @@map("listing_type")
+}
+
+enum ListingStatus {
+  DRAFT     @map("draft")
+  AVAILABLE @map("available")
+  RESERVED  @map("reserved")
+  SOLD      @map("sold")
+
+  @@map("listing_status")
+}
+
+/// The title ribbon reads from this. `SURVEY_ONLY` is the weak-documentation
+/// case and is rendered honestly rather than hidden — design system §7.
+enum TitleType {
+  C_OF_O             @map("c_of_o")
+  GOVERNORS_CONSENT  @map("governors_consent")
+  GAZETTE            @map("gazette")
+  DEED_OF_ASSIGNMENT @map("deed_of_assignment")
+  EXCISION           @map("excision")
+  SURVEY_ONLY        @map("survey_only")
+
+  @@map("title_type")
+}
+
+enum PlotUnit {
+  SQM      @map("sqm")
+  PLOTS    @map("plots")
+  ACRES    @map("acres")
+  HECTARES @map("hectares")
+
+  @@map("plot_unit")
+}
+
+enum HouseType {
+  DETACHED      @map("detached")
+  SEMI_DETACHED @map("semi_detached")
+  TERRACE       @map("terrace")
+  BUNGALOW      @map("bungalow")
+  DUPLEX        @map("duplex")
+  APARTMENT     @map("apartment")
+
+  @@map("house_type")
+}
+
+enum BuildStage {
+  OFF_PLAN           @map("off_plan")
+  UNDER_CONSTRUCTION @map("under_construction")
+  COMPLETED          @map("completed")
+
+  @@map("build_stage")
+}
+
+enum EstateStatus {
+  ACTIVE    @map("active")
+  SOLD_OUT  @map("sold_out")
+  DELIVERED @map("delivered")
+
+  @@map("estate_status")
+}
+
+enum UserRole {
+  ADMIN            @map("admin")
+  SALES            @map("sales")
+  INVESTOR_MANAGER @map("investor_manager")
+
+  @@map("user_role")
+}
+
+/// Which product track a sales user covers. Null for non-sales roles.
+enum SalesTrack {
+  LAND  @map("land")
+  HOMES @map("homes")
+  BOTH  @map("both")
+
+  @@map("sales_track")
+}
+
+/// Denormalised onto `Enquiry` so the inbox scopes without a join, and so the
+/// routing decision survives the listing being deleted — PRD §5 design notes.
+enum EnquiryTrack {
+  LAND  @map("land")
+  HOMES @map("homes")
+
+  @@map("enquiry_track")
+}
+
+enum EnquirySource {
+  LISTING  @map("listing")
+  CONTACT  @map("contact")
+  RESOURCE @map("resource")
+  CAMPAIGN @map("campaign")
+  GENERAL  @map("general")
+
+  @@map("enquiry_source")
+}
+
+enum EnquiryStatus {
+  NEW       @map("new")
+  CONTACTED @map("contacted")
+  QUALIFIED @map("qualified")
+  CLOSED    @map("closed")
+
+  @@map("enquiry_status")
+}
+
+enum ArticleCategory {
+  TITLE_AND_DOCUMENTATION @map("title_and_documentation")
+  BUYING_PROCESS          @map("buying_process")
+  PAYMENT_PLANS           @map("payment_plans")
+  ESTATE_LIVING           @map("estate_living")
+
+  @@map("article_category")
+}
+
+enum ArticleStatus {
+  DRAFT     @map("draft")
+  PUBLISHED @map("published")
+
+  @@map("article_status")
+}
+
+// ---------------------------------------------------------------------------
+// Staff
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  passwordHash String      @map("password_hash")
+  name         String
+  role         UserRole
+  /// Null for admin and investor_manager; set for sales.
+  salesTrack   SalesTrack? @map("sales_track")
+  isActive     Boolean     @default(true) @map("is_active")
+  lastLoginAt  DateTime?   @map("last_login_at")
+  createdAt    DateTime    @default(now()) @map("created_at")
+
+  assignedEnquiries Enquiry[]
+  statusChanges     StatusChange[]
+  internalNotes     InternalNote[]
+  importBatches     ImportBatch[]
+
+  @@index([role, salesTrack, isActive])
+  @@map("users")
+}
+
+// ---------------------------------------------------------------------------
+// Media library
+// ---------------------------------------------------------------------------
+
+/// Media is a library with IDs rather than URLs pasted onto records, so an
+/// image can be re-used across listings and estates — architecture §9.5.
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  /// Required at upload. Accessibility is enforced at the source, not audited later.
+  alt       String
+  width     Int
+  height    Int
+  mimeType  String   @map("mime_type")
+  sizeBytes Int      @map("size_bytes")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  listingMedia   ListingMedia[]
+  estateMedia    EstateMedia[]
+  floorPlanFor   HomeDetail[]
+  landDocuments  LandDocument[]
+  articleCovers  Article[]
+  testimonialFor Testimonial[]
+
+  @@map("media")
+}
+
+// ---------------------------------------------------------------------------
+// Estates
+// ---------------------------------------------------------------------------
+
+model Estate {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  name        String
+  location    String
+  state       String
+  latitude    Decimal?     @db.Decimal(9, 6)
+  longitude   Decimal?     @db.Decimal(9, 6)
+  description String
+  amenities   String[]
+  status      EstateStatus @default(ACTIVE)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  media    EstateMedia[]
+  listings Listing[]
+
+  @@map("estates")
+}
+
+model EstateMedia {
+  estateId String @map("estate_id")
+  mediaId  String @map("media_id")
+  position Int
+
+  estate Estate @relation(fields: [estateId], references: [id], onDelete: Cascade)
+  media  Media  @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@id([estateId, mediaId])
+  @@index([estateId, position])
+  @@map("estate_media")
+}
+
+// ---------------------------------------------------------------------------
+// Listings
+// ---------------------------------------------------------------------------
+
+model Listing {
+  id                   String        @id @default(cuid())
+  slug                 String        @unique
+  /// Human-readable because sales staff quote it on the phone, and the
+  /// idempotency key for CSV import. Format: RXC-LND-0142 / RXC-HME-0031.
+  reference            String        @unique
+  type                 ListingType
+  title                String
+  description          String
+  estateId             String?       @map("estate_id")
+  location             String
+  state                String
+  /// Naira. Null whenever `priceOnRequest` is true — never zero, never blank.
+  price                Decimal?      @db.Decimal(14, 2)
+  /// FR-1.5. A first-class case: excluded from price bands, sorted last.
+  priceOnRequest       Boolean       @default(false) @map("price_on_request")
+  status               ListingStatus @default(DRAFT)
+  paymentPlanAvailable Boolean       @default(false) @map("payment_plan_available")
+  /// { depositPercent, durationMonths, frequency, notes } — structured so
+  /// Phase 2's schedule generator reads it directly rather than parsing prose.
+  paymentPlanTerms     Json?         @map("payment_plan_terms")
+  featured             Boolean       @default(false)
+  createdAt            DateTime      @default(now()) @map("created_at")
+  updatedAt            DateTime      @updatedAt @map("updated_at")
+  publishedAt          DateTime?     @map("published_at")
+
+  estate        Estate?        @relation(fields: [estateId], references: [id], onDelete: SetNull)
+  landDetail    LandDetail?
+  homeDetail    HomeDetail?
+  media         ListingMedia[]
+  enquiries     Enquiry[]
+  statusChanges StatusChange[]
+
+  @@index([type, status])
+  @@index([estateId])
+  @@index([status, featured])
+  @@map("listings")
+}
+
+model ListingMedia {
+  listingId String @map("listing_id")
+  mediaId   String @map("media_id")
+  position  Int
+
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  media   Media   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, mediaId])
+  @@index([listingId, position])
+  @@map("listing_media")
+}
+
+model LandDetail {
+  listingId    String    @id @map("listing_id")
+  plotSize     Decimal   @map("plot_size") @db.Decimal(12, 2)
+  plotUnit     PlotUnit  @map("plot_unit")
+  titleType    TitleType @map("title_type")
+  surveyNumber String?   @map("survey_number")
+  topography   String?
+  roadAccess   String?   @map("road_access")
+
+  listing   Listing        @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  documents LandDocument[]
+
+  @@index([titleType])
+  @@map("land_details")
+}
+
+/// One row per document a plot can evidence. Absence is meaningful: the
+/// ribbon states what is *not* available as plainly as what is.
+model LandDocument {
+  id           String  @id @default(cuid())
+  landDetailId String  @map("land_detail_id")
+  label        String
+  mediaId      String? @map("media_id")
+  position     Int     @default(0)
+
+  landDetail LandDetail @relation(fields: [landDetailId], references: [listingId], onDelete: Cascade)
+  media      Media?     @relation(fields: [mediaId], references: [id], onDelete: SetNull)
+
+  @@index([landDetailId, position])
+  @@map("land_documents")
+}
+
+model HomeDetail {
+  listingId     String     @id @map("listing_id")
+  bedrooms      Int
+  bathrooms     Int
+  houseType     HouseType  @map("house_type")
+  buildStage    BuildStage @map("build_stage")
+  handoverDate  DateTime?  @map("handover_date")
+  builtArea     Decimal    @map("built_area") @db.Decimal(10, 2)
+  landArea      Decimal    @map("land_area") @db.Decimal(10, 2)
+  floorPlanId   String?    @map("floor_plan_id")
+  finishingSpec String     @map("finishing_spec")
+  features      String[]
+
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  floorPlan Media?  @relation(fields: [floorPlanId], references: [id], onDelete: SetNull)
+
+  @@index([buildStage])
+  @@index([bedrooms])
+  @@map("home_details")
+}
+
+/// Audit trail from day one — necessary the first time a plot is disputed.
+model StatusChange {
+  id              String         @id @default(cuid())
+  listingId       String         @map("listing_id")
+  fromStatus      ListingStatus? @map("from_status")
+  toStatus        ListingStatus  @map("to_status")
+  changedByUserId String?        @map("changed_by_user_id")
+  createdAt       DateTime       @default(now()) @map("created_at")
+
+  listing       Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  changedByUser User?   @relation(fields: [changedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([listingId, createdAt])
+  @@map("status_changes")
+}
+
+// ---------------------------------------------------------------------------
+// Enquiries
+// ---------------------------------------------------------------------------
+
+model Enquiry {
+  id                      String        @id @default(cuid())
+  source                  EnquirySource
+  /// Derived from `Listing.type` at submission — FR-3.3.
+  track                   EnquiryTrack?
+  listingId               String?       @map("listing_id")
+  pagePath                String        @map("page_path")
+  campaign                String?
+  name                    String
+  email                   String
+  phone                   String
+  message                 String
+  preferredInspectionDate DateTime?     @map("preferred_inspection_date")
+  status                  EnquiryStatus @default(NEW)
+  assignedToUserId        String?       @map("assigned_to_user_id")
+  /// FR-3.5 — explicit consent, timestamped. NDPR evidence.
+  consentGivenAt          DateTime      @map("consent_given_at")
+  ipAddress               String?       @map("ip_address")
+  createdAt               DateTime      @default(now()) @map("created_at")
+
+  listing       Listing?       @relation(fields: [listingId], references: [id], onDelete: SetNull)
+  assignedTo    User?          @relation(fields: [assignedToUserId], references: [id], onDelete: SetNull)
+  internalNotes InternalNote[]
+
+  @@index([status, track])
+  @@index([assignedToUserId, status])
+  @@index([createdAt])
+  @@map("enquiries")
+}
+
+/// Segregated by permission at the middleware layer, not merely hidden in the
+/// navigation. Never shares a handler or a table with `Enquiry` — PRD §3, FR-4.4.
+model InvestorEnquiry {
+  id              String        @id @default(cuid())
+  name            String
+  organisation    String?
+  email           String
+  phone           String
+  /// Banded select, never a figure the site publishes back.
+  capitalBand     String        @map("capital_band")
+  projectInterest String        @map("project_interest")
+  message         String
+  status          EnquiryStatus @default(NEW)
+  consentGivenAt  DateTime      @map("consent_given_at")
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  internalNotes InternalNote[]
+
+  @@index([status, createdAt])
+  @@map("investor_enquiries")
+}
+
+model InternalNote {
+  id                String   @id @default(cuid())
+  enquiryId         String?  @map("enquiry_id")
+  investorEnquiryId String?  @map("investor_enquiry_id")
+  authorUserId      String?  @map("author_user_id")
+  body              String
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  enquiry         Enquiry?         @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  investorEnquiry InvestorEnquiry? @relation(fields: [investorEnquiryId], references: [id], onDelete: Cascade)
+  author          User?            @relation(fields: [authorUserId], references: [id], onDelete: SetNull)
+
+  @@index([enquiryId, createdAt])
+  @@index([investorEnquiryId, createdAt])
+  @@map("internal_notes")
+}
+
+// ---------------------------------------------------------------------------
+// Content
+// ---------------------------------------------------------------------------
+
+model Article {
+  id           String          @id @default(cuid())
+  slug         String          @unique
+  title        String
+  category     ArticleCategory
+  excerpt      String
+  body         String
+  coverImageId String?         @map("cover_image_id")
+  status       ArticleStatus   @default(DRAFT)
+  publishedAt  DateTime?       @map("published_at")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+
+  coverImage Media? @relation(fields: [coverImageId], references: [id], onDelete: SetNull)
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@map("articles")
+}
+
+/// Not in PRD §5. Added because the plan's Phase 1 seed calls for three
+/// testimonials and Phase 3 renders a testimonials carousel, and the homepage
+/// is specified to render from real records rather than placeholder arrays.
+/// Flagged for confirmation.
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  quote     String
+  avatarId  String?  @map("avatar_id")
+  published Boolean  @default(true)
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  avatar Media? @relation(fields: [avatarId], references: [id], onDelete: SetNull)
+
+  @@index([published, position])
+  @@map("testimonials")
+}
+
+/// CSV migration audit — FR-6.6. Import is idempotent on `Listing.reference`.
+model ImportBatch {
+  id               String   @id @default(cuid())
+  filename         String
+  rowCount         Int      @map("row_count")
+  successCount     Int      @map("success_count")
+  errorCount       Int      @map("error_count")
+  errors           Json?
+  importedByUserId String?  @map("imported_by_user_id")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  importedBy User? @relation(fields: [importedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@map("import_batches")
 }
