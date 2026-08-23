@@ -41,7 +41,7 @@ function serialise<T>(value: T): T {
 }
 
 async function main() {
-  const [listings, estates, articles, testimonials, placements] =
+  const [listings, estates, articles, testimonials, videos, placements] =
     await Promise.all([
       prisma.listing.findMany({
         orderBy: { reference: "asc" },
@@ -121,6 +121,30 @@ async function main() {
         },
       }),
       prisma.testimonial.findMany({ orderBy: { position: "asc" } }),
+      prisma.video.findMany({
+        orderBy: { sortOrder: "asc" },
+        include: {
+          // Exactly the fields lib/videos.ts selects. Carrying width and
+          // height as well made the snapshot return a wider object than
+          // Postgres, which `pnpm verify:parity` flagged.
+          poster: { select: { url: true, alt: true } },
+          listing: {
+            select: {
+              id: true,
+              slug: true,
+              title: true,
+              type: true,
+              status: true,
+              location: true,
+              state: true,
+              estate: { select: { slug: true } },
+            },
+          },
+          estate: {
+            select: { id: true, slug: true, name: true, location: true, state: true },
+          },
+        },
+      }),
       prisma.mediaPlacement.findMany({
         orderBy: { key: "asc" },
         include: {
@@ -144,6 +168,7 @@ async function main() {
     estates,
     articles,
     testimonials,
+    videos,
     placements,
   });
 
@@ -161,6 +186,7 @@ async function main() {
       `  estates       ${estates.length}`,
       `  articles      ${articles.length}`,
       `  testimonials  ${testimonials.length}`,
+      `  videos        ${videos.length}`,
       `  placements    ${placements.length}`,
     ].join("\n"),
   );

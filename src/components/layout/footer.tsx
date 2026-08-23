@@ -21,6 +21,9 @@ const siteLinks = [
   { label: "Land", href: "/land" },
   { label: "Homes", href: "/homes" },
   { label: "Estates", href: "/estates" },
+  // 06_FEATURE_VIDEO_TOURS.md §6 — primary navigation is unchanged; /tours is
+  // reached from here, from the homepage section, and from each video block.
+  { label: "Video tours", href: "/tours" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Partner with us", href: "/invest" },

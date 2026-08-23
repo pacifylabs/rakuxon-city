@@ -31,6 +31,7 @@ import json
 import pathlib
 import subprocess
 import sys
+import time
 
 from PIL import Image
 
@@ -94,22 +95,42 @@ def main() -> None:
     manifest = []
 
     for source in sources:
-        raw = OUT / f"{source['name']}.raw"
-        # curl rather than urllib: this machine's Python has no CA bundle.
-        subprocess.run(
-            ["curl", "-sSL", "--max-time", "60", "-o", str(raw), source["url"]],
-            check=True,
-        )
-
         size = RATIOS[source["ratio"]]
-        with Image.open(raw) as image:
-            processed = crop_to_ratio(
-                image.convert("RGB"), size, source.get("bias", 0.5)
-            )
-            path = OUT / f"{source['name']}.jpg"
-            processed.save(path, "JPEG", quality=72, optimize=True, progressive=True)
+        path = OUT / f"{source['name']}.jpg"
 
-        raw.unlink()
+        # Adding one source should not re-download the other twenty-five.
+        # Wikimedia answers a full re-run with HTTP 429, and the reply is an
+        # HTML error page that PIL then fails to open several images later,
+        # which reads as a corrupt image rather than as rate limiting.
+        # Pass --refetch to rebuild everything deliberately.
+        cached = path.exists() and "--refetch" not in sys.argv
+        if not cached:
+            raw = OUT / f"{source['name']}.raw"
+            # curl rather than urllib: this machine's Python has no CA bundle.
+            subprocess.run(
+                ["curl", "-sSL", "--max-time", "60", "-o", str(raw), source["url"]],
+                check=True,
+            )
+
+            head = raw.read_bytes()[:16]
+            if head[:1] not in (b"\xff", b"\x89", b"R", b"G"):
+                raw.unlink()
+                raise SystemExit(
+                    f"{source['name']}: {source['url']} did not return an image. "
+                    "Wikimedia and Openverse both answer heavy use with an HTML "
+                    "429 page; wait, then re-run."
+                )
+
+            with Image.open(raw) as image:
+                processed = crop_to_ratio(
+                    image.convert("RGB"), size, source.get("bias", 0.5)
+                )
+                processed.save(
+                    path, "JPEG", quality=72, optimize=True, progressive=True
+                )
+
+            raw.unlink()
+            time.sleep(1)  # politeness; a burst is what triggers the 429
 
         attribution = (
             f"\"{source['title']}\" by {source['creator']}, "
@@ -135,7 +156,8 @@ def main() -> None:
             }
         )
         print(
-            f"  {source['name']:<28} {path.stat().st_size // 1024:>4} KB  {source['license']}"
+            f"  {source['name']:<28} {path.stat().st_size // 1024:>4} KB  "
+            f"{source['license']}{'  (cached)' if cached else ''}"
         )
 
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

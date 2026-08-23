@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import { getDeliveredEstateCount, getEstates } from "@/lib/content";
+import { getLaneCounts } from "@/lib/listings";
+import { getPlacement } from "@/lib/media";
 
 export const revalidate = 3600;
 
@@ -12,38 +17,91 @@ export const metadata: Metadata = {
     "Who Rakuxon City is, how we work, and why the documentation position is published on every listing.",
 };
 
+/**
+ * The About page.
+ *
+ * It was previously an unbroken column of prose — the client's words were "so
+ * wording… just plain content organized and it flys around". The copy was not
+ * the problem; nothing anchored it. So this version gives the page the same
+ * furniture every other page has: an image to open on, figures read from the
+ * database rather than asserted, the principles numbered so the eye has a
+ * rhythm to follow, and the estates shown rather than listed.
+ */
 export default async function AboutPage() {
-  const [estates, delivered] = await Promise.all([
+  const [estates, delivered, counts, hero] = await Promise.all([
     getEstates(),
     getDeliveredEstateCount(),
+    getLaneCounts(),
+    getPlacement("homepage.hero"),
   ]);
+
+  const states = Array.from(new Set(estates.map((estate) => estate.state)));
 
   return (
     <>
-      <Section className="pt-10 lg:pt-16">
+      <Section className="pt-10 pb-0 lg:pt-16 lg:pb-0">
         <Container>
           <p className="text-eyebrow text-ink-muted">About</p>
           <h1 className="mt-6 max-w-[18ch] text-display-xl text-ink">
             We sell land the way we would want it sold to us
           </h1>
-          <p className="mt-8 max-w-[58ch] text-body-l text-ink-secondary">
-            {/* TODO: real figures — company story and history need client copy. */}
-            Rakuxon City develops and sells residential land and housing across
-            Lagos, Ogun and the Federal Capital Territory. We acquire and title
-            land ourselves, develop it into serviced estates, and sell plots and
-            completed homes directly to buyers.
-          </p>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-6">
+            <p className="max-w-[52ch] text-body-l text-ink-secondary lg:col-span-5">
+              {/* TODO: real figures — company story and history need client copy. */}
+              Rakuxon City develops and sells residential land and housing
+              across Lagos, Ogun and the Federal Capital Territory. We acquire
+              and title land ourselves, develop it into serviced estates, and
+              sell plots and completed homes directly to buyers.
+            </p>
+
+            {hero ? (
+              <div className="relative aspect-16/10 overflow-hidden rounded-image-l lg:col-span-7">
+                <Image
+                  src={hero.url}
+                  alt={hero.alt}
+                  fill
+                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  priority
+                  className="object-cover"
+                />
+                <StandInLabel
+                  show={hero.isStandIn}
+                  attribution={hero.attribution}
+                />
+              </div>
+            ) : null}
+          </div>
         </Container>
       </Section>
 
-      <Section className="pt-0 lg:pt-0">
+      {/*
+        Figures read from the catalogue, not typed into the page. A number a
+        visitor can check against the listing hubs is worth having; one that
+        drifts the first time stock changes is worse than none.
+      */}
+      <Section className="pb-0 lg:pb-0">
+        <Container>
+          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-hairline bg-hairline lg:grid-cols-4">
+            <Figure value={counts.land} label="plots available" />
+            <Figure value={counts.homes} label="homes available" />
+            <Figure value={estates.length} label="estates" />
+            <Figure
+              value={states.length}
+              label={states.length === 1 ? "state covered" : "states covered"}
+            />
+          </ul>
+        </Container>
+      </Section>
+
+      <Section>
         <Container>
           <SectionHeading
             heading="Why we publish the documentation"
             supporting="Land fraud is the defining risk of this market, and most of it works by omission rather than by forgery."
           />
 
-          <div className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+          <ol className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-3 lg:gap-6">
             {[
               {
                 title: "Title leads every listing",
@@ -57,67 +115,102 @@ export default async function AboutPage() {
                 title: "Verification is encouraged",
                 body: "We provide copies of what we hold so you can run your own search at the state land registry. A buyer who checks is a buyer who stays.",
               },
-            ].map((item) => (
-              <div key={item.title} className="border-t border-hairline pt-6">
-                <p className="text-heading text-ink">{item.title}</p>
+            ].map((item, index) => (
+              <li key={item.title} className="border-t border-hairline pt-6">
+                <p className="tabular text-caption text-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <p className="mt-4 text-heading text-ink">{item.title}</p>
                 <p className="mt-4 text-body text-ink-secondary">{item.body}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </Section>
 
-      <Section>
+      <Section className="pt-0 lg:pt-0">
         <Container>
           <SectionHeading
             align="right"
             heading="Where we build"
-            supporting="Three estates today, across two states and the FCT."
+            supporting={`${estates.length} estates today, across Lagos, Ogun and the Federal Capital Territory. ${delivered === 1 ? "One has" : `${delivered} have`} been handed over in full.`}
           />
 
-          <ul className="mt-12 divide-y divide-hairline border-y border-hairline lg:mt-16">
+          {/* Shown rather than listed: the previous version was a bare row of
+              names, which is exactly the flatness the client was reacting to. */}
+          <ul className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-6">
             {estates.map((estate) => (
-              <li
-                key={estate.slug}
-                className="flex flex-wrap items-baseline justify-between gap-4 py-6"
-              >
-                <div>
-                  <p className="text-display-m text-ink">{estate.name}</p>
+              <li key={estate.slug}>
+                <Link href={`/estates/${estate.slug}`} className="group block">
+                  <div className="relative aspect-4/3 overflow-hidden rounded-card">
+                    {estate.image ? (
+                      <Image
+                        src={estate.image.url}
+                        alt={estate.image.alt}
+                        fill
+                        sizes="(min-width: 1024px) 30vw, 100vw"
+                        className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.02]"
+                      />
+                    ) : (
+                      <div className="size-full bg-accent-tint" />
+                    )}
+                    <StandInLabel
+                      show={Boolean(estate.image?.isStandIn)}
+                      attribution={estate.image?.attribution}
+                      compact
+                    />
+                  </div>
+
+                  <p className="mt-5 text-heading text-ink transition-colors group-hover:text-accent">
+                    {estate.name}
+                  </p>
                   <p className="mt-2 text-body text-ink-secondary">
                     {estate.location}, {estate.state} State
                   </p>
-                </div>
-                <p className="text-body text-ink-muted">
-                  {estate.status === "ACTIVE" ? "Selling now" : "Delivered"}
-                </p>
+                  <p className="mt-3 text-caption text-ink-muted">
+                    {estate.status === "ACTIVE"
+                      ? `Selling now · ${estate.availableCount} available`
+                      : "Delivered"}
+                  </p>
+                </Link>
               </li>
             ))}
           </ul>
-
-          <p className="mt-8 text-body text-ink-secondary">
-            <span className="tabular text-accent">{delivered}</span> of them has
-            been handed over in full.
-          </p>
         </Container>
       </Section>
 
-      <Section>
+      <Section className="pt-0 lg:pt-0">
         <Container>
           {/* TODO: real figures — leadership team, names and photographs, before launch. */}
           <div className="rounded-card border border-hairline bg-surface p-8 lg:p-12">
-            <p className="text-heading text-ink">Leadership</p>
-            <p className="mt-4 max-w-[54ch] text-body text-ink-secondary">
-              Profiles of the team are published here once the client has
-              approved names, roles and photographs.
-            </p>
-            <div className="mt-8">
-              <ButtonLink variant="secondary" href="/contact">
-                Talk to the team
-              </ButtonLink>
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-6">
+              <div className="lg:col-span-7">
+                <p className="text-heading text-ink">Leadership</p>
+                <p className="mt-4 max-w-[54ch] text-body text-ink-secondary">
+                  Profiles of the team are published here once the client has
+                  approved names, roles and photographs. Until then, the people
+                  who would answer your enquiry are the same people who priced
+                  the plot.
+                </p>
+              </div>
+              <div className="lg:col-span-5 lg:justify-self-end">
+                <ButtonLink variant="secondary" href="/contact">
+                  Talk to the team
+                </ButtonLink>
+              </div>
             </div>
           </div>
         </Container>
       </Section>
     </>
+  );
+}
+
+function Figure({ value, label }: { value: number; label: string }) {
+  return (
+    <li className="bg-surface px-6 py-8">
+      <p className="tabular text-display-m text-ink">{value}</p>
+      <p className="mt-2 text-caption text-ink-muted">{label}</p>
+    </li>
   );
 }

@@ -1,6 +1,8 @@
 import "server-only";
 import snapshot from "@/data/snapshot.json";
 import type { ListingCardData } from "@/components/listings/listing-card";
+import type { VideoCardData } from "@/components/video/video-card";
+import { VIDEOS_PER_PAGE, type VideoFilters } from "@/lib/video-query";
 import {
   LISTINGS_PER_PAGE,
   plotSizeBands,
@@ -19,6 +21,7 @@ import type {
   ListingType,
   PlotUnit,
   TitleType,
+  VideoKind,
 } from "@/generated/prisma/enums";
 
 /**
@@ -121,6 +124,38 @@ type SnapshotArticle = {
   coverImage: SnapshotImage | null;
 };
 
+type SnapshotVideo = {
+  slug: string;
+  youtubeId: string;
+  title: string;
+  description: string | null;
+  kind: VideoKind;
+  durationSeconds: number | null;
+  isStandIn: boolean;
+  attribution: string | null;
+  featured: boolean;
+  sortOrder: number;
+  publishedAt: string | null;
+  poster: { url: string; alt: string } | null;
+  listing: {
+    id: string;
+    slug: string;
+    title: string;
+    type: ListingType;
+    status: ListingStatus;
+    location: string;
+    state: string;
+    estate: { slug: string } | null;
+  } | null;
+  estate: {
+    id: string;
+    slug: string;
+    name: string;
+    location: string;
+    state: string;
+  } | null;
+};
+
 type Snapshot = {
   listings: SnapshotListing[];
   estates: SnapshotEstate[];
@@ -131,6 +166,7 @@ type Snapshot = {
     quote: string;
     published: boolean;
   }[];
+  videos: SnapshotVideo[];
   placements: { key: string; media: SnapshotImage }[];
 };
 
@@ -141,6 +177,7 @@ const estates = data.estates;
 const articles = data.articles;
 const testimonials = data.testimonials;
 const placements = data.placements;
+const videos = data.videos;
 
 /** Drafts never reach a public surface, the same rule the Prisma path applies. */
 const published = listings.filter((listing) => listing.status !== "DRAFT");
@@ -184,6 +221,22 @@ function toCard(listing: (typeof listings)[number]): ListingCardData {
 
 /** Mirrors buildListingWhere. Kept beside it in review, and parity-tested. */
 function matches(listing: (typeof listings)[number], filters: ListingFilters) {
+  if (filters.q) {
+    // Mirrors the OR in buildListingWhere: name, place and reference, and
+    // deliberately not the description.
+    const term = filters.q.toLowerCase();
+    const haystack = [
+      listing.title,
+      listing.location,
+      listing.state,
+      listing.reference,
+      listing.estate?.name ?? "",
+    ];
+    if (!haystack.some((field) => field.toLowerCase().includes(term))) {
+      return false;
+    }
+  }
+
   if (filters.state && listing.state !== filters.state) return false;
   if (filters.estate && listing.estate?.slug !== filters.estate) return false;
   if (filters.status && listing.status !== filters.status) return false;
@@ -521,4 +574,126 @@ export function getCollageImages() {
   return ["homepage.collage.1", "homepage.collage.2", "homepage.collage.3"]
     .map((key) => found.get(key))
     .filter((media) => media !== undefined);
+}
+
+// ---------------------------------------------------------------------------
+// Videos — 06_FEATURE_VIDEO_TOURS.md
+// ---------------------------------------------------------------------------
+
+/** A video whose parent listing is a draft never reaches a public surface. */
+const publishedVideos = videos.filter(
+  (video) => !video.listing || video.listing.status !== "DRAFT",
+);
+
+function toVideoCard(video: SnapshotVideo): VideoCardData {
+  const parent = video.listing
+    ? {
+        href: `/${video.listing.type === "LAND" ? "land" : "homes"}/${video.listing.slug}`,
+        name: video.listing.title,
+      }
+    : video.estate
+      ? { href: `/estates/${video.estate.slug}`, name: video.estate.name }
+      : null;
+
+  return {
+    slug: video.slug,
+    youtubeId: video.youtubeId,
+    title: video.title,
+    description: video.description,
+    kind: video.kind,
+    durationSeconds: video.durationSeconds,
+    poster: video.poster,
+    isStandIn: video.isStandIn,
+    attribution: video.attribution,
+    parent,
+  };
+}
+
+const bySortOrder = (a: SnapshotVideo, b: SnapshotVideo) =>
+  a.sortOrder - b.sortOrder;
+
+/** Mirrors buildVideoWhere, including the estate-or-parent-estate rule. */
+function matchesVideo(video: SnapshotVideo, filters: VideoFilters) {
+  if (filters.kind && video.kind !== filters.kind) return false;
+
+  if (filters.estate) {
+    const slug = video.estate?.slug ?? video.listing?.estate?.slug ?? null;
+    if (slug !== filters.estate) return false;
+  }
+
+  return true;
+}
+
+export function getFeaturedVideos(take: number): VideoCardData[] {
+  return publishedVideos
+    .filter((video) => video.featured)
+    .sort(bySortOrder)
+    .slice(0, take)
+    .map(toVideoCard);
+}
+
+export function getListingVideos(listingId: string): VideoCardData[] {
+  return videos
+    .filter((video) => video.listing?.id === listingId)
+    .sort(bySortOrder)
+    .map(toVideoCard);
+}
+
+export function getEstateVideos(estateId: string): VideoCardData[] {
+  return videos
+    .filter((video) => video.estate?.id === estateId)
+    .sort(bySortOrder)
+    .map(toVideoCard);
+}
+
+export function getVideoPage(filters: VideoFilters) {
+  const matched = publishedVideos
+    .filter((video) => matchesVideo(video, filters))
+    .sort(bySortOrder);
+
+  const total = matched.length;
+  const pageCount = Math.max(1, Math.ceil(total / VIDEOS_PER_PAGE));
+  const page = Math.min(filters.page, pageCount);
+
+  return {
+    videos: matched
+      .slice((page - 1) * VIDEOS_PER_PAGE, page * VIDEOS_PER_PAGE)
+      .map(toVideoCard),
+    total,
+    page,
+    pageCount,
+  };
+}
+
+export function getVideoFilterOptions() {
+  const slugs = new Set(
+    publishedVideos
+      .map((video) => video.estate?.slug ?? video.listing?.estate?.slug)
+      .filter((slug): slug is string => Boolean(slug)),
+  );
+
+  return {
+    estates: estates
+      .filter((estate) => slugs.has(estate.slug))
+      .map((estate) => ({ slug: estate.slug, name: estate.name }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  };
+}
+
+export function getVideoSlugs(): string[] {
+  return publishedVideos.map((video) => video.slug);
+}
+
+export function getVideoDetail(slug: string) {
+  const video = publishedVideos.find((entry) => entry.slug === slug);
+  if (!video) return null;
+
+  return {
+    ...toVideoCard(video),
+    context: video.listing
+      ? `${video.listing.location}, ${video.listing.state} State`
+      : video.estate
+        ? `${video.estate.location}, ${video.estate.state} State`
+        : null,
+  };
 }

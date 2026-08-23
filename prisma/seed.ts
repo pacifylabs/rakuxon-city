@@ -35,6 +35,7 @@ import {
   SalesTrack,
   TitleType,
   UserRole,
+  VideoKind,
 } from "../src/generated/prisma/enums";
 
 const connectionString = process.env.DATABASE_URL;
@@ -130,6 +131,7 @@ async function clear() {
   await prisma.internalNote.deleteMany();
   await prisma.enquiry.deleteMany();
   await prisma.investorEnquiry.deleteMany();
+  await prisma.video.deleteMany();
   await prisma.statusChange.deleteMany();
   await prisma.landDocument.deleteMany();
   await prisma.landDetail.deleteMany();
@@ -377,7 +379,8 @@ async function main() {
     slug: string;
     title: string;
     description: string;
-    estate: string;
+    /** Null for stock held outside any of our estates. */
+    estate: string | null;
     location: string;
     state: string;
     price: number | null;
@@ -725,6 +728,350 @@ async function main() {
       image: "land-12",
       alt: "Plot A02 as photographed before sale",
     },
+    // -- Expansion: enough stock that the hub paginates and the filters have
+    // -- something to bite on. Spread deliberately across states, title types,
+    // -- price bands and plot sizes, including plots held outside an estate.
+    {
+      reference: "RXC-LND-0013",
+      slug: "emerald-ridge-plot-b19",
+      title: "Plot B19, Emerald Ridge",
+      description:
+        "A 300 square metre plot on the second row, priced for a first-time buyer. Dry and sand-filled, with drainage completed along the row and the access road graded to the boundary.",
+      estate: "emerald-ridge",
+      location: "Ibeju-Lekki",
+      state: "Lagos",
+      price: 11_200_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 300,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.C_OF_O,
+      surveyNumber: "LS/D/LA2244",
+      topography: "Dry, level, sand-filled",
+      roadAccess: "Graded road to boundary",
+      documents: [
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
+      ],
+      paymentPlan: {
+        depositPercent: 30,
+        durationMonths: 12,
+        frequency: "monthly",
+      },
+      image: "land-13",
+      alt: "Second-row plot at Emerald Ridge",
+    },
+    {
+      reference: "RXC-LND-0014",
+      slug: "emerald-ridge-plot-e04",
+      title: "Plot E04, Emerald Ridge",
+      description:
+        "An 800 square metre double allocation on the estate's eastern edge, backing onto the buffer planting rather than another plot. Suited to a single large build.",
+      estate: "emerald-ridge",
+      location: "Ibeju-Lekki",
+      state: "Lagos",
+      price: 31_000_000,
+      status: ListingStatus.AVAILABLE,
+      featured: true,
+      plotSize: 800,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.C_OF_O,
+      additionalTitleTypes: [TitleType.DEED_OF_ASSIGNMENT],
+      surveyNumber: "LS/D/LA2251",
+      topography: "Dry, gently sloping",
+      roadAccess: "Tarred road frontage",
+      documents: [
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
+        DocumentType.SERVICE_CONNECTION,
+      ],
+      image: "land-14",
+      alt: "Double allocation on the eastern edge of Emerald Ridge",
+    },
+    {
+      reference: "RXC-LND-0015",
+      slug: "cornerstone-gardens-plot-52",
+      title: "Plot 52, Cornerstone Gardens",
+      description:
+        "A 450 square metre plot on the estate's inner ring, sold on gazette with the survey registered. Excision has been granted over the wider parcel and the estate layout is approved.",
+      estate: "cornerstone-gardens",
+      location: "Mowe-Ofada",
+      state: "Ogun",
+      price: 4_400_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 450,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.GAZETTE,
+      additionalTitleTypes: [TitleType.EXCISION],
+      surveyNumber: "OG/SV/8841",
+      topography: "Dry, level",
+      roadAccess: "Graded internal road",
+      documents: [
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.EXCISION_CERTIFICATE,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
+      ],
+      paymentPlan: {
+        depositPercent: 25,
+        durationMonths: 18,
+        frequency: "monthly",
+        notes: "Allocation on completion of the plan.",
+      },
+      image: "land-15",
+      alt: "Inner-ring plot at Cornerstone Gardens",
+    },
+    {
+      reference: "RXC-LND-0016",
+      slug: "cornerstone-gardens-plot-63",
+      title: "Plot 63, Cornerstone Gardens",
+      description:
+        "A 250 square metre plot at the estate's western boundary, the smallest allocation offered here. Level and dry, with the boundary wall completed along the western run.",
+      estate: "cornerstone-gardens",
+      location: "Mowe-Ofada",
+      state: "Ogun",
+      price: 2_650_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 250,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.GAZETTE,
+      surveyNumber: "OG/SV/8853",
+      topography: "Dry, level",
+      roadAccess: "Graded internal road",
+      documents: [
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
+      ],
+      paymentPlan: {
+        depositPercent: 20,
+        durationMonths: 24,
+        frequency: "monthly",
+      },
+      image: "land-16",
+      alt: "Boundary plot at Cornerstone Gardens",
+    },
+    {
+      reference: "RXC-LND-0017",
+      slug: "sabon-lugbe-court-plot-n11",
+      title: "Plot N11, Sabon Lugbe Court",
+      description:
+        "A 600 square metre plot held back at the northern boundary of a delivered court, with Governor's consent obtained and the deed registered. Mains water and power run to the boundary.",
+      estate: "sabon-lugbe-court",
+      location: "Lugbe",
+      state: "FCT Abuja",
+      price: 34_500_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 600,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.GOVERNORS_CONSENT,
+      additionalTitleTypes: [TitleType.DEED_OF_ASSIGNMENT],
+      surveyNumber: "FCT/SV/11207",
+      topography: "Dry, level",
+      roadAccess: "Tarred estate road",
+      documents: [
+        DocumentType.GOVERNORS_CONSENT,
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.SERVICE_CONNECTION,
+      ],
+      image: "land-17",
+      alt: "Plot held back at the northern boundary of Sabon Lugbe Court",
+    },
+    {
+      reference: "RXC-LND-0018",
+      slug: "epe-farm-parcel-two-hectares",
+      title: "Two-hectare parcel, Epe",
+      description:
+        "A two-hectare parcel on the Epe expressway, sold on a registered survey only. Excision has not been granted over this land and there is no Certificate of Occupancy. The price reflects that position and the documents are open for your own search.",
+      estate: null,
+      location: "Epe",
+      state: "Lagos",
+      price: 21_000_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 2,
+      plotUnit: PlotUnit.HECTARES,
+      titleType: TitleType.SURVEY_ONLY,
+      surveyNumber: "LS/D/LA3390",
+      topography: "Mixed, partly wooded",
+      roadAccess: "Laterite access track from the expressway",
+      documents: [
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.PURCHASE_RECEIPT,
+      ],
+      image: "land-18",
+      alt: "Two-hectare parcel on the Epe expressway",
+    },
+    {
+      reference: "RXC-LND-0019",
+      slug: "ikorodu-plot-agric-road",
+      title: "Plot on Agric Road, Ikorodu",
+      description:
+        "A 400 square metre plot fronting Agric Road, held on excision with the survey registered. Sold outside any estate, so there are no service charges and no development timeline attached.",
+      estate: null,
+      location: "Ikorodu",
+      state: "Lagos",
+      price: 8_900_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 400,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.EXCISION,
+      additionalTitleTypes: [TitleType.GAZETTE],
+      surveyNumber: "LS/D/LA3104",
+      topography: "Dry, level",
+      roadAccess: "Direct frontage to a tarred road",
+      documents: [
+        DocumentType.EXCISION_CERTIFICATE,
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+      ],
+      paymentPlan: {
+        depositPercent: 40,
+        durationMonths: 9,
+        frequency: "monthly",
+      },
+      image: "land-19",
+      alt: "Roadside plot at Ikorodu",
+    },
+    {
+      reference: "RXC-LND-0020",
+      slug: "sangotedo-plot-block-f",
+      title: "Plot F08, Sangotedo",
+      description:
+        "A 500 square metre plot in a developed neighbourhood off the Lekki–Epe expressway, held on a Certificate of Occupancy with consent already obtained for the assignment.",
+      estate: null,
+      location: "Sangotedo",
+      state: "Lagos",
+      price: 42_000_000,
+      status: ListingStatus.AVAILABLE,
+      featured: true,
+      plotSize: 500,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.C_OF_O,
+      additionalTitleTypes: [
+        TitleType.GOVERNORS_CONSENT,
+        TitleType.DEED_OF_ASSIGNMENT,
+      ],
+      surveyNumber: "LS/D/LA2988",
+      topography: "Dry, level, fenced",
+      roadAccess: "Tarred road, kerbed",
+      documents: [
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.GOVERNORS_CONSENT,
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.SERVICE_CONNECTION,
+      ],
+      image: "land-20",
+      alt: "Fenced plot at Sangotedo",
+    },
+    {
+      reference: "RXC-LND-0021",
+      slug: "simawa-plot-block-j",
+      title: "Plot J21, Simawa",
+      description:
+        "A 300 square metre plot at Simawa, off the Lagos–Ibadan expressway. Gazetted land with the survey registered, sold on a plan that runs to two years.",
+      estate: null,
+      location: "Simawa",
+      state: "Ogun",
+      price: 3_450_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 300,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.GAZETTE,
+      surveyNumber: "OG/SV/9012",
+      topography: "Dry, gently sloping",
+      roadAccess: "Laterite road, motorable year round",
+      documents: [
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ALLOCATION_LETTER,
+      ],
+      paymentPlan: {
+        depositPercent: 20,
+        durationMonths: 24,
+        frequency: "monthly",
+      },
+      image: "land-21",
+      alt: "Plot at Simawa off the Lagos–Ibadan expressway",
+    },
+    {
+      reference: "RXC-LND-0022",
+      slug: "kuje-parcel-one-acre",
+      title: "One-acre parcel, Kuje",
+      description:
+        "A single acre on the Kuje–Gwagwalada road, held on a deed with the survey registered. Suited to a compound build or to holding, and offered without a payment plan.",
+      estate: null,
+      location: "Kuje",
+      state: "FCT Abuja",
+      price: 16_800_000,
+      status: ListingStatus.AVAILABLE,
+      plotSize: 1,
+      plotUnit: PlotUnit.ACRES,
+      titleType: TitleType.DEED_OF_ASSIGNMENT,
+      surveyNumber: "FCT/SV/11840",
+      topography: "Dry, level, lightly wooded",
+      roadAccess: "Laterite road from the Kuje–Gwagwalada road",
+      documents: [
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.PURCHASE_RECEIPT,
+      ],
+      image: "land-22",
+      alt: "One-acre parcel at Kuje",
+    },
+    {
+      reference: "RXC-LND-0023",
+      slug: "abeokuta-plot-oke-mosan",
+      title: "Plot at Oke-Mosan, Abeokuta",
+      description:
+        "A 700 square metre plot at Oke-Mosan, close to the state secretariat. Held on a Certificate of Occupancy in the estate's name, with the registered survey and the layout approval on file.",
+      estate: null,
+      location: "Abeokuta",
+      state: "Ogun",
+      price: 13_500_000,
+      status: ListingStatus.RESERVED,
+      plotSize: 700,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.C_OF_O,
+      surveyNumber: "OG/SV/7742",
+      topography: "Dry, level",
+      roadAccess: "Tarred road frontage",
+      documents: [
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
+      ],
+      image: "land-23",
+      alt: "Plot at Oke-Mosan, Abeokuta",
+    },
+    {
+      reference: "RXC-LND-0024",
+      slug: "emerald-ridge-plot-c11",
+      title: "Plot C11, Emerald Ridge",
+      description:
+        "A 500 square metre plot sold in March. Certificate of Occupancy issued, survey registered and the deed executed at handover.",
+      estate: "emerald-ridge",
+      location: "Ibeju-Lekki",
+      state: "Lagos",
+      price: 17_900_000,
+      status: ListingStatus.SOLD,
+      plotSize: 500,
+      plotUnit: PlotUnit.SQM,
+      titleType: TitleType.C_OF_O,
+      surveyNumber: "LS/D/LA2198",
+      topography: "Dry, level, sand-filled",
+      roadAccess: "Tarred road to plot boundary",
+      documents: [
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
+      ],
+      image: "land-24",
+      alt: "Plot C11 as photographed before sale",
+    },
   ];
 
   for (const [landIndex, seed] of landSeeds.entries()) {
@@ -741,7 +1088,7 @@ async function main() {
         type: ListingType.LAND,
         title: seed.title,
         description: seed.description,
-        estateId: estates[seed.estate],
+        estateId: seed.estate ? estates[seed.estate] : null,
         location: seed.location,
         state: seed.state,
         price: seed.price,
@@ -793,7 +1140,8 @@ async function main() {
     slug: string;
     title: string;
     description: string;
-    estate: string;
+    /** Null for stock held outside any of our estates. */
+    estate: string | null;
     location: string;
     state: string;
     price: number | null;
@@ -1073,6 +1421,255 @@ async function main() {
       image: "home-08",
       alt: "Terrace unit as photographed before sale",
     },
+    // -- Expansion: a second page of homes, across every build stage and house
+    // -- type, including units held outside an estate.
+    {
+      reference: "RXC-HME-0009",
+      slug: "emerald-ridge-3-bed-semi-detached",
+      title: "Three-bedroom semi-detached house, Emerald Ridge",
+      description:
+        "A three-bedroom semi-detached house under construction on the estate's second row, roofed and plastered, with handover scheduled for the first quarter. All rooms en-suite.",
+      estate: "emerald-ridge",
+      location: "Ibeju-Lekki",
+      state: "Lagos",
+      price: 78_000_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 3,
+      bathrooms: 4,
+      houseType: HouseType.SEMI_DETACHED,
+      buildStage: BuildStage.UNDER_CONSTRUCTION,
+      handoverDate: new Date("2027-03-31"),
+      builtArea: 210,
+      landArea: 300,
+      finishingSpec:
+        "Porcelain tiling, fitted kitchen, POP ceilings, inverter-ready wiring.",
+      features: [
+        "All rooms en-suite",
+        "Fitted kitchen",
+        "Private parking for two",
+      ],
+      paymentPlan: {
+        depositPercent: 30,
+        durationMonths: 15,
+        frequency: "monthly",
+        notes: "Balance due at handover.",
+      },
+      image: "home-01",
+      alt: "Semi-detached house of the type under construction at Emerald Ridge",
+    },
+    {
+      reference: "RXC-HME-0010",
+      slug: "emerald-ridge-2-bed-terrace-off-plan",
+      title: "Two-bedroom terrace, Emerald Ridge",
+      description:
+        "A two-bedroom terrace released off plan on the estate's third row, priced at the launch rate. Foundations are set and the block is scheduled to top out before the rains.",
+      estate: "emerald-ridge",
+      location: "Ibeju-Lekki",
+      state: "Lagos",
+      price: 52_000_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 2,
+      bathrooms: 3,
+      houseType: HouseType.TERRACE,
+      buildStage: BuildStage.OFF_PLAN,
+      handoverDate: new Date("2027-09-30"),
+      builtArea: 145,
+      landArea: 180,
+      finishingSpec:
+        "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+      features: ["Fitted kitchen", "Private terrace", "Estate management"],
+      paymentPlan: {
+        depositPercent: 25,
+        durationMonths: 24,
+        frequency: "monthly",
+      },
+      image: "home-02",
+      alt: "Terrace unit of the type released off plan at Emerald Ridge",
+    },
+    {
+      reference: "RXC-HME-0011",
+      slug: "cornerstone-gardens-2-bed-bungalow",
+      title: "Two-bedroom bungalow, Cornerstone Gardens",
+      description:
+        "A completed two-bedroom bungalow on a 300 square metre plot, the smallest unit built here. Finished and ready for occupation, with a walled compound and a borehole on the plot.",
+      estate: "cornerstone-gardens",
+      location: "Mowe-Ofada",
+      state: "Ogun",
+      price: 38_500_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 2,
+      bathrooms: 3,
+      houseType: HouseType.BUNGALOW,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 120,
+      landArea: 300,
+      finishingSpec:
+        "Ceramic tiling, fitted kitchen, POP ceilings, borehole and overhead tank.",
+      features: ["Walled compound", "Borehole on plot", "Fitted kitchen"],
+      paymentPlan: {
+        depositPercent: 35,
+        durationMonths: 12,
+        frequency: "monthly",
+      },
+      image: "home-03",
+      alt: "Bungalow of the type completed at Cornerstone Gardens",
+    },
+    {
+      reference: "RXC-HME-0012",
+      slug: "cornerstone-gardens-5-bed-duplex",
+      title: "Five-bedroom duplex, Cornerstone Gardens",
+      description:
+        "A five-bedroom duplex on a 600 square metre corner plot, completed and furnished to shell standard above the ground floor. Detached boys' quarters and parking for four.",
+      estate: "cornerstone-gardens",
+      location: "Mowe-Ofada",
+      state: "Ogun",
+      price: 132_000_000,
+      status: ListingStatus.AVAILABLE,
+      featured: true,
+      bedrooms: 5,
+      bathrooms: 6,
+      houseType: HouseType.DUPLEX,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 380,
+      landArea: 600,
+      finishingSpec:
+        "Porcelain tiling, fitted kitchen, POP ceilings, solar-ready roof.",
+      features: [
+        "All rooms en-suite",
+        "Detached boys' quarters",
+        "Parking for four",
+        "Corner plot",
+      ],
+      image: "home-04",
+      alt: "Duplex of the type completed at Cornerstone Gardens",
+    },
+    {
+      reference: "RXC-HME-0013",
+      slug: "sabon-lugbe-court-3-bed-apartment",
+      title: "Three-bedroom apartment, Sabon Lugbe Court",
+      description:
+        "A three-bedroom apartment on the first floor of the northern block, completed and handed over. Lift-served, with allocated parking and a share of the estate generator.",
+      estate: "sabon-lugbe-court",
+      location: "Lugbe",
+      state: "FCT Abuja",
+      price: 64_000_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 3,
+      bathrooms: 4,
+      houseType: HouseType.APARTMENT,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 165,
+      landArea: 0,
+      finishingSpec:
+        "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+      features: ["Lift-served", "Allocated parking", "Estate management"],
+      image: "home-05",
+      alt: "Apartment block of the type at Sabon Lugbe Court",
+    },
+    {
+      reference: "RXC-HME-0014",
+      slug: "sabon-lugbe-court-4-bed-detached",
+      title: "Four-bedroom detached house, Sabon Lugbe Court",
+      description:
+        "A four-bedroom detached house on the court's outer ring, completed in 2024 and unoccupied since. All rooms en-suite, with a study, a detached boys' quarters and a walled compound.",
+      estate: "sabon-lugbe-court",
+      location: "Lugbe",
+      state: "FCT Abuja",
+      price: 168_000_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 4,
+      bathrooms: 5,
+      houseType: HouseType.DETACHED,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 320,
+      landArea: 600,
+      finishingSpec:
+        "Porcelain tiling, fitted kitchen, POP ceilings, borehole and treatment plant.",
+      features: [
+        "All rooms en-suite",
+        "Study",
+        "Detached boys' quarters",
+        "Walled compound",
+      ],
+      image: "home-06",
+      alt: "Detached house of the type at Sabon Lugbe Court",
+    },
+    {
+      reference: "RXC-HME-0015",
+      slug: "gwarinpa-4-bed-terrace",
+      title: "Four-bedroom terrace, Gwarinpa",
+      description:
+        "A four-bedroom terrace in Gwarinpa, sold outside any estate of ours, so there is no service charge and no development timeline. Held on a Certificate of Occupancy with consent obtained.",
+      estate: null,
+      location: "Gwarinpa",
+      state: "FCT Abuja",
+      price: 115_000_000,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 4,
+      bathrooms: 5,
+      houseType: HouseType.TERRACE,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 265,
+      landArea: 250,
+      finishingSpec:
+        "Ceramic tiling, fitted kitchen, POP ceilings, inverter installed.",
+      features: ["All rooms en-suite", "Inverter installed", "Gated street"],
+      image: "home-07",
+      alt: "Terrace of the type sold at Gwarinpa",
+    },
+    {
+      reference: "RXC-HME-0016",
+      slug: "sangotedo-4-bed-detached-off-plan",
+      title: "Four-bedroom detached house, Sangotedo",
+      description:
+        "A four-bedroom detached house released off plan on a fenced 500 square metre plot at Sangotedo. Pricing is set against the build specification and discussed directly.",
+      estate: null,
+      location: "Sangotedo",
+      state: "Lagos",
+      price: null,
+      priceOnRequest: true,
+      status: ListingStatus.AVAILABLE,
+      bedrooms: 4,
+      bathrooms: 5,
+      houseType: HouseType.DETACHED,
+      buildStage: BuildStage.OFF_PLAN,
+      handoverDate: new Date("2028-01-31"),
+      builtArea: 300,
+      landArea: 500,
+      finishingSpec: "Specification agreed with the buyer before works begin.",
+      features: ["All rooms en-suite", "Fenced plot", "Specification to order"],
+      image: "home-08",
+      alt: "Detached house of the type planned at Sangotedo",
+    },
+    {
+      reference: "RXC-HME-0017",
+      slug: "cornerstone-gardens-3-bed-terrace-sold",
+      title: "Three-bedroom terrace, Cornerstone Gardens",
+      description:
+        "Sold in February to a buyer on a twelve-month plan. Completed, handed over, and documented with the deed registered at closing.",
+      estate: "cornerstone-gardens",
+      location: "Mowe-Ofada",
+      state: "Ogun",
+      price: 61_000_000,
+      status: ListingStatus.SOLD,
+      bedrooms: 3,
+      bathrooms: 4,
+      houseType: HouseType.TERRACE,
+      buildStage: BuildStage.COMPLETED,
+      handoverDate: null,
+      builtArea: 185,
+      landArea: 220,
+      finishingSpec:
+        "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+      features: ["All rooms en-suite", "Private terrace", "Estate management"],
+      image: "home-01",
+      alt: "Terrace unit as photographed before sale",
+    },
   ];
 
   for (const seed of homeSeeds) {
@@ -1087,7 +1684,7 @@ async function main() {
         type: ListingType.HOME,
         title: seed.title,
         description: seed.description,
-        estateId: estates[seed.estate],
+        estateId: seed.estate ? estates[seed.estate] : null,
         location: seed.location,
         state: seed.state,
         price: seed.price,
@@ -1161,6 +1758,73 @@ async function main() {
         "Security, drainage, road maintenance and power. What a service charge is buying, how it is usually set, and what to check before you commit to one.",
       image: "article-4",
     },
+    // Three per category rather than one: 05_RESOURCES groups the hub by
+    // category, and a single article per group leaves two empty columns in a
+    // three-column row, which reads as a broken layout rather than a short list.
+    {
+      slug: "excision-and-gazette-explained",
+      title: "Excision and gazette, explained without the jargon",
+      category: ArticleCategory.TITLE_AND_DOCUMENTATION,
+      excerpt:
+        "Most land sold in Lagos and Ogun sits somewhere on the road between family land and a Certificate of Occupancy. Excision and gazette are the two milestones on that road, and knowing which one a plot has reached tells you most of what you need.",
+      image: "article-1",
+    },
+    {
+      slug: "when-a-survey-plan-is-all-there-is",
+      title: "When a registered survey is all there is",
+      category: ArticleCategory.TITLE_AND_DOCUMENTATION,
+      excerpt:
+        "Some plots are sold on a survey and nothing more. That is not automatically a fraud, but it is a different purchase with a different risk, and it should carry a different price.",
+      image: "article-2",
+    },
+    {
+      slug: "the-site-visit-checklist",
+      title: "The site visit checklist we give our own buyers",
+      category: ArticleCategory.BUYING_PROCESS,
+      excerpt:
+        "What to look at, what to photograph and who to speak to on the day you walk the plot. Twenty minutes of attention on site saves a year of correspondence later.",
+      image: "article-3",
+    },
+    {
+      slug: "questions-to-ask-a-land-seller",
+      title: "Eleven questions to ask before you pay a deposit",
+      category: ArticleCategory.BUYING_PROCESS,
+      excerpt:
+        "A seller who answers all eleven plainly is a seller you can work with. One who deflects on any of them has told you something useful.",
+      image: "article-4",
+    },
+    {
+      slug: "deposit-and-default-what-happens",
+      title: "What actually happens when you miss an instalment",
+      category: ArticleCategory.PAYMENT_PLANS,
+      excerpt:
+        "Forfeiture, reallocation, restructuring or a refund minus charges. The four outcomes a plan can specify, and why the difference between them belongs in writing before you sign.",
+      image: "article-1",
+    },
+    {
+      slug: "paying-in-full-versus-a-plan",
+      title: "Paying in full against paying on a plan",
+      category: ArticleCategory.PAYMENT_PLANS,
+      excerpt:
+        "Outright purchase usually buys a discount and a faster allocation. A plan buys time. Which is worth more depends on facts about you, not about the plot.",
+      image: "article-2",
+    },
+    {
+      slug: "what-to-expect-after-allocation",
+      title: "What to expect in the year after allocation",
+      category: ArticleCategory.ESTATE_LIVING,
+      excerpt:
+        "Beaconing, the building approval, the development timeline and the first service charge. The sequence that follows allocation, and roughly what each stage costs.",
+      image: "article-3",
+    },
+    {
+      slug: "building-approvals-in-a-managed-estate",
+      title: "Building approvals inside a managed estate",
+      category: ArticleCategory.ESTATE_LIVING,
+      excerpt:
+        "Estate design rules sit on top of the state's own approval process, not instead of it. Here is how the two fit together, and where buyers most often lose time.",
+      image: "article-4",
+    },
   ];
 
   for (const [index, seed] of articleSeeds.entries()) {
@@ -1182,6 +1846,200 @@ async function main() {
         coverImageId: cover.id,
         status: ArticleStatus.PUBLISHED,
         publishedAt: new Date(Date.now() - index * 86_400_000 * 9),
+      },
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // Video tours — 06_FEATURE_VIDEO_TOURS.md §3
+  //
+  // These are real, live YouTube videos published by other people. They stand
+  // in until the client shoots their own, so every row carries `isStandIn` and
+  // the channel name, and the facade renders a visible "Placeholder video"
+  // label the same way stand-in photography renders "Representative image".
+  //
+  // Only the eleven-character ID is stored, never a pasted URL — the facade
+  // builds its own embed against youtube-nocookie.com from it.
+  //
+  // Every ID here was checked against YouTube's oEmbed endpoint at seed time.
+  // They can still be deleted or made private by their owners at any point,
+  // which is precisely the case FR-V1.8 exists to survive.
+  // -------------------------------------------------------------------------
+
+  const videoSeeds: {
+    slug: string;
+    youtubeId: string;
+    title: string;
+    description: string;
+    kind: VideoKind;
+    attribution: string;
+    /**
+     * §5 strongly prefers a custom poster, and this is why: YouTube's own
+     * thumbnails on these stand-in videos carry baked-in title text, arrows
+     * and price callouts. Eight of them in a grid reads as a bank of someone
+     * else's marketing rather than as this site. The poster is a Media row, so
+     * Phase 7 replaces it through the existing media library.
+     */
+    poster: string;
+    durationSeconds: number | null;
+    listingSlug?: string;
+    estateSlug?: string;
+    featured?: boolean;
+    sortOrder: number;
+  }[] = [
+    {
+      slug: "emerald-ridge-estate-overview",
+      poster: "estate-emerald-ridge",
+      youtubeId: "sywocKB9UcU",
+      title: "A drive through the estate",
+      description:
+        "The gate, the internal road network and the completed drainage, filmed on one pass through the estate.",
+      kind: VideoKind.ESTATE_OVERVIEW,
+      attribution: "Real Estate with Sally",
+      durationSeconds: null,
+      estateSlug: "emerald-ridge",
+      featured: true,
+      sortOrder: 0,
+    },
+    {
+      slug: "emerald-ridge-plot-a14-drone-tour",
+      poster: "land-terrain-01",
+      youtubeId: "PwwZSvyJ97U",
+      title: "Drone tour over the Lekki corridor",
+      description:
+        "An aerial pass over the corridor the estate sits on, showing the road position and how far the development has reached.",
+      kind: VideoKind.DRONE_TOUR,
+      attribution: "Benjamin Landclick",
+      durationSeconds: null,
+      listingSlug: "emerald-ridge-plot-a14",
+      featured: true,
+      sortOrder: 1,
+    },
+    {
+      slug: "emerald-ridge-plot-a14-walkthrough",
+      poster: "home-01",
+      youtubeId: "mRkfUz4BEro",
+      title: "What gets built on a plot this size",
+      description:
+        "A walkthrough of a completed house on a comparable plot, for a sense of what five hundred square metres carries.",
+      kind: VideoKind.WALKTHROUGH,
+      attribution: "Eden Oasis",
+      durationSeconds: null,
+      listingSlug: "emerald-ridge-plot-a14",
+      sortOrder: 2,
+    },
+    {
+      slug: "cornerstone-gardens-estate-overview",
+      poster: "estate-cornerstone-gardens",
+      youtubeId: "FHIwNvemi_g",
+      title: "Inside the estate gates",
+      description:
+        "A tour of a managed estate of comparable size, filmed from the gatehouse through to the inner ring.",
+      kind: VideoKind.ESTATE_OVERVIEW,
+      attribution: "Tolu Ademulegun",
+      durationSeconds: null,
+      estateSlug: "cornerstone-gardens",
+      featured: true,
+      sortOrder: 3,
+    },
+    {
+      slug: "epe-parcel-aerial",
+      poster: "land-terrain-05",
+      youtubeId: "kZpKPC1bk00",
+      title: "Aerial over the Epe approach",
+      description:
+        "Scenic aerial footage along the corridor the parcel sits on, showing the surrounding land use.",
+      kind: VideoKind.DRONE_TOUR,
+      attribution: "Relaxation Corner",
+      durationSeconds: null,
+      listingSlug: "epe-farm-parcel-two-hectares",
+      featured: true,
+      sortOrder: 4,
+    },
+    {
+      slug: "emerald-ridge-4-bed-walkthrough",
+      poster: "home-02",
+      youtubeId: "lYM7MIvJkW8",
+      title: "Four-bedroom walkthrough",
+      description:
+        "A room-by-room walkthrough of a completed detached house, to the same finishing specification.",
+      kind: VideoKind.WALKTHROUGH,
+      attribution: "Favour Sv",
+      durationSeconds: null,
+      listingSlug: "emerald-ridge-4-bed-detached",
+      sortOrder: 5,
+    },
+    {
+      slug: "cornerstone-gardens-bungalow-walkthrough",
+      poster: "home-03",
+      youtubeId: "SC3_OOy4nJ0",
+      title: "Inside a completed bungalow",
+      description:
+        "A walkthrough of finished homes at this end of the market, filmed room by room.",
+      kind: VideoKind.WALKTHROUGH,
+      attribution: "Tayo Aina",
+      durationSeconds: null,
+      listingSlug: "cornerstone-gardens-3-bed-bungalow",
+      sortOrder: 6,
+    },
+    {
+      slug: "sabon-lugbe-court-neighbourhood",
+      poster: "estate-sabon-lugbe-court",
+      youtubeId: "ySZpkjEeBzE",
+      title: "The neighbourhood around the court",
+      description:
+        "A look at the surrounding residential area, the roads into it and what is already built there.",
+      kind: VideoKind.ESTATE_OVERVIEW,
+      attribution: "Steven Ndukwu",
+      durationSeconds: null,
+      estateSlug: "sabon-lugbe-court",
+      sortOrder: 7,
+    },
+  ];
+
+  for (const seed of videoSeeds) {
+    // Resolved by slug rather than carried through the loops above: a video
+    // belongs to a listing or an estate that may be created hundreds of lines
+    // earlier, and threading ids through would couple the two orderings.
+    const listing = seed.listingSlug
+      ? await prisma.listing.findUniqueOrThrow({
+          where: { slug: seed.listingSlug },
+          select: { id: true },
+        })
+      : null;
+    const estate = seed.estateSlug
+      ? await prisma.estate.findUniqueOrThrow({
+          where: { slug: seed.estateSlug },
+          select: { id: true },
+        })
+      : null;
+
+    if (Boolean(listing) === Boolean(estate)) {
+      throw new Error(
+        `Video "${seed.slug}" must belong to exactly one of a listing or an estate.`,
+      );
+    }
+
+    const poster = await prisma.media.create({ data: photo(seed.poster) });
+
+    await prisma.video.create({
+      data: {
+        slug: seed.slug,
+        poster: { connect: { id: poster.id } },
+        youtubeId: seed.youtubeId,
+        title: seed.title,
+        description: seed.description,
+        kind: seed.kind,
+        durationSeconds: seed.durationSeconds,
+        // Prisma exposes the relation rather than the raw foreign key here,
+        // because both sides are declared on the model.
+        listing: listing ? { connect: { id: listing.id } } : undefined,
+        estate: estate ? { connect: { id: estate.id } } : undefined,
+        featured: seed.featured ?? false,
+        sortOrder: seed.sortOrder,
+        isStandIn: true,
+        attribution: seed.attribution,
+        publishedAt: new Date(),
       },
     });
   }
@@ -1241,6 +2099,7 @@ async function main() {
       `  price on req.  ${por}`,
       `  survey only    ${surveyOnly}`,
       `  articles       ${articles}`,
+      `  videos         ${videoSeeds.length} (${videoSeeds.filter((v) => v.featured).length} featured)`,
       `  testimonials   ${testimonials}`,
     ].join("\n"),
   );

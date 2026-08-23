@@ -11,6 +11,10 @@ import { BuildStageBadge } from "@/components/ui/badge";
 import { ArrowGlyph } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { Gallery } from "@/components/ui/gallery";
+import { VideoBlock } from "@/components/video/video-block";
+import { VideoStructuredData } from "@/components/video/video-structured-data";
+import { getListingVideos } from "@/lib/videos";
+import { env } from "@/lib/env";
 import { formatArea, formatHandover } from "@/lib/format";
 import {
   getListingDetail,
@@ -57,12 +61,10 @@ export default async function HouseDetailPage({
   if (!listing || listing.type !== "HOME" || !listing.homeDetail) notFound();
 
   const home = listing.homeDetail;
-  const related = await getRelatedListings(
-    listing.id,
-    "HOME",
-    listing.estateId,
-    listing.location,
-  );
+  const [related, videos] = await Promise.all([
+    getRelatedListings(listing.id, "HOME", listing.estateId, listing.location),
+    getListingVideos(listing.id),
+  ]);
 
   const images = listing.media.map((entry) => entry.media);
   const offPlan = home.buildStage === "OFF_PLAN";
@@ -97,6 +99,16 @@ export default async function HouseDetailPage({
           </p>
 
           <Gallery images={images} className="mt-10" />
+
+          {/* FR-V1.1 — beneath the gallery on home pages. */}
+          {videos.length > 0 ? (
+            <VideoBlock videos={videos} className="mt-12" />
+          ) : null}
+
+          <VideoStructuredData
+            videos={videos}
+            siteUrl={env.NEXT_PUBLIC_SITE_URL}
+          />
 
           {offPlan ? (
             // §8 — non-negotiable on off-plan listings.

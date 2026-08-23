@@ -42,6 +42,48 @@
     "sizeBytes": 114747
   },
   {
+    "name": "land-terrain-04",
+    "file": "/images/photography/land-terrain-04.jpg",
+    "width": 900,
+    "height": 675,
+    "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
+    "title": "Ambaliyar Ruwa",
+    "creator": "YusufuAM",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ambaliyar_Ruwa.jpg",
+    "attribution": null,
+    "sizeBytes": 48891
+  },
+  {
+    "name": "land-terrain-05",
+    "file": "/images/photography/land-terrain-05.jpg",
+    "width": 900,
+    "height": 675,
+    "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
+    "title": "Beautiful skyline in northern nigeria",
+    "creator": "Binwana Gazuwa",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beautiful_skyline_in_northern_nigeria.jpg",
+    "attribution": "\"Beautiful skyline in northern nigeria\" by Binwana Gazuwa, licensed under CC BY 4.0",
+    "sizeBytes": 90495
+  },
+  {
+    "name": "land-terrain-06",
+    "file": "/images/photography/land-terrain-06.jpg",
+    "width": 900,
+    "height": 675,
+    "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
+    "title": "Company in Jos",
+    "creator": "M Bash Ne",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Company_in_Jos.jpg",
+    "attribution": null,
+    "sizeBytes": 141225
+  },
+  {
     "name": "home-01",
     "file": "/images/photography/home-01.jpg",
     "width": 900,

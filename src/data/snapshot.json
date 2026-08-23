@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-23T11:15:21.176Z",
+  "generatedAt": "2026-08-23T14:13:16.735Z",
   "listings": [
     {
-      "id": "cmt5pj40m0029lj3pn37ftrb6",
+      "id": "cmt5vpgei004e6l3p9ii63dm9",
       "slug": "emerald-ridge-4-bed-detached",
       "reference": "RXC-HME-0001",
       "type": "HOME",
       "title": "Four-bedroom detached house, Emerald Ridge",
       "description": "A completed four-bedroom detached house on a 500 square metre plot, finished and ready for occupation. All rooms en-suite, with a detached boys' quarters and a fitted kitchen.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "185000000",
@@ -17,9 +17,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T11:11:50.806Z",
-      "updatedAt": "2026-08-23T11:11:50.806Z",
-      "publishedAt": "2026-08-23T11:11:50.556Z",
+      "createdAt": "2026-08-23T14:04:44.490Z",
+      "updatedAt": "2026-08-23T14:04:44.490Z",
+      "publishedAt": "2026-08-23T14:04:44.247Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -41,7 +41,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pj40m0029lj3pn37ftrb6",
+        "listingId": "cmt5vpgei004e6l3p9ii63dm9",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DETACHED",
@@ -62,13 +62,13 @@
       }
     },
     {
-      "id": "cmt5pj5mp002clj3piyvis2o3",
+      "id": "cmt5vphzm004h6l3pcvud9qv3",
       "slug": "emerald-ridge-3-bed-terrace",
       "reference": "RXC-HME-0002",
       "type": "HOME",
       "title": "Three-bedroom terrace, Emerald Ridge",
       "description": "A three-bedroom terrace unit in the estate's second phase, currently at roofing stage with handover scheduled for the second quarter of next year.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "96500000",
@@ -82,9 +82,9 @@
         "durationMonths": 12
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:52.897Z",
-      "updatedAt": "2026-08-23T11:11:52.897Z",
-      "publishedAt": "2026-08-23T11:11:52.652Z",
+      "createdAt": "2026-08-23T14:04:46.546Z",
+      "updatedAt": "2026-08-23T14:04:46.546Z",
+      "publishedAt": "2026-08-23T14:04:46.294Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -106,7 +106,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pj5mp002clj3piyvis2o3",
+        "listingId": "cmt5vphzm004h6l3pcvud9qv3",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "TERRACE",
@@ -126,13 +126,13 @@
       }
     },
     {
-      "id": "cmt5pj78q002flj3pc6dkindk",
+      "id": "cmt5vpjmj004k6l3pejryheo0",
       "slug": "emerald-ridge-5-bed-off-plan",
       "reference": "RXC-HME-0003",
       "type": "HOME",
       "title": "Five-bedroom detached house, Emerald Ridge",
       "description": "An off-plan five-bedroom detached house on the estate's premium row, available to a buyer who wants input on the finishing schedule. Because the specification is agreed per buyer, pricing is discussed directly.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": null,
@@ -141,9 +141,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:54.986Z",
-      "updatedAt": "2026-08-23T11:11:54.986Z",
-      "publishedAt": "2026-08-23T11:11:54.732Z",
+      "createdAt": "2026-08-23T14:04:48.667Z",
+      "updatedAt": "2026-08-23T14:04:48.667Z",
+      "publishedAt": "2026-08-23T14:04:48.409Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -165,7 +165,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pj78q002flj3pc6dkindk",
+        "listingId": "cmt5vpjmj004k6l3pejryheo0",
         "bedrooms": 5,
         "bathrooms": 6,
         "houseType": "DETACHED",
@@ -186,13 +186,13 @@
       }
     },
     {
-      "id": "cmt5pj8si002ilj3plaob5dzc",
+      "id": "cmt5vpl87004n6l3po23dr3nb",
       "slug": "cornerstone-gardens-3-bed-bungalow",
       "reference": "RXC-HME-0004",
       "type": "HOME",
       "title": "Three-bedroom bungalow, Cornerstone Gardens",
       "description": "A completed three-bedroom bungalow on 450 square metres, built as the estate's show unit and now released for sale.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "58000000",
@@ -205,9 +205,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:56.994Z",
-      "updatedAt": "2026-08-23T11:11:56.994Z",
-      "publishedAt": "2026-08-23T11:11:56.751Z",
+      "createdAt": "2026-08-23T14:04:50.743Z",
+      "updatedAt": "2026-08-23T14:04:50.743Z",
+      "publishedAt": "2026-08-23T14:04:50.482Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -229,7 +229,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pj8si002ilj3plaob5dzc",
+        "listingId": "cmt5vpl87004n6l3po23dr3nb",
         "bedrooms": 3,
         "bathrooms": 3,
         "houseType": "BUNGALOW",
@@ -249,13 +249,13 @@
       }
     },
     {
-      "id": "cmt5pjadi002llj3p8vxbr40i",
+      "id": "cmt5vpmsu004q6l3pou4hytid",
       "slug": "cornerstone-gardens-4-bed-semi-detached",
       "reference": "RXC-HME-0005",
       "type": "HOME",
       "title": "Four-bedroom semi-detached house, Cornerstone Gardens",
       "description": "A four-bedroom semi-detached unit at block stage, with handover scheduled for the fourth quarter of next year. Structured payment plan available across the build period.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "74000000",
@@ -268,9 +268,9 @@
         "durationMonths": 15
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:59.046Z",
-      "updatedAt": "2026-08-23T11:11:59.046Z",
-      "publishedAt": "2026-08-23T11:11:58.801Z",
+      "createdAt": "2026-08-23T14:04:52.782Z",
+      "updatedAt": "2026-08-23T14:04:52.782Z",
+      "publishedAt": "2026-08-23T14:04:52.537Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -292,7 +292,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pjadi002llj3p8vxbr40i",
+        "listingId": "cmt5vpmsu004q6l3pou4hytid",
         "bedrooms": 4,
         "bathrooms": 4,
         "houseType": "SEMI_DETACHED",
@@ -311,13 +311,13 @@
       }
     },
     {
-      "id": "cmt5pjcaq002olj3pam4n7j09",
+      "id": "cmt5vpofn004t6l3pveqs1u55",
       "slug": "sabon-lugbe-2-bed-apartment",
       "reference": "RXC-HME-0006",
       "type": "HOME",
       "title": "Two-bedroom apartment, Sabon Lugbe Court",
       "description": "A completed two-bedroom apartment in a delivered estate with management already in place. Suited to a first purchase or a rental holding.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "42000000",
@@ -326,9 +326,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:12:01.538Z",
-      "updatedAt": "2026-08-23T11:12:01.538Z",
-      "publishedAt": "2026-08-23T11:12:01.273Z",
+      "createdAt": "2026-08-23T14:04:54.900Z",
+      "updatedAt": "2026-08-23T14:04:54.900Z",
+      "publishedAt": "2026-08-23T14:04:54.642Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -350,7 +350,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pjcaq002olj3pam4n7j09",
+        "listingId": "cmt5vpofn004t6l3pveqs1u55",
         "bedrooms": 2,
         "bathrooms": 3,
         "houseType": "APARTMENT",
@@ -370,13 +370,13 @@
       }
     },
     {
-      "id": "cmt5pje8b002rlj3p9q44zjr8",
+      "id": "cmt5vpq4c004w6l3pxnfb3ma0",
       "slug": "sabon-lugbe-4-bed-duplex",
       "reference": "RXC-HME-0007",
       "type": "HOME",
       "title": "Four-bedroom duplex, Sabon Lugbe Court",
       "description": "An off-plan four-bedroom duplex on the estate's last remaining corner plot, with construction beginning once the plot is allocated.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "148000000",
@@ -390,9 +390,9 @@
         "durationMonths": 18
       },
       "featured": true,
-      "createdAt": "2026-08-23T11:12:04.043Z",
-      "updatedAt": "2026-08-23T11:12:04.043Z",
-      "publishedAt": "2026-08-23T11:12:03.788Z",
+      "createdAt": "2026-08-23T14:04:57.084Z",
+      "updatedAt": "2026-08-23T14:04:57.084Z",
+      "publishedAt": "2026-08-23T14:04:56.837Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -414,7 +414,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pje8b002rlj3p9q44zjr8",
+        "listingId": "cmt5vpq4c004w6l3pxnfb3ma0",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DUPLEX",
@@ -434,13 +434,13 @@
       }
     },
     {
-      "id": "cmt5pjfvo002ulj3p16f0ulmi",
+      "id": "cmt5vprqt004z6l3pbebh39h8",
       "slug": "sabon-lugbe-3-bed-terrace",
       "reference": "RXC-HME-0008",
       "type": "HOME",
       "title": "Three-bedroom terrace, Sabon Lugbe Court",
       "description": "Sold in February. A three-bedroom terrace in the delivered court, listed here as evidence of what the estate has handed over.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "88000000",
@@ -449,9 +449,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:12:06.180Z",
-      "updatedAt": "2026-08-23T11:12:06.180Z",
-      "publishedAt": "2026-08-23T11:12:05.940Z",
+      "createdAt": "2026-08-23T14:04:59.189Z",
+      "updatedAt": "2026-08-23T14:04:59.189Z",
+      "publishedAt": "2026-08-23T14:04:58.931Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -473,7 +473,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5pjfvo002ulj3p16f0ulmi",
+        "listingId": "cmt5vprqt004z6l3pbebh39h8",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "TERRACE",
@@ -492,13 +492,540 @@
       }
     },
     {
-      "id": "cmt5piinp000flj3pn99pto66",
+      "id": "cmt5vptcu00526l3poeqofscl",
+      "slug": "emerald-ridge-3-bed-semi-detached",
+      "reference": "RXC-HME-0009",
+      "type": "HOME",
+      "title": "Three-bedroom semi-detached house, Emerald Ridge",
+      "description": "A three-bedroom semi-detached house under construction on the estate's second row, roofed and plastered, with handover scheduled for the first quarter. All rooms en-suite.",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "location": "Ibeju-Lekki",
+      "state": "Lagos",
+      "price": "78000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "notes": "Balance due at handover.",
+        "frequency": "monthly",
+        "depositPercent": 30,
+        "durationMonths": 15
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:01.278Z",
+      "updatedAt": "2026-08-23T14:05:01.278Z",
+      "publishedAt": "2026-08-23T14:05:01.026Z",
+      "estate": {
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-01.jpg",
+            "alt": "Completed detached house with a covered porch and lawn",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Kamakoa Nui single-family detached mod\" by Hawaii County, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vptcu00526l3poeqofscl",
+        "bedrooms": 3,
+        "bathrooms": 4,
+        "houseType": "SEMI_DETACHED",
+        "buildStage": "UNDER_CONSTRUCTION",
+        "handoverDate": "2027-03-31T00:00:00.000Z",
+        "builtArea": "210",
+        "landArea": "300",
+        "floorPlanId": null,
+        "finishingSpec": "Porcelain tiling, fitted kitchen, POP ceilings, inverter-ready wiring.",
+        "features": [
+          "All rooms en-suite",
+          "Fitted kitchen",
+          "Private parking for two"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vpv0c00556l3psdllcl25",
+      "slug": "emerald-ridge-2-bed-terrace-off-plan",
+      "reference": "RXC-HME-0010",
+      "type": "HOME",
+      "title": "Two-bedroom terrace, Emerald Ridge",
+      "description": "A two-bedroom terrace released off plan on the estate's third row, priced at the launch rate. Foundations are set and the block is scheduled to top out before the rains.",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "location": "Ibeju-Lekki",
+      "state": "Lagos",
+      "price": "52000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 25,
+        "durationMonths": 24
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:03.420Z",
+      "updatedAt": "2026-08-23T14:05:03.420Z",
+      "publishedAt": "2026-08-23T14:05:03.176Z",
+      "estate": {
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-02.jpg",
+            "alt": "Residential building at structural stage under scaffolding",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"The George and Dragon - Dayus Square -\" by ell brown, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vpv0c00556l3psdllcl25",
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "houseType": "TERRACE",
+        "buildStage": "OFF_PLAN",
+        "handoverDate": "2027-09-30T00:00:00.000Z",
+        "builtArea": "145",
+        "landArea": "180",
+        "floorPlanId": null,
+        "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+        "features": [
+          "Fitted kitchen",
+          "Private terrace",
+          "Estate management"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vpwla00586l3pt31g7hxl",
+      "slug": "cornerstone-gardens-2-bed-bungalow",
+      "reference": "RXC-HME-0011",
+      "type": "HOME",
+      "title": "Two-bedroom bungalow, Cornerstone Gardens",
+      "description": "A completed two-bedroom bungalow on a 300 square metre plot, the smallest unit built here. Finished and ready for occupation, with a walled compound and a borehole on the plot.",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "location": "Mowe-Ofada",
+      "state": "Ogun",
+      "price": "38500000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 35,
+        "durationMonths": 12
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:05.470Z",
+      "updatedAt": "2026-08-23T14:05:05.470Z",
+      "publishedAt": "2026-08-23T14:05:05.223Z",
+      "estate": {
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-03.jpg",
+            "alt": "Contemporary detached house with large glazing",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Modern Vancouver House\" by pnwra, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vpwla00586l3pt31g7hxl",
+        "bedrooms": 2,
+        "bathrooms": 3,
+        "houseType": "BUNGALOW",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "120",
+        "landArea": "300",
+        "floorPlanId": null,
+        "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, borehole and overhead tank.",
+        "features": [
+          "Walled compound",
+          "Borehole on plot",
+          "Fitted kitchen"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vpybf005b6l3pedfo92di",
+      "slug": "cornerstone-gardens-5-bed-duplex",
+      "reference": "RXC-HME-0012",
+      "type": "HOME",
+      "title": "Five-bedroom duplex, Cornerstone Gardens",
+      "description": "A five-bedroom duplex on a 600 square metre corner plot, completed and furnished to shell standard above the ground floor. Detached boys' quarters and parking for four.",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "location": "Mowe-Ofada",
+      "state": "Ogun",
+      "price": "132000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": true,
+      "createdAt": "2026-08-23T14:05:07.707Z",
+      "updatedAt": "2026-08-23T14:05:07.707Z",
+      "publishedAt": "2026-08-23T14:05:07.437Z",
+      "estate": {
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-04.jpg",
+            "alt": "Single-storey house exterior with a pitched roof",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Modern house exterior with red roof an\" by Shixart1985, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vpybf005b6l3pedfo92di",
+        "bedrooms": 5,
+        "bathrooms": 6,
+        "houseType": "DUPLEX",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "380",
+        "landArea": "600",
+        "floorPlanId": null,
+        "finishingSpec": "Porcelain tiling, fitted kitchen, POP ceilings, solar-ready roof.",
+        "features": [
+          "All rooms en-suite",
+          "Detached boys' quarters",
+          "Parking for four",
+          "Corner plot"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vpzwp005e6l3p26lh4bre",
+      "slug": "sabon-lugbe-court-3-bed-apartment",
+      "reference": "RXC-HME-0013",
+      "type": "HOME",
+      "title": "Three-bedroom apartment, Sabon Lugbe Court",
+      "description": "A three-bedroom apartment on the first floor of the northern block, completed and handed over. Lift-served, with allocated parking and a share of the estate generator.",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "location": "Lugbe",
+      "state": "FCT Abuja",
+      "price": "64000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:09.769Z",
+      "updatedAt": "2026-08-23T14:05:09.769Z",
+      "publishedAt": "2026-08-23T14:05:09.513Z",
+      "estate": {
+        "slug": "sabon-lugbe-court",
+        "name": "Sabon Lugbe Court",
+        "location": "Lugbe",
+        "state": "FCT Abuja"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-05.jpg",
+            "alt": "Houses under construction with roofing in progress",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"The Black Horse, Bristol Road South, N\" by ell brown, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vpzwp005e6l3p26lh4bre",
+        "bedrooms": 3,
+        "bathrooms": 4,
+        "houseType": "APARTMENT",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "165",
+        "landArea": "0",
+        "floorPlanId": null,
+        "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+        "features": [
+          "Lift-served",
+          "Allocated parking",
+          "Estate management"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vq1j8005h6l3p8vglqqnh",
+      "slug": "sabon-lugbe-court-4-bed-detached",
+      "reference": "RXC-HME-0014",
+      "type": "HOME",
+      "title": "Four-bedroom detached house, Sabon Lugbe Court",
+      "description": "A four-bedroom detached house on the court's outer ring, completed in 2024 and unoccupied since. All rooms en-suite, with a study, a detached boys' quarters and a walled compound.",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "location": "Lugbe",
+      "state": "FCT Abuja",
+      "price": "168000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:11.876Z",
+      "updatedAt": "2026-08-23T14:05:11.876Z",
+      "publishedAt": "2026-08-23T14:05:11.613Z",
+      "estate": {
+        "slug": "sabon-lugbe-court",
+        "name": "Sabon Lugbe Court",
+        "location": "Lugbe",
+        "state": "FCT Abuja"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-06.jpg",
+            "alt": "Low-rise apartment building with balconies",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"mogens lassen, systemhuset housing, or\" by seier+seier, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vq1j8005h6l3p8vglqqnh",
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "houseType": "DETACHED",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "320",
+        "landArea": "600",
+        "floorPlanId": null,
+        "finishingSpec": "Porcelain tiling, fitted kitchen, POP ceilings, borehole and treatment plant.",
+        "features": [
+          "All rooms en-suite",
+          "Study",
+          "Detached boys' quarters",
+          "Walled compound"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vq35y005k6l3pg74h0nik",
+      "slug": "gwarinpa-4-bed-terrace",
+      "reference": "RXC-HME-0015",
+      "type": "HOME",
+      "title": "Four-bedroom terrace, Gwarinpa",
+      "description": "A four-bedroom terrace in Gwarinpa, sold outside any estate of ours, so there is no service charge and no development timeline. Held on a Certificate of Occupancy with consent obtained.",
+      "estateId": null,
+      "location": "Gwarinpa",
+      "state": "FCT Abuja",
+      "price": "115000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:13.990Z",
+      "updatedAt": "2026-08-23T14:05:13.990Z",
+      "publishedAt": "2026-08-23T14:05:13.744Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-07.jpg",
+            "alt": "Contemporary two-storey house exterior",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Modern Home in Victoria, BC\" by pnwra, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vq35y005k6l3pg74h0nik",
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "houseType": "TERRACE",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "265",
+        "landArea": "250",
+        "floorPlanId": null,
+        "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, inverter installed.",
+        "features": [
+          "All rooms en-suite",
+          "Inverter installed",
+          "Gated street"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vq4tc005n6l3pljouccgb",
+      "slug": "sangotedo-4-bed-detached-off-plan",
+      "reference": "RXC-HME-0016",
+      "type": "HOME",
+      "title": "Four-bedroom detached house, Sangotedo",
+      "description": "A four-bedroom detached house released off plan on a fenced 500 square metre plot at Sangotedo. Pricing is set against the build specification and discussed directly.",
+      "estateId": null,
+      "location": "Sangotedo",
+      "state": "Lagos",
+      "price": null,
+      "priceOnRequest": true,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:16.128Z",
+      "updatedAt": "2026-08-23T14:05:16.128Z",
+      "publishedAt": "2026-08-23T14:05:15.848Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-08.jpg",
+            "alt": "Row of terraced houses with private frontages",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"arne jacobsen, alléhusene housing, gen\" by seier+seier, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vq4tc005n6l3pljouccgb",
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "houseType": "DETACHED",
+        "buildStage": "OFF_PLAN",
+        "handoverDate": "2028-01-31T00:00:00.000Z",
+        "builtArea": "300",
+        "landArea": "500",
+        "floorPlanId": null,
+        "finishingSpec": "Specification agreed with the buyer before works begin.",
+        "features": [
+          "All rooms en-suite",
+          "Fenced plot",
+          "Specification to order"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vq6f0005q6l3pj5xpm52y",
+      "slug": "cornerstone-gardens-3-bed-terrace-sold",
+      "reference": "RXC-HME-0017",
+      "type": "HOME",
+      "title": "Three-bedroom terrace, Cornerstone Gardens",
+      "description": "Sold in February to a buyer on a twelve-month plan. Completed, handed over, and documented with the deed registered at closing.",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "location": "Mowe-Ofada",
+      "state": "Ogun",
+      "price": "61000000",
+      "priceOnRequest": false,
+      "status": "SOLD",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:05:18.204Z",
+      "updatedAt": "2026-08-23T14:05:18.204Z",
+      "publishedAt": "2026-08-23T14:05:17.953Z",
+      "estate": {
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/home-01.jpg",
+            "alt": "Completed detached house with a covered porch and lawn",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Kamakoa Nui single-family detached mod\" by Hawaii County, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": null,
+      "homeDetail": {
+        "listingId": "cmt5vq6f0005q6l3pj5xpm52y",
+        "bedrooms": 3,
+        "bathrooms": 4,
+        "houseType": "TERRACE",
+        "buildStage": "COMPLETED",
+        "handoverDate": null,
+        "builtArea": "185",
+        "landArea": "220",
+        "floorPlanId": null,
+        "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
+        "features": [
+          "All rooms en-suite",
+          "Private terrace",
+          "Estate management"
+        ],
+        "floorPlan": null
+      }
+    },
+    {
+      "id": "cmt5vo749000f6l3puuylprrc",
       "slug": "emerald-ridge-plot-a14",
       "reference": "RXC-LND-0001",
       "type": "LAND",
       "title": "Plot A14, Emerald Ridge",
       "description": "A 500 square metre residential plot on the first row inside the estate gate, fully dry and sand-filled, with the access road tarred to the boundary. Registered survey and a Certificate of Occupancy already issued in the estate's name.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "18500000",
@@ -512,9 +1039,9 @@
         "durationMonths": 12
       },
       "featured": true,
-      "createdAt": "2026-08-23T11:11:23.126Z",
-      "updatedAt": "2026-08-23T11:11:23.126Z",
-      "publishedAt": "2026-08-23T11:11:22.768Z",
+      "createdAt": "2026-08-23T14:03:45.801Z",
+      "updatedAt": "2026-08-23T14:03:45.801Z",
+      "publishedAt": "2026-08-23T14:03:45.555Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -535,42 +1062,44 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5piinp000flj3pn99pto66",
+        "listingId": "cmt5vo749000f6l3puuylprrc",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
-        "additionalTitleTypes": ["DEED_OF_ASSIGNMENT"],
+        "additionalTitleTypes": [
+          "DEED_OF_ASSIGNMENT"
+        ],
         "surveyNumber": "LS/D/LA2231",
         "topography": "Dry, level, sand-filled",
         "roadAccess": "Tarred road to plot boundary",
         "documents": [
           {
-            "id": "cmt5pij9c000glj3pwpiydzi6",
-            "landDetailId": "cmt5piinp000flj3pn99pto66",
+            "id": "cmt5vo80f000g6l3pz0weeayg",
+            "landDetailId": "cmt5vo749000f6l3puuylprrc",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pij9c000hlj3px88enbfw",
-            "landDetailId": "cmt5piinp000flj3pn99pto66",
+            "id": "cmt5vo80f000h6l3p0wnrsr5k",
+            "landDetailId": "cmt5vo749000f6l3puuylprrc",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5pij9c000ilj3p679zyyfy",
-            "landDetailId": "cmt5piinp000flj3pn99pto66",
+            "id": "cmt5vo80f000i6l3prkhgx48p",
+            "landDetailId": "cmt5vo749000f6l3puuylprrc",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5pij9c000jlj3ptpsi7bg5",
-            "landDetailId": "cmt5piinp000flj3pn99pto66",
+            "id": "cmt5vo80f000j6l3pjhruuthr",
+            "landDetailId": "cmt5vo749000f6l3puuylprrc",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -581,13 +1110,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pikkg000mlj3pog8lxbsk",
+      "id": "cmt5vo973000m6l3pe9gzgeq2",
       "slug": "emerald-ridge-corner-block-c",
       "reference": "RXC-LND-0002",
       "type": "LAND",
       "title": "Corner block C, Emerald Ridge",
       "description": "A 1,000 square metre double-frontage corner block at the junction of the estate's two main roads. Suited to a larger private build or a small terrace development. Pricing is handled directly because terms vary with intended use.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": null,
@@ -596,9 +1125,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:25.600Z",
-      "updatedAt": "2026-08-23T11:11:25.600Z",
-      "publishedAt": "2026-08-23T11:11:25.354Z",
+      "createdAt": "2026-08-23T14:03:48.495Z",
+      "updatedAt": "2026-08-23T14:03:48.495Z",
+      "publishedAt": "2026-08-23T14:03:48.242Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -619,7 +1148,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pikkg000mlj3pog8lxbsk",
+        "listingId": "cmt5vo973000m6l3pe9gzgeq2",
         "plotSize": "1000",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -629,24 +1158,24 @@
         "roadAccess": "Double frontage, both roads tarred",
         "documents": [
           {
-            "id": "cmt5pil5j000nlj3ps4kzghzl",
-            "landDetailId": "cmt5pikkg000mlj3pog8lxbsk",
+            "id": "cmt5vo9tg000n6l3pzb6pwktb",
+            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pil5j000olj3pwi455si9",
-            "landDetailId": "cmt5pikkg000mlj3pog8lxbsk",
+            "id": "cmt5vo9tg000o6l3pnjjlbhcx",
+            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5pil5j000plj3pshhmf3gw",
-            "landDetailId": "cmt5pikkg000mlj3pog8lxbsk",
+            "id": "cmt5vo9tg000p6l3pxhnr4vl8",
+            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -657,13 +1186,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pimdr000slj3pp4do644q",
+      "id": "cmt5vob06000s6l3prkj78zrx",
       "slug": "emerald-ridge-plot-b07",
       "reference": "RXC-LND-0003",
       "type": "LAND",
       "title": "Plot B07, Emerald Ridge",
       "description": "Five hundred square metres on the second row, backing onto the estate green buffer. Governor's consent obtained on the parent title and perfected for this plot.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "12750000",
@@ -676,9 +1205,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:27.951Z",
-      "updatedAt": "2026-08-23T11:11:27.951Z",
-      "publishedAt": "2026-08-23T11:11:27.713Z",
+      "createdAt": "2026-08-23T14:03:50.838Z",
+      "updatedAt": "2026-08-23T14:03:50.838Z",
+      "publishedAt": "2026-08-23T14:03:50.586Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -699,7 +1228,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pimdr000slj3pp4do644q",
+        "listingId": "cmt5vob06000s6l3prkj78zrx",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "GOVERNORS_CONSENT",
@@ -709,24 +1238,24 @@
         "roadAccess": "Tarred road, 9m right of way",
         "documents": [
           {
-            "id": "cmt5pimy4000tlj3pzfnxcf5d",
-            "landDetailId": "cmt5pimdr000slj3pp4do644q",
+            "id": "cmt5vobm7000t6l3pladu7wrt",
+            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pimy4000ulj3p0i9zv28g",
-            "landDetailId": "cmt5pimdr000slj3pp4do644q",
+            "id": "cmt5vobm7000u6l3pp38cuj72",
+            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5pimy4000vlj3pg82pw5tg",
-            "landDetailId": "cmt5pimdr000slj3pp4do644q",
+            "id": "cmt5vobm7000v6l3ph2lzpkll",
+            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -737,13 +1266,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pio3d000ylj3pmci1tzgf",
+      "id": "cmt5vocx9000y6l3p6hpekzbz",
       "slug": "emerald-ridge-plot-d22",
       "reference": "RXC-LND-0004",
       "type": "LAND",
       "title": "Plot D22, Emerald Ridge",
       "description": "A 450 square metre plot currently under reservation. Gazetted land, with the estate's excision published in the Lagos State gazette.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "9400000",
@@ -752,9 +1281,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:30.169Z",
-      "updatedAt": "2026-08-23T11:11:30.169Z",
-      "publishedAt": "2026-08-23T11:11:29.929Z",
+      "createdAt": "2026-08-23T14:03:53.325Z",
+      "updatedAt": "2026-08-23T14:03:53.325Z",
+      "publishedAt": "2026-08-23T14:03:53.007Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -765,36 +1294,38 @@
         {
           "position": 0,
           "media": {
-            "url": "/images/photography/land-terrain-01.jpg",
-            "alt": "Open cultivated land in Niger State, Nigeria",
+            "url": "/images/photography/land-terrain-04.jpg",
+            "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
             "width": 900,
             "height": 675,
             "isStandIn": true,
-            "attribution": "\"Rice paddy fields, Niger State\" by Jeremy Weate, licensed under CC BY 2.0"
+            "attribution": null
           }
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pio3d000ylj3pmci1tzgf",
+        "listingId": "cmt5vocx9000y6l3p6hpekzbz",
         "plotSize": "450",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
-        "additionalTitleTypes": ["EXCISION"],
+        "additionalTitleTypes": [
+          "EXCISION"
+        ],
         "surveyNumber": "LS/D/LA2271",
         "topography": "Dry, level",
         "roadAccess": "Graded road, tarring scheduled",
         "documents": [
           {
-            "id": "cmt5pioor000zlj3pt3g1gz6l",
-            "landDetailId": "cmt5pio3d000ylj3pmci1tzgf",
+            "id": "cmt5vodmc000z6l3pzhh1kujw",
+            "landDetailId": "cmt5vocx9000y6l3p6hpekzbz",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pioor0010lj3ptm97wppq",
-            "landDetailId": "cmt5pio3d000ylj3pmci1tzgf",
+            "id": "cmt5vodmc00106l3phqwahnx0",
+            "landDetailId": "cmt5vocx9000y6l3p6hpekzbz",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -805,13 +1336,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pipxe0013lj3p6rjch3np",
+      "id": "cmt5vof6000136l3p9d49hgs6",
       "slug": "cornerstone-gardens-plot-14",
       "reference": "RXC-LND-0005",
       "type": "LAND",
       "title": "Plot 14, Cornerstone Gardens",
       "description": "Five hundred square metres off the Lagos–Ibadan expressway, sold with a deed of assignment registered against the estate's parent title. Popular with first-time builders.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "6200000",
@@ -825,9 +1356,9 @@
         "durationMonths": 24
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:32.546Z",
-      "updatedAt": "2026-08-23T11:11:32.546Z",
-      "publishedAt": "2026-08-23T11:11:32.308Z",
+      "createdAt": "2026-08-23T14:03:56.232Z",
+      "updatedAt": "2026-08-23T14:03:56.232Z",
+      "publishedAt": "2026-08-23T14:03:55.938Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -838,17 +1369,17 @@
         {
           "position": 0,
           "media": {
-            "url": "/images/photography/land-terrain-02.jpg",
-            "alt": "Savanna and riverine land near Kaduna, Nigeria",
+            "url": "/images/photography/land-terrain-05.jpg",
+            "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
             "width": 900,
             "height": 675,
             "isStandIn": true,
-            "attribution": "\"River Kaduna near Zunguru, savanna\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+            "attribution": "\"Beautiful skyline in northern nigeria\" by Binwana Gazuwa, licensed under CC BY 4.0"
           }
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pipxe0013lj3p6rjch3np",
+        "listingId": "cmt5vof6000136l3p9d49hgs6",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "DEED_OF_ASSIGNMENT",
@@ -858,24 +1389,24 @@
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5piqin0014lj3pgzhpj6aw",
-            "landDetailId": "cmt5pipxe0013lj3p6rjch3np",
+            "id": "cmt5vofs300146l3ps07bw2xy",
+            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5piqin0015lj3p6o4trbpl",
-            "landDetailId": "cmt5pipxe0013lj3p6rjch3np",
+            "id": "cmt5vofs300156l3pfypydtjt",
+            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5piqin0016lj3pe7ku2kom",
-            "landDetailId": "cmt5pipxe0013lj3p6rjch3np",
+            "id": "cmt5vofs300166l3p6f0iudad",
+            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -886,13 +1417,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pirnm0019lj3p0qbfd1a3",
+      "id": "cmt5vohcu00196l3prsfdrfs4",
       "slug": "cornerstone-gardens-plot-31",
       "reference": "RXC-LND-0006",
       "type": "LAND",
       "title": "Plot 31, Cornerstone Gardens",
       "description": "A 464 square metre plot on excised land, with the excision confirmed and the survey registered. The most affordable stock currently held in the estate.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "4850000",
@@ -905,9 +1436,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T11:11:34.786Z",
-      "updatedAt": "2026-08-23T11:11:34.786Z",
-      "publishedAt": "2026-08-23T11:11:34.553Z",
+      "createdAt": "2026-08-23T14:03:59.070Z",
+      "updatedAt": "2026-08-23T14:03:59.070Z",
+      "publishedAt": "2026-08-23T14:03:58.493Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -918,36 +1449,38 @@
         {
           "position": 0,
           "media": {
-            "url": "/images/photography/land-terrain-03.jpg",
-            "alt": "Green savanna grassland with mature trees, Bosso, Nigeria",
+            "url": "/images/photography/land-terrain-06.jpg",
+            "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
             "width": 900,
             "height": 675,
             "isStandIn": true,
-            "attribution": "\"Cattle file through still green savanna, Bosso\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+            "attribution": null
           }
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pirnm0019lj3p0qbfd1a3",
+        "listingId": "cmt5vohcu00196l3prsfdrfs4",
         "plotSize": "464",
         "plotUnit": "SQM",
         "titleType": "EXCISION",
-        "additionalTitleTypes": ["GAZETTE"],
+        "additionalTitleTypes": [
+          "GAZETTE"
+        ],
         "surveyNumber": "OG/2204/2023",
         "topography": "Dry, slight incline",
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5pis86001alj3pg4rdwfvv",
-            "landDetailId": "cmt5pirnm0019lj3p0qbfd1a3",
+            "id": "cmt5voi61001a6l3pwrl26jbl",
+            "landDetailId": "cmt5vohcu00196l3prsfdrfs4",
             "type": "EXCISION_CERTIFICATE",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pis86001blj3pyyb0ca12",
-            "landDetailId": "cmt5pirnm0019lj3p0qbfd1a3",
+            "id": "cmt5voi61001b6l3piwdry8im",
+            "landDetailId": "cmt5vohcu00196l3prsfdrfs4",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -958,13 +1491,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pitf2001elj3po9b7xgax",
+      "id": "cmt5vojfi001e6l3pflbeujf2",
       "slug": "cornerstone-gardens-plot-47",
       "reference": "RXC-LND-0007",
       "type": "LAND",
       "title": "Plot 47, Cornerstone Gardens",
       "description": "Five hundred square metres at the northern edge of the estate. This plot is sold on a registered survey only — the excision covering this section has been applied for but not yet granted, and the price reflects that. Read the documentation panel before enquiring.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "3100000",
@@ -973,9 +1506,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:37.070Z",
-      "updatedAt": "2026-08-23T11:11:37.070Z",
-      "publishedAt": "2026-08-23T11:11:36.818Z",
+      "createdAt": "2026-08-23T14:04:01.758Z",
+      "updatedAt": "2026-08-23T14:04:01.758Z",
+      "publishedAt": "2026-08-23T14:04:01.517Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -996,7 +1529,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pitf2001elj3po9b7xgax",
+        "listingId": "cmt5vojfi001e6l3pflbeujf2",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "SURVEY_ONLY",
@@ -1006,16 +1539,16 @@
         "roadAccess": "Graded road, unpaved",
         "documents": [
           {
-            "id": "cmt5pitzl001flj3pay3wf5za",
-            "landDetailId": "cmt5pitf2001elj3po9b7xgax",
+            "id": "cmt5vok1a001f6l3pasy988vq",
+            "landDetailId": "cmt5vojfi001e6l3pflbeujf2",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pitzl001glj3p1ug3xwdd",
-            "landDetailId": "cmt5pitf2001elj3po9b7xgax",
+            "id": "cmt5vok1a001g6l3p9nv98u75",
+            "landDetailId": "cmt5vojfi001e6l3pflbeujf2",
             "type": "PURCHASE_RECEIPT",
             "note": null,
             "mediaId": null,
@@ -1026,13 +1559,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5piv6a001jlj3pcqu2n9w1",
+      "id": "cmt5vol73001j6l3pz7xk0ike",
       "slug": "cornerstone-gardens-plot-09",
       "reference": "RXC-LND-0008",
       "type": "LAND",
       "title": "Plot 09, Cornerstone Gardens",
       "description": "Sold in March. Kept visible because stock that moves is the clearest signal a buyer has that an estate is real.",
-      "estateId": "cmt5pifvs000blj3pcq3s603w",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "5600000",
@@ -1041,9 +1574,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:39.346Z",
-      "updatedAt": "2026-08-23T11:11:39.346Z",
-      "publishedAt": "2026-08-23T11:11:39.050Z",
+      "createdAt": "2026-08-23T14:04:04.047Z",
+      "updatedAt": "2026-08-23T14:04:04.047Z",
+      "publishedAt": "2026-08-23T14:04:03.803Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1064,7 +1597,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5piv6a001jlj3pcqu2n9w1",
+        "listingId": "cmt5vol73001j6l3pz7xk0ike",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
@@ -1074,16 +1607,16 @@
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5pivqs001klj3pf4ol4pr6",
-            "landDetailId": "cmt5piv6a001jlj3pcqu2n9w1",
+            "id": "cmt5volss001k6l3pgjjl3a5u",
+            "landDetailId": "cmt5vol73001j6l3pz7xk0ike",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pivqs001llj3p1zakjlsb",
-            "landDetailId": "cmt5piv6a001jlj3pcqu2n9w1",
+            "id": "cmt5volss001l6l3p6dpru2he",
+            "landDetailId": "cmt5vol73001j6l3pz7xk0ike",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1094,13 +1627,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5piwvb001olj3pyjrbruu4",
+      "id": "cmt5von1u001o6l3pxj92hb7b",
       "slug": "sabon-lugbe-plot-n03",
       "reference": "RXC-LND-0009",
       "type": "LAND",
       "title": "Plot N03, Sabon Lugbe Court",
       "description": "Six hundred square metres held back at the northern boundary of a delivered estate, with a Certificate of Occupancy already in place and every service connected to the plot line.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "26000000",
@@ -1109,9 +1642,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T11:11:41.543Z",
-      "updatedAt": "2026-08-23T11:11:41.543Z",
-      "publishedAt": "2026-08-23T11:11:41.301Z",
+      "createdAt": "2026-08-23T14:04:06.450Z",
+      "updatedAt": "2026-08-23T14:04:06.450Z",
+      "publishedAt": "2026-08-23T14:04:06.123Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -1132,7 +1665,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5piwvb001olj3pyjrbruu4",
+        "listingId": "cmt5von1u001o6l3pxj92hb7b",
         "plotSize": "600",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -1142,32 +1675,32 @@
         "roadAccess": "Paved road, services at boundary",
         "documents": [
           {
-            "id": "cmt5pixgp001plj3pdiihir1o",
-            "landDetailId": "cmt5piwvb001olj3pyjrbruu4",
+            "id": "cmt5vonn9001p6l3pkx63h4uu",
+            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pixgp001qlj3padwgerwl",
-            "landDetailId": "cmt5piwvb001olj3pyjrbruu4",
+            "id": "cmt5vonn9001q6l3p7c082c76",
+            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5pixgp001rlj3pc0ol8ejg",
-            "landDetailId": "cmt5piwvb001olj3pyjrbruu4",
+            "id": "cmt5vonn9001r6l3pdjzm22df",
+            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5pixgp001slj3p3lolhhyv",
-            "landDetailId": "cmt5piwvb001olj3pyjrbruu4",
+            "id": "cmt5vonn9001s6l3prajp0el9",
+            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
             "type": "SERVICE_CONNECTION",
             "note": null,
             "mediaId": null,
@@ -1178,13 +1711,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5piyoz001vlj3p8ed4z7i2",
+      "id": "cmt5voovd001v6l3p2jy9i0g8",
       "slug": "sabon-lugbe-two-plot-parcel",
       "reference": "RXC-LND-0010",
       "type": "LAND",
       "title": "Two-plot parcel, Sabon Lugbe Court",
       "description": "Two adjoining plots at the estate's northern boundary, offered together for a single build or a pair of semi-detached units. Terms depend on the intended development, so pricing is discussed directly.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": null,
@@ -1193,9 +1726,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:43.907Z",
-      "updatedAt": "2026-08-23T11:11:43.907Z",
-      "publishedAt": "2026-08-23T11:11:43.627Z",
+      "createdAt": "2026-08-23T14:04:08.809Z",
+      "updatedAt": "2026-08-23T14:04:08.809Z",
+      "publishedAt": "2026-08-23T14:04:08.558Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -1206,17 +1739,17 @@
         {
           "position": 0,
           "media": {
-            "url": "/images/photography/land-terrain-01.jpg",
-            "alt": "Open cultivated land in Niger State, Nigeria",
+            "url": "/images/photography/land-terrain-04.jpg",
+            "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
             "width": 900,
             "height": 675,
             "isStandIn": true,
-            "attribution": "\"Rice paddy fields, Niger State\" by Jeremy Weate, licensed under CC BY 2.0"
+            "attribution": null
           }
         }
       ],
       "landDetail": {
-        "listingId": "cmt5piyoz001vlj3p8ed4z7i2",
+        "listingId": "cmt5voovd001v6l3p2jy9i0g8",
         "plotSize": "2",
         "plotUnit": "PLOTS",
         "titleType": "GOVERNORS_CONSENT",
@@ -1226,16 +1759,16 @@
         "roadAccess": "Paved road frontage",
         "documents": [
           {
-            "id": "cmt5piz9t001wlj3p1ho11gtk",
-            "landDetailId": "cmt5piyoz001vlj3p8ed4z7i2",
+            "id": "cmt5vophi001w6l3pe7phe7tm",
+            "landDetailId": "cmt5voovd001v6l3p2jy9i0g8",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5piz9t001xlj3pq2qvs1my",
-            "landDetailId": "cmt5piyoz001vlj3p8ed4z7i2",
+            "id": "cmt5vophi001x6l3p07wmpdah",
+            "landDetailId": "cmt5voovd001v6l3p2jy9i0g8",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1246,13 +1779,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pj0f10020lj3pbe87kz7i",
+      "id": "cmt5voqpw00206l3p3ijkav8p",
       "slug": "sabon-lugbe-plot-n07",
       "reference": "RXC-LND-0011",
       "type": "LAND",
       "title": "Plot N07, Sabon Lugbe Court",
       "description": "Six hundred square metres awaiting final documentation review before publication. Held as a draft so it cannot reach the public site until the title paperwork has been signed off.",
-      "estateId": "cmt5pih1b000dlj3perljor30",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "15000000",
@@ -1261,8 +1794,8 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:46.141Z",
-      "updatedAt": "2026-08-23T11:11:46.141Z",
+      "createdAt": "2026-08-23T14:04:11.204Z",
+      "updatedAt": "2026-08-23T14:04:11.204Z",
       "publishedAt": null,
       "estate": {
         "slug": "sabon-lugbe-court",
@@ -1274,17 +1807,17 @@
         {
           "position": 0,
           "media": {
-            "url": "/images/photography/land-terrain-02.jpg",
-            "alt": "Savanna and riverine land near Kaduna, Nigeria",
+            "url": "/images/photography/land-terrain-05.jpg",
+            "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
             "width": 900,
             "height": 675,
             "isStandIn": true,
-            "attribution": "\"River Kaduna near Zunguru, savanna\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+            "attribution": "\"Beautiful skyline in northern nigeria\" by Binwana Gazuwa, licensed under CC BY 4.0"
           }
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pj0f10020lj3pbe87kz7i",
+        "listingId": "cmt5voqpw00206l3p3ijkav8p",
         "plotSize": "600",
         "plotUnit": "SQM",
         "titleType": "DEED_OF_ASSIGNMENT",
@@ -1294,8 +1827,8 @@
         "roadAccess": "Paved road frontage",
         "documents": [
           {
-            "id": "cmt5pj0ze0021lj3pog3dc2mz",
-            "landDetailId": "cmt5pj0f10020lj3pbe87kz7i",
+            "id": "cmt5vorat00216l3pfz1vremw",
+            "landDetailId": "cmt5voqpw00206l3p3ijkav8p",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -1306,13 +1839,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5pj1wu0023lj3p590piizj",
+      "id": "cmt5vos9s00236l3pjkf0bmt1",
       "slug": "emerald-ridge-plot-a02",
       "reference": "RXC-LND-0012",
       "type": "LAND",
       "title": "Plot A02, Emerald Ridge",
       "description": "Sold in January to a returning buyer. Excised land with the survey registered and the deed executed at handover.",
-      "estateId": "cmt5piep30009lj3pj67t3icp",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "7300000",
@@ -1321,14 +1854,269 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T11:11:48.078Z",
-      "updatedAt": "2026-08-23T11:11:48.078Z",
-      "publishedAt": "2026-08-23T11:11:47.843Z",
+      "createdAt": "2026-08-23T14:04:13.216Z",
+      "updatedAt": "2026-08-23T14:04:13.216Z",
+      "publishedAt": "2026-08-23T14:04:12.970Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
         "location": "Ibeju-Lekki",
         "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-06.jpg",
+            "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": null
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vos9s00236l3pjkf0bmt1",
+        "plotSize": "500",
+        "plotUnit": "SQM",
+        "titleType": "EXCISION",
+        "additionalTitleTypes": [],
+        "surveyNumber": "LS/D/LA2109",
+        "topography": "Dry, level",
+        "roadAccess": "Tarred road",
+        "documents": [
+          {
+            "id": "cmt5vosup00246l3pbw2b5xox",
+            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "type": "EXCISION_CERTIFICATE",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vosup00256l3pt0sgv4fn",
+            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vosup00266l3pew06vqgn",
+            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "type": "DEED_OF_ASSIGNMENT",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vou1z00296l3pfegwgijj",
+      "slug": "emerald-ridge-plot-b19",
+      "reference": "RXC-LND-0013",
+      "type": "LAND",
+      "title": "Plot B19, Emerald Ridge",
+      "description": "A 300 square metre plot on the second row, priced for a first-time buyer. Dry and sand-filled, with drainage completed along the row and the access road graded to the boundary.",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "location": "Ibeju-Lekki",
+      "state": "Lagos",
+      "price": "11200000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 30,
+        "durationMonths": 12
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:15.527Z",
+      "updatedAt": "2026-08-23T14:04:15.527Z",
+      "publishedAt": "2026-08-23T14:04:15.259Z",
+      "estate": {
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-01.jpg",
+            "alt": "Open cultivated land in Niger State, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Rice paddy fields, Niger State\" by Jeremy Weate, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vou1z00296l3pfegwgijj",
+        "plotSize": "300",
+        "plotUnit": "SQM",
+        "titleType": "C_OF_O",
+        "additionalTitleTypes": [],
+        "surveyNumber": "LS/D/LA2244",
+        "topography": "Dry, level, sand-filled",
+        "roadAccess": "Graded road to boundary",
+        "documents": [
+          {
+            "id": "cmt5voun8002a6l3pptp1n2rj",
+            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "type": "CERTIFICATE_OF_OCCUPANCY",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5voun8002b6l3paw690esq",
+            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5voun8002c6l3pujukb8dh",
+            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "type": "ESTATE_LAYOUT_APPROVAL",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vovv0002f6l3p91n647a3",
+      "slug": "emerald-ridge-plot-e04",
+      "reference": "RXC-LND-0014",
+      "type": "LAND",
+      "title": "Plot E04, Emerald Ridge",
+      "description": "An 800 square metre double allocation on the estate's eastern edge, backing onto the buffer planting rather than another plot. Suited to a single large build.",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "location": "Ibeju-Lekki",
+      "state": "Lagos",
+      "price": "31000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": true,
+      "createdAt": "2026-08-23T14:04:17.868Z",
+      "updatedAt": "2026-08-23T14:04:17.868Z",
+      "publishedAt": "2026-08-23T14:04:17.596Z",
+      "estate": {
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-02.jpg",
+            "alt": "Savanna and riverine land near Kaduna, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"River Kaduna near Zunguru, savanna\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vovv0002f6l3p91n647a3",
+        "plotSize": "800",
+        "plotUnit": "SQM",
+        "titleType": "C_OF_O",
+        "additionalTitleTypes": [
+          "DEED_OF_ASSIGNMENT"
+        ],
+        "surveyNumber": "LS/D/LA2251",
+        "topography": "Dry, gently sloping",
+        "roadAccess": "Tarred road frontage",
+        "documents": [
+          {
+            "id": "cmt5vowgr002g6l3p6s2yiv64",
+            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "type": "CERTIFICATE_OF_OCCUPANCY",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vowgr002h6l3pqa0azbrc",
+            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vowgr002i6l3pvwkfanrc",
+            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "type": "DEED_OF_ASSIGNMENT",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          },
+          {
+            "id": "cmt5vowgr002j6l3petn9glrv",
+            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "type": "ESTATE_LAYOUT_APPROVAL",
+            "note": null,
+            "mediaId": null,
+            "position": 3
+          },
+          {
+            "id": "cmt5vowgr002k6l3puv28ypz3",
+            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "type": "SERVICE_CONNECTION",
+            "note": null,
+            "mediaId": null,
+            "position": 4
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5voxn6002n6l3pettuy3yk",
+      "slug": "cornerstone-gardens-plot-52",
+      "reference": "RXC-LND-0015",
+      "type": "LAND",
+      "title": "Plot 52, Cornerstone Gardens",
+      "description": "A 450 square metre plot on the estate's inner ring, sold on gazette with the survey registered. Excision has been granted over the wider parcel and the estate layout is approved.",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "location": "Mowe-Ofada",
+      "state": "Ogun",
+      "price": "4400000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "notes": "Allocation on completion of the plan.",
+        "frequency": "monthly",
+        "depositPercent": 25,
+        "durationMonths": 18
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:20.178Z",
+      "updatedAt": "2026-08-23T14:04:20.178Z",
+      "publishedAt": "2026-08-23T14:04:19.931Z",
+      "estate": {
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
       },
       "media": [
         {
@@ -1344,34 +2132,733 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5pj1wu0023lj3p590piizj",
-        "plotSize": "500",
+        "listingId": "cmt5voxn6002n6l3pettuy3yk",
+        "plotSize": "450",
         "plotUnit": "SQM",
-        "titleType": "EXCISION",
-        "additionalTitleTypes": [],
-        "surveyNumber": "LS/D/LA2109",
+        "titleType": "GAZETTE",
+        "additionalTitleTypes": [
+          "EXCISION"
+        ],
+        "surveyNumber": "OG/SV/8841",
         "topography": "Dry, level",
-        "roadAccess": "Tarred road",
+        "roadAccess": "Graded internal road",
         "documents": [
           {
-            "id": "cmt5pj2hq0024lj3pmzweevm6",
-            "landDetailId": "cmt5pj1wu0023lj3p590piizj",
-            "type": "EXCISION_CERTIFICATE",
+            "id": "cmt5voy8u002o6l3p064drhta",
+            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5pj2hq0025lj3p2sbrwq4u",
-            "landDetailId": "cmt5pj1wu0023lj3p590piizj",
+            "id": "cmt5voy8u002p6l3pho9698ey",
+            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "type": "EXCISION_CERTIFICATE",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5voy8u002q6l3poawshmyn",
+            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          },
+          {
+            "id": "cmt5voy8u002r6l3pqranfiqd",
+            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "type": "ESTATE_LAYOUT_APPROVAL",
+            "note": null,
+            "mediaId": null,
+            "position": 3
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vozh9002u6l3p2dd71rac",
+      "slug": "cornerstone-gardens-plot-63",
+      "reference": "RXC-LND-0016",
+      "type": "LAND",
+      "title": "Plot 63, Cornerstone Gardens",
+      "description": "A 250 square metre plot at the estate's western boundary, the smallest allocation offered here. Level and dry, with the boundary wall completed along the western run.",
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "location": "Mowe-Ofada",
+      "state": "Ogun",
+      "price": "2650000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 20,
+        "durationMonths": 24
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:22.557Z",
+      "updatedAt": "2026-08-23T14:04:22.557Z",
+      "publishedAt": "2026-08-23T14:04:22.309Z",
+      "estate": {
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-04.jpg",
+            "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": null
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vozh9002u6l3p2dd71rac",
+        "plotSize": "250",
+        "plotUnit": "SQM",
+        "titleType": "GAZETTE",
+        "additionalTitleTypes": [],
+        "surveyNumber": "OG/SV/8853",
+        "topography": "Dry, level",
+        "roadAccess": "Graded internal road",
+        "documents": [
+          {
+            "id": "cmt5vp02m002v6l3pki7ocki0",
+            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
+            "type": "GAZETTE_PUBLICATION",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp02m002w6l3pclol97wa",
+            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5pj2hq0026lj3psxj6f98s",
-            "landDetailId": "cmt5pj1wu0023lj3p590piizj",
+            "id": "cmt5vp02m002x6l3p00yec9dy",
+            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
+            "type": "ESTATE_LAYOUT_APPROVAL",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vp1dp00306l3psuvcpfgj",
+      "slug": "sabon-lugbe-court-plot-n11",
+      "reference": "RXC-LND-0017",
+      "type": "LAND",
+      "title": "Plot N11, Sabon Lugbe Court",
+      "description": "A 600 square metre plot held back at the northern boundary of a delivered court, with Governor's consent obtained and the deed registered. Mains water and power run to the boundary.",
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "location": "Lugbe",
+      "state": "FCT Abuja",
+      "price": "34500000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:25.021Z",
+      "updatedAt": "2026-08-23T14:04:25.021Z",
+      "publishedAt": "2026-08-23T14:04:24.775Z",
+      "estate": {
+        "slug": "sabon-lugbe-court",
+        "name": "Sabon Lugbe Court",
+        "location": "Lugbe",
+        "state": "FCT Abuja"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-05.jpg",
+            "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Beautiful skyline in northern nigeria\" by Binwana Gazuwa, licensed under CC BY 4.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vp1dp00306l3psuvcpfgj",
+        "plotSize": "600",
+        "plotUnit": "SQM",
+        "titleType": "GOVERNORS_CONSENT",
+        "additionalTitleTypes": [
+          "DEED_OF_ASSIGNMENT"
+        ],
+        "surveyNumber": "FCT/SV/11207",
+        "topography": "Dry, level",
+        "roadAccess": "Tarred estate road",
+        "documents": [
+          {
+            "id": "cmt5vp20800316l3pqd0g14xl",
+            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "type": "GOVERNORS_CONSENT",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp20900326l3p2flf4zkx",
+            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "type": "DEED_OF_ASSIGNMENT",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vp20900336l3p09ikyxbi",
+            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          },
+          {
+            "id": "cmt5vp20900346l3p82kah5ea",
+            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "type": "SERVICE_CONNECTION",
+            "note": null,
+            "mediaId": null,
+            "position": 3
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vp38100376l3pz8xd5cjq",
+      "slug": "epe-farm-parcel-two-hectares",
+      "reference": "RXC-LND-0018",
+      "type": "LAND",
+      "title": "Two-hectare parcel, Epe",
+      "description": "A two-hectare parcel on the Epe expressway, sold on a registered survey only. Excision has not been granted over this land and there is no Certificate of Occupancy. The price reflects that position and the documents are open for your own search.",
+      "estateId": null,
+      "location": "Epe",
+      "state": "Lagos",
+      "price": "21000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:27.409Z",
+      "updatedAt": "2026-08-23T14:04:27.409Z",
+      "publishedAt": "2026-08-23T14:04:27.163Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-06.jpg",
+            "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": null
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vp38100376l3pz8xd5cjq",
+        "plotSize": "2",
+        "plotUnit": "HECTARES",
+        "titleType": "SURVEY_ONLY",
+        "additionalTitleTypes": [],
+        "surveyNumber": "LS/D/LA3390",
+        "topography": "Mixed, partly wooded",
+        "roadAccess": "Laterite access track from the expressway",
+        "documents": [
+          {
+            "id": "cmt5vp3v200386l3p0ole7wi5",
+            "landDetailId": "cmt5vp38100376l3pz8xd5cjq",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp3v200396l3pmx4g7p0v",
+            "landDetailId": "cmt5vp38100376l3pz8xd5cjq",
+            "type": "PURCHASE_RECEIPT",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vp58j003c6l3p74h24gta",
+      "slug": "ikorodu-plot-agric-road",
+      "reference": "RXC-LND-0019",
+      "type": "LAND",
+      "title": "Plot on Agric Road, Ikorodu",
+      "description": "A 400 square metre plot fronting Agric Road, held on excision with the survey registered. Sold outside any estate, so there are no service charges and no development timeline attached.",
+      "estateId": null,
+      "location": "Ikorodu",
+      "state": "Lagos",
+      "price": "8900000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 40,
+        "durationMonths": 9
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:30.019Z",
+      "updatedAt": "2026-08-23T14:04:30.019Z",
+      "publishedAt": "2026-08-23T14:04:29.745Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-01.jpg",
+            "alt": "Open cultivated land in Niger State, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Rice paddy fields, Niger State\" by Jeremy Weate, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vp58j003c6l3p74h24gta",
+        "plotSize": "400",
+        "plotUnit": "SQM",
+        "titleType": "EXCISION",
+        "additionalTitleTypes": [
+          "GAZETTE"
+        ],
+        "surveyNumber": "LS/D/LA3104",
+        "topography": "Dry, level",
+        "roadAccess": "Direct frontage to a tarred road",
+        "documents": [
+          {
+            "id": "cmt5vp5tj003d6l3pr8eyr7pk",
+            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "type": "EXCISION_CERTIFICATE",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp5tj003e6l3prvnptzu3",
+            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "type": "GAZETTE_PUBLICATION",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vp5tk003f6l3pxe5esvx6",
+            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vp719003i6l3pz6e31o5u",
+      "slug": "sangotedo-plot-block-f",
+      "reference": "RXC-LND-0020",
+      "type": "LAND",
+      "title": "Plot F08, Sangotedo",
+      "description": "A 500 square metre plot in a developed neighbourhood off the Lekki–Epe expressway, held on a Certificate of Occupancy with consent already obtained for the assignment.",
+      "estateId": null,
+      "location": "Sangotedo",
+      "state": "Lagos",
+      "price": "42000000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": true,
+      "createdAt": "2026-08-23T14:04:32.349Z",
+      "updatedAt": "2026-08-23T14:04:32.349Z",
+      "publishedAt": "2026-08-23T14:04:32.085Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-02.jpg",
+            "alt": "Savanna and riverine land near Kaduna, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"River Kaduna near Zunguru, savanna\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vp719003i6l3pz6e31o5u",
+        "plotSize": "500",
+        "plotUnit": "SQM",
+        "titleType": "C_OF_O",
+        "additionalTitleTypes": [
+          "GOVERNORS_CONSENT",
+          "DEED_OF_ASSIGNMENT"
+        ],
+        "surveyNumber": "LS/D/LA2988",
+        "topography": "Dry, level, fenced",
+        "roadAccess": "Tarred road, kerbed",
+        "documents": [
+          {
+            "id": "cmt5vp7n2003j6l3p75l4216g",
+            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "type": "CERTIFICATE_OF_OCCUPANCY",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp7n2003k6l3pgztloj0r",
+            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "type": "GOVERNORS_CONSENT",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vp7n2003l6l3p0qpnoptr",
+            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "type": "DEED_OF_ASSIGNMENT",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          },
+          {
+            "id": "cmt5vp7n2003m6l3pdnq6xmbc",
+            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 3
+          },
+          {
+            "id": "cmt5vp7n2003n6l3p0epgy1k9",
+            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "type": "SERVICE_CONNECTION",
+            "note": null,
+            "mediaId": null,
+            "position": 4
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vp91c003q6l3pw1t3k4a1",
+      "slug": "simawa-plot-block-j",
+      "reference": "RXC-LND-0021",
+      "type": "LAND",
+      "title": "Plot J21, Simawa",
+      "description": "A 300 square metre plot at Simawa, off the Lagos–Ibadan expressway. Gazetted land with the survey registered, sold on a plan that runs to two years.",
+      "estateId": null,
+      "location": "Simawa",
+      "state": "Ogun",
+      "price": "3450000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": true,
+      "paymentPlanTerms": {
+        "frequency": "monthly",
+        "depositPercent": 20,
+        "durationMonths": 24
+      },
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:34.944Z",
+      "updatedAt": "2026-08-23T14:04:34.944Z",
+      "publishedAt": "2026-08-23T14:04:34.684Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-03.jpg",
+            "alt": "Green savanna grassland with mature trees, Bosso, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Cattle file through still green savanna, Bosso\" by Mary Gillham Archive Project, licensed under CC BY 2.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vp91c003q6l3pw1t3k4a1",
+        "plotSize": "300",
+        "plotUnit": "SQM",
+        "titleType": "GAZETTE",
+        "additionalTitleTypes": [],
+        "surveyNumber": "OG/SV/9012",
+        "topography": "Dry, gently sloping",
+        "roadAccess": "Laterite road, motorable year round",
+        "documents": [
+          {
+            "id": "cmt5vp9ng003r6l3p1j0livv3",
+            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "type": "GAZETTE_PUBLICATION",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vp9ng003s6l3pak4zxyhm",
+            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vp9ng003t6l3ptn08n4gk",
+            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "type": "ALLOCATION_LETTER",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vpatv003w6l3pwwr3p7jh",
+      "slug": "kuje-parcel-one-acre",
+      "reference": "RXC-LND-0022",
+      "type": "LAND",
+      "title": "One-acre parcel, Kuje",
+      "description": "A single acre on the Kuje–Gwagwalada road, held on a deed with the survey registered. Suited to a compound build or to holding, and offered without a payment plan.",
+      "estateId": null,
+      "location": "Kuje",
+      "state": "FCT Abuja",
+      "price": "16800000",
+      "priceOnRequest": false,
+      "status": "AVAILABLE",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:37.267Z",
+      "updatedAt": "2026-08-23T14:04:37.267Z",
+      "publishedAt": "2026-08-23T14:04:37.022Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-04.jpg",
+            "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": null
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vpatv003w6l3pwwr3p7jh",
+        "plotSize": "1",
+        "plotUnit": "ACRES",
+        "titleType": "DEED_OF_ASSIGNMENT",
+        "additionalTitleTypes": [],
+        "surveyNumber": "FCT/SV/11840",
+        "topography": "Dry, level, lightly wooded",
+        "roadAccess": "Laterite road from the Kuje–Gwagwalada road",
+        "documents": [
+          {
+            "id": "cmt5vpbfg003x6l3pitaajvqu",
+            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "type": "DEED_OF_ASSIGNMENT",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vpbfg003y6l3po6rbfw93",
+            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vpbfg003z6l3pggik4csk",
+            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "type": "PURCHASE_RECEIPT",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vpcna00426l3pa1cinnmr",
+      "slug": "abeokuta-plot-oke-mosan",
+      "reference": "RXC-LND-0023",
+      "type": "LAND",
+      "title": "Plot at Oke-Mosan, Abeokuta",
+      "description": "A 700 square metre plot at Oke-Mosan, close to the state secretariat. Held on a Certificate of Occupancy in the estate's name, with the registered survey and the layout approval on file.",
+      "estateId": null,
+      "location": "Abeokuta",
+      "state": "Ogun",
+      "price": "13500000",
+      "priceOnRequest": false,
+      "status": "RESERVED",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:39.622Z",
+      "updatedAt": "2026-08-23T14:04:39.622Z",
+      "publishedAt": "2026-08-23T14:04:39.323Z",
+      "estate": null,
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-05.jpg",
+            "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": "\"Beautiful skyline in northern nigeria\" by Binwana Gazuwa, licensed under CC BY 4.0"
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vpcna00426l3pa1cinnmr",
+        "plotSize": "700",
+        "plotUnit": "SQM",
+        "titleType": "C_OF_O",
+        "additionalTitleTypes": [],
+        "surveyNumber": "OG/SV/7742",
+        "topography": "Dry, level",
+        "roadAccess": "Tarred road frontage",
+        "documents": [
+          {
+            "id": "cmt5vpd9t00436l3pjxfhp413",
+            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "type": "CERTIFICATE_OF_OCCUPANCY",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vpd9t00446l3pcst99y73",
+            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vpd9t00456l3puzg0f3fs",
+            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "type": "ESTATE_LAYOUT_APPROVAL",
+            "note": null,
+            "mediaId": null,
+            "position": 2
+          }
+        ]
+      },
+      "homeDetail": null
+    },
+    {
+      "id": "cmt5vpei400486l3plza1qdfh",
+      "slug": "emerald-ridge-plot-c11",
+      "reference": "RXC-LND-0024",
+      "type": "LAND",
+      "title": "Plot C11, Emerald Ridge",
+      "description": "A 500 square metre plot sold in March. Certificate of Occupancy issued, survey registered and the deed executed at handover.",
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "location": "Ibeju-Lekki",
+      "state": "Lagos",
+      "price": "17900000",
+      "priceOnRequest": false,
+      "status": "SOLD",
+      "paymentPlanAvailable": false,
+      "paymentPlanTerms": null,
+      "featured": false,
+      "createdAt": "2026-08-23T14:04:42.028Z",
+      "updatedAt": "2026-08-23T14:04:42.028Z",
+      "publishedAt": "2026-08-23T14:04:41.764Z",
+      "estate": {
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      },
+      "media": [
+        {
+          "position": 0,
+          "media": {
+            "url": "/images/photography/land-terrain-06.jpg",
+            "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
+            "width": 900,
+            "height": 675,
+            "isStandIn": true,
+            "attribution": null
+          }
+        }
+      ],
+      "landDetail": {
+        "listingId": "cmt5vpei400486l3plza1qdfh",
+        "plotSize": "500",
+        "plotUnit": "SQM",
+        "titleType": "C_OF_O",
+        "additionalTitleTypes": [],
+        "surveyNumber": "LS/D/LA2198",
+        "topography": "Dry, level, sand-filled",
+        "roadAccess": "Tarred road to plot boundary",
+        "documents": [
+          {
+            "id": "cmt5vpf4q00496l3pwbnk9lez",
+            "landDetailId": "cmt5vpei400486l3plza1qdfh",
+            "type": "CERTIFICATE_OF_OCCUPANCY",
+            "note": null,
+            "mediaId": null,
+            "position": 0
+          },
+          {
+            "id": "cmt5vpf4q004a6l3pjyjxp57c",
+            "landDetailId": "cmt5vpei400486l3plza1qdfh",
+            "type": "REGISTERED_SURVEY_PLAN",
+            "note": null,
+            "mediaId": null,
+            "position": 1
+          },
+          {
+            "id": "cmt5vpf4q004b6l3ph2ar4c34",
+            "landDetailId": "cmt5vpei400486l3plza1qdfh",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -1384,7 +2871,7 @@
   ],
   "estates": [
     {
-      "id": "cmt5pifvs000blj3pcq3s603w",
+      "id": "cmt5vo4k9000b6l3peedz8uiy",
       "slug": "cornerstone-gardens",
       "name": "Cornerstone Gardens",
       "location": "Mowe-Ofada",
@@ -1400,8 +2887,8 @@
         "Green buffer zone"
       ],
       "status": "ACTIVE",
-      "createdAt": "2026-08-23T11:11:19.528Z",
-      "updatedAt": "2026-08-23T11:11:19.528Z",
+      "createdAt": "2026-08-23T14:03:42.489Z",
+      "updatedAt": "2026-08-23T14:03:42.489Z",
       "media": [
         {
           "position": 0,
@@ -1417,7 +2904,7 @@
       ]
     },
     {
-      "id": "cmt5piep30009lj3pj67t3icp",
+      "id": "cmt5vo3de00096l3pnqtvxr5d",
       "slug": "emerald-ridge",
       "name": "Emerald Ridge Estate",
       "location": "Ibeju-Lekki",
@@ -1435,8 +2922,8 @@
         "Recreation park"
       ],
       "status": "ACTIVE",
-      "createdAt": "2026-08-23T11:11:17.991Z",
-      "updatedAt": "2026-08-23T11:11:17.991Z",
+      "createdAt": "2026-08-23T14:03:40.946Z",
+      "updatedAt": "2026-08-23T14:03:40.946Z",
       "media": [
         {
           "position": 0,
@@ -1452,7 +2939,7 @@
       ]
     },
     {
-      "id": "cmt5pih1b000dlj3perljor30",
+      "id": "cmt5vo5u0000d6l3pk5m941f2",
       "slug": "sabon-lugbe-court",
       "name": "Sabon Lugbe Court",
       "location": "Lugbe",
@@ -1468,8 +2955,8 @@
         "Children's play area"
       ],
       "status": "DELIVERED",
-      "createdAt": "2026-08-23T11:11:21.023Z",
-      "updatedAt": "2026-08-23T11:11:21.023Z",
+      "createdAt": "2026-08-23T14:03:44.136Z",
+      "updatedAt": "2026-08-23T14:03:44.136Z",
       "media": [
         {
           "position": 0,
@@ -1487,17 +2974,17 @@
   ],
   "articles": [
     {
-      "id": "cmt5pjh7s002xlj3p4ri4k5z2",
+      "id": "cmt5vq7t8005t6l3pu96nuh6f",
       "slug": "what-a-certificate-of-occupancy-actually-proves",
       "title": "What a Certificate of Occupancy actually proves",
       "category": "TITLE_AND_DOCUMENTATION",
       "excerpt": "A C of O is the strongest title most Nigerian buyers will encounter, and it still does not answer every question. Here is what it covers, what it does not, and what to ask for alongside it.",
       "body": "A C of O is the strongest title most Nigerian buyers will encounter, and it still does not answer every question. Here is what it covers, what it does not, and what to ask for alongside it.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5pjh0k002wlj3payj4gsya",
+      "coverImageId": "cmt5vq7m2005s6l3peqlkbwe7",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-23T11:12:07.911Z",
-      "createdAt": "2026-08-23T11:12:07.912Z",
-      "updatedAt": "2026-08-23T11:12:07.912Z",
+      "publishedAt": "2026-08-23T14:05:20.011Z",
+      "createdAt": "2026-08-23T14:05:20.012Z",
+      "updatedAt": "2026-08-23T14:05:20.012Z",
       "coverImage": {
         "url": "/images/photography/article-1.jpg",
         "alt": "Surveyors conducting a cadastral land survey",
@@ -1508,17 +2995,38 @@
       }
     },
     {
-      "id": "cmt5pjhlc002zlj3piv1jrobj",
-      "slug": "how-to-verify-a-plot-before-you-pay",
-      "title": "How to verify a plot before you pay for it",
-      "category": "BUYING_PROCESS",
-      "excerpt": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.",
-      "body": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5pjhen002ylj3p34v9miga",
+      "id": "cmt5vq9fl00616l3poknqw4pi",
+      "slug": "excision-and-gazette-explained",
+      "title": "Excision and gazette, explained without the jargon",
+      "category": "TITLE_AND_DOCUMENTATION",
+      "excerpt": "Most land sold in Lagos and Ogun sits somewhere on the road between family land and a Certificate of Occupancy. Excision and gazette are the two milestones on that road, and knowing which one a plot has reached tells you most of what you need.",
+      "body": "Most land sold in Lagos and Ogun sits somewhere on the road between family land and a Certificate of Occupancy. Excision and gazette are the two milestones on that road, and knowing which one a plot has reached tells you most of what you need.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vq98j00606l3p6qqhp2ac",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-14T11:12:08.400Z",
-      "createdAt": "2026-08-23T11:12:08.400Z",
-      "updatedAt": "2026-08-23T11:12:08.400Z",
+      "publishedAt": "2026-07-18T14:05:22.113Z",
+      "createdAt": "2026-08-23T14:05:22.113Z",
+      "updatedAt": "2026-08-23T14:05:22.113Z",
+      "coverImage": {
+        "url": "/images/photography/article-1.jpg",
+        "alt": "Surveyors conducting a cadastral land survey",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"BLM Utah Cadastral Survey Team conduct\" by BLMUtah, licensed under Public Domain Mark"
+      }
+    },
+    {
+      "id": "cmt5vq9ul00636l3pb0yybwsz",
+      "slug": "when-a-survey-plan-is-all-there-is",
+      "title": "When a registered survey is all there is",
+      "category": "TITLE_AND_DOCUMENTATION",
+      "excerpt": "Some plots are sold on a survey and nothing more. That is not automatically a fraud, but it is a different purchase with a different risk, and it should carry a different price.",
+      "body": "Some plots are sold on a survey and nothing more. That is not automatically a fraud, but it is a different purchase with a different risk, and it should carry a different price.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vq9nh00626l3pii65vn5z",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-07-09T14:05:22.652Z",
+      "createdAt": "2026-08-23T14:05:22.653Z",
+      "updatedAt": "2026-08-23T14:05:22.653Z",
       "coverImage": {
         "url": "/images/photography/article-2.jpg",
         "alt": "Signing a property document",
@@ -1529,17 +3037,38 @@
       }
     },
     {
-      "id": "cmt5pjhzf0031lj3p8gciyqy6",
-      "slug": "reading-a-land-payment-plan",
-      "title": "Reading a land payment plan without getting caught out",
-      "category": "PAYMENT_PLANS",
-      "excerpt": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.",
-      "body": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5pjhs40030lj3p25luld2j",
+      "id": "cmt5vq87u005v6l3pa3t7bioz",
+      "slug": "how-to-verify-a-plot-before-you-pay",
+      "title": "How to verify a plot before you pay for it",
+      "category": "BUYING_PROCESS",
+      "excerpt": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.",
+      "body": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vq80d005u6l3pxw4vd2xw",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-05T11:12:08.906Z",
-      "createdAt": "2026-08-23T11:12:08.907Z",
-      "updatedAt": "2026-08-23T11:12:08.907Z",
+      "publishedAt": "2026-08-14T14:05:20.538Z",
+      "createdAt": "2026-08-23T14:05:20.538Z",
+      "updatedAt": "2026-08-23T14:05:20.538Z",
+      "coverImage": {
+        "url": "/images/photography/article-2.jpg",
+        "alt": "Signing a property document",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"Signing Paperwork\" by danielmoyle, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vqa9400656l3ppoecfy5f",
+      "slug": "the-site-visit-checklist",
+      "title": "The site visit checklist we give our own buyers",
+      "category": "BUYING_PROCESS",
+      "excerpt": "What to look at, what to photograph and who to speak to on the day you walk the plot. Twenty minutes of attention on site saves a year of correspondence later.",
+      "body": "What to look at, what to photograph and who to speak to on the day you walk the plot. Twenty minutes of attention on site saves a year of correspondence later.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqa1y00646l3piwdylpph",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-30T14:05:23.175Z",
+      "createdAt": "2026-08-23T14:05:23.176Z",
+      "updatedAt": "2026-08-23T14:05:23.176Z",
       "coverImage": {
         "url": "/images/photography/article-3.jpg",
         "alt": "Reviewing payment paperwork at a desk",
@@ -1550,17 +3079,143 @@
       }
     },
     {
-      "id": "cmt5pjidf0033lj3p4plup1ij",
+      "id": "cmt5vqanz00676l3pe5pcl3xb",
+      "slug": "questions-to-ask-a-land-seller",
+      "title": "Eleven questions to ask before you pay a deposit",
+      "category": "BUYING_PROCESS",
+      "excerpt": "A seller who answers all eleven plainly is a seller you can work with. One who deflects on any of them has told you something useful.",
+      "body": "A seller who answers all eleven plainly is a seller you can work with. One who deflects on any of them has told you something useful.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqagd00666l3po2lfcb03",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-21T14:05:23.711Z",
+      "createdAt": "2026-08-23T14:05:23.711Z",
+      "updatedAt": "2026-08-23T14:05:23.711Z",
+      "coverImage": {
+        "url": "/images/photography/article-4.jpg",
+        "alt": "Modern housing set among mature planting",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"vandkunsten, architects: jystrup savvæ\" by seier+seier, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vq8mv005x6l3p83rpoup5",
+      "slug": "reading-a-land-payment-plan",
+      "title": "Reading a land payment plan without getting caught out",
+      "category": "PAYMENT_PLANS",
+      "excerpt": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.",
+      "body": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vq8fu005w6l3pm2wigu8l",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-08-05T14:05:21.078Z",
+      "createdAt": "2026-08-23T14:05:21.079Z",
+      "updatedAt": "2026-08-23T14:05:21.079Z",
+      "coverImage": {
+        "url": "/images/photography/article-3.jpg",
+        "alt": "Reviewing payment paperwork at a desk",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"Two Person Shaking Each Others Hands -\" by Homedust, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vqb6800696l3pr4dbe0kh",
+      "slug": "deposit-and-default-what-happens",
+      "title": "What actually happens when you miss an instalment",
+      "category": "PAYMENT_PLANS",
+      "excerpt": "Forfeiture, reallocation, restructuring or a refund minus charges. The four outcomes a plan can specify, and why the difference between them belongs in writing before you sign.",
+      "body": "Forfeiture, reallocation, restructuring or a refund minus charges. The four outcomes a plan can specify, and why the difference between them belongs in writing before you sign.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqay000686l3pecx6j674",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-12T14:05:24.367Z",
+      "createdAt": "2026-08-23T14:05:24.368Z",
+      "updatedAt": "2026-08-23T14:05:24.368Z",
+      "coverImage": {
+        "url": "/images/photography/article-1.jpg",
+        "alt": "Surveyors conducting a cadastral land survey",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"BLM Utah Cadastral Survey Team conduct\" by BLMUtah, licensed under Public Domain Mark"
+      }
+    },
+    {
+      "id": "cmt5vqbkb006b6l3pa7vpd7jf",
+      "slug": "paying-in-full-versus-a-plan",
+      "title": "Paying in full against paying on a plan",
+      "category": "PAYMENT_PLANS",
+      "excerpt": "Outright purchase usually buys a discount and a faster allocation. A plan buys time. Which is worth more depends on facts about you, not about the plot.",
+      "body": "Outright purchase usually buys a discount and a faster allocation. A plan buys time. Which is worth more depends on facts about you, not about the plot.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqbdb006a6l3pd9pshgwn",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-03T14:05:24.874Z",
+      "createdAt": "2026-08-23T14:05:24.875Z",
+      "updatedAt": "2026-08-23T14:05:24.875Z",
+      "coverImage": {
+        "url": "/images/photography/article-2.jpg",
+        "alt": "Signing a property document",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"Signing Paperwork\" by danielmoyle, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vq91f005z6l3pp8wvcaxx",
       "slug": "what-estate-service-charges-cover",
       "title": "What service charges cover in a managed estate",
       "category": "ESTATE_LIVING",
       "excerpt": "Security, drainage, road maintenance and power. What a service charge is buying, how it is usually set, and what to check before you commit to one.",
       "body": "Security, drainage, road maintenance and power. What a service charge is buying, how it is usually set, and what to check before you commit to one.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5pji6c0032lj3pvr46c6ga",
+      "coverImageId": "cmt5vq8u4005y6l3p9di8cpds",
       "status": "PUBLISHED",
-      "publishedAt": "2026-07-27T11:12:09.410Z",
-      "createdAt": "2026-08-23T11:12:09.411Z",
-      "updatedAt": "2026-08-23T11:12:09.411Z",
+      "publishedAt": "2026-07-27T14:05:21.601Z",
+      "createdAt": "2026-08-23T14:05:21.603Z",
+      "updatedAt": "2026-08-23T14:05:21.603Z",
+      "coverImage": {
+        "url": "/images/photography/article-4.jpg",
+        "alt": "Modern housing set among mature planting",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"vandkunsten, architects: jystrup savvæ\" by seier+seier, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vqbzn006d6l3pmtrduk5j",
+      "slug": "what-to-expect-after-allocation",
+      "title": "What to expect in the year after allocation",
+      "category": "ESTATE_LIVING",
+      "excerpt": "Beaconing, the building approval, the development timeline and the first service charge. The sequence that follows allocation, and roughly what each stage costs.",
+      "body": "Beaconing, the building approval, the development timeline and the first service charge. The sequence that follows allocation, and roughly what each stage costs.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqbru006c6l3pp4oklvgn",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-05-25T14:05:25.427Z",
+      "createdAt": "2026-08-23T14:05:25.427Z",
+      "updatedAt": "2026-08-23T14:05:25.427Z",
+      "coverImage": {
+        "url": "/images/photography/article-3.jpg",
+        "alt": "Reviewing payment paperwork at a desk",
+        "width": 900,
+        "height": 675,
+        "isStandIn": true,
+        "attribution": "\"Two Person Shaking Each Others Hands -\" by Homedust, licensed under CC BY 2.0"
+      }
+    },
+    {
+      "id": "cmt5vqceb006f6l3pimzs6lqn",
+      "slug": "building-approvals-in-a-managed-estate",
+      "title": "Building approvals inside a managed estate",
+      "category": "ESTATE_LIVING",
+      "excerpt": "Estate design rules sit on top of the state's own approval process, not instead of it. Here is how the two fit together, and where buyers most often lose time.",
+      "body": "Estate design rules sit on top of the state's own approval process, not instead of it. Here is how the two fit together, and where buyers most often lose time.\n\nFull article copy pending client sign-off.",
+      "coverImageId": "cmt5vqc6t006e6l3p72giz8x4",
+      "status": "PUBLISHED",
+      "publishedAt": "2026-05-16T14:05:25.955Z",
+      "createdAt": "2026-08-23T14:05:25.955Z",
+      "updatedAt": "2026-08-23T14:05:25.955Z",
       "coverImage": {
         "url": "/images/photography/article-4.jpg",
         "alt": "Modern housing set among mature planting",
@@ -1573,43 +3228,316 @@
   ],
   "testimonials": [
     {
-      "id": "cmt5pjis90034lj3p42uz8pqd",
+      "id": "cmt5vqpo4006w6l3p93fryxid",
       "name": "Tunde Adeyemi",
       "role": "Bought a plot at Emerald Ridge",
       "quote": "I had been shown three other estates where nobody could produce a survey on the day. Here the documents were on the table before I asked, and the plot I walked was the plot on the plan.",
       "avatarId": null,
       "published": true,
       "position": 0,
-      "createdAt": "2026-08-23T11:12:09.945Z"
+      "createdAt": "2026-08-23T14:05:43.156Z"
     },
     {
-      "id": "cmt5pjis90035lj3psndvm35m",
+      "id": "cmt5vqpo4006x6l3p6ngkh99o",
       "name": "Ngozi Eze",
       "role": "Bought a home at Sabon Lugbe Court",
       "quote": "We paid over fourteen months and moved in the week after the final instalment cleared. No renegotiation, no extra charges at handover.",
       "avatarId": null,
       "published": true,
       "position": 1,
-      "createdAt": "2026-08-23T11:12:09.945Z"
+      "createdAt": "2026-08-23T14:05:43.156Z"
     },
     {
-      "id": "cmt5pjis90036lj3paan7ve4m",
+      "id": "cmt5vqpo4006y6l3pctb81gxk",
       "name": "Yusuf Danjuma",
       "role": "Bought two plots at Cornerstone Gardens",
       "quote": "They told me plainly which plots had excision granted and which did not, and priced them differently. That is the first time anyone has done that with me.",
       "avatarId": null,
       "published": true,
       "position": 2,
-      "createdAt": "2026-08-23T11:12:09.945Z"
+      "createdAt": "2026-08-23T14:05:43.156Z"
+    }
+  ],
+  "videos": [
+    {
+      "id": "cmt5vqdmd006h6l3prcupanax",
+      "slug": "emerald-ridge-estate-overview",
+      "youtubeId": "sywocKB9UcU",
+      "title": "A drive through the estate",
+      "description": "The gate, the internal road network and the completed drainage, filmed on one pass through the estate.",
+      "kind": "ESTATE_OVERVIEW",
+      "posterMediaId": "cmt5vqct7006g6l3pteujjjs9",
+      "durationSeconds": null,
+      "listingId": null,
+      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "isStandIn": true,
+      "attribution": "Real Estate with Sally",
+      "featured": true,
+      "sortOrder": 0,
+      "publishedAt": "2026-08-23T14:05:26.765Z",
+      "createdAt": "2026-08-23T14:05:27.541Z",
+      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "poster": {
+        "url": "/images/photography/estate-emerald-ridge.jpg",
+        "alt": "Aerial view of a laid-out residential development"
+      },
+      "listing": null,
+      "estate": {
+        "id": "cmt5vo3de00096l3pnqtvxr5d",
+        "slug": "emerald-ridge",
+        "name": "Emerald Ridge Estate",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos"
+      }
+    },
+    {
+      "id": "cmt5vqf8g006j6l3pczsm5m55",
+      "slug": "emerald-ridge-plot-a14-drone-tour",
+      "youtubeId": "PwwZSvyJ97U",
+      "title": "Drone tour over the Lekki corridor",
+      "description": "An aerial pass over the corridor the estate sits on, showing the road position and how far the development has reached.",
+      "kind": "DRONE_TOUR",
+      "posterMediaId": "cmt5vqefz006i6l3prjd942cf",
+      "durationSeconds": null,
+      "listingId": "cmt5vo749000f6l3puuylprrc",
+      "estateId": null,
+      "isStandIn": true,
+      "attribution": "Benjamin Landclick",
+      "featured": true,
+      "sortOrder": 1,
+      "publishedAt": "2026-08-23T14:05:28.869Z",
+      "createdAt": "2026-08-23T14:05:29.632Z",
+      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "poster": {
+        "url": "/images/photography/land-terrain-01.jpg",
+        "alt": "Open cultivated land in Niger State, Nigeria"
+      },
+      "listing": {
+        "id": "cmt5vo749000f6l3puuylprrc",
+        "slug": "emerald-ridge-plot-a14",
+        "title": "Plot A14, Emerald Ridge",
+        "type": "LAND",
+        "status": "AVAILABLE",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos",
+        "estate": {
+          "slug": "emerald-ridge"
+        }
+      },
+      "estate": null
+    },
+    {
+      "id": "cmt5vqgsw006l6l3p256fr7wk",
+      "slug": "emerald-ridge-plot-a14-walkthrough",
+      "youtubeId": "mRkfUz4BEro",
+      "title": "What gets built on a plot this size",
+      "description": "A walkthrough of a completed house on a comparable plot, for a sense of what five hundred square metres carries.",
+      "kind": "WALKTHROUGH",
+      "posterMediaId": "cmt5vqg0k006k6l3pnmdxp74m",
+      "durationSeconds": null,
+      "listingId": "cmt5vo749000f6l3puuylprrc",
+      "estateId": null,
+      "isStandIn": true,
+      "attribution": "Eden Oasis",
+      "featured": false,
+      "sortOrder": 2,
+      "publishedAt": "2026-08-23T14:05:30.903Z",
+      "createdAt": "2026-08-23T14:05:31.664Z",
+      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "poster": {
+        "url": "/images/photography/home-01.jpg",
+        "alt": "Completed detached house with a covered porch and lawn"
+      },
+      "listing": {
+        "id": "cmt5vo749000f6l3puuylprrc",
+        "slug": "emerald-ridge-plot-a14",
+        "title": "Plot A14, Emerald Ridge",
+        "type": "LAND",
+        "status": "AVAILABLE",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos",
+        "estate": {
+          "slug": "emerald-ridge"
+        }
+      },
+      "estate": null
+    },
+    {
+      "id": "cmt5vqidu006n6l3pa1933kaa",
+      "slug": "cornerstone-gardens-estate-overview",
+      "youtubeId": "FHIwNvemi_g",
+      "title": "Inside the estate gates",
+      "description": "A tour of a managed estate of comparable size, filmed from the gatehouse through to the inner ring.",
+      "kind": "ESTATE_OVERVIEW",
+      "posterMediaId": "cmt5vqhm9006m6l3ppfgd6nt3",
+      "durationSeconds": null,
+      "listingId": null,
+      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "isStandIn": true,
+      "attribution": "Tolu Ademulegun",
+      "featured": true,
+      "sortOrder": 3,
+      "publishedAt": "2026-08-23T14:05:32.978Z",
+      "createdAt": "2026-08-23T14:05:33.714Z",
+      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "poster": {
+        "url": "/images/photography/estate-cornerstone-gardens.jpg",
+        "alt": "Residential street lined with mature trees"
+      },
+      "listing": null,
+      "estate": {
+        "id": "cmt5vo4k9000b6l3peedz8uiy",
+        "slug": "cornerstone-gardens",
+        "name": "Cornerstone Gardens",
+        "location": "Mowe-Ofada",
+        "state": "Ogun"
+      }
+    },
+    {
+      "id": "cmt5vqjy1006p6l3p1urbgsp7",
+      "slug": "epe-parcel-aerial",
+      "youtubeId": "kZpKPC1bk00",
+      "title": "Aerial over the Epe approach",
+      "description": "Scenic aerial footage along the corridor the parcel sits on, showing the surrounding land use.",
+      "kind": "DRONE_TOUR",
+      "posterMediaId": "cmt5vqj65006o6l3p18mzzinb",
+      "durationSeconds": null,
+      "listingId": "cmt5vp38100376l3pz8xd5cjq",
+      "estateId": null,
+      "isStandIn": true,
+      "attribution": "Relaxation Corner",
+      "featured": true,
+      "sortOrder": 4,
+      "publishedAt": "2026-08-23T14:05:34.985Z",
+      "createdAt": "2026-08-23T14:05:35.737Z",
+      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "poster": {
+        "url": "/images/photography/land-terrain-05.jpg",
+        "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria"
+      },
+      "listing": {
+        "id": "cmt5vp38100376l3pz8xd5cjq",
+        "slug": "epe-farm-parcel-two-hectares",
+        "title": "Two-hectare parcel, Epe",
+        "type": "LAND",
+        "status": "AVAILABLE",
+        "location": "Epe",
+        "state": "Lagos",
+        "estate": null
+      },
+      "estate": null
+    },
+    {
+      "id": "cmt5vqlki006r6l3pxru9hp0l",
+      "slug": "emerald-ridge-4-bed-walkthrough",
+      "youtubeId": "lYM7MIvJkW8",
+      "title": "Four-bedroom walkthrough",
+      "description": "A room-by-room walkthrough of a completed detached house, to the same finishing specification.",
+      "kind": "WALKTHROUGH",
+      "posterMediaId": "cmt5vqkrv006q6l3p98s5l6x9",
+      "durationSeconds": null,
+      "listingId": "cmt5vpgei004e6l3p9ii63dm9",
+      "estateId": null,
+      "isStandIn": true,
+      "attribution": "Favour Sv",
+      "featured": false,
+      "sortOrder": 5,
+      "publishedAt": "2026-08-23T14:05:37.064Z",
+      "createdAt": "2026-08-23T14:05:37.842Z",
+      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "poster": {
+        "url": "/images/photography/home-02.jpg",
+        "alt": "Residential building at structural stage under scaffolding"
+      },
+      "listing": {
+        "id": "cmt5vpgei004e6l3p9ii63dm9",
+        "slug": "emerald-ridge-4-bed-detached",
+        "title": "Four-bedroom detached house, Emerald Ridge",
+        "type": "HOME",
+        "status": "AVAILABLE",
+        "location": "Ibeju-Lekki",
+        "state": "Lagos",
+        "estate": {
+          "slug": "emerald-ridge"
+        }
+      },
+      "estate": null
+    },
+    {
+      "id": "cmt5vqn77006t6l3pb2rdm2d7",
+      "slug": "cornerstone-gardens-bungalow-walkthrough",
+      "youtubeId": "SC3_OOy4nJ0",
+      "title": "Inside a completed bungalow",
+      "description": "A walkthrough of finished homes at this end of the market, filmed room by room.",
+      "kind": "WALKTHROUGH",
+      "posterMediaId": "cmt5vqmdj006s6l3p87nmooxm",
+      "durationSeconds": null,
+      "listingId": "cmt5vpl87004n6l3po23dr3nb",
+      "estateId": null,
+      "isStandIn": true,
+      "attribution": "Tayo Aina",
+      "featured": false,
+      "sortOrder": 6,
+      "publishedAt": "2026-08-23T14:05:39.157Z",
+      "createdAt": "2026-08-23T14:05:39.955Z",
+      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "poster": {
+        "url": "/images/photography/home-03.jpg",
+        "alt": "Contemporary detached house with large glazing"
+      },
+      "listing": {
+        "id": "cmt5vpl87004n6l3po23dr3nb",
+        "slug": "cornerstone-gardens-3-bed-bungalow",
+        "title": "Three-bedroom bungalow, Cornerstone Gardens",
+        "type": "HOME",
+        "status": "AVAILABLE",
+        "location": "Mowe-Ofada",
+        "state": "Ogun",
+        "estate": {
+          "slug": "cornerstone-gardens"
+        }
+      },
+      "estate": null
+    },
+    {
+      "id": "cmt5vqovo006v6l3pvedqz7qd",
+      "slug": "sabon-lugbe-court-neighbourhood",
+      "youtubeId": "ySZpkjEeBzE",
+      "title": "The neighbourhood around the court",
+      "description": "A look at the surrounding residential area, the roads into it and what is already built there.",
+      "kind": "ESTATE_OVERVIEW",
+      "posterMediaId": "cmt5vqo1c006u6l3p24e1rhzw",
+      "durationSeconds": null,
+      "listingId": null,
+      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "isStandIn": true,
+      "attribution": "Steven Ndukwu",
+      "featured": false,
+      "sortOrder": 7,
+      "publishedAt": "2026-08-23T14:05:41.296Z",
+      "createdAt": "2026-08-23T14:05:42.132Z",
+      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "poster": {
+        "url": "/images/photography/estate-sabon-lugbe-court.jpg",
+        "alt": "Delivered houses in a row along an estate street"
+      },
+      "listing": null,
+      "estate": {
+        "id": "cmt5vo5u0000d6l3pk5m941f2",
+        "slug": "sabon-lugbe-court",
+        "name": "Sabon Lugbe Court",
+        "location": "Lugbe",
+        "state": "FCT Abuja"
+      }
     }
   ],
   "placements": [
     {
       "key": "homepage.collage.1",
-      "mediaId": "cmt5pid9j0004lj3poubt4uvi",
+      "mediaId": "cmt5vo1v800046l3p5ig1ff6x",
       "label": "FAQ collage — left",
       "guidance": "3:4 portrait. Plot boundary and access road.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/images/photography/collage-1.jpg",
         "alt": "Access lane running between plots",
@@ -1621,10 +3549,10 @@
     },
     {
       "key": "homepage.collage.2",
-      "mediaId": "cmt5pid9j0005lj3pfldcwdg8",
+      "mediaId": "cmt5vo1v900056l3pxqo0phce",
       "label": "FAQ collage — centre",
       "guidance": "4:3. A completed home exterior.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/images/photography/collage-2.jpg",
         "alt": "Established houses along a residential avenue",
@@ -1636,10 +3564,10 @@
     },
     {
       "key": "homepage.collage.3",
-      "mediaId": "cmt5pid9j0006lj3pgojbv7l1",
+      "mediaId": "cmt5vo1v900066l3ptmu72w38",
       "label": "FAQ collage — right",
       "guidance": "3:4 portrait. An estate street view.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/images/photography/collage-3.jpg",
         "alt": "House exterior seen from the street",
@@ -1651,10 +3579,10 @@
     },
     {
       "key": "homepage.hero",
-      "mediaId": "cmt5piclg0003lj3pnxf2qrww",
+      "mediaId": "cmt5vo1o700036l3plcr6j49g",
       "label": "Homepage hero image",
       "guidance": "16:9. A wide establishing shot across an estate.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/images/photography/hero-estate.jpg",
         "alt": "Aerial view across a residential neighbourhood",
@@ -1666,10 +3594,10 @@
     },
     {
       "key": "site.logo",
-      "mediaId": "cmt5pidho0007lj3pjojimo89",
+      "mediaId": "cmt5vo22s00076l3po7kg7c5u",
       "label": "Site logo",
       "guidance": "Wide mark, transparent background. Renders at 32px tall in the header.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/logo.png",
         "alt": "Rakuxon City",
@@ -1681,10 +3609,10 @@
     },
     {
       "key": "site.ogImage",
-      "mediaId": "cmt5piclg0003lj3pnxf2qrww",
+      "mediaId": "cmt5vo1o700036l3plcr6j49g",
       "label": "Social share image",
       "guidance": "16:9. Shown when a link to the site is shared.",
-      "updatedAt": "2026-08-23T11:11:16.983Z",
+      "updatedAt": "2026-08-23T14:03:39.859Z",
       "media": {
         "url": "/images/photography/hero-estate.jpg",
         "alt": "Aerial view across a residential neighbourhood",

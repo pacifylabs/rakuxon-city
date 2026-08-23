@@ -147,6 +147,18 @@ enum EnquiryStatus {
   @@map("enquiry_status")
 }
 
+/// 06_FEATURE_VIDEO_TOURS.md §3. Named on the site rather than shown raw:
+/// "Drone tour", "Walkthrough", "Estate overview", "Progress update".
+enum VideoKind {
+  DRONE_TOUR
+  WALKTHROUGH
+  ESTATE_OVERVIEW
+  PROGRESS_UPDATE
+  TESTIMONIAL
+
+  @@map("video_kind")
+}
+
 enum ArticleCategory {
   TITLE_AND_DOCUMENTATION @map("title_and_documentation")
   BUYING_PROCESS          @map("buying_process")
@@ -224,6 +236,7 @@ model Media {
   landDocuments  LandDocument[]
   articleCovers  Article[]
   testimonialFor Testimonial[]
+  videoPosters   Video[]
 
   @@map("media")
 }
@@ -273,6 +286,7 @@ model Estate {
 
   media    EstateMedia[]
   listings Listing[]
+  videos   Video[]
 
   @@map("estates")
 }
@@ -326,6 +340,7 @@ model Listing {
   media         ListingMedia[]
   enquiries     Enquiry[]
   statusChanges StatusChange[]
+  videos        Video[]
 
   @@index([type, status])
   @@index([estateId])
@@ -557,4 +572,60 @@ model ImportBatch {
 
   @@index([createdAt])
   @@map("import_batches")
+}
+
+/// 06_FEATURE_VIDEO_TOURS.md §3 — a table rather than a column on Listing,
+/// because a plot plausibly carries both a drone tour and a walkthrough, and
+/// estates carry videos of their own.
+///
+/// `youtubeId` holds the bare 11-character ID, never a pasted URL. Phase 7's
+/// admin form parses watch?v= / youtu.be / shorts / embed and stores the
+/// extraction; until then IDs arrive through the seed. Storing the ID is what
+/// lets the facade build its own embed URL against youtube-nocookie.com.
+model Video {
+  id          String    @id @default(cuid())
+  /// Shareable at /tours/[slug] — §6. Derived from the title at seed and admin.
+  slug        String    @unique
+  youtubeId   String    @map("youtube_id")
+  title       String
+  description String?
+  kind        VideoKind
+
+  /// A custom poster is strongly preferred; §5 falls back to YouTube's own
+  /// thumbnail only where none exists.
+  posterMediaId   String? @map("poster_media_id")
+  /// Display only. Null where the duration is not known.
+  durationSeconds Int?    @map("duration_seconds")
+
+  /// Exactly one of these is set — enforced in the application layer and by a
+  /// check constraint added in the migration.
+  listingId String? @map("listing_id")
+  estateId  String? @map("estate_id")
+
+  /// True while this stands in for the client's own footage. These are real
+  /// YouTube videos belonging to other people, embedded with permission of
+  /// YouTube's player terms but not ours to present as our own — so the facade
+  /// shows a visible "Placeholder video" label naming the channel, exactly as
+  /// `Media.isStandIn` does for photography. Clearing the flag on the client's
+  /// own upload removes the label, one video at a time.
+  isStandIn   Boolean @default(false) @map("is_stand_in")
+  /// The channel the video belongs to. Rendered beside the placeholder label.
+  attribution String?
+
+  /// Eligible for the homepage section. FR-V1.3 hides that section entirely
+  /// below two featured videos.
+  featured    Boolean   @default(false)
+  sortOrder   Int       @default(0) @map("sort_order")
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  poster  Media?   @relation(fields: [posterMediaId], references: [id], onDelete: SetNull)
+  listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  estate  Estate?  @relation(fields: [estateId], references: [id], onDelete: Cascade)
+
+  @@index([featured, sortOrder])
+  @@index([listingId])
+  @@index([estateId])
+  @@map("videos")
 }

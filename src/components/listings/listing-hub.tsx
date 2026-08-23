@@ -2,6 +2,7 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { FilterBar, type FilterConfig } from "@/components/listings/filter-bar";
+import { SearchField } from "@/components/listings/search-field";
 import {
   ListingCard,
   type ListingCardData,
@@ -45,6 +46,11 @@ export function ListingHub({
   filtered: boolean;
 }) {
   const noun = track === "land" ? "plot" : "home";
+  // Whether anything *besides* the search term is narrowing the result.
+  const hasOtherFilters = Object.entries(filters).some(
+    ([key, value]) =>
+      !["q", "sort", "page"].includes(key) && value !== undefined,
+  );
 
   return (
     <Section className="pt-10 lg:pt-16">
@@ -55,8 +61,17 @@ export function ListingHub({
           supporting={supporting}
         />
 
-        <FilterBar
+        <SearchField
           className="mt-12 lg:mt-16"
+          placeholder={
+            track === "land"
+              ? "Search plots by name, town or reference"
+              : "Search homes by name, town or reference"
+          }
+        />
+
+        <FilterBar
+          className="mt-4"
           filters={filterConfig}
           sortOptions={Object.entries(sortOptions).map(([value, label]) => ({
             value,
@@ -67,11 +82,21 @@ export function ListingHub({
         <p className="mt-6 text-caption text-ink-muted">
           <span className="tabular">{total}</span>{" "}
           {total === 1 ? noun : `${noun}s`}
-          {filtered
-            ? total === 1
-              ? " matches your filters"
-              : " match your filters"
-            : " listed"}
+          {filters.q ? (
+            <>
+              {total === 1 ? " matches" : " match"} “
+              <span className="text-ink-secondary">{filters.q}</span>”
+              {filtered && hasOtherFilters ? " and your filters" : ""}
+            </>
+          ) : filtered ? (
+            total === 1 ? (
+              " matches your filters"
+            ) : (
+              " match your filters"
+            )
+          ) : (
+            " listed"
+          )}
         </p>
 
         {listings.length === 0 ? (

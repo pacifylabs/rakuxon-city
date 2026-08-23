@@ -62,6 +62,13 @@ const optional = <T extends z.ZodTypeAny>(schema: T) =>
   );
 
 export const listingFilterSchema = z.object({
+  /**
+   * Free-text search. Matches the things a buyer actually types — the listing
+   * name, where it is, and the reference code sales quote on the phone — and
+   * deliberately not the description, so "five minutes from the gated estate"
+   * never surfaces on a search for "gated".
+   */
+  q: optional(z.string().trim().max(80)),
   state: optional(z.string().max(60)),
   estate: optional(z.string().max(120)),
   price: optional(
@@ -128,6 +135,23 @@ export function buildListingWhere(type: ListingType, filters: ListingFilters) {
   const where: Record<string, unknown> = { ...baseWhere(type) };
   const and: Record<string, unknown>[] = [];
 
+  if (filters.q) {
+    // Postgres `contains` with `mode: "insensitive"` rather than full-text
+    // search: the corpus is small, the fields are short, and a partial word
+    // like "emer" should still find Emerald Ridge, which `to_tsquery` would
+    // not do without a prefix operator and a tsvector column to match it on.
+    const term = filters.q;
+    and.push({
+      OR: [
+        { title: { contains: term, mode: "insensitive" } },
+        { location: { contains: term, mode: "insensitive" } },
+        { state: { contains: term, mode: "insensitive" } },
+        { reference: { contains: term, mode: "insensitive" } },
+        { estate: { name: { contains: term, mode: "insensitive" } } },
+      ],
+    });
+  }
+
   if (filters.state) where.state = filters.state;
   if (filters.estate) where.estate = { slug: filters.estate };
   if (filters.status) where.status = filters.status;
@@ -193,6 +217,7 @@ export function buildListingOrderBy(sort: SortOption) {
 /** True when anything narrowing is applied — drives the empty state's copy. */
 export function hasActiveFilters(filters: ListingFilters): boolean {
   return Boolean(
+    filters.q ||
     filters.state ||
     filters.estate ||
     filters.price ||

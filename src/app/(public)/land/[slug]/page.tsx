@@ -10,6 +10,10 @@ import { TitleRibbon } from "@/components/listings/title-ribbon";
 import { ArrowGlyph } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { Gallery } from "@/components/ui/gallery";
+import { VideoBlock } from "@/components/video/video-block";
+import { VideoStructuredData } from "@/components/video/video-structured-data";
+import { getListingVideos } from "@/lib/videos";
+import { env } from "@/lib/env";
 import { formatArea } from "@/lib/format";
 import {
   getListingDetail,
@@ -48,12 +52,10 @@ export default async function PlotDetailPage({
   if (!listing || listing.type !== "LAND" || !listing.landDetail) notFound();
 
   const land = listing.landDetail;
-  const related = await getRelatedListings(
-    listing.id,
-    "LAND",
-    listing.estateId,
-    listing.location,
-  );
+  const [related, videos] = await Promise.all([
+    getRelatedListings(listing.id, "LAND", listing.estateId, listing.location),
+    getListingVideos(listing.id),
+  ]);
 
   const images = listing.media.map((entry) => entry.media);
 
@@ -78,8 +80,18 @@ export default async function PlotDetailPage({
           </p>
 
           <Gallery images={images} className="mt-10" />
+
+          {/* FR-V1.1 — directly beneath the gallery, above the title ribbon. */}
+          {videos.length > 0 ? (
+            <VideoBlock videos={videos} className="mt-12" />
+          ) : null}
         </Container>
       </Section>
+
+      <VideoStructuredData
+        videos={videos}
+        siteUrl={env.NEXT_PUBLIC_SITE_URL}
+      />
 
       {/*
         §7 — the ribbon sits directly beneath the gallery, before the

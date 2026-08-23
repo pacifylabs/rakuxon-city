@@ -39,6 +39,45 @@
     "attribution_required": true
   },
   {
+    "name": "land-terrain-04",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Ambaliyar_Ruwa.jpg/1920px-Ambaliyar_Ruwa.jpg",
+    "title": "Ambaliyar Ruwa",
+    "creator": "YusufuAM",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ambaliyar_Ruwa.jpg",
+    "alt": "Cleared red-earth land beside a tarred road, northern Nigeria",
+    "ratio": "card",
+    "bias": 0.62,
+    "attribution_required": false
+  },
+  {
+    "name": "land-terrain-05",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Beautiful_skyline_in_northern_nigeria.jpg/1920px-Beautiful_skyline_in_northern_nigeria.jpg",
+    "title": "Beautiful skyline in northern nigeria",
+    "creator": "Binwana Gazuwa",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Beautiful_skyline_in_northern_nigeria.jpg",
+    "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria",
+    "ratio": "card",
+    "bias": 0.66,
+    "attribution_required": true
+  },
+  {
+    "name": "land-terrain-06",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Company_in_Jos.jpg/1920px-Company_in_Jos.jpg",
+    "title": "Company in Jos",
+    "creator": "M Bash Ne",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Company_in_Jos.jpg",
+    "alt": "Hillside view over rooftops and open ground in Jos, Nigeria",
+    "ratio": "card",
+    "bias": 0.6,
+    "attribution_required": false
+  },
+  {
     "name": "home-01",
     "url": "https://live.staticflickr.com/6226/6345074755_813dc7b81f_b.jpg",
     "title": "Kamakoa Nui single-family detached mod",
@@ -132,7 +171,7 @@
   {
     "name": "home-08",
     "url": "https://live.staticflickr.com/5256/5486664417_53c8de8277_b.jpg",
-    "title": "arne jacobsen, all\u00e9husene housing, gen",
+    "title": "arne jacobsen, alléhusene housing, gen",
     "creator": "seier+seier",
     "license": "CC BY 2.0",
     "license_url": "https://creativecommons.org/licenses/by/2.0/",
@@ -159,7 +198,7 @@
     "name": "estate-cornerstone-gardens",
     "url": "https://live.staticflickr.com/3380/3218332654_42b7434f36_b.jpg",
     "title": "'Ivory Curls' in suburban Brisbane",
-    "creator": "Tatters \u273e",
+    "creator": "Tatters ✾",
     "license": "CC BY 2.0",
     "license_url": "https://creativecommons.org/licenses/by/2.0/",
     "source_url": "https://www.flickr.com/photos/62938898@N00/3218332654",
@@ -275,7 +314,7 @@
   {
     "name": "article-4",
     "url": "https://live.staticflickr.com/6105/6352477805_f636afd62c_b.jpg",
-    "title": "vandkunsten, architects: jystrup savv\u00e6",
+    "title": "vandkunsten, architects: jystrup savvæ",
     "creator": "seier+seier",
     "license": "CC BY 2.0",
     "license_url": "https://creativecommons.org/licenses/by/2.0/",

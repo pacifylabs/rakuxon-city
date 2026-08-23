@@ -55,16 +55,37 @@ and `pnpm verify:parity` will tell you if you forget.
 
 ## Scripts
 
-| Command            | Does                           |
-| ------------------ | ------------------------------ |
-| `pnpm dev`         | Development server             |
-| `pnpm build`       | Production build               |
-| `pnpm typecheck`   | `tsc --noEmit`                 |
-| `pnpm lint`        | ESLint                         |
-| `pnpm format`      | Prettier write (skips `docs/`) |
-| `pnpm db:generate` | Regenerate Prisma Client       |
-| `pnpm db:migrate`  | Create and apply a migration   |
-| `pnpm db:studio`   | Prisma Studio                  |
+| Command              | Does                                                          |
+| -------------------- | ------------------------------------------------------------- |
+| `pnpm dev`           | Development server                                            |
+| `pnpm build`         | Production build                                              |
+| `pnpm typecheck`     | `tsc --noEmit`                                                |
+| `pnpm lint`          | ESLint                                                        |
+| `pnpm format`        | Prettier write (skips `docs/`)                                |
+| `pnpm db:generate`   | Regenerate Prisma Client                                      |
+| `pnpm db:migrate`    | Create and apply a migration                                  |
+| `pnpm db:studio`     | Prisma Studio                                                 |
+| `pnpm snapshot`      | Rebuild the no-database fallback from the seed                |
+| `pnpm verify:seed`   | Assert the seed covers every enum and edge case               |
+| `pnpm verify:parity` | Assert Postgres and the snapshot agree (needs `DATABASE_URL`) |
+| `pnpm verify:video`  | Assert the video facade's guarantees still hold               |
+| `pnpm review:invest` | Copy review for the gated investor lane                       |
+
+## A note on speed
+
+Static pages are prerendered and serve in single-digit milliseconds. The
+filterable hubs (`/land`, `/homes`, `/tours`, `/resources`) query on each
+request, so their speed is dominated by how far the app sits from the database
+— measured at roughly a second per page with the app in Nigeria and the
+database in `us-east-2`, against 12–18 ms for the same build with no database
+at all.
+
+**Deploy the app in the same region as its database.** See `TODO.md` §4.7 for
+the measurements.
+
+In development, Turbopack compiles each route on first visit, so the first hit
+to a page is several seconds and every one after is under two. That is not what
+production does.
 
 ## Stack
 

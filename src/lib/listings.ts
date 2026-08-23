@@ -222,21 +222,33 @@ export async function getListingPage(
   const where = buildListingWhere(type, filters);
   const orderBy = buildListingOrderBy(filters.sort);
 
-  // Counted first so the page can be clamped. Asking for page 5 of a one-page
-  // result previously returned an empty set, which renders the "nothing matches
-  // your filters" state over a result set that is not empty at all — a stale
-  // link or a hand-edited URL was enough to trigger it.
-  const total = await db.listing.count({ where });
+  const query = (page: number) =>
+    db.listing.findMany({
+      where,
+      orderBy: [...orderBy],
+      select: listingCardSelect,
+      skip: (page - 1) * LISTINGS_PER_PAGE,
+      take: LISTINGS_PER_PAGE,
+    });
+
+  // The count and the rows go out together rather than one after the other.
+  // Every round trip here is a full network hop — measured at roughly a second
+  // per page when the database sits on another continent from the app — and
+  // the count is only *needed* first in the rare case where the requested page
+  // is out of range.
+  const [total, optimistic] = await Promise.all([
+    db.listing.count({ where }),
+    query(filters.page),
+  ]);
+
   const pageCount = Math.max(1, Math.ceil(total / LISTINGS_PER_PAGE));
   const page = Math.min(filters.page, pageCount);
 
-  const rows = await db.listing.findMany({
-    where,
-    orderBy: [...orderBy],
-    select: listingCardSelect,
-    skip: (page - 1) * LISTINGS_PER_PAGE,
-    take: LISTINGS_PER_PAGE,
-  });
+  // Asking for page 5 of a one-page result returns an empty set, which renders
+  // the "nothing matches your filters" state over a result set that is not
+  // empty at all — a stale link or a hand-edited URL is enough to trigger it.
+  // Only that case pays for a second query.
+  const rows = page === filters.page ? optimistic : await query(page);
 
   return { listings: rows.map(toCard), total, page, pageCount };
 }

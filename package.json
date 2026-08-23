@@ -18,7 +18,8 @@
     "verify:seed": "tsx scripts/verify-seed.ts",
     "review:invest": "tsx scripts/copy-review-invest.ts",
     "snapshot": "tsx scripts/build-snapshot.ts",
-    "verify:parity": "tsx --require ./scripts/server-only-stub.cjs scripts/verify-parity.ts"
+    "verify:parity": "tsx --require ./scripts/server-only-stub.cjs scripts/verify-parity.ts",
+    "verify:video": "tsx --require ./scripts/server-only-stub.cjs scripts/verify-video.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.1",

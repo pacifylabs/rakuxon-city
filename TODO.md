@@ -1,7 +1,8 @@
 # Open items
 
-Everything raised during Phases 0–5 and the imagery pass that needs a decision, real content, or work
-in a later phase. Grouped by who has to act.
+Everything raised during Phases 0–5, the imagery pass and the video tour
+addendum (Phase 5.5) that needs a decision, real content, or work in a later
+phase. Grouped by who has to act.
 
 Phase numbers refer to `docs/03_implementation_plan.md` (v3.0). Items marked
 **launch gate** must be closed before go-live — PRD §7 acceptance criteria and
@@ -107,6 +108,68 @@ own once listings are created at different times, but it is worth deciding
 whether available stock should always sort ahead of sold regardless of date.
 
 ---
+
+### 1.9 The video tours are other people's videos — **launch gate**
+
+The eight seeded tours are real, live YouTube videos published by other
+channels, embedded at the client's explicit instruction ("make use of a public
+housing video that can be updated later"). Every one renders behind a visible
+_Placeholder — video by {channel}_ caption, driven by `Video.isStandIn`.
+
+Embedding is permitted by YouTube's player terms, and each ID was checked
+against the oEmbed endpoint at seed time. Two things are still true and need
+closing before launch:
+
+- **They can vanish.** The owner can delete or privatise any of them without
+  notice. FR-V1.8's unavailable state handles that gracefully — verified — but a
+  client demo with a dead tile is still a bad demo.
+- **They are not our footage.** The caption says so, but the sooner the client's
+  own drone tours replace them, the better. Clearing `isStandIn` on upload
+  removes the caption, one video at a time.
+
+**Owner: client. Replace before go-live.**
+
+### 1.10 The posters are stand-in photographs, not video frames
+
+06_FEATURE_VIDEO_TOURS.md §5 strongly prefers custom posters over YouTube's own
+thumbnails, and it was right to: the auto-generated thumbnails on these
+particular videos carry baked-in title text, arrows and price callouts
+("₦1 BILLION", "THE BEST ESTATE IN LAGOS???"). Eight of those in a grid read as
+someone else's marketing rather than as this site.
+
+So each video points at a photograph from the stand-in library instead. The
+consequence is that the poster does not show a frame from the video it plays.
+That is why the caption reads _Placeholder_ rather than _Placeholder video_ —
+it has to cover the substituted image as well as the borrowed footage.
+
+Resolves itself when the client uploads real posters through the Phase 7 media
+library.
+
+### 1.11 The homepage video section is centred, against the design system
+
+04_DESIGN_SYSTEM.md §4 says the section heading pairing is "never centred", and
+06_FEATURE_VIDEO_TOURS.md §5 asks this section to use the standard asymmetric
+pairing like every other block on the page.
+
+The client reviewed it and asked for it centred. Built centred, flagged in
+`src/components/home/video-tours.tsx` so the next reader knows it was a decision
+rather than a component someone forgot to use.
+
+**Client's call. Recorded, not disputed.**
+
+## 1a. Needs a decision — deferred from the video addendum
+
+### 1a.1 FR-V1.9 references structured data that does not exist
+
+FR-V1.9 asks for `VideoObject` markup "alongside the existing
+`RealEstateListing` markup". `VideoObject` is implemented. There is no
+`RealEstateListing` markup anywhere on the site — no page emits structured data
+of any kind, and the PRD never asked for it.
+
+Adding it belongs to the listing pages rather than to this addendum, so it was
+flagged rather than quietly built.
+
+**Open.**
 
 ## 2. Real content required — **launch gate**
 
@@ -234,6 +297,14 @@ Every other public route is now built.
 
 ---
 
+### 3.3 Video admin is Phase 7
+
+06_FEATURE_VIDEO_TOURS.md §8 defers all of it: the paste-any-URL form with ID
+extraction, poster upload through the media library, the featured toggle and
+drag-to-reorder, and an oEmbed validity check on save that warns when a video
+has gone private. None of it is built. Videos arrive through `prisma/seed.ts`
+until then.
+
 ## 4. Engineering follow-ups
 
 ### 4.1 `NEXT_PUBLIC_SITE_URL` must be set before deploying
@@ -287,6 +358,72 @@ design system. Delete it at the Phase 8 launch gate.
 `prisma init` installed nine skill directories into `.agents/skills` with
 symlinks in `.claude/skills`. Both are git-ignored; `skills-lock.json` pins them
 and `npx skills add prisma/skills` restores them.
+
+### 4.7 Database latency dominates every dynamic page — **launch gate**
+
+Measured on the production build, warm, three runs each, against the configured
+Neon instance in `us-east-2` from a machine in Nigeria:
+
+| Route        | With Neon          | Same build, no database |
+| ------------ | ------------------ | ----------------------- |
+| `/land`      | 1,020–1,200 ms     | 12–18 ms                |
+| `/homes`     | 1,018–1,057 ms     | 13–15 ms                |
+| `/tours`     | 778–815 ms         | 10–15 ms                |
+| `/resources` | 520–536 ms         | 9–13 ms                 |
+| `/`          | 4 ms (prerendered) | 4 ms                    |
+
+Roughly seventy times slower, on identical code. This is not rendering cost —
+it is the round trip. Each hub makes two queries, and each query crosses the
+Atlantic twice.
+
+`getListingPage` and `getVideoPage` now issue the count and the page in
+parallel instead of one after the other, which removed one trip and took
+`/tours` from ~800 ms to ~540 ms. The rest is physics, and the fix is
+deployment rather than code:
+
+1. **Host the app in the same region as the database.** Then app→database is
+   about a millisecond and only the visitor→app hop is long, which a CDN
+   absorbs. This is the real fix.
+2. Or move the database to a region near the users.
+3. Locally, unset `DATABASE_URL` — the bundled snapshot serves the same pages in
+   double-digit milliseconds.
+
+Note also that Neon's compute suspends when idle; the first request after a
+sleep can exceed Prisma's connect timeout and fail outright with `P1001`.
+
+### 4.8 The dev server is slow on first visit to each route
+
+Turbopack compiles a route the first time it is requested — measured at 6.6 s
+for a cold homepage, then 0.7–1.7 s warm. That is dev-mode behaviour and says
+nothing about production, where the same homepage is prerendered and serves in
+4 ms. Worth knowing before optimising something that is not slow.
+
+### 4.9 `scripts/fetch_photography.py` no longer refetches by default
+
+Adding one source used to re-download all twenty-five, which Wikimedia answers
+with an HTTP 429 whose body is an HTML error page. PIL then failed to open it
+several images later, which read as a corrupt image rather than as rate
+limiting. Existing files are now skipped, the response is checked for an image
+signature before decoding, and `--refetch` forces a full rebuild.
+
+### 4.10 Free-licence photography sources are exhausted
+
+Four sources have now been worked through across two sessions: Picsum (no
+houses), Openverse (behind a Cloudflare challenge, returns 429), Wikimedia text
+search (almost entirely archival black-and-white survey photography, and
+geograph.org.uk floods it with CC BY-SA, which a cropped derivative cannot use)
+and Wikimedia categories (genuinely Nigerian, but mostly meetup photos and
+mud-brick villages).
+
+That yielded three more usable Nigerian land photographs, bringing the library
+to twenty-five: six land, eight homes, three estates, four articles and four
+site slots. With twenty-three plots on the hub, each land photograph now appears
+roughly four times.
+
+A **Pexels or Unsplash API key** would resolve this in minutes — both licences
+permit commercial use and modification with no attribution requirement, and
+`scripts/photography-sources.json` already has the shape to take them. Requested
+twice; not yet supplied.
 
 ### 4.6 Do not run Prettier over `docs/`
 

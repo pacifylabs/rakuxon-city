@@ -9,6 +9,7 @@ import { Spotlight } from "@/components/home/spotlight";
 import { Testimonials } from "@/components/home/testimonials";
 import { TrustBand } from "@/components/home/trust-band";
 import { TwoLane } from "@/components/home/two-lane";
+import { VideoTours } from "@/components/home/video-tours";
 import {
   getCollageImages,
   getDeliveredEstateCount,
@@ -17,6 +18,7 @@ import {
   getTestimonials,
 } from "@/lib/content";
 import { getLaneCounts, getSpotlightListings } from "@/lib/listings";
+import { getFeaturedVideos } from "@/lib/videos";
 import { getPlacement } from "@/lib/media";
 
 const description =
@@ -54,6 +56,7 @@ export default async function HomePage() {
     articles,
     collage,
     delivered,
+    videos,
   ] = await Promise.all([
     getLaneCounts(),
     getFeaturedEstates(2),
@@ -62,6 +65,7 @@ export default async function HomePage() {
     getRecentArticles(2),
     getCollageImages(),
     getDeliveredEstateCount(),
+    getFeaturedVideos(4),
   ]);
 
   return (
@@ -71,6 +75,8 @@ export default async function HomePage() {
       <TwoLane counts={counts} />
       <TrustBand deliveredEstates={delivered} />
       <Spotlight listings={spotlight} />
+      {/* FR-V1.3 — between Spotlight and Testimonials. */}
+      <VideoTours videos={videos} />
       <Testimonials testimonials={testimonials} />
       <Faq collage={collage} />
       <ResourcesTeaser articles={articles} />

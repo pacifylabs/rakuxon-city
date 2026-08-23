@@ -12,6 +12,10 @@ import { Gallery } from "@/components/ui/gallery";
 import { cn } from "@/lib/cn";
 import { getEstateDetail, getEstateSlugs } from "@/lib/content";
 import { getEstateListings } from "@/lib/listings";
+import { getEstateVideos } from "@/lib/videos";
+import { VideoCard } from "@/components/video/video-card";
+import { VideoStructuredData } from "@/components/video/video-structured-data";
+import { env } from "@/lib/env";
 import { LISTINGS_PER_PAGE } from "@/lib/listing-query";
 import type { EstateStatus } from "@/generated/prisma/enums";
 
@@ -49,12 +53,21 @@ export default async function EstateDetailPage({
   const estate = await getEstateDetail(slug);
   if (!estate) notFound();
 
-  const { land, homes } = await getEstateListings(estate.id);
+  const [{ land, homes }, videos] = await Promise.all([
+    getEstateListings(estate.id),
+    getEstateVideos(estate.id),
+  ]);
 
   // Tab and page both live in the URL rather than in component state, so a
   // view is shareable and neither needs JavaScript to change.
   const query = await searchParams;
-  const tab = query.tab === "homes" ? "homes" : "land";
+  // FR-V1.2 — a third tab, and only when there is footage to put in it.
+  const tab =
+    query.tab === "homes"
+      ? "homes"
+      : query.tab === "tours" && videos.length > 0
+        ? "tours"
+        : "land";
   const all = tab === "homes" ? homes : land;
 
   // An estate holds at most a few dozen listings (PRD scope: 20-100 site-wide),
@@ -174,10 +187,29 @@ export default async function EstateDetailPage({
                     count={homes.length}
                     active={tab === "homes"}
                   />
+                  {videos.length > 0 ? (
+                    <Tab
+                      href={`/estates/${estate.slug}?tab=tours`}
+                      label="Tours"
+                      count={videos.length}
+                      active={tab === "tours"}
+                    />
+                  ) : null}
                 </ul>
               </nav>
 
-              {active.length === 0 ? (
+              {tab === "tours" ? (
+                <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {videos.map((video, index) => (
+                    <VideoCard
+                      key={video.slug}
+                      video={video}
+                      priority={index === 0}
+                      className="h-full"
+                    />
+                  ))}
+                </div>
+              ) : active.length === 0 ? (
                 <p className="mt-8 max-w-[54ch] text-body text-ink-secondary">
                   No {tab === "homes" ? "homes" : "plots"} are listed in this
                   estate at the moment.{" "}
@@ -218,6 +250,8 @@ export default async function EstateDetailPage({
           )}
         </Container>
       </Section>
+
+      <VideoStructuredData videos={videos} siteUrl={env.NEXT_PUBLIC_SITE_URL} />
 
       <Section className="pt-0 lg:pt-0">
         <Container>

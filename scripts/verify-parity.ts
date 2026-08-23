@@ -33,6 +33,15 @@ import {
   getSpotlightListings,
 } from "../src/lib/listings";
 import {
+  getFeaturedVideos,
+  getVideoDetail,
+  getVideoFilterOptions,
+  getVideoPage,
+  getVideoSlugs,
+} from "../src/lib/videos";
+import { videoFilterSchema, type VideoFilters } from "../src/lib/video-query";
+import { VideoKind } from "../src/generated/prisma/enums";
+import {
   listingFilterSchema,
   type ListingFilters,
 } from "../src/lib/listing-query";
@@ -123,6 +132,67 @@ const cases: { label: string; type: ListingType; filters: ListingFilters }[] = [
     type: "HOME",
     filters: filters({ sort: "price-desc" }),
   },
+  // Search runs through two hand-written implementations — a Prisma OR and an
+  // array filter — which is exactly where the two paths would drift unnoticed.
+  {
+    label: "land, search by estate name",
+    type: "LAND",
+    filters: filters({ q: "Emerald" }),
+  },
+  {
+    label: "land, search by location",
+    type: "LAND",
+    filters: filters({ q: "Ikorodu" }),
+  },
+  {
+    label: "land, search by reference",
+    type: "LAND",
+    filters: filters({ q: "RXC-LND-0018" }),
+  },
+  {
+    label: "land, search is case-insensitive",
+    type: "LAND",
+    filters: filters({ q: "eMeRaLd" }),
+  },
+  {
+    label: "land, search matching nothing",
+    type: "LAND",
+    filters: filters({ q: "zzzzz" }),
+  },
+  {
+    label: "land, search combined with a filter",
+    type: "LAND",
+    filters: filters({ q: "Emerald", titleType: "C_OF_O" }),
+  },
+  {
+    label: "homes, search by town",
+    type: "HOME",
+    filters: filters({ q: "Lugbe" }),
+  },
+];
+
+const videoFilters = (overrides: Partial<VideoFilters> = {}): VideoFilters => ({
+  ...videoFilterSchema.parse({}),
+  ...overrides,
+});
+
+const videoCases: { label: string; filters: VideoFilters }[] = [
+  { label: "videos, defaults", filters: videoFilters() },
+  {
+    label: "videos, drone tours",
+    filters: videoFilters({ kind: VideoKind.DRONE_TOUR }),
+  },
+  {
+    label: "videos, walkthroughs",
+    filters: videoFilters({ kind: VideoKind.WALKTHROUGH }),
+  },
+  {
+    // The estate filter matches a video's own estate *or* its listing's estate,
+    // which is the rule most likely to be implemented differently twice.
+    label: "videos, by estate",
+    filters: videoFilters({ estate: "emerald-ridge" }),
+  },
+  { label: "videos, page 2", filters: videoFilters({ page: 2 }) },
 ];
 
 async function main() {
@@ -185,6 +255,48 @@ async function main() {
     );
   }
 
+  for (const testCase of videoCases) {
+    const fromDb = await getVideoPage(testCase.filters);
+    const fromSnapshot = fixture.getVideoPage(testCase.filters);
+    compare(
+      testCase.label,
+      {
+        total: fromDb.total,
+        pageCount: fromDb.pageCount,
+        slugs: fromDb.videos.map((video) => video.slug),
+      },
+      {
+        total: fromSnapshot.total,
+        pageCount: fromSnapshot.pageCount,
+        slugs: fromSnapshot.videos.map((video) => video.slug),
+      },
+    );
+  }
+
+  compare(
+    "featured videos",
+    (await getFeaturedVideos(4)).map((video) => video.slug),
+    fixture.getFeaturedVideos(4).map((video) => video.slug),
+  );
+
+  compare(
+    "video filter options",
+    await getVideoFilterOptions(),
+    fixture.getVideoFilterOptions(),
+  );
+
+  compare(
+    "video slugs",
+    (await getVideoSlugs()).slice().sort(),
+    fixture.getVideoSlugs().slice().sort(),
+  );
+
+  compare(
+    "video detail, emerald-ridge-estate-overview",
+    await getVideoDetail("emerald-ridge-estate-overview"),
+    fixture.getVideoDetail("emerald-ridge-estate-overview"),
+  );
+
   console.log();
   if (failures.length > 0) {
     console.log(
@@ -195,7 +307,9 @@ async function main() {
     );
     process.exit(1);
   }
-  console.log(`All ${cases.length + 7} parity checks passed.`);
+  console.log(
+    `All ${cases.length + videoCases.length + 11} parity checks passed.`,
+  );
 }
 
 main().catch((error) => {
