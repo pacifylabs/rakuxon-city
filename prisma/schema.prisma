@@ -177,24 +177,62 @@ model User {
 /// Media is a library with IDs rather than URLs pasted onto records, so an
 /// image can be re-used across listings and estates — architecture §9.5.
 model Media {
-  id        String   @id @default(cuid())
+  id        String @id @default(cuid())
   url       String
   /// Required at upload. Accessibility is enforced at the source, not audited later.
   alt       String
   width     Int
   height    Int
-  mimeType  String   @map("mime_type")
-  sizeBytes Int      @map("size_bytes")
+  mimeType  String @map("mime_type")
+  sizeBytes Int    @map("size_bytes")
+
+  /// True while this image stands in for photography we do not have yet —
+  /// a designed placeholder, or a licensed photograph of somewhere else.
+  /// Anything rendering one shows a visible "Representative image" label, so
+  /// no visitor can mistake it for the actual plot. Clearing this flag on
+  /// upload is what removes the label, one image at a time.
+  isStandIn   Boolean @default(false) @map("is_stand_in")
+  /// Required by CC BY and similar licences. Rendered beside the image and
+  /// collected into IMAGE_CREDITS.md.
+  attribution String?
+  sourceUrl   String? @map("source_url")
+
   createdAt DateTime @default(now()) @map("created_at")
 
   listingMedia   ListingMedia[]
   estateMedia    EstateMedia[]
+  placements     MediaPlacement[]
   floorPlanFor   HomeDetail[]
   landDocuments  LandDocument[]
   articleCovers  Article[]
   testimonialFor Testimonial[]
 
   @@map("media")
+}
+
+/// Named slots for the images that are page furniture rather than content —
+/// the homepage hero, the FAQ collage, the logo, the share image.
+///
+/// Without this they can only be found by matching on a URL, which breaks the
+/// first time someone uploads a replacement with a different filename. A stable
+/// key means the admin screen in Phase 7 can list every editable image on the
+/// site and swap the row behind each one.
+///
+/// Not in PRD §5. Added so "every image is editable from the admin" is true of
+/// page furniture too, and flagged in TODO.md for sign-off.
+model MediaPlacement {
+  /// Stable, human-readable: "homepage.hero", "site.logo", "homepage.collage.1".
+  key       String   @id
+  mediaId   String   @map("media_id")
+  /// Shown in the admin list, e.g. "Homepage hero image".
+  label     String
+  /// Guidance for whoever replaces it — aspect ratio, what the shot should show.
+  guidance  String?
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  media Media @relation(fields: [mediaId], references: [id], onDelete: Restrict)
+
+  @@map("media_placements")
 }
 
 // ---------------------------------------------------------------------------

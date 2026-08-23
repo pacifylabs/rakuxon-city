@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/badge";
 import { IconAction } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import { cn } from "@/lib/cn";
 import { formatArea } from "@/lib/format";
-import { isPlaceholder } from "@/lib/media";
 import type {
   BuildStage,
   ListingStatus,
@@ -28,7 +28,12 @@ export type ListingCardData = {
   price: string | number | null;
   priceOnRequest: boolean;
   status: ListingStatus;
-  image: { url: string; alt: string } | null;
+  image: {
+    url: string;
+    alt: string;
+    isStandIn: boolean;
+    attribution: string | null;
+  } | null;
   land: {
     plotSize: string | number;
     plotUnit: PlotUnit;
@@ -91,13 +96,11 @@ export function ListingCard({
           <div className="size-full bg-accent-tint" />
         )}
 
-        {listing.image && isPlaceholder(listing.image.url) ? (
-          // Sits where §8 puts the "Artist's impression" label. Placeholder
-          // imagery is never passed off as a photograph of the actual plot.
-          <p className="absolute bottom-2 left-2 rounded-full bg-canvas/85 px-2 py-0.5 text-caption text-ink-muted">
-            Photography pending
-          </p>
-        ) : null}
+        <StandInLabel
+          show={Boolean(listing.image?.isStandIn)}
+          context={listing.type === "LAND" ? "plot" : "property"}
+          attribution={listing.image?.attribution}
+        />
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5">

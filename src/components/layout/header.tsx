@@ -23,7 +23,12 @@ const navigation = [
   { href: "/about", label: "About" },
 ];
 
-export function Header() {
+export function Header({
+  logo,
+}: {
+  /** Resolved from the `site.logo` placement, so the admin can swap it. */
+  logo: { url: string; alt: string; width: number; height: number };
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -32,10 +37,10 @@ export function Header() {
         <div className="flex items-center justify-between gap-6 py-6">
           <Link href="/" className="shrink-0" aria-label="Rakuxon City — home">
             <Image
-              src="/logo.png"
-              alt="Rakuxon City"
-              width={2172}
-              height={724}
+              src={logo.url}
+              alt={logo.alt}
+              width={logo.width}
+              height={logo.height}
               priority
               className="h-8 w-auto"
             />

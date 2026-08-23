@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { getArticle, getArticleSlugs } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
-import { isPlaceholder } from "@/lib/media";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { ArticleCategory } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -77,11 +77,10 @@ export default async function ArticlePage({
                 sizes="(min-width: 1024px) 70vw, 100vw"
                 className="object-cover"
               />
-              {isPlaceholder(article.coverImage.url) ? (
-                <figcaption className="absolute bottom-3 left-3 rounded-full bg-canvas/85 px-3 py-1 text-caption text-ink-muted">
-                  Photography pending
-                </figcaption>
-              ) : null}
+              <StandInLabel
+                show={article.coverImage.isStandIn}
+                attribution={article.coverImage.attribution}
+              />
             </figure>
           ) : null}
         </Container>

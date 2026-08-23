@@ -1,14 +1,59 @@
-/**
- * Placeholder imagery stands in until the client's photography arrives at the
- * Phase 8 content gate. Anything rendering one says so on the image itself,
- * where §8 puts the "Artist's impression" label — a placeholder is never passed
- * off as a photograph of the actual plot.
- *
- * TODO: real photography — delete this module and scripts/generate_placeholders.py
- * once public/images/placeholders is empty.
- */
-const PLACEHOLDER_PREFIX = "/images/placeholders/";
+import "server-only";
+import { db } from "@/lib/db";
 
-export function isPlaceholder(url: string): boolean {
-  return url.startsWith(PLACEHOLDER_PREFIX);
+/**
+ * Stand-in imagery — designed placeholders, or licensed photographs of
+ * somewhere else — stands in until the client's own photography arrives.
+ *
+ * Anything rendering one shows a visible label, in the same caption slot where
+ * design system §8 puts "Artist's impression". That matters more here than on
+ * most sites: a listing states a survey number and a title type, so a visitor
+ * has every reason to believe the photograph above it is the plot itself. It is
+ * not, and the page says so.
+ *
+ * The flag lives on the `Media` row rather than being inferred from the URL, so
+ * clearing it is what removes the label — one image at a time, as real
+ * photography lands, without a code change.
+ */
+export type StandInContext = "plot" | "property" | "generic";
+
+export function standInLabel(context: StandInContext): string {
+  switch (context) {
+    case "plot":
+      return "Representative image — not the actual plot";
+    case "property":
+      return "Representative image — not the actual property";
+    default:
+      return "Representative image";
+  }
+}
+
+/**
+ * Named image slots for page furniture — the hero, the FAQ collage, the logo,
+ * the share image. Resolved by key so an admin can swap the row behind a slot
+ * without anything in the code matching on a filename.
+ */
+export async function getPlacements(keys: string[]) {
+  const rows = await db.mediaPlacement.findMany({
+    where: { key: { in: keys } },
+    select: {
+      key: true,
+      media: {
+        select: {
+          url: true,
+          alt: true,
+          width: true,
+          height: true,
+          isStandIn: true,
+          attribution: true,
+        },
+      },
+    },
+  });
+
+  return new Map(rows.map((row) => [row.key, row.media]));
+}
+
+export async function getPlacement(key: string) {
+  return (await getPlacements([key])).get(key) ?? null;
 }

@@ -7,7 +7,7 @@ import { Container, Section } from "@/components/ui/container";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getEstates } from "@/lib/content";
-import { isPlaceholder } from "@/lib/media";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { EstateStatus } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -59,11 +59,7 @@ export default async function EstatesPage() {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    {estate.image && isPlaceholder(estate.image.url) ? (
-                      <p className="absolute bottom-3 left-3 rounded-full bg-canvas/85 px-3 py-1 text-caption text-ink-muted">
-                        Photography pending
-                      </p>
-                    ) : null}
+                    <StandInLabel show={Boolean(estate.image?.isStandIn)} attribution={estate.image?.attribution} />
                   </div>
 
                   <div className="mt-6 flex flex-1 flex-col">

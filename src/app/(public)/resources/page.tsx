@@ -6,7 +6,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getArticles } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
-import { isPlaceholder } from "@/lib/media";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import { ArticleCategory } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -72,12 +72,7 @@ export default async function ResourcesPage() {
                             ) : (
                               <div className="size-full bg-accent-tint" />
                             )}
-                            {article.coverImage &&
-                            isPlaceholder(article.coverImage.url) ? (
-                              <p className="absolute bottom-2 left-2 rounded-full bg-canvas/85 px-2 py-0.5 text-caption text-ink-muted">
-                                Photography pending
-                              </p>
-                            ) : null}
+                            <StandInLabel show={Boolean(article.coverImage?.isStandIn)} attribution={article.coverImage?.attribution} />
                           </div>
 
                           <h3 className="mt-5 text-heading text-ink transition-colors group-hover:text-accent">

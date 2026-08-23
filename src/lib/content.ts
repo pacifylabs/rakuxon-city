@@ -1,5 +1,6 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { getPlacements } from "@/lib/media";
 import { ArticleStatus, EstateStatus } from "@/generated/prisma/enums";
 
 /**
@@ -24,7 +25,14 @@ export async function getFeaturedEstates(take = 2) {
         take: 1,
         select: {
           media: {
-            select: { url: true, alt: true, width: true, height: true },
+            select: {
+              url: true,
+              alt: true,
+              width: true,
+              height: true,
+              isStandIn: true,
+              attribution: true,
+            },
           },
         },
       },
@@ -61,7 +69,9 @@ export async function getRecentArticles(take = 2) {
       excerpt: true,
       category: true,
       publishedAt: true,
-      coverImage: { select: { url: true, alt: true } },
+      coverImage: {
+        select: { url: true, alt: true, isStandIn: true, attribution: true },
+      },
     },
   });
 }
@@ -75,13 +85,23 @@ export async function getTestimonials(take = 6) {
   });
 }
 
-/** Collage tiles for the FAQ block. Drawn from the media library, not hardcoded paths. */
+/**
+ * Collage tiles for the FAQ block, resolved through named placements.
+ *
+ * These were previously found by matching on a URL prefix, which would have
+ * broken the first time an admin uploaded a replacement under a different
+ * filename. The slot key is stable; the row behind it is not.
+ */
 export async function getCollageImages() {
-  return db.media.findMany({
-    where: { url: { startsWith: "/images/placeholders/collage-" } },
-    orderBy: { url: "asc" },
-    select: { url: true, alt: true, width: true, height: true },
-  });
+  const placements = await getPlacements([
+    "homepage.collage.1",
+    "homepage.collage.2",
+    "homepage.collage.3",
+  ]);
+
+  return ["homepage.collage.1", "homepage.collage.2", "homepage.collage.3"]
+    .map((key) => placements.get(key))
+    .filter((media) => media !== undefined);
 }
 
 /** Every estate, for the index. Active first — delivered ones are portfolio evidence. */
@@ -99,7 +119,16 @@ export async function getEstates() {
       media: {
         orderBy: { position: "asc" },
         take: 1,
-        select: { media: { select: { url: true, alt: true } } },
+        select: {
+          media: {
+            select: {
+              url: true,
+              alt: true,
+              isStandIn: true,
+              attribution: true,
+            },
+          },
+        },
       },
       _count: {
         select: {
@@ -137,7 +166,14 @@ export async function getEstateDetail(slug: string) {
         orderBy: { position: "asc" },
         select: {
           media: {
-            select: { url: true, alt: true, width: true, height: true },
+            select: {
+              url: true,
+              alt: true,
+              width: true,
+              height: true,
+              isStandIn: true,
+              attribution: true,
+            },
           },
         },
       },
@@ -156,7 +192,9 @@ export async function getArticles() {
       excerpt: true,
       category: true,
       publishedAt: true,
-      coverImage: { select: { url: true, alt: true } },
+      coverImage: {
+        select: { url: true, alt: true, isStandIn: true, attribution: true },
+      },
     },
   });
 }
@@ -180,7 +218,14 @@ export async function getArticle(slug: string) {
       category: true,
       publishedAt: true,
       coverImage: {
-        select: { url: true, alt: true, width: true, height: true },
+        select: {
+          url: true,
+          alt: true,
+          width: true,
+          height: true,
+          isStandIn: true,
+          attribution: true,
+        },
       },
     },
   });

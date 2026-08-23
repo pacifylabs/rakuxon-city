@@ -17,12 +17,28 @@ import {
   getTestimonials,
 } from "@/lib/content";
 import { getLaneCounts, getSpotlightListings } from "@/lib/listings";
+import { getPlacement } from "@/lib/media";
 
-export const metadata: Metadata = {
-  title: "Rakuxon City — land and homes, with the papers in order",
-  description:
-    "Serviced plots and completed homes across Lagos, Ogun and the FCT. Every listing shows its title type and documentation before it shows a price.",
-};
+const description =
+  "Serviced plots and completed homes across Lagos, Ogun and the FCT. Every listing shows its title type and documentation before it shows a price.";
+
+/** The share image is resolved from the `site.ogImage` slot, so it is editable. */
+export async function generateMetadata(): Promise<Metadata> {
+  const og = await getPlacement("site.ogImage");
+
+  return {
+    title: "Rakuxon City — land and homes, with the papers in order",
+    description,
+    openGraph: {
+      title: "Rakuxon City",
+      description,
+      type: "website",
+      images: og
+        ? [{ url: og.url, width: og.width, height: og.height, alt: og.alt }]
+        : undefined,
+    },
+  };
+}
 
 /**
  * The landing page, per 01_SITE_ARCHITECTURE.md §5.1 and the reference layout.

@@ -5,7 +5,7 @@ import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { formatMonthYear } from "@/lib/format";
-import { isPlaceholder } from "@/lib/media";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 import type { ArticleCategory } from "@/generated/prisma/enums";
 
 type Article = {
@@ -14,7 +14,12 @@ type Article = {
   excerpt: string;
   category: ArticleCategory;
   publishedAt: Date | null;
-  coverImage: { url: string; alt: string } | null;
+  coverImage: {
+    url: string;
+    alt: string;
+    isStandIn: boolean;
+    attribution: string | null;
+  } | null;
 };
 
 const categoryLabels: Record<ArticleCategory, string> = {
@@ -62,12 +67,7 @@ export function ResourcesTeaser({ articles }: { articles: Article[] }) {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    {article.coverImage &&
-                    isPlaceholder(article.coverImage.url) ? (
-                      <p className="absolute bottom-3 left-3 rounded-full bg-canvas/85 px-3 py-1 text-caption text-ink-muted">
-                        Photography pending
-                      </p>
-                    ) : null}
+                    <StandInLabel show={Boolean(article.coverImage?.isStandIn)} attribution={article.coverImage?.attribution} />
                   </div>
 
                   <div className="mt-6 flex gap-6">

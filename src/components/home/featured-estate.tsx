@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowGlyph, ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
-import { isPlaceholder } from "@/lib/media";
+import { StandInLabel } from "@/components/ui/stand-in-label";
 
 type Estate = {
   slug: string;
@@ -11,7 +11,14 @@ type Estate = {
   state: string;
   description: string;
   listingCount: number;
-  image: { url: string; alt: string; width: number; height: number } | null;
+  image: {
+    url: string;
+    alt: string;
+    width: number;
+    height: number;
+    isStandIn: boolean;
+    attribution: string | null;
+  } | null;
 };
 
 /**
@@ -55,11 +62,7 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 </span>
               </figcaption>
 
-              {lead.image && isPlaceholder(lead.image.url) ? (
-                <p className="absolute bottom-3 left-3 rounded-full bg-canvas/85 px-3 py-1 text-caption text-ink-muted">
-                  Photography pending
-                </p>
-              ) : null}
+              <StandInLabel show={Boolean(lead.image?.isStandIn)} attribution={lead.image?.attribution} />
             </figure>
 
             {/* Elevation 1 of 2 — the callout overlapping the hero imagery. */}

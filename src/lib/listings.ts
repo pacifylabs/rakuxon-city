@@ -26,7 +26,16 @@ const listingCardSelect = {
   media: {
     orderBy: { position: "asc" },
     take: 1,
-    select: { media: { select: { url: true, alt: true } } },
+    select: {
+      media: {
+        select: {
+          url: true,
+          alt: true,
+          isStandIn: true,
+          attribution: true,
+        },
+      },
+    },
   },
   landDetail: { select: { plotSize: true, plotUnit: true, titleType: true } },
   homeDetail: { select: { bedrooms: true, bathrooms: true, buildStage: true } },
@@ -42,7 +51,14 @@ type ListingCardRow = {
   price: { toString(): string } | null;
   priceOnRequest: boolean;
   status: ListingStatus;
-  media: { media: { url: string; alt: string } }[];
+  media: {
+    media: {
+      url: string;
+      alt: string;
+      isStandIn: boolean;
+      attribution: string | null;
+    };
+  }[];
   landDetail: {
     plotSize: { toString(): string };
     plotUnit: ListingCardData["land"] extends null

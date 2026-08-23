@@ -17,6 +17,8 @@
  */
 
 import "dotenv/config";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { randomBytes, scryptSync } from "node:crypto";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
@@ -71,11 +73,52 @@ function placeholder(
     ...dimensions,
     mimeType: "image/png",
     sizeBytes: 6000,
+    isStandIn: true,
+  };
+}
+
+/**
+ * Openly-licensed Nigerian terrain photography, standing in for land listings
+ * until the client's own photographs arrive. See scripts/fetch_photography.py.
+ *
+ * Still stand-ins: they are real photographs, but not of the actual plot, so
+ * they carry the same `isStandIn` flag and the same visible label. The
+ * attribution is stored on the row because CC BY requires it and a credit that
+ * lives only in a script is a credit waiting to be lost.
+ */
+const photography: {
+  name: string;
+  file: string;
+  width: number;
+  height: number;
+  alt: string;
+  attribution: string;
+  sourceUrl: string;
+}[] = JSON.parse(
+  readFileSync(
+    join(process.cwd(), "public", "images", "photography", "manifest.json"),
+    "utf8",
+  ),
+);
+
+function terrainPhoto(index: number) {
+  const item = photography[index % photography.length];
+  return {
+    url: item.file,
+    alt: item.alt,
+    width: item.width,
+    height: item.height,
+    mimeType: "image/jpeg",
+    sizeBytes: 120_000,
+    isStandIn: true,
+    attribution: item.attribution,
+    sourceUrl: item.sourceUrl,
   };
 }
 
 async function clear() {
   // Order matters: children before parents, and the join tables before both.
+  await prisma.mediaPlacement.deleteMany();
   await prisma.internalNote.deleteMany();
   await prisma.enquiry.deleteMany();
   await prisma.investorEnquiry.deleteMany();
@@ -136,23 +179,77 @@ async function main() {
   // photography is a data change rather than a code change.
   // -------------------------------------------------------------------------
 
-  await prisma.media.createMany({
+  const hero = await prisma.media.create({
+    data: {
+      ...placeholder("hero-estate", "hero"),
+      alt: "Wide establishing shot across a Rakuxon City estate",
+    },
+  });
+
+  const collage = await Promise.all(
+    [
+      { name: "collage-1", ratio: "portrait" as const, alt: "Plot boundary and access road" },
+      { name: "collage-2", ratio: "card" as const, alt: "Completed home exterior" },
+      { name: "collage-3", ratio: "portrait" as const, alt: "Estate street view" },
+    ].map((item) =>
+      prisma.media.create({
+        data: { ...placeholder(item.name, item.ratio), alt: item.alt },
+      }),
+    ),
+  );
+
+  // The logo is the client's own artwork, not a stand-in.
+  const logo = await prisma.media.create({
+    data: {
+      url: "/logo.png",
+      alt: "Rakuxon City",
+      width: 2172,
+      height: 724,
+      mimeType: "image/png",
+      sizeBytes: 502_823,
+      isStandIn: false,
+    },
+  });
+
+  // Named slots, so page furniture is editable from the admin without anyone
+  // having to match on a filename. Phase 7 renders this table as a screen.
+  await prisma.mediaPlacement.createMany({
     data: [
       {
-        ...placeholder("hero-estate", "hero"),
-        alt: "Wide establishing shot across a Rakuxon City estate — photography pending",
+        key: "site.logo",
+        mediaId: logo.id,
+        label: "Site logo",
+        guidance: "Wide mark, transparent background. Renders at 32px tall in the header.",
       },
       {
-        ...placeholder("collage-1", "portrait"),
-        alt: "Plot boundary and access road — photography pending",
+        key: "site.ogImage",
+        mediaId: hero.id,
+        label: "Social share image",
+        guidance: "16:9. Shown when a link to the site is shared.",
       },
       {
-        ...placeholder("collage-2", "card"),
-        alt: "Completed home exterior — photography pending",
+        key: "homepage.hero",
+        mediaId: hero.id,
+        label: "Homepage hero image",
+        guidance: "16:9. A wide establishing shot across an estate.",
       },
       {
-        ...placeholder("collage-3", "portrait"),
-        alt: "Estate street view — photography pending",
+        key: "homepage.collage.1",
+        mediaId: collage[0].id,
+        label: "FAQ collage — left",
+        guidance: "3:4 portrait. Plot boundary and access road.",
+      },
+      {
+        key: "homepage.collage.2",
+        mediaId: collage[1].id,
+        label: "FAQ collage — centre",
+        guidance: "4:3. A completed home exterior.",
+      },
+      {
+        key: "homepage.collage.3",
+        mediaId: collage[2].id,
+        label: "FAQ collage — right",
+        guidance: "3:4 portrait. An estate street view.",
       },
     ],
   });
@@ -182,7 +279,7 @@ async function main() {
         "Recreation park",
       ],
       image: "estate-emerald-ridge",
-      alt: "Aerial view of Emerald Ridge Estate showing the completed road network and plot boundaries — photography pending",
+      alt: "Aerial view of Emerald Ridge Estate showing the completed road network and plot boundaries",
     },
     {
       slug: "cornerstone-gardens",
@@ -202,7 +299,7 @@ async function main() {
         "Green buffer zone",
       ],
       image: "estate-cornerstone-gardens",
-      alt: "Wide establishing shot of Cornerstone Gardens showing terrain and access road — photography pending",
+      alt: "Wide establishing shot of Cornerstone Gardens showing terrain and access road",
     },
     {
       slug: "sabon-lugbe-court",
@@ -222,7 +319,7 @@ async function main() {
         "Children's play area",
       ],
       image: "estate-sabon-lugbe-court",
-      alt: "Street view within Sabon Lugbe Court showing delivered units — photography pending",
+      alt: "Street view within Sabon Lugbe Court showing delivered units",
     },
   ];
 
@@ -316,7 +413,7 @@ async function main() {
         notes: "Allocation on completion of the final instalment.",
       },
       image: "land-01",
-      alt: "Wide establishing shot of Plot A14 showing boundary markers and the tarred access road — photography pending",
+      alt: "Wide establishing shot of Plot A14 showing boundary markers and the tarred access road",
     },
     {
       reference: "RXC-LND-0002",
@@ -342,7 +439,7 @@ async function main() {
         "Estate layout approval",
       ],
       image: "land-02",
-      alt: "Corner block showing both road frontages and boundary extent — photography pending",
+      alt: "Corner block showing both road frontages and boundary extent",
     },
     {
       reference: "RXC-LND-0003",
@@ -372,7 +469,7 @@ async function main() {
         frequency: "monthly",
       },
       image: "land-03",
-      alt: "Plot B07 seen from the access road with the green buffer behind — photography pending",
+      alt: "Plot B07 seen from the access road with the green buffer behind",
     },
     {
       reference: "RXC-LND-0004",
@@ -393,7 +490,7 @@ async function main() {
       roadAccess: "Graded road, tarring scheduled",
       documents: ["Gazette publication", "Registered survey plan"],
       image: "land-04",
-      alt: "Plot D22 showing boundary pillars and neighbouring development — photography pending",
+      alt: "Plot D22 showing boundary pillars and neighbouring development",
     },
     {
       reference: "RXC-LND-0005",
@@ -424,7 +521,7 @@ async function main() {
         notes: "No interest applied within the plan window.",
       },
       image: "land-05",
-      alt: "Plot 14 with boundary markers and surrounding graded road — photography pending",
+      alt: "Plot 14 with boundary markers and surrounding graded road",
     },
     {
       reference: "RXC-LND-0006",
@@ -450,7 +547,7 @@ async function main() {
         frequency: "monthly",
       },
       image: "land-06",
-      alt: "Plot 31 showing terrain and incline toward the estate boundary — photography pending",
+      alt: "Plot 31 showing terrain and incline toward the estate boundary",
     },
     {
       reference: "RXC-LND-0007",
@@ -471,7 +568,7 @@ async function main() {
       roadAccess: "Graded road, unpaved",
       documents: ["Registered survey plan", "Purchase receipt"],
       image: "land-07",
-      alt: "Plot 47 at the northern estate boundary showing the unpaved approach — photography pending",
+      alt: "Plot 47 at the northern estate boundary showing the unpaved approach",
     },
     {
       reference: "RXC-LND-0008",
@@ -492,7 +589,7 @@ async function main() {
       roadAccess: "Graded estate road",
       documents: ["Gazette publication", "Registered survey plan"],
       image: "land-08",
-      alt: "Plot 09 as photographed before sale — photography pending",
+      alt: "Plot 09 as photographed before sale",
     },
     {
       reference: "RXC-LND-0009",
@@ -519,7 +616,7 @@ async function main() {
         "Service connection certificate",
       ],
       image: "land-09",
-      alt: "Plot N03 within the delivered estate showing paved road and service points — photography pending",
+      alt: "Plot N03 within the delivered estate showing paved road and service points",
     },
     {
       reference: "RXC-LND-0010",
@@ -541,7 +638,7 @@ async function main() {
       roadAccess: "Paved road frontage",
       documents: ["Governor's consent", "Registered survey plan"],
       image: "land-10",
-      alt: "The two-plot parcel photographed across its full frontage — photography pending",
+      alt: "The two-plot parcel photographed across its full frontage",
     },
     {
       reference: "RXC-LND-0011",
@@ -562,7 +659,7 @@ async function main() {
       roadAccess: "Paved road frontage",
       documents: ["Deed of assignment"],
       image: "land-11",
-      alt: "Plot N07 pending documentation review — photography pending",
+      alt: "Plot N07 pending documentation review",
     },
     {
       reference: "RXC-LND-0012",
@@ -587,13 +684,16 @@ async function main() {
         "Deed of assignment",
       ],
       image: "land-12",
-      alt: "Plot A02 as photographed before sale — photography pending",
+      alt: "Plot A02 as photographed before sale",
     },
   ];
 
-  for (const seed of landSeeds) {
+  for (const [landIndex, seed] of landSeeds.entries()) {
+    // Land gets real Nigerian terrain photography; homes keep the designed
+    // placeholders, because no usable Nigerian residential exteriors exist in
+    // the open-licensed pool. See TODO.md.
     const media = await prisma.media.create({
-      data: { ...placeholder(seed.image, "card"), alt: seed.alt },
+      data: terrainPhoto(landIndex),
     });
 
     const listing = await prisma.listing.create({
@@ -710,7 +810,7 @@ async function main() {
         "Parking for three cars",
       ],
       image: "home-01",
-      alt: "Exterior of the completed four-bedroom detached house from the street — photography pending",
+      alt: "Exterior of the completed four-bedroom detached house from the street",
     },
     {
       reference: "RXC-HME-0002",
@@ -745,7 +845,7 @@ async function main() {
         notes: "Balance due at handover.",
       },
       image: "home-02",
-      alt: "Terrace block under construction at roofing stage — photography pending",
+      alt: "Terrace block under construction at roofing stage",
     },
     {
       reference: "RXC-HME-0003",
@@ -776,7 +876,7 @@ async function main() {
         "Private garden",
       ],
       image: "home-03",
-      alt: "Artist's impression of the five-bedroom detached house — photography pending",
+      alt: "Artist's impression of the five-bedroom detached house",
     },
     {
       reference: "RXC-HME-0004",
@@ -810,7 +910,7 @@ async function main() {
         frequency: "monthly",
       },
       image: "home-04",
-      alt: "Exterior of the completed three-bedroom bungalow — photography pending",
+      alt: "Exterior of the completed three-bedroom bungalow",
     },
     {
       reference: "RXC-HME-0005",
@@ -843,7 +943,7 @@ async function main() {
         frequency: "monthly",
       },
       image: "home-05",
-      alt: "Semi-detached pair under construction at block stage — photography pending",
+      alt: "Semi-detached pair under construction at block stage",
     },
     {
       reference: "RXC-HME-0006",
@@ -872,7 +972,7 @@ async function main() {
         "Standby power",
       ],
       image: "home-06",
-      alt: "Apartment block exterior within the delivered court — photography pending",
+      alt: "Apartment block exterior within the delivered court",
     },
     {
       reference: "RXC-HME-0007",
@@ -908,7 +1008,7 @@ async function main() {
         notes: "Balance due at handover.",
       },
       image: "home-07",
-      alt: "Artist's impression of the four-bedroom duplex on the corner plot — photography pending",
+      alt: "Artist's impression of the four-bedroom duplex on the corner plot",
     },
     {
       reference: "RXC-HME-0008",
@@ -932,7 +1032,7 @@ async function main() {
         "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
       features: ["All rooms en-suite", "Private terrace", "Estate management"],
       image: "home-08",
-      alt: "Terrace unit as photographed before sale — photography pending",
+      alt: "Terrace unit as photographed before sale",
     },
   ];
 
@@ -1028,7 +1128,7 @@ async function main() {
     const cover = await prisma.media.create({
       data: {
         ...placeholder(seed.image, "card"),
-        alt: `Cover image for "${seed.title}" — photography pending`,
+        alt: `Cover image for "${seed.title}"`,
       },
     });
 
