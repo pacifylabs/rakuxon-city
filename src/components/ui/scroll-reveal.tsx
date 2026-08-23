@@ -7,9 +7,15 @@ import { cn } from "@/lib/cn";
  * 04_DESIGN_SYSTEM.md §9 — fade and a 12px rise as an element enters view,
  * 400ms ease-out, staggered across a grid.
  *
- * Anyone who has asked for reduced motion gets the finished state immediately,
- * never a fade they did not consent to. Stillness is part of the credibility
- * here, so this is the only motion on the page beyond hover and the carousels.
+ * The hidden state is expressed in CSS, gated on `[data-js="true"]` which the
+ * root layout sets before paint. That matters: hiding on the server and
+ * revealing from an observer means anyone without JavaScript — or any tool that
+ * does not run it — gets a page of invisible content. The markup is visible by
+ * default and only JavaScript takes it away, never the other way round.
+ *
+ * Reduced motion is handled in the same rule, so anyone who has asked for
+ * stillness sees the finished state immediately rather than a fade they did not
+ * consent to.
  */
 export function ScrollReveal({
   children,
@@ -27,8 +33,6 @@ export function ScrollReveal({
     const element = ref.current;
     if (!element) return;
 
-    // Reduced motion needs no branch here: the hidden state is expressed only
-    // through motion-safe utilities, so it never applies in the first place.
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -49,13 +53,7 @@ export function ScrollReveal({
     <div
       ref={ref}
       style={{ transitionDelay: revealed ? `${delayMs}ms` : "0ms" }}
-      className={cn(
-        "motion-safe:transition-[opacity,transform] motion-safe:duration-400 motion-safe:ease-out",
-        revealed
-          ? "translate-y-0 opacity-100"
-          : "motion-safe:translate-y-3 motion-safe:opacity-0",
-        className,
-      )}
+      className={cn("reveal", revealed && "is-revealed", className)}
     >
       {children}
     </div>

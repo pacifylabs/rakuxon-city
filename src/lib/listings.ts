@@ -2,6 +2,12 @@ import "server-only";
 import { db } from "@/lib/db";
 import type { ListingCardData } from "@/components/listings/listing-card";
 import { ListingStatus, ListingType } from "@/generated/prisma/enums";
+import {
+  LISTINGS_PER_PAGE,
+  buildListingOrderBy,
+  buildListingWhere,
+  type ListingFilters,
+} from "@/lib/listing-query";
 
 /**
  * The shape every listing card needs, selected in one place so a card rendered
@@ -164,4 +170,174 @@ export async function getSampleListings(take = 6): Promise<ListingCardData[]> {
   ]);
 
   return [...land, ...homes].map(toCard);
+}
+
+/**
+ * A page of listings for a hub, filtered and sorted entirely in the database.
+ * The where/orderBy come from lib/listing-query, so price-on-request behaves
+ * identically here, on the estate pages, and anywhere else that lists stock.
+ */
+export async function getListingPage(
+  type: ListingType,
+  filters: ListingFilters,
+): Promise<{
+  listings: ListingCardData[];
+  total: number;
+  page: number;
+  pageCount: number;
+}> {
+  const where = buildListingWhere(type, filters);
+  const orderBy = buildListingOrderBy(filters.sort);
+
+  const [total, rows] = await Promise.all([
+    db.listing.count({ where }),
+    db.listing.findMany({
+      where,
+      orderBy: [...orderBy],
+      select: listingCardSelect,
+      skip: (filters.page - 1) * LISTINGS_PER_PAGE,
+      take: LISTINGS_PER_PAGE,
+    }),
+  ]);
+
+  return {
+    listings: rows.map(toCard),
+    total,
+    page: filters.page,
+    pageCount: Math.max(1, Math.ceil(total / LISTINGS_PER_PAGE)),
+  };
+}
+
+/**
+ * Filter options built from stock that actually exists. Offering a state or an
+ * estate with nothing in it produces an empty result the visitor blames on the
+ * site rather than on the inventory.
+ */
+export async function getFilterOptions(type: ListingType) {
+  const [states, estates] = await Promise.all([
+    db.listing.findMany({
+      where: { type, status: { not: ListingStatus.DRAFT } },
+      distinct: ["state"],
+      select: { state: true },
+      orderBy: { state: "asc" },
+    }),
+    db.estate.findMany({
+      where: {
+        listings: { some: { type, status: { not: ListingStatus.DRAFT } } },
+      },
+      select: { slug: true, name: true },
+      orderBy: { name: "asc" },
+    }),
+  ]);
+
+  return { states: states.map((row) => row.state), estates };
+}
+
+/** Slugs for `generateStaticParams`. Drafts are excluded, so they cannot be prerendered. */
+export async function getListingSlugs(type: ListingType): Promise<string[]> {
+  const rows = await db.listing.findMany({
+    where: { type, status: { not: ListingStatus.DRAFT } },
+    select: { slug: true },
+  });
+
+  return rows.map((row) => row.slug);
+}
+
+/** FR-1.10 — three related listings from the same estate, falling back to location. */
+export async function getRelatedListings(
+  listingId: string,
+  type: ListingType,
+  estateId: string | null,
+  location: string,
+): Promise<ListingCardData[]> {
+  const shared = {
+    id: { not: listingId },
+    type,
+    status: { not: ListingStatus.DRAFT },
+  };
+
+  const fromEstate = estateId
+    ? await db.listing.findMany({
+        where: { ...shared, estateId },
+        select: listingCardSelect,
+        orderBy: [{ status: "asc" }, { publishedAt: "desc" }],
+        take: 3,
+      })
+    : [];
+
+  if (fromEstate.length === 3) return fromEstate.map(toCard);
+
+  const fromLocation = await db.listing.findMany({
+    where: {
+      ...shared,
+      location,
+      ...(estateId ? { NOT: { estateId } } : {}),
+    },
+    select: listingCardSelect,
+    orderBy: [{ status: "asc" }, { publishedAt: "desc" }],
+    take: 3 - fromEstate.length,
+  });
+
+  return [...fromEstate, ...fromLocation].map(toCard);
+}
+
+/** Everything a detail page needs, in one query. */
+export async function getListingDetail(slug: string) {
+  return db.listing.findFirst({
+    where: { slug, status: { not: ListingStatus.DRAFT } },
+    select: {
+      id: true,
+      slug: true,
+      reference: true,
+      type: true,
+      title: true,
+      description: true,
+      location: true,
+      state: true,
+      price: true,
+      priceOnRequest: true,
+      status: true,
+      paymentPlanAvailable: true,
+      paymentPlanTerms: true,
+      estateId: true,
+      estate: {
+        select: { slug: true, name: true, location: true, state: true },
+      },
+      media: {
+        orderBy: { position: "asc" },
+        select: {
+          media: {
+            select: { url: true, alt: true, width: true, height: true },
+          },
+        },
+      },
+      landDetail: {
+        select: {
+          plotSize: true,
+          plotUnit: true,
+          titleType: true,
+          surveyNumber: true,
+          topography: true,
+          roadAccess: true,
+          documents: { orderBy: { position: "asc" }, select: { label: true } },
+        },
+      },
+      homeDetail: {
+        select: {
+          bedrooms: true,
+          bathrooms: true,
+          houseType: true,
+          buildStage: true,
+          handoverDate: true,
+          builtArea: true,
+          landArea: true,
+          finishingSpec: true,
+          features: true,
+          floorPlan: {
+            select: { url: true, alt: true, width: true, height: true },
+          },
+        },
+      },
+    },
+  });
 }

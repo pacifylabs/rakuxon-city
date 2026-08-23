@@ -38,7 +38,18 @@
   --color-status-available-bg: #e7efe8;
   --color-status-reserved: #8a6a1f;
   --color-status-reserved-bg: #f6efdd;
-  --color-status-sold: #6b6f69;
+  /*
+   * DEVIATION from design system §2, which specifies #6B6F69.
+   *
+   * Same conflict as ink-muted above, and narrower: #6B6F69 on its own
+   * background gives 4.42:1 against the 4.5:1 AA floor. This pair carries the
+   * Sold badge and, more importantly, the survey-only title ribbon — the one
+   * place §7 insists on stating a weak documentation position plainly. It
+   * should not be the hardest text on the site to read.
+   *
+   * #686C66 gives 4.62:1. Two shades darker, same neutral.
+   */
+  --color-status-sold: #686c66;
   --color-status-sold-bg: #edefeb;
 
   /* §6 Forms — inline error text */
@@ -115,6 +126,26 @@
   h6 {
     font-family: var(--font-display);
     font-weight: 400;
+  }
+
+  /*
+   * §9 scroll reveal. The hidden state is applied only when JavaScript is
+   * running (`data-js`) and only when motion is welcome, so the server-rendered
+   * markup is visible to anyone the observer never reaches.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    :root[data-js="true"] .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity 400ms ease-out,
+        transform 400ms ease-out;
+    }
+
+    :root[data-js="true"] .reveal.is-revealed {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   /* §3 — prices, areas and counts align in columns. */
