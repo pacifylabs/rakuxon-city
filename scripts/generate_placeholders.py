@@ -37,11 +37,13 @@ TONES = [
 
 HAIRLINE = (238, 242, 236)
 
+# Half the dimensions a photograph would need. These are flat tonal fields with
+# no detail to lose, and the hero frame is the page's LCP element.
 RATIOS = {
-    "hero": (2000, 1125),      # 16:9
-    "card": (1200, 900),       # 4:3
-    "portrait": (900, 1200),   # 3:4
-    "wide": (1600, 1000),      # estate feature
+    "hero": (1200, 675),     # 16:9
+    "card": (800, 600),      # 4:3
+    "portrait": (600, 800),  # 3:4
+    "wide": (1000, 625),     # estate feature
 }
 
 
@@ -58,18 +60,31 @@ def render(name: str, ratio: str) -> pathlib.Path:
     image = Image.new("RGB", (width, height), base)
     draw = ImageDraw.Draw(image)
 
-    # A single soft horizon, placed off-centre. Enough to read as ground and sky
-    # without pretending to be a picture of anything.
     digest = hashlib.sha256(name.encode()).digest()
-    horizon = int(height * (0.58 + (digest[1] % 14) / 100))
+
+    # A horizon placed off-centre, then two shallower bands below it. A single
+    # flat field reads as a broken image once it is 760px wide; the banding gives
+    # a large frame enough structure to read as deliberate without pretending to
+    # be a picture of anything.
+    horizon = int(height * (0.46 + (digest[1] % 14) / 100))
     draw.rectangle([0, horizon, width, height], fill=band)
 
-    # Two faint verticals echoing the container column rules in §4.
-    for fraction in (0.18, 0.82):
-        x = int(width * fraction)
+    mid = tuple(round((b * 2 + t) / 3) for b, t in zip(band, base))
+    lower = tuple(max(0, round(c * 0.94)) for c in band)
+    first = horizon + int((height - horizon) * 0.34)
+    second = horizon + int((height - horizon) * 0.68)
+    draw.rectangle([0, horizon, width, first], fill=mid)
+    draw.rectangle([0, second, width, height], fill=lower)
+
+    # Faint verticals echoing the container column rules in §4, offset per image
+    # so a grid of placeholders does not line up into a single stripe.
+    offset = (digest[2] % 12) / 100
+    for fraction in (0.18 + offset, 0.62 + offset):
+        x = int(width * min(fraction, 0.94))
         draw.line([(x, 0), (x, height)], fill=HAIRLINE, width=2)
 
-    draw.line([(0, horizon), (width, horizon)], fill=HAIRLINE, width=2)
+    for y in (horizon, first, second):
+        draw.line([(0, y), (width, y)], fill=HAIRLINE, width=2)
 
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / f"{name}.png"

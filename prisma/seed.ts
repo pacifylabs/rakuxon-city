@@ -60,10 +60,10 @@ function placeholder(
   ratio: "hero" | "card" | "portrait" | "wide",
 ) {
   const dimensions = {
-    hero: { width: 2000, height: 1125 },
-    card: { width: 1200, height: 900 },
-    portrait: { width: 900, height: 1200 },
-    wide: { width: 1600, height: 1000 },
+    hero: { width: 1200, height: 675 },
+    card: { width: 800, height: 600 },
+    portrait: { width: 600, height: 800 },
+    wide: { width: 1000, height: 625 },
   }[ratio];
 
   return {
@@ -129,6 +129,33 @@ async function main() {
       },
     }),
   ]);
+
+  // -------------------------------------------------------------------------
+  // Page furniture — the hero frame and the collage behind the FAQ panel.
+  // Held in the media library like everything else, so swapping in the client's
+  // photography is a data change rather than a code change.
+  // -------------------------------------------------------------------------
+
+  await prisma.media.createMany({
+    data: [
+      {
+        ...placeholder("hero-estate", "hero"),
+        alt: "Wide establishing shot across a Rakuxon City estate — photography pending",
+      },
+      {
+        ...placeholder("collage-1", "portrait"),
+        alt: "Plot boundary and access road — photography pending",
+      },
+      {
+        ...placeholder("collage-2", "card"),
+        alt: "Completed home exterior — photography pending",
+      },
+      {
+        ...placeholder("collage-3", "portrait"),
+        alt: "Estate street view — photography pending",
+      },
+    ],
+  });
 
   // -------------------------------------------------------------------------
   // Estates
