@@ -4,7 +4,7 @@
     "file": "/images/photography/land-terrain-01.jpg",
     "width": 1000,
     "height": 750,
-    "alt": "Open cultivated land in Niger State, Nigeria \u2014 representative image, not the actual plot",
+    "alt": "Open cultivated land in Niger State, Nigeria",
     "title": "Rice paddy fields, Niger State",
     "creator": "Jeremy Weate",
     "license": "CC BY 2.0",
@@ -18,7 +18,7 @@
     "file": "/images/photography/land-terrain-02.jpg",
     "width": 1000,
     "height": 750,
-    "alt": "Savanna and riverine land near Kaduna, Nigeria \u2014 representative image, not the actual plot",
+    "alt": "Savanna and riverine land near Kaduna, Nigeria",
     "title": "River Kaduna near Zunguru, savanna",
     "creator": "Mary Gillham Archive Project",
     "license": "CC BY 2.0",
@@ -32,7 +32,7 @@
     "file": "/images/photography/land-terrain-03.jpg",
     "width": 1000,
     "height": 750,
-    "alt": "Green savanna grassland with mature trees, Bosso, Nigeria \u2014 representative image, not the actual plot",
+    "alt": "Green savanna grassland with mature trees, Bosso, Nigeria",
     "title": "Cattle file through still green savanna, Bosso",
     "creator": "Mary Gillham Archive Project",
     "license": "CC BY 2.0",
@@ -40,19 +40,5 @@
     "sourceUrl": "https://www.flickr.com/photos/maryhgillham/36805588243",
     "attribution": "\"Cattle file through still green savanna, Bosso\" by Mary Gillham Archive Project, licensed under CC BY 2.0",
     "sizeBytes": 171157
-  },
-  {
-    "name": "land-terrain-04",
-    "file": "/images/photography/land-terrain-04.jpg",
-    "width": 1000,
-    "height": 750,
-    "alt": "Wooded savanna near Bauchi, Nigeria \u2014 representative image, not the actual plot",
-    "title": "Yankari Reserve, green riparian forest and savanna near Bauchi",
-    "creator": "Mary Gillham Archive Project",
-    "license": "CC BY 2.0",
-    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-    "sourceUrl": "https://www.flickr.com/photos/maryhgillham/34513851280",
-    "attribution": "\"Yankari Reserve, green riparian forest and savanna near Bauchi\" by Mary Gillham Archive Project, licensed under CC BY 2.0",
-    "sizeBytes": 170551
   }
 ]

@@ -22,7 +22,7 @@ export function StandInLabel({
   return (
     <p
       className={cn(
-        "text-caption text-ink-secondary bg-canvas/90 absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full px-3 py-1",
+        "absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full bg-canvas/90 px-3 py-1 text-caption text-ink-secondary",
         className,
       )}
       title={attribution ?? undefined}

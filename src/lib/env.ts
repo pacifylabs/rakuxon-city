@@ -14,6 +14,13 @@ const envSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
 
+  /**
+   * Public origin, e.g. https://rakuxoncity.com. Absolute URLs in metadata
+   * (og:image, canonicals) are built from it; without it Next falls back to
+   * localhost and every shared link points nowhere.
+   */
+  NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
+
   /** Phase 1 — Prisma datasource. */
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
 

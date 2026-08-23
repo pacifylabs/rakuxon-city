@@ -188,9 +188,21 @@ async function main() {
 
   const collage = await Promise.all(
     [
-      { name: "collage-1", ratio: "portrait" as const, alt: "Plot boundary and access road" },
-      { name: "collage-2", ratio: "card" as const, alt: "Completed home exterior" },
-      { name: "collage-3", ratio: "portrait" as const, alt: "Estate street view" },
+      {
+        name: "collage-1",
+        ratio: "portrait" as const,
+        alt: "Plot boundary and access road",
+      },
+      {
+        name: "collage-2",
+        ratio: "card" as const,
+        alt: "Completed home exterior",
+      },
+      {
+        name: "collage-3",
+        ratio: "portrait" as const,
+        alt: "Estate street view",
+      },
     ].map((item) =>
       prisma.media.create({
         data: { ...placeholder(item.name, item.ratio), alt: item.alt },
@@ -219,7 +231,8 @@ async function main() {
         key: "site.logo",
         mediaId: logo.id,
         label: "Site logo",
-        guidance: "Wide mark, transparent background. Renders at 32px tall in the header.",
+        guidance:
+          "Wide mark, transparent background. Renders at 32px tall in the header.",
       },
       {
         key: "site.ogImage",

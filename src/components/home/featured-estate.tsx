@@ -62,7 +62,10 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 </span>
               </figcaption>
 
-              <StandInLabel show={Boolean(lead.image?.isStandIn)} attribution={lead.image?.attribution} />
+              <StandInLabel
+                show={Boolean(lead.image?.isStandIn)}
+                attribution={lead.image?.attribution}
+              />
             </figure>
 
             {/* Elevation 1 of 2 — the callout overlapping the hero imagery. */}

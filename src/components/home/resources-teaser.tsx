@@ -67,7 +67,10 @@ export function ResourcesTeaser({ articles }: { articles: Article[] }) {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    <StandInLabel show={Boolean(article.coverImage?.isStandIn)} attribution={article.coverImage?.attribution} />
+                    <StandInLabel
+                      show={Boolean(article.coverImage?.isStandIn)}
+                      attribution={article.coverImage?.attribution}
+                    />
                   </div>
 
                   <div className="mt-6 flex gap-6">

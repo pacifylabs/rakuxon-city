@@ -11,6 +11,9 @@ NOT photographs of the actual plots, and every one renders with a visible
 "Representative image" label. Openverse carries no usable Nigerian residential
 exteriors, so homes and estates keep the designed placeholders for now.
 
+A fourth candidate (Yankari Reserve) was dropped: a leafless tree over a hazy
+plain reads as barren, which is the wrong first impression for a plot listing.
+
     python3 scripts/fetch_photography.py
 
 Output lands in public/images/photography/ with a manifest alongside it.
@@ -38,7 +41,8 @@ SOURCES = [
         "license": "CC BY 2.0",
         "license_url": "https://creativecommons.org/licenses/by/2.0/",
         "source_url": "https://www.flickr.com/photos/jeremyweate/4878740433",
-        "alt": "Open cultivated land in Niger State, Nigeria — representative image, not the actual plot",
+        "alt": "Open cultivated land in Niger State, Nigeria",
+        "bias": 0.55,
     },
     {
         "name": "land-terrain-02",
@@ -48,7 +52,8 @@ SOURCES = [
         "license": "CC BY 2.0",
         "license_url": "https://creativecommons.org/licenses/by/2.0/",
         "source_url": "https://www.flickr.com/photos/maryhgillham/34090106253",
-        "alt": "Savanna and riverine land near Kaduna, Nigeria — representative image, not the actual plot",
+        "alt": "Savanna and riverine land near Kaduna, Nigeria",
+        "bias": 0.78,
     },
     {
         "name": "land-terrain-03",
@@ -58,23 +63,22 @@ SOURCES = [
         "license": "CC BY 2.0",
         "license_url": "https://creativecommons.org/licenses/by/2.0/",
         "source_url": "https://www.flickr.com/photos/maryhgillham/36805588243",
-        "alt": "Green savanna grassland with mature trees, Bosso, Nigeria — representative image, not the actual plot",
-    },
-    {
-        "name": "land-terrain-04",
-        "url": "https://live.staticflickr.com/4199/34513851280_c99cbd5b4e_b.jpg",
-        "title": "Yankari Reserve, green riparian forest and savanna near Bauchi",
-        "creator": "Mary Gillham Archive Project",
-        "license": "CC BY 2.0",
-        "license_url": "https://creativecommons.org/licenses/by/2.0/",
-        "source_url": "https://www.flickr.com/photos/maryhgillham/34513851280",
-        "alt": "Wooded savanna near Bauchi, Nigeria — representative image, not the actual plot",
+        "alt": "Green savanna grassland with mature trees, Bosso, Nigeria",
+        "bias": 0.6,
     },
 ]
 
 
-def crop_to_ratio(image: Image.Image, size: tuple[int, int]) -> Image.Image:
-    """Centre-crop to the target aspect, then resize. Never distorts."""
+def crop_to_ratio(
+    image: Image.Image, size: tuple[int, int], vertical_bias: float = 0.5
+) -> Image.Image:
+    """Crop to the target aspect, then resize. Never distorts.
+
+    `vertical_bias` decides where the crop sits: 0.5 is centred, higher favours
+    the lower part of the frame. Landscape photographs here carry a lot of sky,
+    and design system §8 is explicit that a land buyer wants to see the edges of
+    what they are buying, not a mood. Biasing downward keeps the ground.
+    """
     target_w, target_h = size
     target_ratio = target_w / target_h
     width, height = image.size
@@ -86,7 +90,8 @@ def crop_to_ratio(image: Image.Image, size: tuple[int, int]) -> Image.Image:
         image = image.crop((left, 0, left + new_width, height))
     else:
         new_height = int(width / target_ratio)
-        top = (height - new_height) // 2
+        span = height - new_height
+        top = max(0, min(span, int(span * vertical_bias * 2)))
         image = image.crop((0, top, width, top + new_height))
 
     return image.resize(size, Image.LANCZOS)
@@ -105,7 +110,9 @@ def main() -> None:
         )
 
         with Image.open(raw) as image:
-            processed = crop_to_ratio(image.convert("RGB"), CARD)
+            processed = crop_to_ratio(
+                image.convert("RGB"), CARD, source.get("bias", 0.5)
+            )
             path = OUT / f"{source['name']}.jpg"
             processed.save(path, "JPEG", quality=82, optimize=True, progressive=True)
 

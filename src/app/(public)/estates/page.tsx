@@ -59,7 +59,10 @@ export default async function EstatesPage() {
                     ) : (
                       <div className="size-full bg-accent-tint" />
                     )}
-                    <StandInLabel show={Boolean(estate.image?.isStandIn)} attribution={estate.image?.attribution} />
+                    <StandInLabel
+                      show={Boolean(estate.image?.isStandIn)}
+                      attribution={estate.image?.attribution}
+                    />
                   </div>
 
                   <div className="mt-6 flex flex-1 flex-col">

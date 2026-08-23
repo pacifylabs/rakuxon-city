@@ -72,7 +72,10 @@ export default async function ResourcesPage() {
                             ) : (
                               <div className="size-full bg-accent-tint" />
                             )}
-                            <StandInLabel show={Boolean(article.coverImage?.isStandIn)} attribution={article.coverImage?.attribution} />
+                            <StandInLabel
+                              show={Boolean(article.coverImage?.isStandIn)}
+                              attribution={article.coverImage?.attribution}
+                            />
                           </div>
 
                           <h3 className="mt-5 text-heading text-ink transition-colors group-hover:text-accent">

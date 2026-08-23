@@ -17,7 +17,11 @@ const LOGO_FALLBACK = {
   height: 724,
 };
 
-export default async function PublicLayout({ children }: { children: ReactNode }) {
+export default async function PublicLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
 
   return (

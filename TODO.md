@@ -1,6 +1,6 @@
 # Open items
 
-Everything raised during Phases 0–5 that needs a decision, real content, or work
+Everything raised during Phases 0–5 and the imagery pass that needs a decision, real content, or work
 in a later phase. Grouped by who has to act.
 
 Phase numbers refer to `docs/03_implementation_plan.md` (v3.0). Items marked
@@ -56,7 +56,21 @@ model was added with a comment saying so (`prisma/schema.prisma`).
 
 **Fold it into PRD §5, or remove it and hardcode the carousel.**
 
-### 1.4 No mapping provider has been chosen
+### 1.4 `MediaPlacement` is not in the PRD data model
+
+PRD §5 defines no concept for page furniture — the homepage hero, the FAQ
+collage, the logo and the social share image are images the site needs but no
+listing owns. They were previously found by matching on a URL prefix, which
+would have broken the first time an admin uploaded a replacement.
+
+`MediaPlacement` maps a stable key (`homepage.hero`, `site.logo`,
+`homepage.collage.1`, `site.ogImage`) to a `Media` row, with a label and
+guidance for the admin screen. Phase 7 renders it as a list of every editable
+image on the site.
+
+**Fold it into PRD §5, or propose something else.**
+
+### 1.5 No mapping provider has been chosen
 
 Architecture §7 lists a `MapEmbed`; PRD §9 names no provider. Every embed worth
 having needs an API key and sends the visitor's IP to a third party, which is an
@@ -67,7 +81,7 @@ plainly and hands off to the visitor's own map.
 
 **Choose a provider (and clear it against NDPR), or keep the hand-off.**
 
-### 1.5 No seeded estate exercises FR-2.2
+### 1.6 No seeded estate exercises FR-2.2
 
 FR-2.2 requires an estate with no available stock to still render as portfolio
 evidence. All three seeded estates currently hold available listings, so the
@@ -79,13 +93,13 @@ before restoring. But a fourth seeded estate, sold out and empty, would make it
 visible from day one the way the survey-only plot and the price-on-request
 listings are. The plan specifies three estates, so this was not added unasked.
 
-### 1.6 `/invest/enquire` is deliberately noindex
+### 1.7 `/invest/enquire` is deliberately noindex
 
 It scores 63 on Lighthouse SEO as a result. That is the flag doing its job on a
 thin gated form, not a defect — but if the client wants the page indexed, remove
 the `robots` directive in `src/app/(public)/invest/enquire/page.tsx`.
 
-### 1.7 Default hub sort is arbitrary on seeded data
+### 1.8 Default hub sort is arbitrary on seeded data
 
 Every seeded listing shares roughly the same `publishedAt`, so "newest" ordering
 is effectively random and a sold plot can lead the page. This will resolve on its
@@ -105,18 +119,46 @@ launching with invented trust figures as a **High** risk.
 The delivered-estate count is the exception: it reads from the database, because
 it can be true today.
 
-### 2.2 Photography
+### 2.2 Photography — partly filled, mostly still missing
 
-All 31 images are generated placeholders (`public/images/placeholders/`), each
-captioned "Photography pending" in the UI. Design system §8 sets the shot list:
-wide establishing shots showing boundaries and access for land, exterior first
-then interiors then floor plan for homes, dated progress sequences for estates.
+**Land listings** now carry three openly-licensed Nigerian terrain photographs
+(rice paddies in Niger State, savanna at River Kaduna, green grassland at
+Bosso), rotated across the twelve plots. All CC BY 2.0, credited in
+[`IMAGE_CREDITS.md`](IMAGE_CREDITS.md) and on the `Media` row itself.
 
-The `alt` text on every seeded `Media` row already describes the intended shot,
-so it doubles as a brief.
+**Homes, estates, the hero, the FAQ collage and article covers are still
+designed placeholders.** Three open-licensed sources were searched — Picsum,
+Wikimedia Commons and Openverse — and none carries usable Nigerian residential
+exteriors or premium estate photography. The plausible-looking alternatives were
+Kigali, Maputo, Johannesburg and Sierra Leone; passing those off as Nigerian
+estates was rejected.
 
-**On replacement:** delete `scripts/generate_placeholders.py` and
-`src/lib/media.ts`, and remove the "Photography pending" captions.
+**The fastest fix is a free Pexels or Unsplash API key** (about two minutes to
+register). That unlocks genuine African residential and land photography,
+licensed for commercial use with no attribution burden, and
+`scripts/fetch_photography.py` is already shaped to fetch, crop and credit from
+a source list.
+
+Design system §8 sets the shot list: wide establishing shots showing boundaries
+and access for land, exterior first then interiors then floor plan for homes,
+dated progress sequences for estates. The `alt` text on every seeded `Media` row
+describes the intended shot, so it doubles as a brief.
+
+Everything currently standing in is flagged `Media.isStandIn = true` and renders
+a visible **"Representative image — not the actual plot"** label. Clearing that
+flag on upload is what removes the label, one image at a time — no code change.
+
+**On full replacement:** delete `scripts/generate_placeholders.py`,
+`scripts/fetch_photography.py`, `public/images/placeholders/`,
+`public/images/photography/` and `IMAGE_CREDITS.md`.
+
+### 2.2b CC BY attribution is a live obligation
+
+The three land photographs require attribution wherever they appear. They are
+credited in `IMAGE_CREDITS.md` and carried on the `Media.attribution` column,
+surfaced as the label's tooltip. If the client wants them presented differently
+— a visible credit line, a dedicated credits page — that is a design decision,
+but the credit cannot simply be dropped while the images are in use.
 
 ### 2.3 Contact details
 
@@ -190,7 +232,13 @@ Every other public route is now built.
 
 ## 4. Engineering follow-ups
 
-### 4.1 Database is a local Docker container
+### 4.1 `NEXT_PUBLIC_SITE_URL` must be set before deploying
+
+Absolute URLs in metadata — `og:image` above all — are built from it. Unset, it
+falls back to `http://localhost:3000` and every shared link points at nothing.
+Set it to the real origin in the deployment environment.
+
+### 4.2 Database is a local Docker container
 
 `docker-compose.yml` runs `postgres:17-alpine` on port 55432. The schema and seed
 are portable — moving to Neon or Supabase is a one-line `DATABASE_URL` change —
@@ -199,7 +247,7 @@ but a hosted database is needed before anything is deployed.
 Note that the homepage and both detail routes are prerendered at build time, so
 the build itself needs database access.
 
-### 4.2 Passwords use `node:crypto` scrypt
+### 4.3 Passwords use `node:crypto` scrypt
 
 The seed hashes with scrypt rather than bcrypt or argon2, because Phase 0 said to
 install nothing for auth yet. The stored format is self-describing
@@ -207,18 +255,18 @@ install nothing for auth yet. The stored format is self-describing
 
 Seeded credentials are `ChangeMeBeforeLaunch1/2/3` — **must not survive Phase 7.**
 
-### 4.3 `/primitives` is internal
+### 4.4 `/primitives` is internal
 
 `src/app/(public)/primitives/page.tsx` carries `noindex` and exists to verify the
 design system. Delete it at the Phase 8 launch gate.
 
-### 4.4 Prisma vendored agent skills
+### 4.5 Prisma vendored agent skills
 
 `prisma init` installed nine skill directories into `.agents/skills` with
 symlinks in `.claude/skills`. Both are git-ignored; `skills-lock.json` pins them
 and `npx skills add prisma/skills` restores them.
 
-### 4.5 Do not run Prettier over `docs/`
+### 4.6 Do not run Prettier over `docs/`
 
 `docs` is in `.prettierignore`. The five specification documents are the
 client's; Prettier reflows their markdown tables and swaps emphasis markers,
