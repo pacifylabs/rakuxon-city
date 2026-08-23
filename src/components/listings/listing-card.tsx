@@ -38,6 +38,7 @@ export type ListingCardData = {
     plotSize: string | number;
     plotUnit: PlotUnit;
     titleType: TitleType;
+    additionalTitleTypes: TitleType[];
   } | null;
   home: { bedrooms: number; bathrooms: number; buildStage: BuildStage } | null;
 };
@@ -97,6 +98,7 @@ export function ListingCard({
         )}
 
         <StandInLabel
+          compact
           show={Boolean(listing.image?.isStandIn)}
           context={listing.type === "LAND" ? "plot" : "property"}
           attribution={listing.image?.attribution}
@@ -107,7 +109,10 @@ export function ListingCard({
         {/* 1 — title ribbon on land, build stage on homes */}
         <div>
           {listing.type === "LAND" && listing.land ? (
-            <TitleTypeBadge titleType={listing.land.titleType} />
+            <TitleTypeBadge
+              titleType={listing.land.titleType}
+              extraCount={listing.land.additionalTitleTypes.length}
+            />
           ) : listing.home ? (
             <BuildStageBadge buildStage={listing.home.buildStage} />
           ) : null}

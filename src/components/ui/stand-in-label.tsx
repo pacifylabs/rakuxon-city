@@ -10,11 +10,14 @@ export function StandInLabel({
   show,
   context = "generic",
   attribution,
+  /** Cards are too narrow for the qualifier — it truncated mid-word. */
+  compact = false,
   className,
 }: {
   show: boolean;
   context?: StandInContext;
   attribution?: string | null;
+  compact?: boolean;
   className?: string;
 }) {
   if (!show) return null;
@@ -22,12 +25,12 @@ export function StandInLabel({
   return (
     <p
       className={cn(
-        "absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full bg-canvas/90 px-3 py-1 text-caption text-ink-secondary",
+        "absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-full bg-canvas/90 px-3 py-1 text-caption text-ink-secondary",
         className,
       )}
       title={attribution ?? undefined}
     >
-      {standInLabel(context)}
+      {compact ? "Representative image" : standInLabel(context)}
     </p>
   );
 }

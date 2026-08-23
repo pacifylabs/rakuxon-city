@@ -89,6 +89,7 @@ export default async function PlotDetailPage({
       <TitleRibbon
         className="mt-12 lg:mt-16"
         titleType={land.titleType}
+        additionalTitleTypes={land.additionalTitleTypes}
         surveyNumber={land.surveyNumber}
         documents={land.documents}
       />

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { ListingCard } from "@/components/listings/listing-card";
+import { Pagination } from "@/components/listings/pagination";
 import { LocationBlock } from "@/components/listings/location-block";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { Gallery } from "@/components/ui/gallery";
 import { cn } from "@/lib/cn";
 import { getEstateDetail, getEstateSlugs } from "@/lib/content";
 import { getEstateListings } from "@/lib/listings";
+import { LISTINGS_PER_PAGE } from "@/lib/listing-query";
 import type { EstateStatus } from "@/generated/prisma/enums";
 
 export const revalidate = 3600;
@@ -49,11 +51,26 @@ export default async function EstateDetailPage({
 
   const { land, homes } = await getEstateListings(estate.id);
 
-  // Tab state lives in the URL rather than in component state, so a tab is
-  // shareable and the page needs no JavaScript to switch between them.
-  const requested = (await searchParams).tab;
-  const tab = requested === "homes" ? "homes" : "land";
-  const active = tab === "homes" ? homes : land;
+  // Tab and page both live in the URL rather than in component state, so a
+  // view is shareable and neither needs JavaScript to change.
+  const query = await searchParams;
+  const tab = query.tab === "homes" ? "homes" : "land";
+  const all = tab === "homes" ? homes : land;
+
+  // An estate holds at most a few dozen listings (PRD scope: 20-100 site-wide),
+  // so the set is fetched whole for accurate tab counts and paged in memory.
+  const pageCount = Math.max(1, Math.ceil(all.length / LISTINGS_PER_PAGE));
+  const page = Math.min(
+    Math.max(
+      1,
+      Number(Array.isArray(query.page) ? query.page[0] : query.page) || 1,
+    ),
+    pageCount,
+  );
+  const active = all.slice(
+    (page - 1) * LISTINGS_PER_PAGE,
+    page * LISTINGS_PER_PAGE,
+  );
 
   const images = estate.media.map((entry) => entry.media);
   const delivered = estate.status !== "ACTIVE";
@@ -173,15 +190,29 @@ export default async function EstateDetailPage({
                   and we will be in touch when that changes.
                 </p>
               ) : (
-                <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {active.map((listing) => (
-                    <ListingCard
-                      key={listing.slug}
-                      listing={listing}
-                      className="h-full"
-                    />
-                  ))}
-                </div>
+                <>
+                  <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {active.map((listing) => (
+                      <ListingCard
+                        key={listing.slug}
+                        listing={listing}
+                        className="h-full"
+                      />
+                    ))}
+                  </div>
+
+                  <Pagination
+                    page={page}
+                    pageCount={pageCount}
+                    hrefFor={(target) => {
+                      const next = new URLSearchParams();
+                      if (tab === "homes") next.set("tab", "homes");
+                      if (target > 1) next.set("page", String(target));
+                      const search = next.toString();
+                      return `/estates/${estate.slug}${search ? `?${search}` : ""}`;
+                    }}
+                  />
+                </>
               )}
             </>
           )}

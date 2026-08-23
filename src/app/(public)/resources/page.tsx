@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
+import { Pagination } from "@/components/listings/pagination";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getArticles } from "@/lib/content";
@@ -32,8 +33,28 @@ const categoryLabels: Record<ArticleCategory, string> = {
   ESTATE_LIVING: "Estate living",
 };
 
-export default async function ResourcesPage() {
-  const articles = await getArticles();
+const ARTICLES_PER_PAGE = 12;
+
+export default async function ResourcesPage({
+  searchParams,
+}: PageProps<"/resources">) {
+  const all = await getArticles();
+
+  // Paged rather than endless: the categories below stay readable, and a reader
+  // can share the page they are on.
+  const pageCount = Math.max(1, Math.ceil(all.length / ARTICLES_PER_PAGE));
+  const query = await searchParams;
+  const page = Math.min(
+    Math.max(
+      1,
+      Number(Array.isArray(query.page) ? query.page[0] : query.page) || 1,
+    ),
+    pageCount,
+  );
+  const articles = all.slice(
+    (page - 1) * ARTICLES_PER_PAGE,
+    page * ARTICLES_PER_PAGE,
+  );
 
   return (
     <Section className="pt-10 lg:pt-16">
@@ -98,6 +119,14 @@ export default async function ResourcesPage() {
             );
           })}
         </div>
+
+        <Pagination
+          page={page}
+          pageCount={pageCount}
+          hrefFor={(target) =>
+            target > 1 ? `/resources?page=${target}` : "/resources"
+          }
+        />
       </Container>
     </Section>
   );

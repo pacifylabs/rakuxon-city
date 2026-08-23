@@ -48,6 +48,24 @@ enum TitleType {
   @@map("title_type")
 }
 
+/// What a plot can actually evidence. A controlled list rather than free text,
+/// so the ribbon can render a known glyph per type, the admin picks instead of
+/// typing, and two plots holding the same document say so identically.
+enum DocumentType {
+  CERTIFICATE_OF_OCCUPANCY @map("certificate_of_occupancy")
+  GOVERNORS_CONSENT        @map("governors_consent")
+  DEED_OF_ASSIGNMENT       @map("deed_of_assignment")
+  REGISTERED_SURVEY_PLAN   @map("registered_survey_plan")
+  EXCISION_CERTIFICATE     @map("excision_certificate")
+  GAZETTE_PUBLICATION      @map("gazette_publication")
+  ESTATE_LAYOUT_APPROVAL   @map("estate_layout_approval")
+  SERVICE_CONNECTION       @map("service_connection")
+  PURCHASE_RECEIPT         @map("purchase_receipt")
+  ALLOCATION_LETTER        @map("allocation_letter")
+
+  @@map("document_type")
+}
+
 enum PlotUnit {
   SQM      @map("sqm")
   PLOTS    @map("plots")
@@ -329,13 +347,21 @@ model ListingMedia {
 }
 
 model LandDetail {
-  listingId    String    @id @map("listing_id")
-  plotSize     Decimal   @map("plot_size") @db.Decimal(12, 2)
-  plotUnit     PlotUnit  @map("plot_unit")
-  titleType    TitleType @map("title_type")
-  surveyNumber String?   @map("survey_number")
-  topography   String?
-  roadAccess   String?   @map("road_access")
+  listingId String    @id @map("listing_id")
+  plotSize  Decimal   @map("plot_size") @db.Decimal(12, 2)
+  plotUnit  PlotUnit  @map("plot_unit")
+  /// The strongest title the plot holds, and the one the card badge leads with.
+  /// Kept as a single field rather than folded into the array below so the hub
+  /// filter, the badge and the survey-only test all stay unambiguous: a plot is
+  /// weakly documented when *this* is SURVEY_ONLY, whatever else it carries.
+  titleType TitleType @map("title_type")
+
+  /// Anything else the plot holds alongside the lead — a gazetted plot that
+  /// also has a registered survey, say. Rendered in the ribbon, never on a card.
+  additionalTitleTypes TitleType[] @map("additional_title_types")
+  surveyNumber         String?     @map("survey_number")
+  topography           String?
+  roadAccess           String?     @map("road_access")
 
   listing   Listing        @relation(fields: [listingId], references: [id], onDelete: Cascade)
   documents LandDocument[]
@@ -347,11 +373,13 @@ model LandDetail {
 /// One row per document a plot can evidence. Absence is meaningful: the
 /// ribbon states what is *not* available as plainly as what is.
 model LandDocument {
-  id           String  @id @default(cuid())
-  landDetailId String  @map("land_detail_id")
-  label        String
-  mediaId      String? @map("media_id")
-  position     Int     @default(0)
+  id           String       @id @default(cuid())
+  landDetailId String       @map("land_detail_id")
+  type         DocumentType
+  /// Optional qualifier shown after the type, e.g. a reference number.
+  note         String?
+  mediaId      String?      @map("media_id")
+  position     Int          @default(0)
 
   landDetail LandDetail @relation(fields: [landDetailId], references: [listingId], onDelete: Cascade)
   media      Media?     @relation(fields: [mediaId], references: [id], onDelete: SetNull)

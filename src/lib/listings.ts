@@ -37,7 +37,14 @@ const listingCardSelect = {
       },
     },
   },
-  landDetail: { select: { plotSize: true, plotUnit: true, titleType: true } },
+  landDetail: {
+    select: {
+      plotSize: true,
+      plotUnit: true,
+      titleType: true,
+      additionalTitleTypes: true,
+    },
+  },
   homeDetail: { select: { bedrooms: true, bathrooms: true, buildStage: true } },
 } as const;
 
@@ -61,10 +68,11 @@ type ListingCardRow = {
   }[];
   landDetail: {
     plotSize: { toString(): string };
-    plotUnit: ListingCardData["land"] extends null
-      ? never
-      : NonNullable<ListingCardData["land"]>["plotUnit"];
+    plotUnit: NonNullable<ListingCardData["land"]>["plotUnit"];
     titleType: NonNullable<ListingCardData["land"]>["titleType"];
+    additionalTitleTypes: NonNullable<
+      ListingCardData["land"]
+    >["additionalTitleTypes"];
   } | null;
   homeDetail: NonNullable<ListingCardData["home"]> | null;
 };
@@ -87,6 +95,7 @@ function toCard(row: ListingCardRow): ListingCardData {
           plotSize: row.landDetail.plotSize.toString(),
           plotUnit: row.landDetail.plotUnit,
           titleType: row.landDetail.titleType,
+          additionalTitleTypes: row.landDetail.additionalTitleTypes,
         }
       : null,
     home: row.homeDetail,
@@ -332,10 +341,14 @@ export async function getListingDetail(slug: string) {
           plotSize: true,
           plotUnit: true,
           titleType: true,
+          additionalTitleTypes: true,
           surveyNumber: true,
           topography: true,
           roadAccess: true,
-          documents: { orderBy: { position: "asc" }, select: { label: true } },
+          documents: {
+            orderBy: { position: "asc" },
+            select: { type: true, note: true },
+          },
         },
       },
       homeDetail: {

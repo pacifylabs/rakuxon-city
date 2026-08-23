@@ -25,6 +25,7 @@ import { PrismaClient } from "../src/generated/prisma/client";
 import {
   ArticleCategory,
   ArticleStatus,
+  DocumentType,
   BuildStage,
   EstateStatus,
   HouseType,
@@ -383,7 +384,8 @@ async function main() {
     surveyNumber: string | null;
     topography: string;
     roadAccess: string;
-    documents: string[];
+    documents: DocumentType[];
+    additionalTitleTypes?: TitleType[];
     paymentPlan?: {
       depositPercent: number;
       durationMonths: number;
@@ -410,14 +412,15 @@ async function main() {
       plotSize: 500,
       plotUnit: PlotUnit.SQM,
       titleType: TitleType.C_OF_O,
+      additionalTitleTypes: [TitleType.DEED_OF_ASSIGNMENT],
       surveyNumber: "LS/D/LA2231",
       topography: "Dry, level, sand-filled",
       roadAccess: "Tarred road to plot boundary",
       documents: [
-        "Certificate of Occupancy",
-        "Registered survey plan",
-        "Deed of assignment",
-        "Estate layout approval",
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
       ],
       paymentPlan: {
         depositPercent: 30,
@@ -447,9 +450,9 @@ async function main() {
       topography: "Dry, level",
       roadAccess: "Double frontage, both roads tarred",
       documents: [
-        "Certificate of Occupancy",
-        "Registered survey plan",
-        "Estate layout approval",
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
       ],
       image: "land-02",
       alt: "Corner block showing both road frontages and boundary extent",
@@ -472,9 +475,9 @@ async function main() {
       topography: "Dry, gentle slope",
       roadAccess: "Tarred road, 9m right of way",
       documents: [
-        "Governor's consent",
-        "Registered survey plan",
-        "Deed of assignment",
+        DocumentType.GOVERNORS_CONSENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
       ],
       paymentPlan: {
         depositPercent: 25,
@@ -498,10 +501,14 @@ async function main() {
       plotSize: 450,
       plotUnit: PlotUnit.SQM,
       titleType: TitleType.GAZETTE,
+      additionalTitleTypes: [TitleType.EXCISION],
       surveyNumber: "LS/D/LA2271",
       topography: "Dry, level",
       roadAccess: "Graded road, tarring scheduled",
-      documents: ["Gazette publication", "Registered survey plan"],
+      documents: [
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+      ],
       image: "land-04",
       alt: "Plot D22 showing boundary pillars and neighbouring development",
     },
@@ -523,9 +530,9 @@ async function main() {
       topography: "Dry, level",
       roadAccess: "Graded estate road",
       documents: [
-        "Deed of assignment",
-        "Registered survey plan",
-        "Estate layout approval",
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.ESTATE_LAYOUT_APPROVAL,
       ],
       paymentPlan: {
         depositPercent: 20,
@@ -550,10 +557,14 @@ async function main() {
       plotSize: 464,
       plotUnit: PlotUnit.SQM,
       titleType: TitleType.EXCISION,
+      additionalTitleTypes: [TitleType.GAZETTE],
       surveyNumber: "OG/2204/2023",
       topography: "Dry, slight incline",
       roadAccess: "Graded estate road",
-      documents: ["Excision certificate", "Registered survey plan"],
+      documents: [
+        DocumentType.EXCISION_CERTIFICATE,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+      ],
       paymentPlan: {
         depositPercent: 20,
         durationMonths: 18,
@@ -579,7 +590,10 @@ async function main() {
       surveyNumber: "OG/2288/2024",
       topography: "Dry, level",
       roadAccess: "Graded road, unpaved",
-      documents: ["Registered survey plan", "Purchase receipt"],
+      documents: [
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.PURCHASE_RECEIPT,
+      ],
       image: "land-07",
       alt: "Plot 47 at the northern estate boundary showing the unpaved approach",
     },
@@ -600,7 +614,10 @@ async function main() {
       surveyNumber: "OG/2101/2023",
       topography: "Dry, level",
       roadAccess: "Graded estate road",
-      documents: ["Gazette publication", "Registered survey plan"],
+      documents: [
+        DocumentType.GAZETTE_PUBLICATION,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+      ],
       image: "land-08",
       alt: "Plot 09 as photographed before sale",
     },
@@ -623,10 +640,10 @@ async function main() {
       topography: "Dry, level",
       roadAccess: "Paved road, services at boundary",
       documents: [
-        "Certificate of Occupancy",
-        "Registered survey plan",
-        "Deed of assignment",
-        "Service connection certificate",
+        DocumentType.CERTIFICATE_OF_OCCUPANCY,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
+        DocumentType.SERVICE_CONNECTION,
       ],
       image: "land-09",
       alt: "Plot N03 within the delivered estate showing paved road and service points",
@@ -649,7 +666,10 @@ async function main() {
       surveyNumber: "FCT/ABJ/LUG/0918",
       topography: "Dry, level",
       roadAccess: "Paved road frontage",
-      documents: ["Governor's consent", "Registered survey plan"],
+      documents: [
+        DocumentType.GOVERNORS_CONSENT,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+      ],
       image: "land-10",
       alt: "The two-plot parcel photographed across its full frontage",
     },
@@ -670,7 +690,7 @@ async function main() {
       surveyNumber: null,
       topography: "Dry, level",
       roadAccess: "Paved road frontage",
-      documents: ["Deed of assignment"],
+      documents: [DocumentType.DEED_OF_ASSIGNMENT],
       image: "land-11",
       alt: "Plot N07 pending documentation review",
     },
@@ -692,9 +712,9 @@ async function main() {
       topography: "Dry, level",
       roadAccess: "Tarred road",
       documents: [
-        "Excision certificate",
-        "Registered survey plan",
-        "Deed of assignment",
+        DocumentType.EXCISION_CERTIFICATE,
+        DocumentType.REGISTERED_SURVEY_PLAN,
+        DocumentType.DEED_OF_ASSIGNMENT,
       ],
       image: "land-12",
       alt: "Plot A02 as photographed before sale",
@@ -732,12 +752,13 @@ async function main() {
             plotSize: seed.plotSize,
             plotUnit: seed.plotUnit,
             titleType: seed.titleType,
+            additionalTitleTypes: seed.additionalTitleTypes ?? [],
             surveyNumber: seed.surveyNumber,
             topography: seed.topography,
             roadAccess: seed.roadAccess,
             documents: {
-              create: seed.documents.map((label, position) => ({
-                label,
+              create: seed.documents.map((type, position) => ({
+                type,
                 position,
               })),
             },
