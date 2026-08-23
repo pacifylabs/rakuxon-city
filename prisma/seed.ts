@@ -116,7 +116,9 @@ function photo(name: string) {
  * land-terrain set — rotating over the whole manifest would put a photograph
  * of a house above a plot of land.
  */
-const terrain = photography.filter((item) => item.name.startsWith("land-terrain-"));
+const terrain = photography.filter((item) =>
+  item.name.startsWith("land-terrain-"),
+);
 
 function terrainPhoto(index: number) {
   return toMedia(terrain[index % terrain.length]);

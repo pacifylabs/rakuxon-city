@@ -119,46 +119,50 @@ launching with invented trust figures as a **High** risk.
 The delivered-estate count is the exception: it reads from the database, because
 it can be true today.
 
-### 2.2 Photography — partly filled, mostly still missing
+### 2.2 Photography — all stand-ins, none of the actual properties
 
-**Land listings** now carry three openly-licensed Nigerian terrain photographs
-(rice paddies in Niger State, savanna at River Kaduna, green grassland at
-Bosso), rotated across the twelve plots. All CC BY 2.0, credited in
-[`IMAGE_CREDITS.md`](IMAGE_CREDITS.md) and on the `Media` row itself.
+Every image on the site is now a real photograph. There are no designed
+placeholder tiles left anywhere: `scripts/generate_placeholders.py` and
+`public/images/placeholders/` are deleted.
 
-**Homes, estates, the hero, the FAQ collage and article covers are still
-designed placeholders.** Three open-licensed sources were searched — Picsum,
-Wikimedia Commons and Openverse — and none carries usable Nigerian residential
-exteriors or premium estate photography. The plausible-looking alternatives were
-Kigali, Maputo, Johannesburg and Sierra Leone; passing those off as Nigerian
-estates was rejected.
+**They are still stand-ins.** Twenty-two openly-licensed photographs cover land
+terrain, house exteriors at each build stage, estate aerials and streets, the
+hero, the FAQ collage and the article covers. Three are genuinely Nigerian
+(Niger State, Kaduna, Bosso); the rest are residential photography from
+elsewhere, because no open-licensed source carries Nigerian residential
+exteriors — Picsum, Wikimedia and Openverse were all searched.
 
-**The fastest fix is a free Pexels or Unsplash API key** (about two minutes to
-register). That unlocks genuine African residential and land photography,
-licensed for commercial use with no attribution burden, and
-`scripts/fetch_photography.py` is already shaped to fetch, crop and credit from
-a source list.
+Every one carries `Media.isStandIn = true` and renders behind a visible
+**"Representative image"** label, with the fuller *"— not the actual plot"* on
+detail pages. Clearing the flag on upload removes the label, one image at a
+time, without a code change.
 
-Design system §8 sets the shot list: wide establishing shots showing boundaries
-and access for land, exterior first then interiors then floor plan for homes,
-dated progress sequences for estates. The `alt` text on every seeded `Media` row
-describes the intended shot, so it doubles as a brief.
+**Licence constraint worth knowing.** Every image is cropped to the design
+system's ratios, which makes a derivative work. That rules out CC BY-ND and
+CC BY-SA even though Openverse returns both under its "commercial use" filter,
+so only CC BY, CC0 and Public Domain Mark are used —
+`scripts/fetch_photography.py` refuses to run against anything else. Credits are
+in [`IMAGE_CREDITS.md`](IMAGE_CREDITS.md) and on each `Media` row.
 
-Everything currently standing in is flagged `Media.isStandIn = true` and renders
-a visible **"Representative image — not the actual plot"** label. Clearing that
-flag on upload is what removes the label, one image at a time — no code change.
+Design system §8 still sets the shot list the client's own photographer should
+work to: wide establishing shots showing boundaries and access for land,
+exterior then interiors then floor plan for homes, dated progress sequences for
+estates.
 
-**On full replacement:** delete `scripts/generate_placeholders.py`,
-`scripts/fetch_photography.py`, `public/images/placeholders/`,
-`public/images/photography/` and `IMAGE_CREDITS.md`.
+**On replacement:** delete `scripts/fetch_photography.py`,
+`scripts/photography-sources.json`, `public/images/photography/` and
+`IMAGE_CREDITS.md`.
 
-### 2.2b CC BY attribution is a live obligation
+### 2.2b Image weight is now a live performance concern
 
-The three land photographs require attribution wherever they appear. They are
-credited in `IMAGE_CREDITS.md` and carried on the `Media.attribution` column,
-surfaced as the label's tooltip. If the client wants them presented differently
-— a visible credit line, a dedicated credits page — that is a design decision,
-but the credit cannot simply be dropped while the images are in use.
+The photographs cost real bytes where the flat tiles cost none. First build with
+them dropped the homepage from 92 to **61**. Recovered to **85** by shrinking
+the logo (a 2172px master was being served for a 32px-tall render, making it the
+single heaviest asset on the page), trimming card crops, and dropping JPEG
+quality to 72.
+
+The homepage still ships ~620KB of imagery. Real photography will be heavier
+again, so PRD §6's LCP target needs watching at the Phase 8 performance pass.
 
 ### 2.3 Contact details
 

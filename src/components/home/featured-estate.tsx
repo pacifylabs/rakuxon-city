@@ -62,9 +62,11 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 </span>
               </figcaption>
 
+              {/* Bottom-right: the lifted callout overlaps the bottom-left corner. */}
               <StandInLabel
                 show={Boolean(lead.image?.isStandIn)}
                 attribution={lead.image?.attribution}
+                className="right-3 bottom-3 left-auto"
               />
             </figure>
 
