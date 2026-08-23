@@ -62,7 +62,7 @@ export function Footer() {
           */}
           <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="text-eyebrow text-gold-on-deep">Contact us</p>
+              <p className="text-eyebrow text-accent-fill">Contact us</p>
               <ul className="mt-5 space-y-3">
                 <li>
                   <a
@@ -94,14 +94,14 @@ export function Footer() {
               */}
               <Link
                 href="/invest"
-                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-gold-on-deep px-5 text-body text-gold-on-deep transition-colors hover:bg-gold-on-deep/10 focus-visible:ring-2 focus-visible:ring-gold-on-deep focus-visible:outline-none"
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-accent-fill px-5 text-body text-accent-fill transition-colors hover:bg-accent-fill/10 focus-visible:ring-2 focus-visible:ring-accent-fill focus-visible:outline-none"
               >
                 Partner with us
               </Link>
             </div>
 
             <nav aria-label="Footer" className="lg:col-span-2">
-              <p className="text-eyebrow text-gold-on-deep">Explore</p>
+              <p className="text-eyebrow text-accent-fill">Explore</p>
               <ul className="mt-5 space-y-3">
                 {siteLinks.map((link) => (
                   <li key={link.href}>
@@ -117,7 +117,7 @@ export function Footer() {
             </nav>
 
             <div className="lg:col-span-2">
-              <p className="text-eyebrow text-gold-on-deep">Share with us</p>
+              <p className="text-eyebrow text-accent-fill">Share with us</p>
               <ul className="mt-5 space-y-3">
                 {socials.map((social) => (
                   <li key={social.label}>
@@ -135,13 +135,13 @@ export function Footer() {
             </div>
 
             <div className="lg:col-span-4">
-              <p className="text-eyebrow text-gold-on-deep">Newsletter</p>
+              <p className="text-eyebrow text-accent-fill">Newsletter</p>
               {/* Live-looking, and honest on press — see NewsletterSignup. */}
               <NewsletterSignup />
             </div>
           </div>
 
-          <div className="mt-16 flex flex-col gap-4 border-t border-gold-on-deep/25 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-16 flex flex-col gap-4 border-t border-accent-fill/25 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-caption text-canvas/75">
               © {new Date().getFullYear()} Rakuxon City. All rights reserved.
             </p>

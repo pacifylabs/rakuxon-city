@@ -17,6 +17,7 @@ import { VideoStructuredData } from "@/components/video/video-structured-data";
 import { env } from "@/lib/env";
 import { LISTINGS_PER_PAGE } from "@/lib/listing-query";
 import type { EstateStatus } from "@/generated/prisma/enums";
+import { BackLink } from "@/components/layout/back-link";
 
 export const revalidate = 3600;
 
@@ -91,6 +92,8 @@ export default async function EstateDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
+          <BackLink href="/estates" label="All estates" />
+
           <div className="flex flex-wrap items-center gap-3">
             <Badge
               className={

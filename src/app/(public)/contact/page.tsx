@@ -53,6 +53,39 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        {/*
+          A closing row under both columns. The form is tall and the detail
+          column short, so the section ended on a wide band of nothing — the
+          space the client marked. These are the three things people actually
+          ask after sending an enquiry.
+        */}
+        <dl className="mt-16 grid gap-8 border-t border-hairline pt-10 sm:grid-cols-3">
+          {[
+            {
+              term: "When we reply",
+              detail:
+                "Within one working day. If you have not heard from us by the second, call the number above — it means something went wrong on our side.",
+            },
+            {
+              term: "Inspections",
+              detail:
+                "Tuesday to Saturday, arranged in advance so a member of the team can walk the boundaries with you rather than hand you a map.",
+            },
+            {
+              term: "What to bring",
+              detail:
+                "Your own surveyor or lawyer, if you would like one. We would rather you verified everything than took our word for it.",
+            },
+          ].map((item) => (
+            <div key={item.term}>
+              <dt className="text-heading text-ink">{item.term}</dt>
+              <dd className="mt-3 text-body text-ink-secondary">
+                {item.detail}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </Container>
     </Section>
   );

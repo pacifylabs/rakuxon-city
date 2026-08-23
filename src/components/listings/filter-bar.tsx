@@ -544,8 +544,8 @@ function FilterPanel({
             type="button"
             onClick={apply}
             className={cn(
-              "min-h-12 flex-1 cursor-pointer rounded-full bg-accent px-5 text-body text-white transition-colors",
-              "hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
+              "min-h-12 flex-1 cursor-pointer rounded-full bg-accent-fill px-5 text-body text-deep transition-colors",
+              "hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
             )}
           >
             Show results

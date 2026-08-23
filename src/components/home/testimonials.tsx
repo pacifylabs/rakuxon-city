@@ -62,7 +62,7 @@ export function Testimonials({
                   className={cn(
                     "flex size-12 items-center justify-center rounded-full text-caption transition-colors",
                     index === active
-                      ? "bg-accent text-white"
+                      ? "bg-accent-fill text-deep"
                       : "bg-accent-tint text-accent",
                   )}
                 >

@@ -26,41 +26,57 @@
    */
   --color-ink-muted: #6b716a;
 
-  --color-accent: #3e7350;
-  --color-accent-hover: #325d41;
-  --color-accent-tint: #e7efe8;
+  /*
+   * THE ACTION COLOUR IS GOLD, and the ground is navy. Both are sampled from
+   * the logo: gold #C4933C (hue 38.4°), navy #0E254E. Sage is retired.
+   *
+   * DEVIATION from design system §11 ("no second accent colour. Sage carries
+   * everything") and §2. Instructed by the client so the site matches the brand
+   * mark it carries on every page. §11 needs amending — see TODO §1.1.
+   *
+   * Gold as an action colour has one trap, and it is the reason there are three
+   * tokens rather than one. A gold light enough to look gold is far too light
+   * to be read as text on the light canvas:
+   *
+   *   #C4933C on canvas  =  2.50   illegible
+   *   #C4933C on navy    =  5.44   fine
+   *
+   * So the family splits by job, not by taste:
+   *
+   *   --color-accent          #806028   5.23 on canvas, 5.80 on surface.
+   *                           TEXT and borders on light grounds — links, icon
+   *                           strokes, rules. Reads bronze rather than gold;
+   *                           that is what AA costs on a near-white canvas.
+   *
+   *   --color-accent-fill     #C4933C   The logo gold, used as a GROUND with
+   *                           navy text over it (5.44). This is what makes a
+   *                           button actually look gold. NEVER use it as text
+   *                           on canvas. Safe as text on navy.
+   *
+   *   --color-accent-tint     #F7ECD7   Pale wash for badges and quiet panels.
+   *                           Paired with --color-accent text: 4.95.
+   *
+   * Filled buttons therefore carry NAVY text, not white. White on #C4933C is
+   * 2.77 and fails outright — if a button ever looks wrong, that is the mistake
+   * to check for first.
+   */
+  --color-accent: #806028;
+  --color-accent-hover: #6b5021;
+  --color-accent-fill: #c4933c;
+  /* 4.56 under navy text — the darkest hover that still clears AA. */
+  --color-accent-fill-hover: #b28637;
+  --color-accent-tint: #f7ecd7;
 
   --color-hairline: #e2e7df;
-  --color-deep: #101310;
-
   /*
-   * DEVIATION from design system §11, which says "no second accent colour.
-   * Sage carries everything." Added at the client's instruction, and it
-   * settles TODO §1.1 — the supplied logo is navy and gold, so the palette was
-   * already fighting the brand mark it sits beside every page.
-   *
-   * Sampled from public/logo.png: the mark's gold is #C4933C, hue 38.4°.
-   * All three tokens hold that hue and differ only in value, so the family
-   * reads as one colour rather than three.
-   *
-   * Gold is a SECONDARY. Sage stays the action colour — buttons, links,
-   * badges, the play control. Gold marks: section rules, the active nav
-   * underline, the hero glyph, and accents on the deep footer.
-   *
-   * Which token to reach for is decided by contrast, not by taste:
-   *
-   *   --color-gold          3.10 on canvas, 3.44 on surface
-   *                         Non-text only. Clears WCAG 1.4.11's 3:1 for UI
-   *                         components and graphics. NEVER use it for text.
-   *   --color-gold-strong   4.60 on canvas, 5.11 on surface
-   *                         The text-safe one. Use wherever gold carries words.
-   *   --color-gold-on-deep  6.76 on deep
-   *                         The logo gold unmodified. Only on dark grounds —
-   *                         it is 2.50 on canvas and illegible there.
+   * The logo navy, replacing the near-black #101310. Everything the old ground
+   * carried still passes on it, with room to spare:
+   *   canvas text        13.58
+   *   white              15.07
+   *   accent-fill gold    5.44
    */
-  --color-gold: #ae8336;
-  --color-gold-strong: #8b682b;
-  --color-gold-on-deep: #c4933c;
+  --color-deep: #0e254e;
+
 
   /* §2 Status — quiet by design, they appear on every card */
   --color-status-available: #3e7350;
@@ -190,4 +206,32 @@
   .tabular {
     font-variant-numeric: tabular-nums;
   }
+}
+
+/*
+ * The hero's "moving background", done as a transform rather than a video.
+ *
+ * The client asked for motion behind the hero. A looping MP4 would have been
+ * 2–5MB against a 3G performance target this page already misses (TODO §1.16),
+ * so the motion is a 28s drift across an image the page has downloaded anyway:
+ * zero extra bytes, GPU-composited, no layout work per frame.
+ *
+ * Applied via `motion-safe:` so it never runs for someone who asked for less
+ * motion. The scale floor of 1.06 matters — at 1.0 the pan would expose the
+ * container edge.
+ */
+@keyframes hero-drift {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+}
+
+@theme {
+  --animate-hero-drift: hero-drift 28s ease-in-out infinite;
 }

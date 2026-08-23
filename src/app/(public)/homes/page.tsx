@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { ListingHub } from "@/components/listings/listing-hub";
-import { getFilterOptions, getListingPage } from "@/lib/listings";
+import {
+  getFilterOptions,
+  getListingPage,
+  getTrackSummary,
+} from "@/lib/listings";
 import {
   hasActiveFilters,
   parseListingFilters,
@@ -34,10 +38,12 @@ export default async function HomesHubPage({
 }: PageProps<"/homes">) {
   const filters = parseListingFilters(await searchParams);
 
-  const [{ listings, total, page, pageCount }, options] = await Promise.all([
-    getListingPage("HOME", filters),
-    getFilterOptions("HOME"),
-  ]);
+  const [{ listings, total, page, pageCount }, options, summary] =
+    await Promise.all([
+      getListingPage("HOME", filters),
+      getFilterOptions("HOME"),
+      getTrackSummary("HOME"),
+    ]);
 
   return (
     <ListingHub
@@ -47,6 +53,9 @@ export default async function HomesHubPage({
       supporting="Completed units, houses under construction, and off-plan builds. Each one states its build stage, its finishing specification and when it hands over."
       filters={filters}
       filtered={hasActiveFilters(filters)}
+      trackTotal={summary.total}
+      availableTotal={summary.available}
+      estateTotal={summary.estates}
       filterConfig={[
         {
           key: "bedrooms",

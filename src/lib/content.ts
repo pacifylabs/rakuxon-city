@@ -138,17 +138,39 @@ export async function getEstates() {
           },
         },
       },
-      _count: {
-        select: {
-          listings: { where: { status: "AVAILABLE" } },
-        },
+      /*
+       * The statuses, not two `_count`s. Prisma counts a relation once per
+       * query, so "available" and "all published" cannot both be `_count`
+       * entries on `listings`. Pulling the statuses gets both from one query
+       * without an N+1, and estates are few enough that the rows are trivial.
+       */
+      listings: {
+        where: { status: { not: "DRAFT" } },
+        select: { status: true },
       },
     },
   });
 
+  /*
+   * Built explicitly rather than spread.
+   *
+   * Spreading the row leaked `_count` and `media` into the return type, so this
+   * function and its snapshot twin resolved to a union of two different shapes
+   * and `listingCount` was reachable on neither. Both paths now return the same
+   * object, which is what lets lib/data/fixture.ts stand in for this one.
+   */
   return estates.map((estate) => ({
-    ...estate,
-    availableCount: estate._count.listings,
+    slug: estate.slug,
+    name: estate.name,
+    location: estate.location,
+    state: estate.state,
+    description: estate.description,
+    status: estate.status,
+    amenities: estate.amenities,
+    availableCount: estate.listings.filter(
+      (listing) => listing.status === "AVAILABLE",
+    ).length,
+    listingCount: estate.listings.length,
     image: estate.media[0]?.media ?? null,
   }));
 }

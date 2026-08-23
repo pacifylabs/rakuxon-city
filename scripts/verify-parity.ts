@@ -31,6 +31,7 @@ import {
   getListingPage,
   getListingSlugs,
   getSpotlightListings,
+  getTrackSummary,
 } from "../src/lib/listings";
 import {
   getFeaturedVideos,
@@ -48,10 +49,12 @@ import {
 import type { ListingType } from "../src/generated/prisma/enums";
 
 const failures: string[] = [];
+let checks = 0;
 
 function compare(label: string, a: unknown, b: unknown) {
   const left = JSON.stringify(a);
   const right = JSON.stringify(b);
+  checks += 1;
   const same = left === right;
   console.log(`${same ? "PASS" : "FAIL"}  ${label}`);
   if (!same) {
@@ -221,6 +224,14 @@ async function main() {
 
   for (const type of ["LAND", "HOME"] as ListingType[]) {
     compare(
+      `track summary, ${type}`,
+      await getTrackSummary(type),
+      fixture.getTrackSummary(type),
+    );
+  }
+
+  for (const type of ["LAND", "HOME"] as ListingType[]) {
+    compare(
       `filter options, ${type}`,
       await getFilterOptions(type),
       fixture.getFilterOptions(type),
@@ -307,9 +318,9 @@ async function main() {
     );
     process.exit(1);
   }
-  console.log(
-    `All ${cases.length + videoCases.length + 11} parity checks passed.`,
-  );
+  // Counted, not computed. The hand-maintained arithmetic here had already
+  // drifted two behind the assertions actually running.
+  console.log(`All ${checks} parity checks passed.`);
 }
 
 main().catch((error) => {

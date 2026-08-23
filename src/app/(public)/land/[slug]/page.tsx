@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { EnquiryPanel } from "@/components/listings/enquiry-panel";
 import { FactList } from "@/components/listings/fact-list";
 import { LocationBlock } from "@/components/listings/location-block";
+import { BuyingSteps } from "@/components/listings/buying-steps";
 import { PaymentPlan } from "@/components/listings/payment-plan";
 import { RelatedListings } from "@/components/listings/related-listings";
 import { TitleRibbon } from "@/components/listings/title-ribbon";
@@ -20,6 +21,7 @@ import {
   getRelatedListings,
 } from "@/lib/listings";
 import Link from "next/link";
+import { BackLink } from "@/components/layout/back-link";
 
 /** ISR — listings change through the admin dashboard, not on every request. */
 export const revalidate = 3600;
@@ -62,6 +64,8 @@ export default async function PlotDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
+          <BackLink href="/land" label="All plots" />
+
           <h1 className="max-w-[22ch] text-display-m text-ink">
             {listing.title}
           </h1>
@@ -152,6 +156,8 @@ export default async function PlotDetailPage({
                     <ArrowGlyph />
                   </Link>
                 ) : null}
+
+                <BuyingSteps noun="plot" className="mt-4" />
               </div>
             </div>
 

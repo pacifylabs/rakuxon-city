@@ -413,3 +413,30 @@ export async function getEstateListings(estateId: string) {
     homes: listings.filter((listing) => listing.type === ListingType.HOME),
   };
 }
+
+/**
+ * Whole-track figures for a hub heading.
+ *
+ * Deliberately NOT filtered. These sit beside the heading, above the filter
+ * chips, and a number that moved when a chip was pressed would read as part of
+ * the result set rather than as a fact about the inventory.
+ */
+export async function getTrackSummary(type: ListingType): Promise<{
+  total: number;
+  available: number;
+  estates: number;
+}> {
+  if (!hasDatabase) return fixture.getTrackSummary(type);
+
+  const [total, available, estates] = await Promise.all([
+    db.listing.count({ where: { ...publiclyVisible, type } }),
+    db.listing.count({
+      where: { ...publiclyVisible, type, status: ListingStatus.AVAILABLE },
+    }),
+    db.estate.count({
+      where: { listings: { some: { ...publiclyVisible, type } } },
+    }),
+  ]);
+
+  return { total, available, estates };
+}

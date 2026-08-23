@@ -61,11 +61,11 @@ export function NotLiveNotice({
       // a screen reader user has to be told the press did something.
       role="status"
       className={cn(
-        "rounded-control border border-gold bg-surface px-4 py-3 text-body text-ink-secondary",
+        "rounded-control border border-accent/50 bg-surface px-4 py-3 text-body text-ink-secondary",
         className,
       )}
     >
-      <span className="text-gold-strong">Not open yet.</span> Online enquiries
+      <span className="text-accent">Not open yet.</span> Online enquiries
       go live shortly. In the meantime, email{" "}
       <a
         href={mailto}

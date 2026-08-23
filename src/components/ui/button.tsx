@@ -18,11 +18,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "text-body rounded-full bg-accent px-6 py-3 text-white hover:bg-accent-hover",
+    "text-body rounded-full bg-accent-fill px-6 py-3 text-deep hover:bg-accent-fill-hover",
   secondary:
     "text-body rounded-full border border-accent bg-surface px-6 py-3 text-accent hover:bg-accent-tint",
   text: "text-body rounded-full text-accent hover:text-accent-hover",
-  icon: "size-10 shrink-0 rounded-full bg-accent text-white hover:bg-accent-hover",
+  icon: "size-10 shrink-0 rounded-full bg-accent-fill text-deep hover:bg-accent-fill-hover",
 };
 
 type ButtonProps = {

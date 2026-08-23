@@ -12,31 +12,45 @@ the Phase 8 content gate both depend on them.
 
 ## 1. Needs a decision from the client or the design owner
 
-### 1.1 Gold added as a second accent — **resolved, needs design-owner sign-off**
+### 1.1 The palette is now the logo's — **needs design-owner sign-off**
 
 `public/logo.png` is navy and gold. Design system §11 says "no second accent
-colour. Sage carries everything."
+colour. Sage carries everything." The client resolved it by instruction, in two
+steps: gold first as a restrained secondary, then — on review — **gold as the
+action colour and navy as the ground, with sage retired entirely.**
 
-The client resolved this by instruction: bring gold into the palette as a
-restrained secondary. Sage remains the action colour — buttons, links, badges,
-the video play control. Gold carries section rules, the active nav underline,
-the hero category marks, and the accents on the deep footer.
+Both values are sampled from the mark: gold `#C4933C` (hue 38.4°), navy
+`#0E254E`.
 
-Three tokens, sampled from the mark itself (`#C4933C`, hue 38.4°) and separated
-only by value, so the family reads as one colour:
+Gold as an action colour has one trap, and it is why there are three tokens:
 
-| Token | On canvas | On surface | On deep | Permitted use |
-|---|---|---|---|---|
-| `--color-gold` `#AE8336` | 3.10 | 3.44 | 5.43 | **Non-text only.** Clears WCAG 1.4.11's 3:1 for UI components and graphics |
-| `--color-gold-strong` `#8B682B` | 4.60 | 5.11 | — | Text on light grounds |
-| `--color-gold-on-deep` `#C4933C` | 2.50 | — | 6.76 | Dark grounds only — illegible on canvas |
+| Token | Value | On canvas | On surface | On navy | Permitted use |
+|---|---|---|---|---|---|
+| `--color-accent` | `#806028` | 5.23 | 5.80 | — | Text and borders on light grounds |
+| `--color-accent-fill` | `#C4933C` | 2.50 | — | 5.44 | A **ground** under navy text; text on navy. Never text on canvas |
+| `--color-accent-tint` | `#F7ECD7` | — | — | — | Pale wash; carries `--color-accent` text at 4.95 |
 
-No single value clears 4.5:1 on both the light canvas and the deep footer; that
-is why there are three rather than one. Anything introducing gold in a new place
-must pick by contrast, not by eye.
+A gold light enough to read as gold is far too light to be text on a near-white
+canvas — `#C4933C` is 2.50 there. So filled buttons carry **navy** text, not
+white: white on `#C4933C` is 2.77 and fails outright. If a gold control ever
+looks wrong, check for white text on it first.
 
-**Still a documented deviation from §11.** It needs the design owner's sign-off,
-and §11 should be amended rather than left contradicting the build.
+Navy replacing the old near-black ground had a consequence worth recording:
+navy's luminance is 0.0197 against `#101310`'s 0.0061, so a scrim over a
+photograph needs **more** opacity, not less — 70% to hold body text at AA, 65%
+fails at 4.44. At 70% navy the photograph underneath was no longer visible. The
+hero was restructured rather than tuned: copy sits on solid navy, the
+photograph occupies its own column at full strength. See the note in
+`src/components/home/hero.tsx`.
+
+Status colours are untouched. §2 defines them as a separate semantic axis, and
+green still means available.
+
+Verified: Lighthouse accessibility 100 and zero contrast failures on `/`,
+`/land` and `/contact` after the change.
+
+**Still a documented deviation from §11 and §2. §11 should be amended rather
+than left contradicting the build.**
 
 ### 1.2 Three colour tokens were darkened to meet WCAG AA
 
@@ -242,8 +256,8 @@ homepage LCP element from a text node to an image, and the cost is measured:
 
 | | Text hero | Photographic hero |
 |---|---|---|
-| Mobile performance (median of 3) | 94 | 84 |
-| LCP | ~2s | 3.6–4.4s |
+| Mobile performance (median of 3) | 94 | 89 |
+| LCP | ~2s | 3.5–4.0s |
 | Accessibility / best practices / SEO | 100 | 100 |
 | CLS | 0 | 0 |
 
@@ -276,8 +290,18 @@ The levers that would actually work:
 3. **Accept it and amend PRD §6.** Defensible if the client values the hero more
    than the target — but it should be an explicit decision, not a silent drift.
 
-**Open. Needs the client's call, since they chose the hero knowing it cost an
-LCP image.**
+A later change made the hero a three-slide carousel of estates. That cost
+nothing measurable, because only the first slide is eager — the page still
+fetches four images totalling 115KB, exactly as it did with one static hero.
+The same rule must hold for anything added there.
+
+The client also asked for a moving video background. It was not built: a looping
+MP4 runs 2–5MB and would have made this page unusable on the device it targets.
+The motion is a CSS transform on the image already downloaded — zero extra
+bytes. That trade was explicit and agreed.
+
+**Open. Needs the client's call, since they chose the photographic hero knowing
+it cost an LCP image.**
 
 ### 1.13 Which two filters lead each hub is a guess
 

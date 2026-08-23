@@ -51,28 +51,40 @@ export default async function HomePage() {
   const [
     counts,
     estates,
+    heroEstates,
     spotlight,
     testimonials,
     articles,
     collage,
     delivered,
     videos,
-    hero,
   ] = await Promise.all([
     getLaneCounts(),
     getFeaturedEstates(2),
+    getFeaturedEstates(3),
     getSpotlightListings(8),
     getTestimonials(),
     getRecentArticles(2),
     getCollageImages(),
     getDeliveredEstateCount(),
     getFeaturedVideos(4),
-    getPlacement("homepage.hero"),
   ]);
+
+  /** The estate rows, shaped for the hero. Slide order follows estate order. */
+  const heroSlides = heroEstates.map((estate) => ({
+    slug: estate.slug,
+    name: estate.name,
+    location: estate.location,
+    state: estate.state,
+    listingCount: estate.listingCount,
+    image: estate.image
+      ? { url: estate.image.url, alt: estate.image.alt }
+      : null,
+  }));
 
   return (
     <>
-      <Hero counts={counts} image={hero} />
+      <Hero counts={counts} slides={heroSlides} />
       <FeaturedEstate estates={estates} />
       <TwoLane counts={counts} />
       <TrustBand deliveredEstates={delivered} />

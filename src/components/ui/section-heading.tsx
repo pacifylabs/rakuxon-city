@@ -15,6 +15,7 @@ export function SectionHeading({
   supporting,
   action,
   note,
+  stats,
   align = "left",
   className,
 }: {
@@ -25,6 +26,15 @@ export function SectionHeading({
   action?: ReactNode;
   /** Quiet text opposite the action. */
   note?: ReactNode;
+  /**
+   * Live figures under the supporting paragraph.
+   *
+   * The supporting column is shorter than the heading beside it, which left a
+   * hole to its right on every hub — the space the client marked. Rather than
+   * pad it, the column now carries something worth reading: counts drawn from
+   * the same query that fills the grid below.
+   */
+  stats?: { label: string; value: string }[];
   align?: "left" | "right";
   className?: string;
 }) {
@@ -51,7 +61,7 @@ export function SectionHeading({
         <h2 className="text-display-l text-ink">{heading}</h2>
       </div>
 
-      {supporting || action || note ? (
+      {supporting || action || note || stats ? (
         <div className={cn("flex flex-col justify-start", supportingColumns)}>
           {supporting ? (
             <p className="max-w-[46ch] text-body text-ink-secondary">
@@ -63,7 +73,7 @@ export function SectionHeading({
             <>
               {/* Gold rather than hairline: one of the few marks §11's new secondary
                   is allowed to carry. Decorative, so no contrast floor applies. */}
-              <hr className="mt-6 border-t border-gold/40" />
+              <hr className="mt-6 border-t border-accent/40" />
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                 {action}
                 {note ? (
@@ -73,6 +83,19 @@ export function SectionHeading({
                 ) : null}
               </div>
             </>
+          ) : null}
+
+          {stats && stats.length > 0 ? (
+            <dl className="mt-8 grid grid-cols-3 gap-x-4 gap-y-2 border-t border-hairline pt-6">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <dt className="text-caption text-ink-muted">{stat.label}</dt>
+                  <dd className="tabular mt-1 text-display-m text-ink">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           ) : null}
         </div>
       ) : null}

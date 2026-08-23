@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/lib/cn";
+import { ButtonLink } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowGlyph } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
@@ -33,6 +35,21 @@ export default async function EstatesPage() {
           eyebrow="Estates"
           heading="The estates behind every listing"
           supporting="Three developments across Lagos, Ogun and the FCT. We keep the delivered ones on this page — an estate that has been handed over is the strongest evidence we have that the next one will be."
+          stats={[
+            { label: "Estates", value: String(estates.length) },
+            {
+              label: "Selling now",
+              value: String(
+                estates.filter((estate) => estate.status === "ACTIVE").length,
+              ),
+            },
+            {
+              label: "Listings",
+              value: String(
+                estates.reduce((sum, estate) => sum + estate.listingCount, 0),
+              ),
+            },
+          ]}
         />
 
         <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -106,6 +123,34 @@ export default async function EstatesPage() {
               </article>
             </ScrollReveal>
           ))}
+
+          {/*
+            A closing panel so the two-column grid never ends on a half-empty
+            row. Three estates left the trailing cell blank — the gap the client
+            marked. It spans both columns whenever the estate count would
+            otherwise leave it alone on a row, so the grid stays full at any
+            number of estates.
+          */}
+          <div
+            className={cn(
+              "flex flex-col justify-center rounded-image-l border border-hairline bg-surface p-8 lg:p-10",
+              estates.length % 2 === 0 && "lg:col-span-2",
+            )}
+          >
+            <p className="text-display-m text-ink">
+              The next one is already in acquisition
+            </p>
+            <p className="mt-4 max-w-[46ch] text-body text-ink-secondary">
+              We buy and title land before we subdivide it, so an estate appears
+              here only once the paperwork is in hand. Tell us the area you are
+              looking at and we will say what is coming.
+            </p>
+            <div className="mt-8">
+              <ButtonLink variant="secondary" href="/contact">
+                Talk to the team
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </Container>
     </Section>

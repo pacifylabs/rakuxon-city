@@ -697,3 +697,23 @@ export function getVideoDetail(slug: string) {
         : null,
   };
 }
+
+/** Mirrors listings.getTrackSummary. Held honest by scripts/verify-parity.ts. */
+export function getTrackSummary(type: ListingType): {
+  total: number;
+  available: number;
+  estates: number;
+} {
+  const visible = data.listings.filter(
+    (listing) => listing.type === type && listing.status !== "DRAFT",
+  );
+
+  return {
+    total: visible.length,
+    available: visible.filter((listing) => listing.status === "AVAILABLE")
+      .length,
+    estates: new Set(
+      visible.map((listing) => listing.estate?.slug).filter(Boolean),
+    ).size,
+  };
+}

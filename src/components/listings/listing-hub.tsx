@@ -32,6 +32,9 @@ export function ListingHub({
   page,
   pageCount,
   filtered,
+  trackTotal,
+  availableTotal,
+  estateTotal,
 }: {
   track: "land" | "homes";
   heading: string;
@@ -44,6 +47,10 @@ export function ListingHub({
   page: number;
   pageCount: number;
   filtered: boolean;
+  /** Whole-track counts, independent of the active filters. */
+  trackTotal: number;
+  availableTotal: number;
+  estateTotal: number;
 }) {
   const noun = track === "land" ? "plot" : "home";
   // Whether anything *besides* the search term is narrowing the result.
@@ -52,6 +59,17 @@ export function ListingHub({
       !["q", "sort", "page"].includes(key) && value !== undefined,
   );
 
+  /*
+   * Figures for the heading's third column. Counted from the whole track, not
+   * the current page, so they stay steady while a visitor filters — a number
+   * that changed under the filter chips would read as part of the result set.
+   */
+  const stats = [
+    { label: "Listed", value: String(trackTotal) },
+    { label: "Available", value: String(availableTotal) },
+    { label: "Estates", value: String(estateTotal) },
+  ];
+
   return (
     <Section className="pt-10 lg:pt-16">
       <Container>
@@ -59,6 +77,7 @@ export function ListingHub({
           eyebrow={track === "land" ? "Land" : "Homes"}
           heading={heading}
           supporting={supporting}
+          stats={stats}
         />
 
         <SearchField

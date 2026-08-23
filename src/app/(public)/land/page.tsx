@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { ListingHub } from "@/components/listings/listing-hub";
 import { titleTypeLabel } from "@/components/ui/badge";
-import { getFilterOptions, getListingPage } from "@/lib/listings";
+import {
+  getFilterOptions,
+  getListingPage,
+  getTrackSummary,
+} from "@/lib/listings";
 import {
   hasActiveFilters,
   parseListingFilters,
@@ -21,10 +25,12 @@ export default async function LandHubPage({
 }: PageProps<"/land">) {
   const filters = parseListingFilters(await searchParams);
 
-  const [{ listings, total, page, pageCount }, options] = await Promise.all([
-    getListingPage("LAND", filters),
-    getFilterOptions("LAND"),
-  ]);
+  const [{ listings, total, page, pageCount }, options, summary] =
+    await Promise.all([
+      getListingPage("LAND", filters),
+      getFilterOptions("LAND"),
+      getTrackSummary("LAND"),
+    ]);
 
   return (
     <ListingHub
@@ -34,6 +40,9 @@ export default async function LandHubPage({
       supporting="Every plot below carries its title type, its survey number and the documents we hold. Where the position is weaker than a buyer would like, it says so."
       filters={filters}
       filtered={hasActiveFilters(filters)}
+      trackTotal={summary.total}
+      availableTotal={summary.available}
+      estateTotal={summary.estates}
       filterConfig={[
         {
           key: "titleType",

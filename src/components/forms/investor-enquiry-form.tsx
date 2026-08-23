@@ -129,7 +129,7 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
       <div>
         <button
           type="submit"
-          className="min-h-11 cursor-pointer rounded-full bg-accent px-6 py-3 text-body text-white transition-colors hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           Send enquiry
         </button>

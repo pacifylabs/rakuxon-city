@@ -105,8 +105,8 @@ export function SearchField({
         <button
           type="submit"
           className={cn(
-            "min-h-9 cursor-pointer rounded-full bg-accent px-4 text-caption text-white transition-colors",
-            "hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
+            "min-h-9 cursor-pointer rounded-full bg-accent-fill px-4 text-caption text-deep transition-colors",
+            "hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
           )}
         >
           Search

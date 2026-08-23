@@ -7,6 +7,7 @@ import { Container, Section } from "@/components/ui/container";
 import { VideoFacade } from "@/components/video/video-facade";
 import { getVideoDetail, getVideoSlugs } from "@/lib/videos";
 import { formatDuration, posterUrl, videoKindLabels } from "@/lib/video";
+import { BackLink } from "@/components/layout/back-link";
 
 export const revalidate = 3600;
 
@@ -58,6 +59,8 @@ export default async function TourPage({ params }: PageProps<"/tours/[slug]">) {
   return (
     <Section className="pt-10 lg:pt-16">
       <Container>
+        <BackLink href="/tours" label="All video tours" />
+
         <div className="mx-auto max-w-4xl">
           {/* FR-V1.5 — full width, and still a facade: a shared link that
               costs a megabyte before playing is a link that does not open. */}

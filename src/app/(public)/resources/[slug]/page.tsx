@@ -3,9 +3,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
-import { getArticle, getArticleSlugs } from "@/lib/content";
+import Link from "next/link";
+import { getArticle, getArticleSlugs, getArticles } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
 import type { ArticleCategory } from "@/generated/prisma/enums";
+import { BackLink } from "@/components/layout/back-link";
 
 export const revalidate = 3600;
 
@@ -41,10 +43,26 @@ export default async function ArticlePage({
   const article = await getArticle(slug);
   if (!article) notFound();
 
+  /*
+   * Three more guides for the sidebar — same category first, then anything
+   * else. The body is capped at 68ch for readability, which left the right
+   * half of the page empty; this fills it with the obvious next thing to read
+   * rather than widening the measure.
+   */
+  const others = (await getArticles()).filter(
+    (entry) => entry.slug !== article.slug,
+  );
+  const related = [
+    ...others.filter((entry) => entry.category === article.category),
+    ...others.filter((entry) => entry.category !== article.category),
+  ].slice(0, 3);
+
   return (
     <>
       <Section className="pt-10 pb-0 lg:pt-16 lg:pb-0">
         <Container>
+          <BackLink href="/resources" label="All buyer guides" />
+
           <p className="text-eyebrow text-ink-muted">
             {categoryLabels[article.category]}
           </p>
@@ -74,20 +92,59 @@ export default async function ArticlePage({
 
       <Section>
         <Container>
-          <div className="max-w-[68ch]">
-            {/*
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="max-w-[68ch] lg:col-span-7">
+              {/*
               Plain paragraphs for now. FR-5.3 wants headings, images, tables and
               internal links to listings — that arrives with the rich text editor
               in Phase 7, alongside the client's real copy.
             */}
-            {article.body.split("\n\n").map((paragraph) => (
-              <p
-                key={paragraph}
-                className="mb-6 text-body-l text-ink-secondary"
-              >
-                {paragraph}
-              </p>
-            ))}
+              {article.body.split("\n\n").map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="mb-6 text-body-l text-ink-secondary"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {related.length > 0 ? (
+              <aside className="lg:col-span-4 lg:col-start-9">
+                <p className="text-eyebrow text-ink-muted">Read next</p>
+                <ul className="mt-5 divide-y divide-hairline border-t border-hairline">
+                  {related.map((entry) => (
+                    <li key={entry.slug}>
+                      <Link
+                        href={`/resources/${entry.slug}`}
+                        className="group block py-5"
+                      >
+                        <p className="text-caption text-ink-muted">
+                          {categoryLabels[entry.category]}
+                        </p>
+                        <p className="mt-2 text-body text-ink transition-colors group-hover:text-accent">
+                          {entry.title}
+                        </p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-10 rounded-card border border-hairline p-6">
+                  <p className="text-body text-ink">Not sure what applies?</p>
+                  <p className="mt-3 text-caption text-ink-secondary">
+                    Send us the plot or the area you are looking at and we will
+                    tell you what the documentation position actually is.
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="mt-5 inline-block text-body text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
+                  >
+                    Ask us
+                  </Link>
+                </div>
+              </aside>
+            ) : null}
           </div>
 
           {/* FR-5.2 — every article closes with a contextual enquiry action. */}

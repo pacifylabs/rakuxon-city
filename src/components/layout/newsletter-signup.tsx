@@ -35,14 +35,14 @@ export function NewsletterSignup() {
         />
         <button
           type="submit"
-          className="min-h-11 shrink-0 cursor-pointer rounded-full border border-gold-on-deep px-6 text-body text-gold-on-deep transition-colors hover:bg-gold-on-deep/10 focus-visible:ring-2 focus-visible:ring-gold-on-deep focus-visible:outline-none"
+          className="min-h-11 shrink-0 cursor-pointer rounded-full border border-accent-fill px-6 text-body text-accent-fill transition-colors hover:bg-accent-fill/10 focus-visible:ring-2 focus-visible:ring-accent-fill focus-visible:outline-none"
         >
           Subscribe
         </button>
       </div>
 
       {submitted ? (
-        <p role="status" className="mt-3 text-caption text-gold-on-deep">
+        <p role="status" className="mt-3 text-caption text-accent-fill">
           The list is not open yet — nothing was stored. Email{" "}
           <a
             href="mailto:hello@rakuxoncity.com?subject=Newsletter"

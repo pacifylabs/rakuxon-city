@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { EnquiryPanel } from "@/components/listings/enquiry-panel";
 import { FactList } from "@/components/listings/fact-list";
 import { LocationBlock } from "@/components/listings/location-block";
+import { BuyingSteps } from "@/components/listings/buying-steps";
 import { PaymentPlan } from "@/components/listings/payment-plan";
 import { RelatedListings } from "@/components/listings/related-listings";
 import { BuildStageBadge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ import {
   getRelatedListings,
 } from "@/lib/listings";
 import type { HouseType } from "@/generated/prisma/enums";
+import { BackLink } from "@/components/layout/back-link";
 
 export const revalidate = 3600;
 
@@ -72,6 +74,8 @@ export default async function HouseDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
+          <BackLink href="/homes" label="All homes" />
+
           <div className="flex flex-wrap items-center gap-4">
             <BuildStageBadge buildStage={home.buildStage} />
             {home.handoverDate ? (
@@ -225,6 +229,8 @@ export default async function HouseDetailPage({
                     <ArrowGlyph />
                   </Link>
                 ) : null}
+
+                <BuyingSteps noun="home" className="mt-4" />
               </div>
             </div>
 

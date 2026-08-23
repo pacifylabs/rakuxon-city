@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InvestorEnquiryForm } from "@/components/forms/investor-enquiry-form";
 import { Container, Section } from "@/components/ui/container";
+import { BackLink } from "@/components/layout/back-link";
 
 export const metadata: Metadata = {
   title: "Start a conversation — Rakuxon City",
@@ -17,6 +18,8 @@ export default function InvestorEnquirePage() {
   return (
     <Section className="pt-10 lg:pt-16">
       <Container>
+        <BackLink href="/invest" label="Back to partnerships" />
+
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
             <h1 className="max-w-[16ch] text-display-l text-ink">
