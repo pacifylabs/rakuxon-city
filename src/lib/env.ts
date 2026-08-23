@@ -9,6 +9,12 @@ import { z } from "zod";
  * Variables land phase by phase (03_IMPLEMENTATION_PLAN.md). Those not yet
  * consumed are optional and marked with the phase that makes them required.
  */
+/** Treat empty strings the same as missing — Vercel sets unset vars to "". */
+const emptyToUndefined = z.preprocess(
+  (val) => (val === "" ? undefined : val),
+  z.string().optional(),
+);
+
 const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "test", "production"])
@@ -21,24 +27,39 @@ const envSchema = z.object({
    */
   NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
 
-  /** Phase 1 — Prisma datasource. */
-  DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+  /** Phase 1 — Prisma datasource. A Postgres connection string, not an HTTP URL. */
+  DATABASE_URL: z
+    .string()
+    .min(1, "DATABASE_URL is required")
+    .regex(/^postgres(ql)?:\/\//, "Must be a PostgreSQL connection string"),
 
   /** Phase 5 — Auth.js credentials provider. Generate with `openssl rand -base64 32`. */
-  AUTH_SECRET: z.string().min(32).optional(),
+  AUTH_SECRET: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.string().min(32).optional(),
+  ),
 
   /** Phase 4 — Resend transactional email. */
-  RESEND_API_KEY: z.string().startsWith("re_").optional(),
-  ENQUIRY_FROM_EMAIL: z.email().optional(),
+  RESEND_API_KEY: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.string().startsWith("re_").optional(),
+  ),
+  ENQUIRY_FROM_EMAIL: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.email().optional(),
+  ),
   /** Investor notifications go to their own target. Never the general inbox. */
-  INVESTOR_NOTIFICATION_EMAIL: z.email().optional(),
+  INVESTOR_NOTIFICATION_EMAIL: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.email().optional(),
+  ),
 
   /** Phase 4 — Cloudflare Turnstile. */
-  TURNSTILE_SITE_KEY: z.string().optional(),
-  TURNSTILE_SECRET_KEY: z.string().optional(),
+  TURNSTILE_SITE_KEY: emptyToUndefined,
+  TURNSTILE_SECRET_KEY: emptyToUndefined,
 
   /** Phase 5 — media library uploads. */
-  BLOB_READ_WRITE_TOKEN: z.string().optional(),
+  BLOB_READ_WRITE_TOKEN: emptyToUndefined,
 });
 
 export type Env = z.infer<typeof envSchema>;

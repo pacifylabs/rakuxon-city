@@ -57,64 +57,69 @@ function hashPassword(plain: string): string {
   return `scrypt$16384$8$1$${salt}$${derived}`;
 }
 
-/** Placeholder imagery — see scripts/generate_placeholders.py. */
-function placeholder(
-  name: string,
-  ratio: "hero" | "card" | "portrait" | "wide",
-) {
-  const dimensions = {
-    hero: { width: 1200, height: 675 },
-    card: { width: 800, height: 600 },
-    portrait: { width: 600, height: 800 },
-    wide: { width: 1000, height: 625 },
-  }[ratio];
-
-  return {
-    url: `/images/placeholders/${name}.png`,
-    ...dimensions,
-    mimeType: "image/png",
-    sizeBytes: 6000,
-    isStandIn: true,
-  };
-}
-
 /**
- * Openly-licensed Nigerian terrain photography, standing in for land listings
- * until the client's own photographs arrive. See scripts/fetch_photography.py.
+ * Stand-in photography — see scripts/fetch_photography.py.
  *
- * Still stand-ins: they are real photographs, but not of the actual plot, so
- * they carry the same `isStandIn` flag and the same visible label. The
- * attribution is stored on the row because CC BY requires it and a credit that
- * lives only in a script is a credit waiting to be lost.
+ * Real photographs, but not of the actual plot, home or estate, so every one
+ * carries `isStandIn` and renders behind a visible "Representative image"
+ * label. The attribution is stored on the row because CC BY requires it, and a
+ * credit that lives only in a script is a credit waiting to be lost.
+ *
+ * `alt` describes what the photograph actually shows rather than what we wish
+ * it showed — a screen reader user is owed the same honesty as a sighted one.
  */
-const photography: {
+type Photograph = {
   name: string;
   file: string;
   width: number;
   height: number;
   alt: string;
-  attribution: string;
+  attribution: string | null;
   sourceUrl: string;
-}[] = JSON.parse(
+  sizeBytes: number;
+};
+
+const photography: Photograph[] = JSON.parse(
   readFileSync(
     join(process.cwd(), "public", "images", "photography", "manifest.json"),
     "utf8",
   ),
 );
 
-function terrainPhoto(index: number) {
-  const item = photography[index % photography.length];
+function toMedia(item: Photograph) {
   return {
     url: item.file,
     alt: item.alt,
     width: item.width,
     height: item.height,
     mimeType: "image/jpeg",
-    sizeBytes: 120_000,
+    sizeBytes: item.sizeBytes,
     isStandIn: true,
     attribution: item.attribution,
     sourceUrl: item.sourceUrl,
   };
+}
+
+/** Look up one photograph by slot name. Throws rather than seeding a broken image. */
+function photo(name: string) {
+  const item = photography.find((entry) => entry.name === name);
+  if (!item) {
+    throw new Error(
+      `No photograph named "${name}". Run scripts/fetch_photography.py.`,
+    );
+  }
+  return toMedia(item);
+}
+
+/**
+ * Terrain shots for land listings, rotated across the plots. Scoped to the
+ * land-terrain set — rotating over the whole manifest would put a photograph
+ * of a house above a plot of land.
+ */
+const terrain = photography.filter((item) => item.name.startsWith("land-terrain-"));
+
+function terrainPhoto(index: number) {
+  return toMedia(terrain[index % terrain.length]);
 }
 
 async function clear() {
@@ -182,8 +187,7 @@ async function main() {
 
   const hero = await prisma.media.create({
     data: {
-      ...placeholder("hero-estate", "hero"),
-      alt: "Wide establishing shot across a Rakuxon City estate",
+      ...photo("hero-estate"),
     },
   });
 
@@ -206,7 +210,7 @@ async function main() {
       },
     ].map((item) =>
       prisma.media.create({
-        data: { ...placeholder(item.name, item.ratio), alt: item.alt },
+        data: photo(item.name),
       }),
     ),
   );
@@ -341,7 +345,7 @@ async function main() {
 
   for (const seed of estateSeeds) {
     const media = await prisma.media.create({
-      data: { ...placeholder(seed.image, "wide"), alt: seed.alt },
+      data: photo(seed.image),
     });
 
     const estate = await prisma.estate.create({
@@ -722,9 +726,8 @@ async function main() {
   ];
 
   for (const [landIndex, seed] of landSeeds.entries()) {
-    // Land gets real Nigerian terrain photography; homes keep the designed
-    // placeholders, because no usable Nigerian residential exteriors exist in
-    // the open-licensed pool. See TODO.md.
+    // Land gets Nigerian terrain photography; homes and estates get residential
+    // photography from the wider open-licensed pool. All stand-ins either way.
     const media = await prisma.media.create({
       data: terrainPhoto(landIndex),
     });
@@ -1072,7 +1075,7 @@ async function main() {
 
   for (const seed of homeSeeds) {
     const media = await prisma.media.create({
-      data: { ...placeholder(seed.image, "card"), alt: seed.alt },
+      data: photo(seed.image),
     });
 
     const listing = await prisma.listing.create({
@@ -1161,8 +1164,7 @@ async function main() {
   for (const [index, seed] of articleSeeds.entries()) {
     const cover = await prisma.media.create({
       data: {
-        ...placeholder(seed.image, "card"),
-        alt: `Cover image for "${seed.title}"`,
+        ...photo(seed.image),
       },
     });
 

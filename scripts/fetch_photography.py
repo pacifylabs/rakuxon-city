@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
-"""Fetch the openly-licensed stand-in photography and crop it to the design ratios.
+"""Fetch the stand-in photography and crop it to the design system's ratios.
 
-Sourced through Openverse, filtered to commercial-use licences. Every image here
-is CC BY 2.0, which permits commercial use and requires attribution — the
-attribution string travels into the `Media` row and out to IMAGE_CREDITS.md, so
-crediting cannot be forgotten when someone edits the seed.
+Sources live in scripts/photography-sources.json, found through Openverse.
 
-These are Nigerian terrain photographs standing in for land listings. They are
-NOT photographs of the actual plots, and every one renders with a visible
-"Representative image" label. Openverse carries no usable Nigerian residential
-exteriors, so homes and estates keep the designed placeholders for now.
+LICENCE GUARD — read before adding a source.
 
-A fourth candidate (Yankari Reserve) was dropped: a leafless tree over a hazy
-plain reads as barren, which is the wrong first impression for a plot listing.
+Every image here is cropped and resized, which makes a derivative work. That
+rules out two licences Openverse happily returns under its "commercial use"
+filter:
+
+  * CC BY-ND forbids distributing a modified version at all.
+  * CC BY-SA would push its share-alike terms onto the cropped file.
+
+Only CC BY, CC0 and Public Domain Mark are accepted, and `main` refuses to run
+if anything else appears in the source list. Attribution travels into the Media
+row and out to IMAGE_CREDITS.md, so a credit cannot be lost by editing the seed.
+
+None of these photograph the actual plots, homes or estates being sold. Every
+one renders behind a visible "Representative image" label, driven by
+`Media.isStandIn` rather than by a filename.
 
     python3 scripts/fetch_photography.py
 
@@ -24,49 +30,23 @@ from __future__ import annotations
 import json
 import pathlib
 import subprocess
+import sys
 
 from PIL import Image
 
-OUT = pathlib.Path(__file__).resolve().parent.parent / "public" / "images" / "photography"
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+OUT = ROOT / "public" / "images" / "photography"
+SOURCES = ROOT / "scripts" / "photography-sources.json"
 
-# 4:3, matching the listing card ratio in design system §8.
-CARD = (1000, 750)
+ALLOWED_LICENCES = {"CC BY 2.0", "CC BY 4.0", "CC0 1.0", "Public Domain Mark"}
 
-SOURCES = [
-    {
-        "name": "land-terrain-01",
-        "url": "https://live.staticflickr.com/4135/4878740433_a30677083a_b.jpg",
-        "title": "Rice paddy fields, Niger State",
-        "creator": "Jeremy Weate",
-        "license": "CC BY 2.0",
-        "license_url": "https://creativecommons.org/licenses/by/2.0/",
-        "source_url": "https://www.flickr.com/photos/jeremyweate/4878740433",
-        "alt": "Open cultivated land in Niger State, Nigeria",
-        "bias": 0.55,
-    },
-    {
-        "name": "land-terrain-02",
-        "url": "https://live.staticflickr.com/4244/34090106253_848099f41a_b.jpg",
-        "title": "River Kaduna near Zunguru, savanna",
-        "creator": "Mary Gillham Archive Project",
-        "license": "CC BY 2.0",
-        "license_url": "https://creativecommons.org/licenses/by/2.0/",
-        "source_url": "https://www.flickr.com/photos/maryhgillham/34090106253",
-        "alt": "Savanna and riverine land near Kaduna, Nigeria",
-        "bias": 0.78,
-    },
-    {
-        "name": "land-terrain-03",
-        "url": "https://live.staticflickr.com/4452/36805588243_85dc033dca_b.jpg",
-        "title": "Cattle file through still green savanna, Bosso",
-        "creator": "Mary Gillham Archive Project",
-        "license": "CC BY 2.0",
-        "license_url": "https://creativecommons.org/licenses/by/2.0/",
-        "source_url": "https://www.flickr.com/photos/maryhgillham/36805588243",
-        "alt": "Green savanna grassland with mature trees, Bosso, Nigeria",
-        "bias": 0.6,
-    },
-]
+# The aspect ratios design system §8 calls for.
+RATIOS = {
+    "hero": (1200, 675),      # 16:9
+    "card": (900, 675),       # 4:3
+    "portrait": (675, 900),    # 3:4
+    "wide": (1000, 625),      # estate feature
+}
 
 
 def crop_to_ratio(
@@ -75,9 +55,9 @@ def crop_to_ratio(
     """Crop to the target aspect, then resize. Never distorts.
 
     `vertical_bias` decides where the crop sits: 0.5 is centred, higher favours
-    the lower part of the frame. Landscape photographs here carry a lot of sky,
-    and design system §8 is explicit that a land buyer wants to see the edges of
-    what they are buying, not a mood. Biasing downward keeps the ground.
+    the lower part of the frame. Landscape photographs carry a lot of sky, and
+    §8 is explicit that a land buyer wants to see the edges of what they are
+    buying, not a mood.
     """
     target_w, target_h = size
     target_ratio = target_w / target_h
@@ -98,10 +78,22 @@ def crop_to_ratio(
 
 
 def main() -> None:
+    sources = json.loads(SOURCES.read_text())
+
+    unsafe = [s for s in sources if s["license"] not in ALLOWED_LICENCES]
+    if unsafe:
+        for source in unsafe:
+            print(
+                f"REFUSED {source['name']}: {source['license']} forbids or "
+                f"encumbers the cropped derivative we publish",
+                file=sys.stderr,
+            )
+        raise SystemExit("Unsafe licence in the source list — see the guard above.")
+
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = []
 
-    for source in SOURCES:
+    for source in sources:
         raw = OUT / f"{source['name']}.raw"
         # curl rather than urllib: this machine's Python has no CA bundle.
         subprocess.run(
@@ -109,70 +101,80 @@ def main() -> None:
             check=True,
         )
 
+        size = RATIOS[source["ratio"]]
         with Image.open(raw) as image:
             processed = crop_to_ratio(
-                image.convert("RGB"), CARD, source.get("bias", 0.5)
+                image.convert("RGB"), size, source.get("bias", 0.5)
             )
             path = OUT / f"{source['name']}.jpg"
-            processed.save(path, "JPEG", quality=82, optimize=True, progressive=True)
+            processed.save(path, "JPEG", quality=72, optimize=True, progressive=True)
 
         raw.unlink()
+
+        attribution = (
+            f"\"{source['title']}\" by {source['creator']}, "
+            f"licensed under {source['license']}"
+            if source.get("attribution_required", True)
+            else None
+        )
 
         manifest.append(
             {
                 "name": source["name"],
                 "file": f"/images/photography/{source['name']}.jpg",
-                "width": CARD[0],
-                "height": CARD[1],
+                "width": size[0],
+                "height": size[1],
                 "alt": source["alt"],
                 "title": source["title"],
                 "creator": source["creator"],
                 "license": source["license"],
                 "licenseUrl": source["license_url"],
                 "sourceUrl": source["source_url"],
-                "attribution": (
-                    f"\"{source['title']}\" by {source['creator']}, "
-                    f"licensed under {source['license']}"
-                ),
+                "attribution": attribution,
                 "sizeBytes": path.stat().st_size,
             }
         )
-        print(f"  {source['name']}.jpg  {path.stat().st_size // 1024} KB")
+        print(
+            f"  {source['name']:<28} {path.stat().st_size // 1024:>4} KB  {source['license']}"
+        )
 
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
     # CC BY requires attribution in a manner reasonable to the medium. The site
     # credits each image in place; this file is the collected record.
-    credits = pathlib.Path(__file__).resolve().parent.parent / "IMAGE_CREDITS.md"
     lines = [
         "# Image credits",
         "",
         "Stand-in photography used until the client's own photographs arrive.",
-        "Every image below is licensed for commercial use and requires attribution.",
         "",
-        "None of these are photographs of the actual plots, homes or estates being",
-        "sold. Each renders on the site with a visible *Representative image* label.",
+        "None of these photograph the actual plots, homes or estates being sold.",
+        "Each renders on the site behind a visible *Representative image* label.",
+        "",
+        "Every image is cropped and resized, which makes a derivative work, so only",
+        "CC BY, CC0 and Public Domain Mark are used. `scripts/fetch_photography.py`",
+        "refuses to run against a BY-ND or BY-SA source.",
         "",
         "| Image | Title | Creator | Licence | Source |",
         "|---|---|---|---|---|",
     ]
     for item in manifest:
+        credit = item["creator"] if item["attribution"] else "—"
         lines.append(
-            f"| `{item['name']}` | {item['title']} | {item['creator']} | "
-            f"[{item['license']}]({item['licenseUrl']}) | [Flickr]({item['sourceUrl']}) |"
+            f"| `{item['name']}` | {item['title']} | {credit} | "
+            f"[{item['license']}]({item['licenseUrl']}) | [source]({item['sourceUrl']}) |"
         )
     lines += [
         "",
-        "Regenerate with `python3 scripts/fetch_photography.py`.",
+        f"{len(manifest)} images. Regenerate with `python3 scripts/fetch_photography.py`.",
         "",
-        "Delete this file, `scripts/fetch_photography.py` and",
-        "`public/images/photography/` once real photography replaces these.",
+        "Delete this file, `scripts/fetch_photography.py`,",
+        "`scripts/photography-sources.json` and `public/images/photography/`",
+        "once the client's own photography replaces these.",
         "",
     ]
-    credits.write_text("\n".join(lines))
+    (ROOT / "IMAGE_CREDITS.md").write_text("\n".join(lines))
 
     print(f"\n{len(manifest)} images written to {OUT}")
-    print(f"credits written to {credits}")
 
 
 if __name__ == "__main__":

@@ -255,22 +255,22 @@ export default async function PrimitivesPage() {
         <Gallery
           images={[
             {
-              url: "/images/placeholders/estate-emerald-ridge.png",
-              alt: "Aerial view of Emerald Ridge Estate — photography pending",
-              width: 1600,
-              height: 1000,
+              url: "/images/photography/estate-emerald-ridge.jpg",
+              alt: "Aerial view of a laid-out residential development",
+              width: 1000,
+              height: 625,
             },
             {
-              url: "/images/placeholders/land-01.png",
-              alt: "Plot A14 showing boundary markers — photography pending",
-              width: 1200,
-              height: 900,
+              url: "/images/photography/land-terrain-01.jpg",
+              alt: "Open cultivated land in Niger State, Nigeria",
+              width: 1000,
+              height: 750,
             },
             {
-              url: "/images/placeholders/home-01.png",
-              alt: "Completed four-bedroom detached house — photography pending",
-              width: 1200,
-              height: 900,
+              url: "/images/photography/home-01.jpg",
+              alt: "Completed detached house with a covered porch and lawn",
+              width: 1000,
+              height: 750,
             },
           ]}
         />

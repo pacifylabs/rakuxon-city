@@ -2,8 +2,8 @@ import "server-only";
 import { db } from "@/lib/db";
 
 /**
- * Stand-in imagery — designed placeholders, or licensed photographs of
- * somewhere else — stands in until the client's own photography arrives.
+ * Stand-in imagery — openly-licensed photographs of somewhere else — stands
+ * in until the client's own photography arrives.
  *
  * Anything rendering one shows a visible label, in the same caption slot where
  * design system §8 puts "Artist's impression". That matters more here than on

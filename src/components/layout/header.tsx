@@ -42,6 +42,10 @@ export function Header({
               width={logo.width}
               height={logo.height}
               priority
+              // Renders 32px tall. Without this the browser picks a candidate
+              // sized for the viewport and the mark becomes the heaviest asset
+              // on the page.
+              sizes="120px"
               className="h-8 w-auto"
             />
           </Link>
