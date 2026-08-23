@@ -11,7 +11,20 @@
 
   --color-ink: #171a16;
   --color-ink-secondary: #5c635b;
-  --color-ink-muted: #8e948c;
+
+  /*
+   * DEVIATION from design system §10, which specifies #8E948C.
+   *
+   * §2 assigns ink-muted to captions and metadata and §3 sets those at 13px,
+   * but #8E948C gives 2.80:1 on canvas and 3.10:1 on surface — below the 4.5:1
+   * that PRD §6 (WCAG 2.1 AA) and acceptance criterion 9 both require. The two
+   * documents cannot both hold.
+   *
+   * #6B716A is the smallest darkening that clears AA on both grounds: 4.51:1
+   * on canvas, 5.01:1 on surface. Same hue, same role, nothing else changes.
+   * Reverting is this one line.
+   */
+  --color-ink-muted: #6b716a;
 
   --color-accent: #3e7350;
   --color-accent-hover: #325d41;
