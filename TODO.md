@@ -1,6 +1,6 @@
 # Open items
 
-Everything raised during Phases 0–4 that needs a decision, real content, or work
+Everything raised during Phases 0–5 that needs a decision, real content, or work
 in a later phase. Grouped by who has to act.
 
 Phase numbers refer to `docs/03_implementation_plan.md` (v3.0). Items marked
@@ -22,25 +22,31 @@ header keeping the colour version for the footer, or a full re-draw in sage.
 
 **Open. Header treatment only — nothing else depends on it.**
 
-### 1.2 Two colour tokens were darkened to meet WCAG AA
+### 1.2 Three colour tokens were darkened to meet WCAG AA
 
 Design system §2/§10 and PRD §6 cannot both hold as written. §2 assigns these
 tokens to caption-sized text; PRD §6 requires WCAG 2.1 AA and acceptance
 criterion 9 wants Lighthouse accessibility ≥ 95.
 
-| Token | Spec | Now | Contrast before | Contrast after |
-|---|---|---|---|---|
-| `ink-muted` | `#8E948C` | `#6B716A` | 2.80 on canvas, 3.10 on surface | 4.51 / 5.01 |
-| `status-sold` | `#6B6F69` | `#686C66` | 4.42 on its own background | 4.62 |
+| Token             | Spec      | Now       | Contrast before                 | Contrast after |
+| ----------------- | --------- | --------- | ------------------------------- | -------------- |
+| `ink-muted`       | `#8E948C` | `#6B716A` | 2.80 on canvas, 3.10 on surface | 4.51 / 5.01    |
+| `status-sold`     | `#6B6F69` | `#686C66` | 4.42 on its own background      | 4.62           |
+| `status-reserved` | `#8A6A1F` | `#87671D` | 4.40 on its own background      | 4.59           |
 
-Both are recorded as `DEVIATION` comments at the token in
+All three status colours were within a few hundredths of the line, which
+suggests §2 was set by eye against the 4.5 threshold rather than measured. The
+adjustments are two or three shades each and do not change the character of the
+palette.
+
+All three are recorded as `DEVIATION` comments at the token in
 `src/app/globals.css`, with the arithmetic. Each reverts in one line.
 
 `status-sold` carries the survey-only title ribbon, which is the one place §7
 insists on stating a weak documentation position plainly — it should not be the
 hardest text on the site to read.
 
-**Needs sign-off, or a decision to revert and accept the AA failure.**
+**Needs sign-off, or a decision to revert and accept the AA failures.**
 
 ### 1.3 `Testimonial` is not in the PRD data model
 
@@ -61,7 +67,25 @@ plainly and hands off to the visitor's own map.
 
 **Choose a provider (and clear it against NDPR), or keep the hand-off.**
 
-### 1.5 Default hub sort is arbitrary on seeded data
+### 1.5 No seeded estate exercises FR-2.2
+
+FR-2.2 requires an estate with no available stock to still render as portfolio
+evidence. All three seeded estates currently hold available listings, so the
+branch is never seen without editing data.
+
+It is verified — the path was exercised by temporarily drafting one estate's
+listings, and it renders the delivered state, the amenities and a way onward
+before restoring. But a fourth seeded estate, sold out and empty, would make it
+visible from day one the way the survey-only plot and the price-on-request
+listings are. The plan specifies three estates, so this was not added unasked.
+
+### 1.6 `/invest/enquire` is deliberately noindex
+
+It scores 63 on Lighthouse SEO as a result. That is the flag doing its job on a
+thin gated form, not a defect — but if the client wants the page indexed, remove
+the `robots` directive in `src/app/(public)/invest/enquire/page.tsx`.
+
+### 1.7 Default hub sort is arbitrary on seeded data
 
 Every seeded listing shares roughly the same `publishedAt`, so "newest" ordering
 is effectively random and a sold plot can lead the page. This will resolve on its
@@ -128,35 +152,39 @@ signed off — they are invented for the demo and must not be published as-is.
 
 ## 3. Deferred to a later phase by design
 
-| Item | Lands in |
-|---|---|
-| Enquiry forms submit; every "Coming soon" stub removed | Phase 6 |
-| Newsletter sign-up in the footer | Phase 6 |
-| Track routing (FR-3.3) with unit tests in `lib/routing` | Phase 6 |
-| Investor enquiry route, table and separate notification target | Phase 6 |
-| Turnstile, rate limiting, Resend templates | Phase 6 |
-| Admin dashboard, auth, CSV importer, media upload | Phase 7 |
-| Per-listing SEO metadata, OG images, `RealEstateListing` JSON-LD, sitemap | Phase 8 |
-| Privacy policy, terms, cookie notice, NDPR consent copy and retention period | Phase 8 |
-| Analytics with enquiry conversion **and form abandonment** (the WhatsApp risk measurement, PRD §8) | Phase 8 |
-| Error boundaries, 500 page | Phase 8 |
+| Item                                                                                               | Lands in |
+| -------------------------------------------------------------------------------------------------- | -------- |
+| Enquiry forms submit; every "Coming soon" stub removed                                             | Phase 6  |
+| Newsletter sign-up in the footer                                                                   | Phase 6  |
+| Track routing (FR-3.3) with unit tests in `lib/routing`                                            | Phase 6  |
+| Investor enquiry route, table and separate notification target                                     | Phase 6  |
+| Turnstile, rate limiting, Resend templates                                                         | Phase 6  |
+| Admin dashboard, auth, CSV importer, media upload                                                  | Phase 7  |
+| Per-listing SEO metadata, OG images, `RealEstateListing` JSON-LD, sitemap                          | Phase 8  |
+| Privacy policy, terms, cookie notice, NDPR consent copy and retention period                       | Phase 8  |
+| Analytics with enquiry conversion **and form abandonment** (the WhatsApp risk measurement, PRD §8) | Phase 8  |
+| Error boundaries, 500 page                                                                         | Phase 8  |
 
 ### 3.1 Investor lane copy review — **launch gate**
 
-`/invest` is not built yet (Phase 5). When it is, PRD §8 and FR-4.2 make copy
-review a launch gate: no returns, yields, ROI figures, minimum ticket sizes or
-profit projections. Publishing any of them turns the page into a financial
-promotion and pulls the client into SEC territory.
+`/invest` is built and passes an automated review (`pnpm review:invest`), which
+checks the rendered page for returns, yields, ROI, minimum ticket, projections,
+percentages, naira figures and multiples, and confirms the page is absent from
+primary navigation while linked from the footer and homepage strip.
+
+**A human still has to read it.** The script catches mechanical failures, not
+judgement. Re-run it against the deployment before launch.
 
 Architecture §10 also asks that the advice be **put to the client in writing**,
-so there is a record if they later ask for projected returns.
+so there is a record if they later ask for projected returns. That has not been
+done — it is not something the codebase can do.
 
 ### 3.2 Routes that still 404
 
-`/estates`, `/estates/[slug]`, `/about`, `/contact`, `/resources`,
-`/resources/[slug]`, `/invest`, `/invest/enquire`, `/privacy`, `/terms` — all
-Phase 5 or Phase 8. They are linked from the header, the footer and the listing
-detail pages, and currently land on the styled 404 in `src/app/not-found.tsx`.
+`/privacy` and `/terms` — Phase 8. They are linked from the footer and land on
+the styled 404 in `src/app/not-found.tsx` until the legal copy exists.
+
+Every other public route is now built.
 
 ---
 

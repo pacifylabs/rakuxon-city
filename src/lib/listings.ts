@@ -341,3 +341,19 @@ export async function getListingDetail(slug: string) {
     },
   });
 }
+
+/** Available stock inside one estate, split by track for the detail page tabs. */
+export async function getEstateListings(estateId: string) {
+  const rows = await db.listing.findMany({
+    where: { estateId, status: { not: ListingStatus.DRAFT } },
+    select: listingCardSelect,
+    orderBy: [{ status: "asc" }, { publishedAt: "desc" }],
+  });
+
+  const listings = rows.map(toCard);
+
+  return {
+    land: listings.filter((listing) => listing.type === ListingType.LAND),
+    homes: listings.filter((listing) => listing.type === ListingType.HOME),
+  };
+}

@@ -36,7 +36,12 @@
   /* §2 Status — quiet by design, they appear on every card */
   --color-status-available: #3e7350;
   --color-status-available-bg: #e7efe8;
-  --color-status-reserved: #8a6a1f;
+  /*
+   * DEVIATION from design system §2, which specifies #8A6A1F — the third and
+   * last of these. 4.40:1 on its own background, against the 4.5:1 AA floor.
+   * #87671D gives 4.59:1. Same amber.
+   */
+  --color-status-reserved: #87671d;
   --color-status-reserved-bg: #f6efdd;
   /*
    * DEVIATION from design system §2, which specifies #6B6F69.

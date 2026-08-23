@@ -83,3 +83,105 @@ export async function getCollageImages() {
     select: { url: true, alt: true, width: true, height: true },
   });
 }
+
+/** Every estate, for the index. Active first — delivered ones are portfolio evidence. */
+export async function getEstates() {
+  const estates = await db.estate.findMany({
+    orderBy: [{ status: "asc" }, { name: "asc" }],
+    select: {
+      slug: true,
+      name: true,
+      location: true,
+      state: true,
+      description: true,
+      status: true,
+      amenities: true,
+      media: {
+        orderBy: { position: "asc" },
+        take: 1,
+        select: { media: { select: { url: true, alt: true } } },
+      },
+      _count: {
+        select: {
+          listings: { where: { status: "AVAILABLE" } },
+        },
+      },
+    },
+  });
+
+  return estates.map((estate) => ({
+    ...estate,
+    availableCount: estate._count.listings,
+    image: estate.media[0]?.media ?? null,
+  }));
+}
+
+export async function getEstateSlugs(): Promise<string[]> {
+  const rows = await db.estate.findMany({ select: { slug: true } });
+  return rows.map((row) => row.slug);
+}
+
+export async function getEstateDetail(slug: string) {
+  return db.estate.findUnique({
+    where: { slug },
+    select: {
+      id: true,
+      slug: true,
+      name: true,
+      location: true,
+      state: true,
+      description: true,
+      status: true,
+      amenities: true,
+      media: {
+        orderBy: { position: "asc" },
+        select: {
+          media: {
+            select: { url: true, alt: true, width: true, height: true },
+          },
+        },
+      },
+    },
+  });
+}
+
+/** Published articles for the resources index, newest first within each category. */
+export async function getArticles() {
+  return db.article.findMany({
+    where: { status: ArticleStatus.PUBLISHED },
+    orderBy: [{ category: "asc" }, { publishedAt: "desc" }],
+    select: {
+      slug: true,
+      title: true,
+      excerpt: true,
+      category: true,
+      publishedAt: true,
+      coverImage: { select: { url: true, alt: true } },
+    },
+  });
+}
+
+export async function getArticleSlugs(): Promise<string[]> {
+  const rows = await db.article.findMany({
+    where: { status: ArticleStatus.PUBLISHED },
+    select: { slug: true },
+  });
+  return rows.map((row) => row.slug);
+}
+
+export async function getArticle(slug: string) {
+  return db.article.findFirst({
+    where: { slug, status: ArticleStatus.PUBLISHED },
+    select: {
+      slug: true,
+      title: true,
+      excerpt: true,
+      body: true,
+      category: true,
+      publishedAt: true,
+      coverImage: {
+        select: { url: true, alt: true, width: true, height: true },
+      },
+    },
+  });
+}
