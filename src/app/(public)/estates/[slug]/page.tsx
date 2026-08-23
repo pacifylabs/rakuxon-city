@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { ListingCard } from "@/components/listings/listing-card";
 import { Pagination } from "@/components/listings/pagination";
 import { LocationBlock } from "@/components/listings/location-block";
@@ -92,15 +91,7 @@ export default async function EstateDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
-          <Breadcrumbs
-            trail={[
-              { label: "Home", href: "/" },
-              { label: "Estates", href: "/estates" },
-              { label: estate.name },
-            ]}
-          />
-
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <Badge
               className={
                 estate.status === "ACTIVE"

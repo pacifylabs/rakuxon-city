@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { EnquiryPanel } from "@/components/listings/enquiry-panel";
 import { FactList } from "@/components/listings/fact-list";
 import { LocationBlock } from "@/components/listings/location-block";
@@ -73,15 +72,7 @@ export default async function HouseDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
-          <Breadcrumbs
-            trail={[
-              { label: "Home", href: "/" },
-              { label: "Homes", href: "/homes" },
-              { label: listing.title },
-            ]}
-          />
-
-          <div className="mt-6 flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <BuildStageBadge buildStage={home.buildStage} />
             {home.handoverDate ? (
               <p className="text-caption text-ink-muted">

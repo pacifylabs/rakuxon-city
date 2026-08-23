@@ -11,26 +11,37 @@ export type FilterConfig = {
   key: string;
   label: string;
   options: FilterOption[];
+  /**
+   * Shown inline on desktop. Everything else collapses behind "More filters".
+   *
+   * Two per hub, chosen by what a buyer narrows on first: price and title type
+   * on land, price and bedrooms on homes. A hub with no secondary filters — as
+   * /tours has — shows them all inline and no "More filters" button at all.
+   */
+  primary?: boolean;
 };
 
 /**
- * 04_DESIGN_SYSTEM.md §6 — a horizontal row of pill chips above the grid.
+ * The filter controls above every listing grid.
  *
- * Config-driven so every hub shares one component: land passes title type and
- * plot size, homes passes bedrooms and build stage, /tours passes kind and
- * estate.
+ * 04_DESIGN_SYSTEM.md §6 asks for a row of pill chips. Seven of them plus a
+ * sort control is a row of eight, which is what the client rejected: no
+ * hierarchy, and every option shouting equally.
  *
- * Two layouts, one behaviour:
+ * So the row is two tiers. The two filters buyers actually reach for stay
+ * inline; the rest live behind one "More filters" button that carries a count
+ * of how many are active. That keeps §6's chip vocabulary — same pills, same
+ * hairline, same accent-tint selected state — while cutting the row from eight
+ * controls to four.
  *
- *   Desktop keeps the chip row. Every option is a real `<Link>` carrying the
- *   full query string rather than a click handler pushing state, so filters
- *   survive a refresh, a shared URL and the back button for free — FR-1.2.
+ * Below `md` all of it collapses into a single "Filters" button. Seven chips
+ * wrapping over four ragged lines is bad on a phone, and each tap there also
+ * cost a full page load.
  *
- *   Below `md` the chips collapse into a single "Filters" button opening a
- *   sheet. Seven chips wrapping over four ragged lines is what the client was
- *   looking at, and on a phone each of those chips also cost a full page load.
- *   The sheet batches instead: choices are held locally and one navigation
- *   happens on Apply.
+ * Inline chips navigate immediately — a real `<Link>` carrying the whole query
+ * string, so filters survive a refresh, a shared URL and the back button for
+ * free (FR-1.2). The panels batch instead, applying once on submit, because a
+ * visitor setting four filters should not pay for four round trips.
  */
 export function FilterBar({
   filters,
@@ -45,7 +56,7 @@ export function FilterBar({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [open, setOpen] = useState<string | null>(null);
-  const [sheetOpen, setSheetOpen] = useState(false);
+  const [panel, setPanel] = useState<"none" | "more" | "all">("none");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,6 +77,12 @@ export function FilterBar({
     };
   }, [open]);
 
+  // A hub that marks nothing primary gets everything inline rather than an
+  // empty row above a button holding all of them.
+  const hasPrimary = filters.some((filter) => filter.primary);
+  const primary = hasPrimary ? filters.filter((f) => f.primary) : filters;
+  const secondary = hasPrimary ? filters.filter((f) => !f.primary) : [];
+
   /** Any filter change returns to page one; page 4 of the old result set is meaningless. */
   const hrefFor = (key: string, value: string | null) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -77,9 +94,11 @@ export function FilterBar({
     return `${pathname}${query ? `?${query}` : ""}`;
   };
 
-  const activeCount = filters.filter((filter) =>
-    searchParams.get(filter.key),
-  ).length;
+  const countActive = (set: FilterConfig[]) =>
+    set.filter((filter) => searchParams.get(filter.key)).length;
+
+  const activeCount = countActive(filters);
+  const secondaryActive = countActive(secondary);
 
   /** Search is cleared separately, by the field's own control. */
   const clearHref = (() => {
@@ -92,9 +111,9 @@ export function FilterBar({
 
   return (
     <div ref={containerRef} className={cn("", className)}>
-      {/* Desktop: the chip row from §6. */}
+      {/* Desktop: two primary chips, one "More filters", sort on the right. */}
       <div className="hidden flex-wrap items-center gap-3 md:flex">
-        {filters.map((filter) => {
+        {primary.map((filter) => {
           const current = searchParams.get(filter.key);
           const selected = filter.options.find(
             (option) => option.value === current,
@@ -103,31 +122,18 @@ export function FilterBar({
 
           return (
             <div key={filter.key} className="relative">
-              <button
-                type="button"
+              <Chip
+                selected={Boolean(selected)}
                 onClick={() => setOpen(isOpen ? null : filter.key)}
                 aria-expanded={isOpen}
                 aria-haspopup="true"
-                className={cn(
-                  "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-body transition-colors",
-                  "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
-                  selected
-                    ? "border-accent bg-accent-tint text-accent"
-                    : "border-hairline bg-surface text-ink-secondary hover:border-ink-muted",
-                )}
               >
                 {selected ? selected.label : filter.label}
                 <Chevron open={isOpen} />
-              </button>
+              </Chip>
 
               {isOpen ? (
-                <div
-                  className={cn(
-                    // Hairline, not elevation. §5 spends the page's two lifts
-                    // elsewhere and says everything else stays flat.
-                    "absolute top-full left-0 z-30 mt-2 w-60 rounded-card border border-hairline bg-surface p-2",
-                  )}
-                >
+                <Dropdown>
                   <ul className="max-h-72 overflow-y-auto">
                     {current ? (
                       <li>
@@ -160,11 +166,27 @@ export function FilterBar({
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Dropdown>
               ) : null}
             </div>
           );
         })}
+
+        {secondary.length > 0 ? (
+          <Chip selected={secondaryActive > 0} onClick={() => setPanel("more")}>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 20 20"
+              className="size-4 fill-none stroke-current stroke-[1.5]"
+            >
+              <path d="M3 5h14M6 10h8M8.5 15h3" strokeLinecap="round" />
+            </svg>
+            More filters
+            {secondaryActive > 0 ? (
+              <span className="tabular">({secondaryActive})</span>
+            ) : null}
+          </Chip>
+        ) : null}
 
         <div className="ml-auto flex items-center gap-3">
           {activeCount > 0 ? (
@@ -178,15 +200,11 @@ export function FilterBar({
 
           {sortOptions ? (
             <div className="relative">
-              <button
-                type="button"
+              <Chip
+                selected={false}
                 onClick={() => setOpen(open === "sort" ? null : "sort")}
                 aria-expanded={open === "sort"}
                 aria-haspopup="true"
-                className={cn(
-                  "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-hairline bg-surface px-4 text-body text-ink-secondary transition-colors hover:border-ink-muted",
-                  "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
-                )}
               >
                 {
                   sortOptions.find(
@@ -195,10 +213,10 @@ export function FilterBar({
                   )?.label
                 }
                 <Chevron open={open === "sort"} />
-              </button>
+              </Chip>
 
               {open === "sort" ? (
-                <div className="absolute top-full right-0 z-30 mt-2 w-56 rounded-card border border-hairline bg-surface p-2">
+                <Dropdown align="right">
                   <ul>
                     {sortOptions.map((option) => (
                       <li key={option.value}>
@@ -218,25 +236,28 @@ export function FilterBar({
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Dropdown>
               ) : null}
             </div>
           ) : null}
         </div>
+
+        {panel === "more" ? (
+          <FilterPanel
+            variant="modal"
+            title="More filters"
+            filters={secondary}
+            onClose={() => setPanel("none")}
+          />
+        ) : null}
       </div>
 
-      {/* Mobile: one control, opening the sheet. */}
+      {/* Mobile: one control, opening a sheet with everything in it. */}
       <div className="flex items-center gap-3 md:hidden">
-        <button
-          type="button"
-          onClick={() => setSheetOpen(true)}
-          className={cn(
-            "inline-flex min-h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border px-4 text-body transition-colors",
-            "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
-            activeCount > 0
-              ? "border-accent bg-accent-tint text-accent"
-              : "border-hairline bg-surface text-ink-secondary",
-          )}
+        <Chip
+          selected={activeCount > 0}
+          onClick={() => setPanel("all")}
+          className="min-h-12 flex-1 justify-center"
         >
           <svg
             aria-hidden="true"
@@ -249,7 +270,7 @@ export function FilterBar({
           {activeCount > 0 ? (
             <span className="tabular">({activeCount})</span>
           ) : null}
-        </button>
+        </Chip>
 
         {/*
           Inside the breakpoint wrapper, not beside it. The sheet is only
@@ -257,14 +278,65 @@ export function FilterBar({
           opened it and then widened the window — or rotated a tablet — was
           left with a modal over a layout that already shows every filter.
         */}
-        {sheetOpen ? (
-          <FilterSheet
+        {panel === "all" ? (
+          <FilterPanel
+            variant="sheet"
+            title="Filters"
             filters={filters}
             sortOptions={sortOptions}
-            onClose={() => setSheetOpen(false)}
+            onClose={() => setPanel("none")}
           />
         ) : null}
       </div>
+    </div>
+  );
+}
+
+/** §6's pill, in one place so the two tiers cannot drift apart visually. */
+function Chip({
+  selected,
+  className,
+  children,
+  ...props
+}: {
+  selected: boolean;
+  className?: string;
+  children: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button
+      type="button"
+      className={cn(
+        "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-body transition-colors",
+        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        selected
+          ? "border-accent bg-accent-tint text-accent"
+          : "border-hairline bg-surface text-ink-secondary hover:border-ink-muted",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
+/** Hairline, not elevation — §5 spends the page's two lifts elsewhere. */
+function Dropdown({
+  align = "left",
+  children,
+}: {
+  align?: "left" | "right";
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={cn(
+        "absolute top-full z-30 mt-2 w-60 rounded-card border border-hairline bg-surface p-2",
+        align === "left" ? "left-0" : "right-0",
+      )}
+    >
+      {children}
     </div>
   );
 }
@@ -285,21 +357,25 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 /**
- * The mobile sheet.
+ * The batching panel behind "More filters" and behind mobile's "Filters".
  *
  * Built on a native `<dialog>` opened with `showModal()`, which brings the
- * focus trap, the Escape handler, the inert background and the top-layer
- * stacking with it. Hand-rolling those is where accessible modals usually go
- * wrong, and the platform already ships a correct one.
+ * focus trap, the Escape handler, the inert background and top-layer stacking
+ * with it. Hand-rolling those is where accessible modals usually go wrong, and
+ * the platform already ships a correct one.
  *
- * Selections are held locally and applied in one navigation, rather than each
- * tap costing a page load on a phone connection.
+ * `variant` only changes where it sits: a bottom sheet on a phone, a centred
+ * card on a desktop. The behaviour is identical.
  */
-function FilterSheet({
+function FilterPanel({
+  variant,
+  title,
   filters,
   sortOptions,
   onClose,
 }: {
+  variant: "sheet" | "modal";
+  title: string;
   filters: FilterConfig[];
   sortOptions?: FilterOption[];
   onClose: () => void;
@@ -323,7 +399,7 @@ function FilterSheet({
     if (!dialog) return;
 
     dialog.showModal();
-    // The page behind must not scroll while the sheet is over it.
+    // The page behind must not scroll while the panel is over it.
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
@@ -335,7 +411,11 @@ function FilterSheet({
   const apply = () => {
     const params = new URLSearchParams(searchParams.toString());
     for (const [key, value] of Object.entries(pending)) {
-      if (value === null || value === "" || (key === "sort" && value === "newest")) {
+      if (
+        value === null ||
+        value === "" ||
+        (key === "sort" && value === "newest")
+      ) {
         params.delete(key);
       } else {
         params.set(key, value);
@@ -364,19 +444,21 @@ function FilterSheet({
       onClick={(event) => {
         if (event.target === dialogRef.current) dialogRef.current?.close();
       }}
-      aria-label="Filters"
+      aria-label={title}
       className={cn(
-        "m-0 mt-auto max-h-[85dvh] w-full max-w-none rounded-t-image-l bg-canvas p-0 text-ink",
-        "backdrop:bg-deep/40",
+        "max-h-[85dvh] bg-canvas p-0 text-ink backdrop:bg-deep/40",
+        variant === "sheet"
+          ? "m-0 mt-auto w-full max-w-none rounded-t-image-l"
+          : "m-auto w-[min(34rem,calc(100vw-3rem))] rounded-card border border-hairline",
       )}
     >
       <div className="flex max-h-[85dvh] flex-col">
         <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
-          <p className="text-heading text-ink">Filters</p>
+          <p className="text-heading text-ink">{title}</p>
           <button
             type="button"
             onClick={() => dialogRef.current?.close()}
-            aria-label="Close filters"
+            aria-label={`Close ${title.toLowerCase()}`}
             className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:text-ink"
           >
             <svg
@@ -423,7 +505,7 @@ function FilterSheet({
           ))}
 
           {sortOptions ? (
-            <fieldset>
+            <fieldset className="mt-8">
               <legend className="mb-3 text-caption text-ink-muted">
                 Sort by
               </legend>
@@ -450,10 +532,10 @@ function FilterSheet({
             onClick={clear}
             disabled={activeCount === 0}
             className={cn(
-              "min-h-12 cursor-pointer rounded-full border border-hairline px-5 text-body transition-colors",
+              "min-h-12 rounded-full border border-hairline px-5 text-body transition-colors",
               activeCount === 0
                 ? "cursor-not-allowed text-ink-muted"
-                : "text-ink-secondary hover:border-ink-muted",
+                : "cursor-pointer text-ink-secondary hover:border-ink-muted",
             )}
           >
             Clear

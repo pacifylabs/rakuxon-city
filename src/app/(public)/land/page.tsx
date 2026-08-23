@@ -37,6 +37,7 @@ export default async function LandHubPage({
       filterConfig={[
         {
           key: "titleType",
+          primary: true,
           label: "Title type",
           options: Object.values(TitleType).map((value) => ({
             value,
@@ -69,6 +70,7 @@ export default async function LandHubPage({
         },
         {
           key: "price",
+          primary: true,
           label: "Price",
           options: Object.entries(priceBands).map(([value, band]) => ({
             value,

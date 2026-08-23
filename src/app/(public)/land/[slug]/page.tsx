@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { EnquiryPanel } from "@/components/listings/enquiry-panel";
 import { FactList } from "@/components/listings/fact-list";
 import { LocationBlock } from "@/components/listings/location-block";
@@ -63,15 +62,7 @@ export default async function PlotDetailPage({
     <>
       <Section className="pb-0 lg:pb-0">
         <Container>
-          <Breadcrumbs
-            trail={[
-              { label: "Home", href: "/" },
-              { label: "Land", href: "/land" },
-              { label: listing.title },
-            ]}
-          />
-
-          <h1 className="mt-6 max-w-[22ch] text-display-m text-ink">
+          <h1 className="max-w-[22ch] text-display-m text-ink">
             {listing.title}
           </h1>
           <p className="mt-3 text-body text-ink-secondary">

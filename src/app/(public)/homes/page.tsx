@@ -50,6 +50,7 @@ export default async function HomesHubPage({
       filterConfig={[
         {
           key: "bedrooms",
+          primary: true,
           label: "Bedrooms",
           options: [2, 3, 4, 5].map((n) => ({
             value: String(n),
@@ -82,6 +83,7 @@ export default async function HomesHubPage({
         },
         {
           key: "price",
+          primary: true,
           label: "Price",
           options: Object.entries(priceBands).map(([value, band]) => ({
             value,

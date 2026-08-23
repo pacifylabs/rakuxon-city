@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { getArticle, getArticleSlugs } from "@/lib/content";
@@ -47,15 +46,7 @@ export default async function ArticlePage({
     <>
       <Section className="pt-10 pb-0 lg:pt-16 lg:pb-0">
         <Container>
-          <Breadcrumbs
-            trail={[
-              { label: "Home", href: "/" },
-              { label: "Buyer guides", href: "/resources" },
-              { label: article.title },
-            ]}
-          />
-
-          <p className="mt-8 text-eyebrow text-ink-muted">
+          <p className="text-eyebrow text-ink-muted">
             {categoryLabels[article.category]}
           </p>
           <h1 className="mt-4 max-w-[22ch] text-display-l text-ink">

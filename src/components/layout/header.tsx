@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -23,6 +24,21 @@ const navigation = [
   { href: "/about", label: "About" },
 ];
 
+/**
+ * Which nav item owns the current page.
+ *
+ * A prefix match, not equality: `/land/emerald-ridge-plot-a14` belongs to Land.
+ * This carries the weight breadcrumbs used to — it is the only thing on a
+ * detail page now saying which section you are in — so a detail page has to
+ * light its parent, not nothing.
+ *
+ * `/` is matched exactly, or every route would claim it.
+ */
+function isActive(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function Header({
   logo,
 }: {
@@ -30,6 +46,7 @@ export function Header({
   logo: { url: string; alt: string; width: number; height: number };
 }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="relative z-20">
@@ -52,16 +69,40 @@ export function Header({
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-8">
-              {navigation.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-body text-ink-secondary transition-colors hover:text-ink"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navigation.map((item) => {
+                const active = isActive(pathname, item.href);
+
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "relative py-1 text-body transition-colors",
+                        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+                        active
+                          ? "text-ink"
+                          : "text-ink-secondary hover:text-ink",
+                      )}
+                    >
+                      {item.label}
+                      {/*
+                        A rule under the active item rather than a colour change
+                        alone: colour on its own is not an accessible way to
+                        carry state, and `aria-current` covers screen readers
+                        but not someone who cannot distinguish the two greys.
+                      */}
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "absolute -bottom-1 left-0 h-px w-full origin-left bg-accent transition-transform duration-200",
+                          active ? "scale-x-100" : "scale-x-0",
+                        )}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -122,17 +163,31 @@ export function Header({
           <Container>
             <nav aria-label="Primary, mobile" className="py-4">
               <ul className="divide-y divide-hairline">
-                {navigation.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className="block py-4 text-body text-ink"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+                {navigation.map((item) => {
+                  const active = isActive(pathname, item.href);
+
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={cn(
+                          "flex items-center justify-between py-4 text-body",
+                          active ? "text-accent" : "text-ink",
+                        )}
+                      >
+                        {item.label}
+                        {active ? (
+                          <span
+                            aria-hidden="true"
+                            className="size-1.5 rounded-full bg-accent"
+                          />
+                        ) : null}
+                      </Link>
+                    </li>
+                  );
+                })}
                 <li>
                   <Link
                     href="/contact"

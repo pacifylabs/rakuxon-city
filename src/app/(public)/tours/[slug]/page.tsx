@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
-import { Breadcrumbs } from "@/components/listings/breadcrumbs";
 import { VideoFacade } from "@/components/video/video-facade";
 import { getVideoDetail, getVideoSlugs } from "@/lib/videos";
 import { formatDuration, posterUrl, videoKindLabels } from "@/lib/video";
@@ -57,17 +56,9 @@ export default async function TourPage({ params }: PageProps<"/tours/[slug]">) {
   const duration = formatDuration(video.durationSeconds);
 
   return (
-    <Section className="pt-6 lg:pt-10">
+    <Section className="pt-10 lg:pt-16">
       <Container>
-        <Breadcrumbs
-          trail={[
-            { label: "Home", href: "/" },
-            { label: "Video tours", href: "/tours" },
-            { label: video.title },
-          ]}
-        />
-
-        <div className="mx-auto mt-8 max-w-4xl">
+        <div className="mx-auto max-w-4xl">
           {/* FR-V1.5 — full width, and still a facade: a shared link that
               costs a megabyte before playing is a link that does not open. */}
           <VideoFacade video={video} priority>
