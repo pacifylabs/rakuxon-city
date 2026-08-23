@@ -96,7 +96,12 @@ async function main() {
   const primaryNav =
     homeHtml.match(/aria-label="Primary"[\s\S]*?<\/nav>/)?.[0] ?? "";
   const inPrimaryNav = primaryNav.includes('href="/invest"');
-  const inFooter = /aria-label="Footer"[\s\S]*?href="\/invest"/.test(homeHtml);
+  // Scoped to the <footer> element rather than to the footer *nav*: the
+  // investor link is a call-to-action in the contact column now, not a list
+  // item. The nav-relative form also matched lazily past the end of the
+  // footer, so a stray /invest link anywhere below it would have passed.
+  const footer = homeHtml.match(/<footer[\s\S]*?<\/footer>/)?.[0] ?? "";
+  const inFooter = footer.includes('href="/invest"');
   const inHomepageStrip = homeHtml.includes('href="/invest"');
 
   console.log();

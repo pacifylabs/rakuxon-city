@@ -157,6 +157,39 @@ rather than a component someone forgot to use.
 
 **Client's call. Recorded, not disputed.**
 
+### 1.12 Breadcrumbs removed from every detail page
+
+01_SITE_ARCHITECTURE.md §7 lists `BreadcrumbNav` as a component on "All detail
+pages". At the client's instruction it has been removed everywhere and replaced
+by an active-state indicator on the primary navigation — an accent rule under
+the current section, plus `aria-current="page"`, matched by path prefix so
+`/land/emerald-ridge-plot-a14` lights "Land".
+
+`src/components/listings/breadcrumbs.tsx` is deleted rather than left unused.
+
+What was traded away, so it is on the record rather than discovered later:
+
+- A detail page no longer shows its own position in the hierarchy, only its
+  section. "Home / Land / Plot A14" becomes an underline under "Land".
+- The one-tap route back to the parent hub or estate is gone. Visitors arriving
+  from search or a shared WhatsApp link now use the nav or the back button.
+- `/tours` and `/contact` are not in primary navigation, so pages under them
+  light nothing at all.
+
+**Client's call, made after seeing the built page. Reversible — the component
+was a single file and the six call sites were one line each.**
+
+### 1.13 Which two filters lead each hub is a guess
+
+The filter row is now two tiers: two chips inline, the rest behind "More
+filters". Land leads with title type and price, homes with bedrooms and price.
+
+Title type leads land because §7 makes it the signature element, and price is
+the near-universal first filter. Both are reasoning, not evidence. Once there
+is analytics on the live site, the pair should be whichever two are actually
+used — it is a one-line `primary: true` change per filter in
+`src/app/(public)/land/page.tsx` and `homes/page.tsx`.
+
 ## 1a. Needs a decision — deferred from the video addendum
 
 ### 1a.1 FR-V1.9 references structured data that does not exist
