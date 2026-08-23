@@ -1,5 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { hasDatabase } from "@/lib/env";
+import * as fixture from "@/lib/data/fixture";
 import { getPlacements } from "@/lib/media";
 import { ArticleStatus, EstateStatus } from "@/generated/prisma/enums";
 
@@ -9,6 +11,7 @@ import { ArticleStatus, EstateStatus } from "@/generated/prisma/enums";
  * rather than something a visitor can buy into today.
  */
 export async function getFeaturedEstates(take = 2) {
+  if (!hasDatabase) return fixture.getFeaturedEstates(take);
   const estates = await db.estate.findMany({
     orderBy: [{ status: "asc" }, { createdAt: "asc" }],
     take,
@@ -54,11 +57,13 @@ export async function getFeaturedEstates(take = 2) {
 }
 
 export async function getDeliveredEstateCount() {
+  if (!hasDatabase) return fixture.getDeliveredEstateCount();
   return db.estate.count({ where: { status: EstateStatus.DELIVERED } });
 }
 
 /** The resources teaser — the two most recent published articles. */
 export async function getRecentArticles(take = 2) {
+  if (!hasDatabase) return fixture.getRecentArticles(take);
   return db.article.findMany({
     where: { status: ArticleStatus.PUBLISHED },
     orderBy: { publishedAt: "desc" },
@@ -77,6 +82,7 @@ export async function getRecentArticles(take = 2) {
 }
 
 export async function getTestimonials(take = 6) {
+  if (!hasDatabase) return fixture.getTestimonials(take);
   return db.testimonial.findMany({
     where: { published: true },
     orderBy: { position: "asc" },
@@ -93,6 +99,7 @@ export async function getTestimonials(take = 6) {
  * filename. The slot key is stable; the row behind it is not.
  */
 export async function getCollageImages() {
+  if (!hasDatabase) return fixture.getCollageImages();
   const placements = await getPlacements([
     "homepage.collage.1",
     "homepage.collage.2",
@@ -106,6 +113,7 @@ export async function getCollageImages() {
 
 /** Every estate, for the index. Active first — delivered ones are portfolio evidence. */
 export async function getEstates() {
+  if (!hasDatabase) return fixture.getEstates();
   const estates = await db.estate.findMany({
     orderBy: [{ status: "asc" }, { name: "asc" }],
     select: {
@@ -146,11 +154,13 @@ export async function getEstates() {
 }
 
 export async function getEstateSlugs(): Promise<string[]> {
+  if (!hasDatabase) return fixture.getEstateSlugs();
   const rows = await db.estate.findMany({ select: { slug: true } });
   return rows.map((row) => row.slug);
 }
 
 export async function getEstateDetail(slug: string) {
+  if (!hasDatabase) return fixture.getEstateDetail(slug);
   return db.estate.findUnique({
     where: { slug },
     select: {
@@ -183,6 +193,7 @@ export async function getEstateDetail(slug: string) {
 
 /** Published articles for the resources index, newest first within each category. */
 export async function getArticles() {
+  if (!hasDatabase) return fixture.getArticles();
   return db.article.findMany({
     where: { status: ArticleStatus.PUBLISHED },
     orderBy: [{ category: "asc" }, { publishedAt: "desc" }],
@@ -200,6 +211,7 @@ export async function getArticles() {
 }
 
 export async function getArticleSlugs(): Promise<string[]> {
+  if (!hasDatabase) return fixture.getArticleSlugs();
   const rows = await db.article.findMany({
     where: { status: ArticleStatus.PUBLISHED },
     select: { slug: true },
@@ -208,6 +220,7 @@ export async function getArticleSlugs(): Promise<string[]> {
 }
 
 export async function getArticle(slug: string) {
+  if (!hasDatabase) return fixture.getArticle(slug);
   return db.article.findFirst({
     where: { slug, status: ArticleStatus.PUBLISHED },
     select: {

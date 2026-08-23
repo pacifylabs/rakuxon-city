@@ -133,7 +133,7 @@ elsewhere, because no open-licensed source carries Nigerian residential
 exteriors — Picsum, Wikimedia and Openverse were all searched.
 
 Every one carries `Media.isStandIn = true` and renders behind a visible
-**"Representative image"** label, with the fuller *"— not the actual plot"* on
+**"Representative image"** label, with the fuller _"— not the actual plot"_ on
 detail pages. Clearing the flag on upload removes the label, one image at a
 time, without a code change.
 
@@ -242,7 +242,25 @@ Absolute URLs in metadata — `og:image` above all — are built from it. Unset,
 falls back to `http://localhost:3000` and every shared link points at nothing.
 Set it to the real origin in the deployment environment.
 
-### 4.2 Database is a local Docker container
+### 4.2 Database is optional, and the fallback needs keeping in step
+
+The public site runs with no DATABASE_URL, serving `src/data/snapshot.json`.
+Docker and Postgres are only needed to work on the schema or the seed.
+
+**The cost:** two read paths. `src/lib/data/fixture.ts` mirrors the Prisma
+queries, and two implementations of the same filtering rules is exactly the
+shape of thing that drifts. `pnpm verify:parity` runs 23 checks across both and
+already caught one real bug — `?page=5` on a one-page result returned an empty
+grid from Postgres, rendering "nothing matches your filters" over a result set
+that was not empty.
+
+Run `pnpm snapshot` after any seed change, and `pnpm verify:parity` in CI.
+
+**Phase 7 changes this.** Once staff write data, a snapshot cannot be the live
+source, and DATABASE_URL becomes genuinely required for the admin routes. The
+public read paths can keep the fallback for previews.
+
+### 4.2b The local Docker container
 
 `docker-compose.yml` runs `postgres:17-alpine` on port 55432. The schema and seed
 are portable — moving to Neon or Supabase is a one-line `DATABASE_URL` change —

@@ -1,5 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { hasDatabase } from "@/lib/env";
+import * as fixture from "@/lib/data/fixture";
 
 /**
  * Stand-in imagery — openly-licensed photographs of somewhere else — stands
@@ -34,6 +36,7 @@ export function standInLabel(context: StandInContext): string {
  * without anything in the code matching on a filename.
  */
 export async function getPlacements(keys: string[]) {
+  if (!hasDatabase) return fixture.getPlacements(keys);
   const rows = await db.mediaPlacement.findMany({
     where: { key: { in: keys } },
     select: {

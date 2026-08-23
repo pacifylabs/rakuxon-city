@@ -134,12 +134,16 @@
   }
 
   /*
-   * §9 scroll reveal. The hidden state is applied only when JavaScript is
-   * running (`data-js`) and only when motion is welcome, so the server-rendered
-   * markup is visible to anyone the observer never reaches.
+   * §9 scroll reveal.
+   *
+   * The hidden state applies only where the observer can actually undo it:
+   * `scripting: enabled` asks the browser directly, so no inline script is
+   * needed to flag it. Anyone with JavaScript blocked, and any tool that does
+   * not run it, gets the markup as rendered rather than a page of empty space.
+   * A browser without support for the feature query simply never hides.
    */
-  @media (prefers-reduced-motion: no-preference) {
-    :root[data-js="true"] .reveal {
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+    .reveal {
       opacity: 0;
       transform: translateY(12px);
       transition:
@@ -147,7 +151,7 @@
         transform 400ms ease-out;
     }
 
-    :root[data-js="true"] .reveal.is-revealed {
+    .reveal.is-revealed {
       opacity: 1;
       transform: none;
     }

@@ -26,12 +26,32 @@ cards never carry a shadow, and the page background is canvas (`#F1F4EF`).
 
 ## Getting started
 
+Nothing is required beyond Node and pnpm. No database, no Docker, no `.env`.
+
 ```bash
 pnpm install
-cp .env.example .env      # fill in DATABASE_URL
-pnpm db:generate
-pnpm dev
+pnpm build && pnpm start
 ```
+
+The site serves a bundled snapshot of the seeded catalogue
+(`src/data/snapshot.json`), which is enough because everything public is
+read-only until the admin dashboard arrives in Phase 7. This is the path to
+deploy for a preview.
+
+### Working on the data layer
+
+Set `DATABASE_URL` and Postgres takes over, with nothing else to change:
+
+```bash
+docker compose up -d          # optional — any Postgres will do
+cp .env.example .env          # then set DATABASE_URL
+pnpm db:migrate && pnpm db:seed
+pnpm snapshot                 # refresh the fallback from the seed
+pnpm verify:parity            # assert both read paths agree
+```
+
+`pnpm snapshot` is what keeps the two in step. Run it after changing the seed,
+and `pnpm verify:parity` will tell you if you forget.
 
 ## Scripts
 

@@ -16,6 +16,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Prisma Client is generated output, not source.
     "src/generated/**",
+    // A CommonJS require hook by necessity — it patches module loading before
+    // any ESM can run. See the file for why it exists.
+    "scripts/server-only-stub.cjs",
   ]),
 ]);
 

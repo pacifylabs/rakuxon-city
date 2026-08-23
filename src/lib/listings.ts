@@ -1,5 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { hasDatabase } from "@/lib/env";
+import * as fixture from "@/lib/data/fixture";
 import type { ListingCardData } from "@/components/listings/listing-card";
 import { ListingStatus, ListingType } from "@/generated/prisma/enums";
 import {
@@ -114,6 +116,7 @@ const publiclyVisible = {
 export async function getFeaturedListings(
   take = 6,
 ): Promise<ListingCardData[]> {
+  if (!hasDatabase) return fixture.getFeaturedListings(take);
   const rows = await db.listing.findMany({
     where: { ...publiclyVisible, featured: true },
     select: listingCardSelect,
@@ -131,6 +134,7 @@ export async function getFeaturedListings(
 export async function getSpotlightListings(
   take = 8,
 ): Promise<ListingCardData[]> {
+  if (!hasDatabase) return fixture.getSpotlightListings(take);
   const rows = await db.listing.findMany({
     where: { ...publiclyVisible },
     select: listingCardSelect,
@@ -149,6 +153,7 @@ export async function getLaneCounts(): Promise<{
   land: number;
   homes: number;
 }> {
+  if (!hasDatabase) return fixture.getLaneCounts();
   const [land, homes] = await Promise.all([
     db.listing.count({
       where: {
@@ -175,6 +180,7 @@ export async function getLaneCounts(): Promise<{
  * the one component most worth eyeballing.
  */
 export async function getSampleListings(take = 6): Promise<ListingCardData[]> {
+  if (!hasDatabase) return fixture.getSampleListings(take);
   const half = Math.ceil(take / 2);
 
   const [land, homes] = await Promise.all([
@@ -211,26 +217,28 @@ export async function getListingPage(
   page: number;
   pageCount: number;
 }> {
+  if (!hasDatabase) return fixture.getListingPage(type, filters);
+
   const where = buildListingWhere(type, filters);
   const orderBy = buildListingOrderBy(filters.sort);
 
-  const [total, rows] = await Promise.all([
-    db.listing.count({ where }),
-    db.listing.findMany({
-      where,
-      orderBy: [...orderBy],
-      select: listingCardSelect,
-      skip: (filters.page - 1) * LISTINGS_PER_PAGE,
-      take: LISTINGS_PER_PAGE,
-    }),
-  ]);
+  // Counted first so the page can be clamped. Asking for page 5 of a one-page
+  // result previously returned an empty set, which renders the "nothing matches
+  // your filters" state over a result set that is not empty at all — a stale
+  // link or a hand-edited URL was enough to trigger it.
+  const total = await db.listing.count({ where });
+  const pageCount = Math.max(1, Math.ceil(total / LISTINGS_PER_PAGE));
+  const page = Math.min(filters.page, pageCount);
 
-  return {
-    listings: rows.map(toCard),
-    total,
-    page: filters.page,
-    pageCount: Math.max(1, Math.ceil(total / LISTINGS_PER_PAGE)),
-  };
+  const rows = await db.listing.findMany({
+    where,
+    orderBy: [...orderBy],
+    select: listingCardSelect,
+    skip: (page - 1) * LISTINGS_PER_PAGE,
+    take: LISTINGS_PER_PAGE,
+  });
+
+  return { listings: rows.map(toCard), total, page, pageCount };
 }
 
 /**
@@ -239,6 +247,7 @@ export async function getListingPage(
  * site rather than on the inventory.
  */
 export async function getFilterOptions(type: ListingType) {
+  if (!hasDatabase) return fixture.getFilterOptions(type);
   const [states, estates] = await Promise.all([
     db.listing.findMany({
       where: { type, status: { not: ListingStatus.DRAFT } },
@@ -260,6 +269,7 @@ export async function getFilterOptions(type: ListingType) {
 
 /** Slugs for `generateStaticParams`. Drafts are excluded, so they cannot be prerendered. */
 export async function getListingSlugs(type: ListingType): Promise<string[]> {
+  if (!hasDatabase) return fixture.getListingSlugs(type);
   const rows = await db.listing.findMany({
     where: { type, status: { not: ListingStatus.DRAFT } },
     select: { slug: true },
@@ -275,6 +285,9 @@ export async function getRelatedListings(
   estateId: string | null,
   location: string,
 ): Promise<ListingCardData[]> {
+  if (!hasDatabase)
+    return fixture.getRelatedListings(listingId, type, estateId, location);
+
   const shared = {
     id: { not: listingId },
     type,
@@ -308,6 +321,7 @@ export async function getRelatedListings(
 
 /** Everything a detail page needs, in one query. */
 export async function getListingDetail(slug: string) {
+  if (!hasDatabase) return fixture.getListingDetail(slug);
   return db.listing.findFirst({
     where: { slug, status: { not: ListingStatus.DRAFT } },
     select: {
@@ -373,6 +387,7 @@ export async function getListingDetail(slug: string) {
 
 /** Available stock inside one estate, split by track for the detail page tabs. */
 export async function getEstateListings(estateId: string) {
+  if (!hasDatabase) return fixture.getEstateListings(estateId);
   const rows = await db.listing.findMany({
     where: { estateId, status: { not: ListingStatus.DRAFT } },
     select: listingCardSelect,

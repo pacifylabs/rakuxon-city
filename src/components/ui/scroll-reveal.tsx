@@ -7,11 +7,11 @@ import { cn } from "@/lib/cn";
  * 04_DESIGN_SYSTEM.md §9 — fade and a 12px rise as an element enters view,
  * 400ms ease-out, staggered across a grid.
  *
- * The hidden state is expressed in CSS, gated on `[data-js="true"]` which the
- * root layout sets before paint. That matters: hiding on the server and
- * revealing from an observer means anyone without JavaScript — or any tool that
- * does not run it — gets a page of invisible content. The markup is visible by
- * default and only JavaScript takes it away, never the other way round.
+ * The hidden state is expressed in CSS, gated on `@media (scripting: enabled)`.
+ * That matters: hiding on the server and revealing from an observer means
+ * anyone without JavaScript — or any tool that does not run it — gets a page of
+ * invisible content. The markup is visible by default and only a browser that
+ * can actually run the observer takes it away, never the other way round.
  *
  * Reduced motion is handled in the same rule, so anyone who has asked for
  * stillness sees the finished state immediately rather than a fade they did not

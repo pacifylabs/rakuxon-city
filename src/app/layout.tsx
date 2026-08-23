@@ -33,19 +33,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${instrumentSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <head>
-        {/*
-          Marks the document as JavaScript-capable before first paint, so the
-          scroll-reveal rule in globals.css can hide content only where it will
-          actually be revealed again. Without it, a visitor with JavaScript
-          blocked reads a page of empty space.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.dataset.js="true"`,
-          }}
-        />
-      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

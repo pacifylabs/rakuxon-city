@@ -1,10 +1,20 @@
-# Local development database. Disposable: the schema and seed are portable, so
-# pointing DATABASE_URL at Neon or Supabase later is a one-line change.
+# OPTIONAL. The app does not need Docker, or Postgres, or a .env file.
+#
+#   pnpm install && pnpm build && pnpm start
+#
+# runs the whole site from the bundled snapshot in src/data/snapshot.json.
+# That is the deployable path, and the one to use for a preview.
+#
+# This compose file is for working on the data layer — editing the schema,
+# changing the seed, or running `pnpm verify:parity`. Postgres is the real
+# backend and takes over the moment DATABASE_URL is set.
 #
 #   docker compose up -d
-#   pnpm db:migrate && pnpm db:seed
+#   echo 'DATABASE_URL="postgresql://rakuxon:rakuxon_dev@localhost:55432/rakuxon_city"' >> .env
+#   pnpm db:migrate && pnpm db:seed && pnpm snapshot
 #
-# Host port 55432 because a system Postgres already holds 5432 on this machine.
+# Host port 55432 because a system Postgres often already holds 5432. Any other
+# Postgres works just as well — point DATABASE_URL at it and skip this file.
 
 services:
   postgres:

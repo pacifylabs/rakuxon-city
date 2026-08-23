@@ -27,11 +27,25 @@ const envSchema = z.object({
    */
   NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
 
-  /** Phase 1 — Prisma datasource. A Postgres connection string, not an HTTP URL. */
-  DATABASE_URL: z
-    .string()
-    .min(1, "DATABASE_URL is required")
-    .regex(/^postgres(ql)?:\/\//, "Must be a PostgreSQL connection string"),
+  /**
+   * Prisma datasource, a Postgres connection string. OPTIONAL BY DESIGN.
+   *
+   * The public site is read-only until the admin dashboard lands in Phase 7, so
+   * with no database configured it serves a bundled snapshot of the seeded
+   * catalogue instead. `pnpm build && pnpm start` therefore works on a clean
+   * checkout with no .env, no Docker and no Postgres, which is what makes the
+   * preview deployable anywhere.
+   *
+   * Set it and the app uses Postgres instead, with nothing else to change. It
+   * becomes genuinely required in Phase 7, when staff start writing data.
+   */
+  DATABASE_URL: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z
+      .string()
+      .regex(/^postgres(ql)?:\/\//, "Must be a PostgreSQL connection string")
+      .optional(),
+  ),
 
   /** Phase 5 — Auth.js credentials provider. Generate with `openssl rand -base64 32`. */
   AUTH_SECRET: z.preprocess(
@@ -80,3 +94,9 @@ function loadEnv(): Env {
 }
 
 export const env = loadEnv();
+
+/**
+ * True when a real database is configured. Everything downstream branches on
+ * this rather than reading `process.env` again, so one place decides.
+ */
+export const hasDatabase = Boolean(env.DATABASE_URL);
