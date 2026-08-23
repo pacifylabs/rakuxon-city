@@ -235,6 +235,50 @@ Two consequences to be aware of:
 
 **Resolved as instructed. The launch gate at §2.2 is now load-bearing.**
 
+### 1.16 The photographic hero costs LCP — **breaches PRD §6**
+
+The client chose to anchor the hero on a full-width photograph. That moved the
+homepage LCP element from a text node to an image, and the cost is measured:
+
+| | Text hero | Photographic hero |
+|---|---|---|
+| Mobile performance (median of 3) | 94 | 84 |
+| LCP | ~2s | 3.6–4.4s |
+| Accessibility / best practices / SEO | 100 | 100 |
+| CLS | 0 | 0 |
+
+**PRD §6 requires LCP under 2.5s on a mid-range Android over 3G.** The homepage
+no longer meets it.
+
+What was already done, and what it bought:
+
+- The below-fold estate image still carried `priority` from when it was the LCP.
+  It was preloading 85KB — the page's largest payload — ahead of the real LCP
+  image. Removed.
+- AVIF enabled ahead of WebP, hero `sizes` corrected to the real rendered width,
+  quality 68. Hero went from 74KB to 27KB, a 64% cut.
+- Optimised variants now cached for a year rather than re-encoded per cold hit.
+
+None of it moved LCP much, and the reason is worth recording so nobody repeats
+the work: the hero transfers in **13ms** on the real connection. The 3.8s is
+Lighthouse's *simulated* slow-4G, where LCP is dominated by ~2s of Load Delay —
+discovery and queueing behind 508KB of total page weight — not by the image's
+size. Shrinking it further will not help. A font-preload experiment (dropping
+Inter's preload) was measured and made no difference either; that hypothesis is
+disproved, do not retry it.
+
+The levers that would actually work:
+
+1. **Revert to the text hero.** Recovers ~10 points immediately, undoes the
+   client's explicit choice.
+2. **Reduce total page weight.** 160KB of scripts is the next largest block
+   after images.
+3. **Accept it and amend PRD §6.** Defensible if the client values the hero more
+   than the target — but it should be an explicit decision, not a silent drift.
+
+**Open. Needs the client's call, since they chose the hero knowing it cost an
+LCP image.**
+
 ### 1.13 Which two filters lead each hub is a guess
 
 The filter row is now two tiers: two chips inline, the rest behind "More
