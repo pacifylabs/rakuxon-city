@@ -28,14 +28,14 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "public" / "images" / "pl
 # rather than punching a grey hole through it. canvas / accent-tint / hairline
 # and two quiet stone tones that carry the same sage cast.
 TONES = [
-    ((228, 234, 226), (211, 220, 209)),
-    ((231, 239, 232), (214, 226, 216)),
-    ((226, 231, 223), (208, 216, 205)),
-    ((233, 236, 230), (216, 222, 213)),
-    ((222, 230, 224), (205, 215, 207)),
+    ((206, 216, 204), (176, 190, 174)),
+    ((211, 221, 212), (183, 198, 185)),
+    ((201, 209, 198), (170, 182, 168)),
+    ((214, 220, 210), (186, 196, 182)),
+    ((198, 210, 201), (166, 181, 169)),
 ]
 
-HAIRLINE = (226, 231, 223)
+HAIRLINE = (238, 242, 236)
 
 RATIOS = {
     "hero": (2000, 1125),      # 16:9
@@ -61,7 +61,7 @@ def render(name: str, ratio: str) -> pathlib.Path:
     # A single soft horizon, placed off-centre. Enough to read as ground and sky
     # without pretending to be a picture of anything.
     digest = hashlib.sha256(name.encode()).digest()
-    horizon = int(height * (0.55 + (digest[1] % 20) / 100))
+    horizon = int(height * (0.58 + (digest[1] % 14) / 100))
     draw.rectangle([0, horizon, width, height], fill=band)
 
     # Two faint verticals echoing the container column rules in §4.
