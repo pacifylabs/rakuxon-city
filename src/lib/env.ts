@@ -68,6 +68,15 @@ const envSchema = z.object({
     z.email().optional(),
   ),
 
+  /**
+   * Phase 6 — the Resend audience newsletter sign-ups mirror into.
+   *
+   * Optional. Without it the local `Subscriber` table still records every
+   * sign-up; only the push to Resend is skipped, and `syncedToResendAt` stays
+   * null so a later backfill can find those rows.
+   */
+  RESEND_AUDIENCE_ID: emptyToUndefined,
+
   /** Phase 4 — Cloudflare Turnstile. */
   TURNSTILE_SITE_KEY: emptyToUndefined,
   TURNSTILE_SECRET_KEY: emptyToUndefined,

@@ -632,3 +632,43 @@ model Video {
   @@index([estateId])
   @@map("videos")
 }
+
+/// Footer newsletter sign-ups.
+///
+/// The list is held HERE first and pushed to Resend second, so it survives a
+/// change of email provider and a Resend outage never loses a sign-up.
+///
+/// Consent is deferred-double-opt-in: an address is stored immediately with
+/// `consentGivenAt` set, but stays unconfirmed until it clicks a confirmation
+/// email. That email cannot be sent until RESEND_API_KEY is configured, so
+/// sign-ups accumulate as `confirmedAt = null` and are confirmed in a batch
+/// once it is. Nothing is mailed to an unconfirmed address.
+model Subscriber {
+  id    String @id @default(cuid())
+  email String @unique
+
+  /// Where they subscribed from, for attribution.
+  sourcePath String @map("source_path")
+
+  /// NDPA 2023 evidence — the moment they pressed Subscribe.
+  consentGivenAt DateTime  @map("consent_given_at")
+  /// Null until they click the confirmation link. Never mail a null.
+  confirmedAt    DateTime? @map("confirmed_at")
+
+  /// Single-use, for the confirmation link.
+  confirmationToken String  @unique @map("confirmation_token")
+  /// Long-lived, for the unsubscribe link. Issued now, used in Phase 7.
+  unsubscribeToken  String  @unique @map("unsubscribe_token")
+
+  /// Set once the address reaches the Resend audience. Null means it has not
+  /// synced yet — a retry can find them without re-pushing the whole list.
+  syncedToResendAt DateTime? @map("synced_to_resend_at")
+
+  unsubscribedAt DateTime? @map("unsubscribed_at")
+  ipAddress      String?   @map("ip_address")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  @@index([confirmedAt])
+  @@index([syncedToResendAt])
+  @@map("subscribers")
+}

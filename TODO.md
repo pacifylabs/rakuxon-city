@@ -359,6 +359,57 @@ Seeding a second sales user per track would make it demonstrable, and would
 deviate from the Phase 1 spec. Worth raising with the client rather than doing
 silently.
 
+### 1.19 Email is wired but SENDING NOTHING — **two blockers**
+
+Every enquiry and every acknowledgement is composed correctly and then skipped,
+because `RESEND_API_KEY` is not set. From a real submission:
+
+```
+[email] skipped "New enquiry (RC-E-QKF9SG)" — RESEND_API_KEY not set
+[email] skipped "We have your enquiry — Rakuxon City" — RESEND_API_KEY not set
+```
+
+Nothing is lost: the enquiry persists and the Phase 7 inbox will show it. But
+no one is being notified, and that is not obvious from the site.
+
+**Blocker 1 — configuration.** `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL` must
+be set, and the from-address must sit on a domain verified inside Resend or
+every send is rejected.
+
+**Blocker 2 — the target is not a real mailbox.** Notifications route to the
+assigned sales user, currently `land@rakuxoncity.com` and
+`homes@rakuxoncity.com`. Those are SEEDED PLACEHOLDERS. Setting the Resend key
+alone would send notifications successfully into nowhere, which is worse than
+not sending them, because the logs would look healthy. Either create those
+mailboxes or change the seeded users to addresses that exist.
+
+Same applies to `INVESTOR_NOTIFICATION_EMAIL`: unset, so partnership
+notifications are skipped rather than — deliberately — falling back to the
+sales inbox.
+
+### 1.20 Newsletter: no unsubscribe route — **do not send a bulk email yet**
+
+Sign-ups are live and stored. Every subscriber is issued an `unsubscribeToken`
+at creation, but the `/unsubscribe` page that consumes it is deferred to Phase
+7 at the client's decision.
+
+**Consequence, stated plainly: no bulk newsletter may be sent until that page
+exists.** A marketing email without a working unsubscribe is not a design
+shortcoming, it is a compliance failure under NDPA 2023, and the tokens being
+ready is not the same as the route being ready.
+
+Sign-ups accumulating in the meantime is fine — nothing is mailed to them.
+
+### 1.21 Newsletter confirmations are pending, not sent
+
+Subscribers are stored with `confirmedAt: null` and are never mailed in that
+state. The confirmation email needs `RESEND_API_KEY` (see §1.19).
+
+When it lands, a one-off backfill should mail everyone with
+`confirmedAt: null`, and only those who click become confirmed. Only confirmed
+addresses are pushed to the Resend audience — `syncedToResendAt` marks which
+have made it, so a retry can find the rest without re-pushing the list.
+
 ### 2.1 Contact details — partly real, one unverified
 
 `src/lib/site.ts` now holds every contact detail, taken from the sibling
