@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
@@ -7,14 +6,16 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { getDeliveredEstateCount, getEstates } from "@/lib/content";
 import { getLaneCounts } from "@/lib/listings";
 import { getPlacement } from "@/lib/media";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "About — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "About",
   description:
     "Who Rakuxon City is, how we work, and why the documentation position is published on every listing.",
-};
+  path: "/about",
+});
 
 /**
  * The About page.

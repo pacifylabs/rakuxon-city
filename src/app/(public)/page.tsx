@@ -20,6 +20,10 @@ import {
 import { getLaneCounts, getSpotlightListings } from "@/lib/listings";
 import { getFeaturedVideos } from "@/lib/videos";
 import { getPlacement } from "@/lib/media";
+import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { faqJsonLd } from "@/lib/schema";
+import { questions } from "@/components/home/faq";
 
 const description =
   "Serviced plots and completed homes across Lagos, Ogun and the FCT. Every listing shows its title type and documentation before it shows a price.";
@@ -28,18 +32,17 @@ const description =
 export async function generateMetadata(): Promise<Metadata> {
   const og = await getPlacement("site.ogImage");
 
-  return {
-    title: "Rakuxon City — land and homes, with the papers in order",
+  return pageMetadata({
+    // Absolute: the root template would otherwise append the brand a second
+    // time to a title that already carries it.
+    title: "Rakuxon City",
+    absoluteTitle: "Rakuxon City — land and homes, with the papers in order",
     description,
-    openGraph: {
-      title: "Rakuxon City",
-      description,
-      type: "website",
-      images: og
-        ? [{ url: og.url, width: og.width, height: og.height, alt: og.alt }]
-        : undefined,
-    },
-  };
+    path: "/",
+    images: og
+      ? [{ url: og.url, width: og.width, height: og.height, alt: og.alt }]
+      : undefined,
+  });
 }
 
 /**
@@ -83,6 +86,10 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* FR-5.x — the accordion below is real Q&A, so it is eligible for
+          FAQ markup, built from the same array the accordion renders. */}
+      <JsonLd data={faqJsonLd(questions)} />
+
       <Hero counts={counts} slides={heroSlides} />
       <FeaturedEstate estates={estates} />
       <TwoLane counts={counts} />

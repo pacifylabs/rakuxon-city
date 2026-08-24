@@ -1,6 +1,6 @@
 import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
-import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -18,7 +18,7 @@ export const metadata = pageMetadata({
  * decisions that have not been made: no analytics provider has been chosen, no
  * retention period has been set by the client, and no NDPR/NDPA data
  * protection officer or compliance organisation has been appointed. Each is
- * flagged inline below and recorded in TODO.md §2.
+ * flagged inline below and recorded in TODO.md §2.2.
  */
 const sections: LegalSection[] = [
   {
@@ -64,7 +64,7 @@ const sections: LegalSection[] = [
       "An enquiry that does not lead to a purchase is kept while we are still in contact about it, and then deleted.",
       /* TODO: the client has not set a retention period. A specific figure —
          "twelve months", "twenty-four months" — must replace this sentence
-         before launch. See TODO.md §2. */
+         before launch. See TODO.md §2.2. */
       "The exact retention period is being confirmed and will be stated here.",
       "Where you buy from us, we keep the transaction records for as long as the law requires us to.",
     ],
@@ -90,9 +90,7 @@ const sections: LegalSection[] = [
   },
   {
     heading: "Your rights",
-    body: [
-      "Under the Nigeria Data Protection Act 2023 you can ask us to:",
-    ],
+    body: ["Under the Nigeria Data Protection Act 2023 you can ask us to:"],
     points: [
       "Tell you what personal data of yours we hold",
       "Give you a copy of it",

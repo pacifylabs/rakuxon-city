@@ -4,10 +4,9 @@ import { posterUrl, watchUrl } from "@/lib/video";
 /**
  * FR-V1.9 — `VideoObject` markup for each video on a page.
  *
- * NOTE: the requirement says "alongside the existing `RealEstateListing`
- * markup". There is no `RealEstateListing` markup on this site yet — no page
- * emits structured data of any kind. That belongs to the listing pages rather
- * than to this addendum, so it is flagged rather than quietly built here.
+ * FR-V1.9 asks for this "alongside the existing `RealEstateListing` markup",
+ * and that markup now exists — see lib/schema.ts. Both are emitted on a
+ * listing detail page, and they reference the same organisation by @id.
  *
  * `contentUrl` deliberately points at YouTube rather than at an mp4: the video
  * is hosted there, and claiming otherwise would be a lie to a crawler.

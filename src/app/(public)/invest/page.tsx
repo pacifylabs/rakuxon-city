@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getEstates } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Partner with us — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Partner with us",
   description:
     "How Rakuxon City works with private partners on estate development. Descriptive only; terms are agreed per project and discussed directly.",
-};
+  path: "/invest",
+});
 
 /**
  * 01_SITE_ARCHITECTURE.md §5.7, FR-4.1 to FR-4.5, and PRD §8.

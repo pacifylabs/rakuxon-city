@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
@@ -10,14 +9,16 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getEstates } from "@/lib/content";
 import type { EstateStatus } from "@/generated/prisma/enums";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Estates — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Estates",
   description:
     "The estates behind every plot and house we sell, across Lagos, Ogun and the FCT — including the ones already delivered.",
-};
+  path: "/estates",
+});
 
 const statusLabels: Record<EstateStatus, string> = {
   ACTIVE: "Selling now",

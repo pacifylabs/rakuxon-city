@@ -245,7 +245,7 @@ Two consequences to be aware of:
 - Nothing on a listing page now tells a visitor the photograph is not the actual
   plot. The site states a survey number and a title type beside it, so a buyer
   has every reason to read the image as the property. This is a stronger reason
-  than usual to close §2.2 before launch.
+  than usual to close §2.5 before launch.
 
 **Resolved as instructed. The launch gate at §2.2 is now load-bearing.**
 
@@ -330,7 +330,53 @@ flagged rather than quietly built.
 
 ## 2. Real content required — **launch gate**
 
-### 2.0 Buyer-guide copy is unreviewed — **legal sign-off required**
+### 2.1 Contact details — partly real, one unverified
+
+`src/lib/site.ts` now holds every contact detail, taken from the sibling
+`rakuxon-care` project, which had already separated group-level facts from
+brand-specific ones.
+
+**Real and carried across:** the Rakuxon group social accounts (Instagram,
+Facebook, X, TikTok, YouTube) and the Nigerian WhatsApp line
+**+234 816 717 8847**, which replaces `+234 800 000 0000` — a placeholder that
+was sitting in a `tel:` link on every page and is not a dialable number.
+
+**Deliberately NOT carried across:** `hello@rakuxoncare.co.uk`, the CQC status,
+the Employment Agencies regulations and "Rakuxon Care Ltd". Those belong to a
+UK home-care business; a Lagos buyer enquiring about a plot must not be routed
+to any of them.
+
+**Still unverified — needed before launch:**
+
+- `hello@rakuxoncity.com`. Conventional for the domain but not published
+  anywhere, and it is the address every enquiry mailto now points at. Confirm
+  the mailbox exists and is monitored.
+- Registered company name and RC number. Needed by the terms of use, first
+  section. Not published on rakuxon.com and not in the care project.
+- A Nigerian office address. rakuxon.com's London address belongs to the UK
+  businesses. Omitted rather than invented, which is also why the
+  `RealEstateAgent` schema carries `areaServed` and no `PostalAddress`.
+- Whether the group phone should be presented as the property line at all, or
+  whether a dedicated Rakuxon City number should be obtained first.
+
+### 2.2 Privacy notice and terms are unreviewed — **legal sign-off required**
+
+`/privacy` and `/terms` are written and live, describing what the site actually
+does rather than boilerplate. Both carry a visible "Awaiting sign-off" banner.
+
+Under the Nigeria Data Protection Act 2023 an inaccurate privacy notice is a
+compliance problem, not an editorial one. Two statements in it are placeholders
+that must be replaced with decisions, not with wording:
+
+- **Retention period.** The notice says the exact period "is being confirmed".
+  A figure is needed.
+- **Analytics.** The notice states that none runs, which is true today. If any
+  is added, that section must be rewritten _before_ it ships, and a consent
+  banner is likely required.
+
+The terms need the registered company name and RC number above.
+
+### 2.3 Buyer-guide copy is unreviewed — **legal sign-off required**
 
 `prisma/article-bodies.ts` carries full body copy for all twelve guides,
 written at the client's instruction to replace the placeholder line that left
@@ -350,7 +396,7 @@ more credibility than an empty page would have.
 or replaces them. The file is deliberately separate from `seed.ts` so it can be
 handed to a reviewer on its own.
 
-### 2.1 Trust-band figures are invented
+### 2.4 Trust-band figures are invented
 
 `src/components/home/trust-band.tsx` — years operating, plots sold, estates
 delivered. Every one is a placeholder marked `TODO: real figures`. PRD §8 logs
@@ -359,7 +405,7 @@ launching with invented trust figures as a **High** risk.
 The delivered-estate count is the exception: it reads from the database, because
 it can be true today.
 
-### 2.2 Photography — all stand-ins, none of the actual properties
+### 2.5 Photography — all stand-ins, none of the actual properties
 
 Every image on the site is now a real photograph. There are no designed
 placeholder tiles left anywhere: `scripts/generate_placeholders.py` and
@@ -403,7 +449,7 @@ estates.
 `scripts/photography-sources.json`, `public/images/photography/` and
 `IMAGE_CREDITS.md`.
 
-### 2.2b Image weight is now a live performance concern
+### 2.6 Image weight is now a live performance concern
 
 The photographs cost real bytes where the flat tiles cost none. First build with
 them dropped the homepage from 92 to **61**. Recovered to **85** by shrinking
@@ -414,31 +460,18 @@ quality to 72.
 The homepage still ships ~620KB of imagery. Real photography will be heavier
 again, so PRD §6's LCP target needs watching at the Phase 8 performance pass.
 
-### 2.3 Contact details
-
-`src/components/layout/footer.tsx` — `+234 800 000 0000`,
-`hello@rakuxoncity.com`, and the `land@` / `homes@` addresses on the homepage
-enquiry band are all placeholders.
-
-### 2.4 Article bodies
-
-The four seeded articles carry a real title, category and excerpt, but the body
-is `"Full article copy pending client sign-off."` The excerpt is what the
-homepage teaser renders, so the homepage looks complete and
-`/resources/[slug]` will not.
-
-### 2.5 Testimonial photographs
+### 2.7 Testimonial photographs
 
 No avatars are seeded. Design system §11 permits real buyer photographs only, so
 the component falls back to initials rather than using stock faces. Real
 photographs need the buyers' permission alongside the quotes.
 
-### 2.6 Floor plans
+### 2.8 Floor plans
 
 None seeded. House detail pages show "The floor plan for this unit is available
 on request" where the drawing would go.
 
-### 2.7 Per-listing title sign-off
+### 2.9 Per-listing title sign-off
 
 PRD §8 logs inaccurate documentation on a listing as a **High** risk, mitigated
 by client sign-off per listing at publish. None of the seeded listings have been

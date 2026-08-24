@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ListingHub } from "@/components/listings/listing-hub";
 import {
   getFilterOptions,
@@ -11,12 +10,14 @@ import {
   priceBands,
 } from "@/lib/listing-query";
 import { BuildStage, HouseType, ListingStatus } from "@/generated/prisma/enums";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Homes for sale — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Homes for sale",
   description:
     "Completed and in-build houses across Lagos, Ogun and the FCT, with finishing specification and handover date stated up front.",
-};
+  path: "/homes",
+});
 
 const houseTypeLabels: Record<HouseType, string> = {
   DETACHED: "Detached",

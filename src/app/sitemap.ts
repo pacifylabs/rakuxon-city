@@ -49,12 +49,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
   ];
 
+  // Next normalises the root canonical to the bare origin, so the sitemap
+  // uses the same form. Two spellings of the homepage URL across canonical and
+  // sitemap is the kind of thing that reads as duplicate content.
   const entry = (
     path: string,
     priority: number,
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"],
   ) => ({
-    url: absoluteUrl(path),
+    url: path === "/" ? absoluteUrl("/").replace(/\/$/, "") : absoluteUrl(path),
     lastModified: now,
     changeFrequency,
     priority,

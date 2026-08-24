@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Image credits — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Image credits",
   description:
     "Attribution for the stand-in photography used on this site while the client's own photographs are produced.",
-};
+  path: "/credits",
+});
 
 /**
  * Where the photography credits live now that the on-image label is gone.

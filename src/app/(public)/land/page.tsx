@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { ListingHub } from "@/components/listings/listing-hub";
 import { titleTypeLabel } from "@/components/ui/badge";
 import {
@@ -13,12 +12,14 @@ import {
   priceBands,
 } from "@/lib/listing-query";
 import { ListingStatus, TitleType } from "@/generated/prisma/enums";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Land for sale — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Land for sale",
   description:
     "Serviced plots across Lagos, Ogun and the FCT, each listed with its title type, survey number and documentation.",
-};
+  path: "/land",
+});
 
 export default async function LandHubPage({
   searchParams,

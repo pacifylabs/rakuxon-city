@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Accordion } from "@/components/ui/accordion";
 import {
   Badge,
@@ -23,6 +22,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { ListingCard } from "@/components/listings/listing-card";
 import { getSampleListings } from "@/lib/listings";
 import { BuildStage, ListingStatus, TitleType } from "@/generated/prisma/enums";
+import { pageMetadata } from "@/lib/seo";
 
 /**
  * Phase 2 verification surface — every primitive in every variant, checked
@@ -31,10 +31,13 @@ import { BuildStage, ListingStatus, TitleType } from "@/generated/prisma/enums";
  * Not part of the site. It carries noindex and is deleted at the Phase 8
  * launch gate.
  */
-export const metadata: Metadata = {
-  title: "Primitives — Rakuxon City",
-  robots: { index: false, follow: false },
-};
+export const metadata = pageMetadata({
+  title: "Primitives",
+  description:
+    "Internal gallery of the design system components. Not part of the public site.",
+  path: "/primitives",
+  noIndex: true,
+});
 
 export default async function PrimitivesPage() {
   const listings = await getSampleListings(6);

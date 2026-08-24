@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
@@ -9,14 +8,16 @@ import { cn } from "@/lib/cn";
 import { getArticles } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
 import { ArticleCategory } from "@/generated/prisma/enums";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Buyer guides — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Buyer guides",
   description:
     "Practical guides to title, verification, payment plans and estate living — written for Nigerian land and home buyers.",
-};
+  path: "/resources",
+});
 
 /** FR-5.1 — the four categories, in the order a buyer meets them. */
 const categoryOrder: ArticleCategory[] = [

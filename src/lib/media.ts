@@ -13,7 +13,7 @@ import * as fixture from "@/lib/data/fixture";
  * is still set on every one of these rows, because the admin needs to know
  * which images are placeholders even though the public pages no longer say so.
  *
- * See TODO §2.2 — replacing them with real photography is a launch gate.
+ * See TODO §2.5 — replacing them with real photography is a launch gate.
  */
 
 /**

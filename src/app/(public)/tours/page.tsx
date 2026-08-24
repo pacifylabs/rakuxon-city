@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, Section } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -13,14 +12,16 @@ import {
   parseVideoFilters,
 } from "@/lib/video-query";
 import { videoKindLabels, videoKindOrder } from "@/lib/video";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Video tours — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Video tours",
   description:
     "Drone tours, walkthroughs and estate overviews of the plots and homes we sell across Lagos, Ogun and the FCT.",
-};
+  path: "/tours",
+});
 
 /** FR-V1.4 — every video, filterable by kind and estate, paginated at twelve. */
 export default async function ToursPage({ searchParams }: PageProps<"/tours">) {

@@ -12,7 +12,7 @@
  *  costs more than an empty page would.
  *
  *  Before launch: the client's solicitor reads all twelve and signs off, or
- *  replaces them. Tracked in TODO.md §2.
+ *  replaces them. Tracked in TODO.md §2.3.
  * ─────────────────────────────────────────────────────────────────────────
  *
  * Kept out of seed.ts because prose and data have different reviewers — the

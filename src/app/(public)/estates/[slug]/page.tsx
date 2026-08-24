@@ -18,6 +18,9 @@ import { env } from "@/lib/env";
 import { LISTINGS_PER_PAGE } from "@/lib/listing-query";
 import type { EstateStatus } from "@/generated/prisma/enums";
 import { BackLink } from "@/components/layout/back-link";
+import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -37,12 +40,25 @@ export async function generateMetadata({
 }: PageProps<"/estates/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const estate = await getEstateDetail(slug);
-  if (!estate) return { title: "Estate not found — Rakuxon City" };
+  if (!estate) return { title: "Estate not found" };
 
-  return {
-    title: `${estate.name} — Rakuxon City`,
+  const image = estate.media[0]?.media;
+
+  return pageMetadata({
+    title: estate.name,
     description: estate.description.slice(0, 155),
-  };
+    path: `/estates/${estate.slug}`,
+    images: image
+      ? [
+          {
+            url: image.url,
+            width: image.width,
+            height: image.height,
+            alt: image.alt,
+          },
+        ]
+      : undefined,
+  });
 }
 
 export default async function EstateDetailPage({
@@ -90,6 +106,13 @@ export default async function EstateDetailPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Estates", path: "/estates" },
+          { name: estate.name, path: `/estates/${estate.slug}` },
+        ])}
+      />
       <Section className="pb-0 lg:pb-0">
         <Container>
           <BackLink href="/estates" label="All estates" />

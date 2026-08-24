@@ -8,6 +8,10 @@ import { VideoFacade } from "@/components/video/video-facade";
 import { getVideoDetail, getVideoSlugs } from "@/lib/videos";
 import { formatDuration, posterUrl, videoKindLabels } from "@/lib/video";
 import { BackLink } from "@/components/layout/back-link";
+import { absoluteUrl, origin } from "@/lib/seo";
+import { VideoStructuredData } from "@/components/video/video-structured-data";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -35,6 +39,10 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // FR-V1.6 — these pages exist to be shared, so the canonical matters more
+    // here than anywhere. `video.other` is kept rather than going through
+    // pageMetadata, which only emits `website`.
+    alternates: { canonical: absoluteUrl(`/tours/${video.slug}`) },
     openGraph: {
       title: video.title,
       description,
@@ -59,6 +67,21 @@ export default async function TourPage({ params }: PageProps<"/tours/[slug]">) {
   return (
     <Section className="pt-10 lg:pt-16">
       <Container>
+        {/*
+          FR-V1.9. These pages exist to be shared, so the video markup matters
+          more here than on a listing — it is what produces a video result
+          rather than a plain link. Breadcrumbs too, since the visible trail was
+          removed at the client's request (TODO §1.14).
+        */}
+        <VideoStructuredData videos={[video]} siteUrl={origin()} />
+        <JsonLd
+          data={breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Video tours", path: "/tours" },
+            { name: video.title, path: `/tours/${video.slug}` },
+          ])}
+        />
+
         <BackLink href="/tours" label="All video tours" />
 
         <div className="mx-auto max-w-4xl">

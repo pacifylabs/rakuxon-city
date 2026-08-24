@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import { InvestorEnquiryForm } from "@/components/forms/investor-enquiry-form";
 import { Container, Section } from "@/components/ui/container";
 import { BackLink } from "@/components/layout/back-link";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Start a conversation — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Start a conversation",
   description:
     "Tell us about the kind of development project you work on. A member of the team will make contact.",
-  robots: { index: false, follow: true },
-};
+  path: "/invest/enquire",
+  noIndex: true,
+});
 
 /**
  * FR-4.5 — the confirmation says only that the team will make contact. Nothing

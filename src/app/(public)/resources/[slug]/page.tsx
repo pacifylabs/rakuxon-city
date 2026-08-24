@@ -8,6 +8,9 @@ import { getArticle, getArticleSlugs, getArticles } from "@/lib/content";
 import { formatMonthYear } from "@/lib/format";
 import type { ArticleCategory } from "@/generated/prisma/enums";
 import { BackLink } from "@/components/layout/back-link";
+import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -28,12 +31,25 @@ export async function generateMetadata({
 }: PageProps<"/resources/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticle(slug);
-  if (!article) return { title: "Article not found — Rakuxon City" };
+  if (!article) return { title: "Guide not found" };
 
-  return {
-    title: `${article.title} — Rakuxon City`,
+  const image = article.coverImage;
+
+  return pageMetadata({
+    title: article.title,
     description: article.excerpt,
-  };
+    path: `/resources/${article.slug}`,
+    images: image
+      ? [
+          {
+            url: image.url,
+            width: image.width,
+            height: image.height,
+            alt: image.alt,
+          },
+        ]
+      : undefined,
+  });
 }
 
 export default async function ArticlePage({
@@ -59,6 +75,22 @@ export default async function ArticlePage({
 
   return (
     <>
+      <JsonLd
+        data={articleJsonLd({
+          slug: article.slug,
+          title: article.title,
+          excerpt: article.excerpt,
+          publishedAt: article.publishedAt,
+          coverImage: article.coverImage,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Buyer guides", path: "/resources" },
+          { name: article.title, path: `/resources/${article.slug}` },
+        ])}
+      />
       <Section className="pt-10 pb-0 lg:pt-16 lg:pb-0">
         <Container>
           <BackLink href="/resources" label="All buyer guides" />

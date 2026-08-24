@@ -13,7 +13,10 @@ type CollageImage = { url: string; alt: string; width: number; height: number };
  * Answers are deliberately concrete. A buyer arriving here is checking whether
  * we will be straight with them, and vague reassurance reads as evasion.
  */
-const questions = [
+/* Exported so the homepage can emit FAQPage markup from the same source
+   the accordion renders — schema that drifts from the visible answer is a
+   structured-data violation, not just untidy. */
+export const questions = [
   {
     question: "How do I know the title on a plot is genuine?",
     answer:

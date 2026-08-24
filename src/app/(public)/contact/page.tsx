@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { site, telHref } from "@/lib/site";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
 import { Container, Section } from "@/components/ui/container";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact — Rakuxon City",
+export const metadata = pageMetadata({
+  title: "Contact",
   description:
     "Talk to the land or homes team about a plot, a house, or what you are looking for.",
-};
+  path: "/contact",
+});
 
 /**
  * FR-3.7 — the web form is the sole tracked enquiry channel. The phone number

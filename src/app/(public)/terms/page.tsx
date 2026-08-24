@@ -1,6 +1,6 @@
 import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
-import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -19,7 +19,7 @@ export const metadata = pageMetadata({
  *
  * TODO — LAUNCH GATE. Not reviewed by a solicitor. The company's registered
  * name and RC number are unknown and are needed for the first section. See
- * TODO.md §2.
+ * TODO.md §2.2.
  */
 const sections: LegalSection[] = [
   {

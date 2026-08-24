@@ -22,6 +22,9 @@ import {
 } from "@/lib/listings";
 import Link from "next/link";
 import { BackLink } from "@/components/layout/back-link";
+import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, listingJsonLd } from "@/lib/schema";
 
 /** ISR — listings change through the admin dashboard, not on every request. */
 export const revalidate = 3600;
@@ -36,12 +39,25 @@ export async function generateMetadata({
 }: PageProps<"/land/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const listing = await getListingDetail(slug);
-  if (!listing) return { title: "Plot not found — Rakuxon City" };
+  if (!listing) return { title: "Plot not found" };
 
-  return {
-    title: `${listing.title} — Rakuxon City`,
+  const image = listing.media[0]?.media;
+
+  return pageMetadata({
+    title: listing.title,
     description: listing.description.slice(0, 155),
-  };
+    path: `/land/${listing.slug}`,
+    images: image
+      ? [
+          {
+            url: image.url,
+            width: image.width,
+            height: image.height,
+            alt: image.alt,
+          },
+        ]
+      : undefined,
+  });
 }
 
 export default async function PlotDetailPage({
@@ -84,6 +100,39 @@ export default async function PlotDetailPage({
       </Section>
 
       <VideoStructuredData videos={videos} siteUrl={env.NEXT_PUBLIC_SITE_URL} />
+
+      {/*
+        FR-1.9 — the listing itself, plus the breadcrumb trail.
+
+        The VISIBLE breadcrumb was removed at the client's request (TODO
+        §1.14), replaced by an active state on the primary nav. The structured
+        version stays: it is what renders the trail beneath a search result,
+        and dropping it would cost click-through for no visual gain.
+      */}
+      <JsonLd
+        data={listingJsonLd({
+          slug: listing.slug,
+          title: listing.title,
+          description: listing.description,
+          location: listing.location,
+          state: listing.state,
+          price: listing.price === null ? null : listing.price.toString(),
+          priceOnRequest: listing.priceOnRequest,
+          status: listing.status,
+          type: listing.type,
+          images: images.map((image) => ({ url: image.url })),
+          land: land
+            ? { plotSize: land.plotSize.toString(), plotUnit: land.plotUnit }
+            : null,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Land", path: "/land" },
+          { name: listing.title, path: `/land/${listing.slug}` },
+        ])}
+      />
 
       {/*
         §7 — the ribbon sits directly beneath the gallery, before the

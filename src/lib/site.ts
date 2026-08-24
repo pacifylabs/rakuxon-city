@@ -37,7 +37,7 @@ export const site = {
    * TODO: unverified. Not published on rakuxon.com and not present in the care
    * project, which only carries the care brand's own address. This is the
    * conventional form for the domain and is the address the enquiry mailto
-   * links point at, so it must be confirmed before launch — see TODO.md §2.
+   * links point at, so it must be confirmed before launch — see TODO.md §2.1.
    */
   email: "hello@rakuxoncity.com",
 

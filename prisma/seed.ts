@@ -1849,7 +1849,7 @@ async function main() {
          * page than a page announcing that its own copy is missing.
          *
          * See prisma/article-bodies.ts: NOT yet reviewed by a lawyer, and a
-         * launch gate in TODO.md §2.
+         * launch gate in TODO.md §2.3.
          */
         body: articleBodies[seed.slug] ?? seed.excerpt,
         coverImageId: cover.id,
