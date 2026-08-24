@@ -209,6 +209,8 @@ export default async function PlotDetailPage({
 
             <div className="lg:col-span-5">
               <EnquiryPanel
+                listingId={listing.id}
+                showInspectionDate={false}
                 reference={listing.reference}
                 price={listing.price?.toString() ?? null}
                 priceOnRequest={listing.priceOnRequest}

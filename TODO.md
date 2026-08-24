@@ -330,6 +330,35 @@ flagged rather than quietly built.
 
 ## 2. Real content required — **launch gate**
 
+### 1.17 Rate limiting is per-instance
+
+`src/lib/rate-limit.ts` holds its windows in process memory. On a platform that
+runs several serverless instances, an attacker gets the limit multiplied by the
+number of instances they happen to hit.
+
+It still does the job it is there for — stopping a script hammering one
+endpoint, and a frustrated visitor pressing send eleven times. Turnstile is
+what stands between the site and a determined attacker.
+
+Phase 7 introduces Redis for job queues. Moving this to a shared store then is
+a small change.
+
+### 1.18 Round-robin distribution is proven by unit test, not end to end
+
+`selectAssignee` spreads work across every eligible user on a track, and
+`src/lib/routing.test.ts` covers that with 14 tests including the distribution
+case.
+
+**The live path cannot demonstrate it.** The seed has exactly one land-track
+user and one homes-track user, per Phase 1 of the implementation plan, so every
+land enquiry correctly goes to the same person whatever the algorithm does. The
+end-to-end check therefore proves *correct routing* — land never reaches the
+homes desk — but not *distribution*.
+
+Seeding a second sales user per track would make it demonstrable, and would
+deviate from the Phase 1 spec. Worth raising with the client rather than doing
+silently.
+
 ### 2.1 Contact details — partly real, one unverified
 
 `src/lib/site.ts` now holds every contact detail, taken from the sibling

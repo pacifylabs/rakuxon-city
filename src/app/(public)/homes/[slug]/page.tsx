@@ -286,6 +286,8 @@ export default async function HouseDetailPage({
 
             <div className="lg:col-span-5">
               <EnquiryPanel
+                listingId={listing.id}
+                showInspectionDate={true}
                 reference={listing.reference}
                 price={listing.price?.toString() ?? null}
                 priceOnRequest={listing.priceOnRequest}

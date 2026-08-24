@@ -1,9 +1,8 @@
 "use client";
 
-import {
-  NotLiveNotice,
-  useNotLiveSubmit,
-} from "@/components/forms/not-live-notice";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 import {
   Checkbox,
   Field,
@@ -11,73 +10,169 @@ import {
   Select,
   Textarea,
 } from "@/components/ui/field";
+import { TurnstileWidget } from "@/components/forms/turnstile-widget";
+import { FormStatus } from "@/components/forms/form-status";
+import { useEnquirySubmit } from "@/components/forms/use-enquiry-submit";
+import type { EnquirySource } from "@/generated/prisma/enums";
 
 /**
- * The enquiry form, rendered but deliberately inert until Phase 6.
+ * The enquiry form. Live from Phase 6.
  *
- * Every control is genuinely `disabled`, not merely unwired. A stakeholder
- * reviewing this preview cannot type an enquiry, watch it appear to send, and
- * then wonder why nobody called them back — which is exactly what happens when
- * a form is left live against a handler that does not exist yet.
+ * FR-3.1 — captures the contact details plus the source context: the listing
+ * it came from, the page path, and a campaign parameter where one is present.
+ * FR-3.2 adds a preferred inspection date on home listings.
  *
- * 03_IMPLEMENTATION_PLAN.md Phase 6 removes `preview` and wires this to
- * POST /api/enquiries with Turnstile, rate limiting and track routing.
+ * Two things this does that a form usually does not:
+ *
+ *   - It never clears on failure. The submitted values stay in the fields, so
+ *     a rejected submission costs a click rather than retyping everything. A
+ *     buyer who has to type their enquiry twice usually does not.
+ *   - Server-side field errors are placed on the fields they belong to, not
+ *     collected into a banner at the top.
  */
 export function EnquiryForm({
+  listingId,
   listingReference,
-  preview = true,
+  source = "CONTACT",
+  showInspectionDate = false,
 }: {
-  /** Pre-filled on a listing page so the enquiry arrives with context attached. */
+  /** The database id, which is what the API routes on — FR-3.3. */
+  listingId?: string;
+  /** The human reference, shown to the enquirer for context. */
   listingReference?: string;
-  preview?: boolean;
+  source?: EnquirySource;
+  /** FR-3.2 — home detail pages only. */
+  showInspectionDate?: boolean;
 }) {
-  const { mailto, onSubmit } = useNotLiveSubmit("Property enquiry");
+  const pathname = usePathname();
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const { state, fieldErrors, message, reference, submit } = useEnquirySubmit();
+
+  if (state === "succeeded") {
+    return (
+      <div role="status" className="flex flex-col gap-4">
+        <p className="text-heading text-ink">Thank you — we have it.</p>
+        <p className="text-body text-ink-secondary">
+          A member of the team will be in touch. Your reference is{" "}
+          <span className="tabular text-ink">{reference}</span>, and we have
+          emailed you a copy.
+        </p>
+        <p className="text-body text-ink-secondary">
+          When we reply we will send the documentation position on the property
+          — the title type, the survey number, and what we hold — so you can
+          begin your own checks.
+        </p>
+        <p className="text-caption text-ink-muted">
+          We handle your details as set out in our{" "}
+          <Link
+            href="/privacy"
+            className="text-accent underline underline-offset-4"
+          >
+            privacy notice
+          </Link>
+          .
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form
       className="flex flex-col gap-5"
-      onSubmit={preview ? onSubmit : undefined}
+      noValidate
+      onSubmit={(event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        submit({
+          source,
+          listingId: listingId ?? null,
+          pagePath: pathname,
+          campaign:
+            new URLSearchParams(window.location.search).get("utm_campaign") ??
+            null,
+          name: String(data.get("name") ?? ""),
+          email: String(data.get("email") ?? ""),
+          phone: String(data.get("phone") ?? ""),
+          message: String(data.get("message") ?? ""),
+          preferredInspectionDate: data.get("preferredInspectionDate")
+            ? String(data.get("preferredInspectionDate"))
+            : null,
+          consent: data.get("consent") === "on",
+          turnstileToken,
+        });
+      }}
     >
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full name" htmlFor="enquiry-name">
+        <Field
+          label="Full name"
+          htmlFor="enquiry-name"
+          error={fieldErrors.name}
+        >
           <Input
             id="enquiry-name"
             name="name"
             autoComplete="name"
             placeholder="Your name"
+            aria-invalid={Boolean(fieldErrors.name)}
           />
         </Field>
 
-        <Field label="Phone number" htmlFor="enquiry-phone">
+        <Field
+          label="Phone number"
+          htmlFor="enquiry-phone"
+          error={fieldErrors.phone}
+        >
           <Input
             id="enquiry-phone"
             name="phone"
             type="tel"
             autoComplete="tel"
             placeholder="0803 123 4567"
+            aria-invalid={Boolean(fieldErrors.phone)}
           />
         </Field>
 
-        <Field label="Email address" htmlFor="enquiry-email">
+        <Field
+          label="Email address"
+          htmlFor="enquiry-email"
+          error={fieldErrors.email}
+        >
           <Input
             id="enquiry-email"
             name="email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
+            aria-invalid={Boolean(fieldErrors.email)}
           />
         </Field>
 
-        <Field label="What are you looking for?" htmlFor="enquiry-interest">
-          <Select id="enquiry-interest" name="interest" defaultValue="">
-            <option value="" disabled>
-              Choose one
-            </option>
-            <option value="land">A plot of land</option>
-            <option value="home">A completed or in-build home</option>
-            <option value="both">Still deciding</option>
-          </Select>
-        </Field>
+        {showInspectionDate ? (
+          /* FR-3.2 — optional, and only where an inspection makes sense. */
+          <Field
+            label="Preferred inspection date"
+            htmlFor="enquiry-inspection"
+            hint="Optional"
+          >
+            <Input
+              id="enquiry-inspection"
+              name="preferredInspectionDate"
+              type="date"
+              min={new Date().toISOString().slice(0, 10)}
+            />
+          </Field>
+        ) : (
+          <Field label="What are you looking for?" htmlFor="enquiry-interest">
+            <Select id="enquiry-interest" name="interest" defaultValue="">
+              <option value="" disabled>
+                Choose one
+              </option>
+              <option value="land">A plot of land</option>
+              <option value="home">A completed or in-build home</option>
+              <option value="both">Still deciding</option>
+            </Select>
+          </Field>
+        )}
       </div>
 
       {listingReference ? (
@@ -91,12 +186,17 @@ export function EnquiryForm({
         </Field>
       ) : null}
 
-      <Field label="Message" htmlFor="enquiry-message">
+      <Field
+        label="Message"
+        htmlFor="enquiry-message"
+        error={fieldErrors.message}
+      >
         <Textarea
           id="enquiry-message"
           name="message"
           rows={4}
           placeholder="Tell us which estate you are interested in, and when you would like to inspect."
+          aria-invalid={Boolean(fieldErrors.message)}
         />
       </Field>
 
@@ -104,22 +204,32 @@ export function EnquiryForm({
       <Checkbox
         id="enquiry-consent"
         name="consent"
+        error={fieldErrors.consent}
         label={
           <>
-            I have read the privacy policy and consent to Rakuxon City
-            contacting me about this enquiry.
+            I have read the{" "}
+            <Link
+              href="/privacy"
+              className="text-accent underline underline-offset-4"
+            >
+              privacy notice
+            </Link>{" "}
+            and consent to Rakuxon City contacting me about this enquiry.
           </>
         }
       />
 
-      {mailto ? <NotLiveNotice mailto={mailto} /> : null}
+      <TurnstileWidget onToken={setTurnstileToken} />
+
+      <FormStatus state={state} message={message} />
 
       <div>
         <button
           type="submit"
-          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
+          disabled={state === "submitting"}
+          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
         >
-          Send enquiry
+          {state === "submitting" ? "Sending…" : "Send enquiry"}
         </button>
       </div>
     </form>

@@ -13,17 +13,23 @@ import type { ListingStatus } from "@/generated/prisma/enums";
  * their time and ours.
  */
 export function EnquiryPanel({
+  listingId,
   reference,
   price,
   priceOnRequest,
   status,
   action,
+  showInspectionDate = false,
 }: {
+  /** FR-3.3 — the API derives the sales track from this, not from the form. */
+  listingId: string;
   reference: string;
   price: string | number | null;
   priceOnRequest: boolean;
   status: ListingStatus;
   action: string;
+  /** FR-3.2 — home detail pages offer a preferred inspection date. */
+  showInspectionDate?: boolean;
 }) {
   const sold = status === "SOLD";
 
@@ -63,7 +69,12 @@ export function EnquiryPanel({
             <>
               <p className="text-heading text-ink">{action}</p>
               <div className="mt-5">
-                <EnquiryForm listingReference={reference} />
+                <EnquiryForm
+                  listingId={listingId}
+                  listingReference={reference}
+                  source="LISTING"
+                  showInspectionDate={showInspectionDate}
+                />
               </div>
             </>
           )}

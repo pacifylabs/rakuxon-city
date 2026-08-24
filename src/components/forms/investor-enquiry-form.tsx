@@ -1,9 +1,10 @@
 "use client";
 
-import {
-  NotLiveNotice,
-  useNotLiveSubmit,
-} from "@/components/forms/not-live-notice";
+import Link from "next/link";
+import { useState } from "react";
+import { FormStatus } from "@/components/forms/form-status";
+import { TurnstileWidget } from "@/components/forms/turnstile-widget";
+import { useEnquirySubmit } from "@/components/forms/use-enquiry-submit";
 import {
   Checkbox,
   Field,
@@ -20,8 +21,13 @@ import {
  * FR-4.3. A separate form, writing to a separate table, notifying a separate
  * inbox — never a shared handler with general enquiries (FR-4.4).
  *
- * Inert until Phase 6, like every other form at this stage. The capital band is
- * a question we ask privately; nothing about it is ever published back (FR-4.2).
+ * Live from Phase 6, posting to /api/investor-enquiries — a different endpoint
+ * from the sales form, deliberately, so nothing here can ever reach the
+ * `Enquiry` table or the sales inbox.
+ *
+ * The capital band is a question we ask privately; nothing about it is ever
+ * published back (FR-4.2), and the confirmation says only that the team will
+ * make contact (FR-4.5).
  */
 const bandLabels: Record<(typeof capitalBands)[number], string> = {
   "under-50m": "Under ₦50 million",
@@ -38,16 +44,62 @@ const interestLabels: Record<(typeof projectInterests)[number], string> = {
   undecided: "Not yet decided",
 };
 
-export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
-  const { mailto, onSubmit } = useNotLiveSubmit("Partnership enquiry");
+export function InvestorEnquiryForm() {
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const { state, fieldErrors, message, reference, submit } = useEnquirySubmit(
+    "/api/investor-enquiries",
+  );
+
+  if (state === "succeeded") {
+    /* FR-4.5 — the confirmation says only that the team will make contact.
+       No mention of terms, timelines, returns or next steps. */
+    return (
+      <div role="status" className="flex flex-col gap-4">
+        <p className="text-heading text-ink">Thank you — we have it.</p>
+        <p className="text-body text-ink-secondary">
+          A member of the team will make contact. Your reference is{" "}
+          <span className="tabular text-ink">{reference}</span>.
+        </p>
+        <p className="text-caption text-ink-muted">
+          We handle your details as set out in our{" "}
+          <Link
+            href="/privacy"
+            className="text-accent underline underline-offset-4"
+          >
+            privacy notice
+          </Link>
+          .
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form
       className="flex flex-col gap-5"
-      onSubmit={preview ? onSubmit : undefined}
+      noValidate
+      onSubmit={(event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        submit({
+          name: String(data.get("name") ?? ""),
+          organisation: String(data.get("organisation") ?? "") || null,
+          email: String(data.get("email") ?? ""),
+          phone: String(data.get("phone") ?? ""),
+          capitalBand: String(data.get("capitalBand") ?? ""),
+          projectInterest: String(data.get("projectInterest") ?? ""),
+          message: String(data.get("message") ?? ""),
+          consent: data.get("consent") === "on",
+          turnstileToken,
+        });
+      }}
     >
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full name" htmlFor="investor-name">
+        <Field
+          label="Full name"
+          htmlFor="investor-name"
+          error={fieldErrors.name}
+        >
           <Input id="investor-name" name="name" autoComplete="name" />
         </Field>
 
@@ -63,7 +115,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
           />
         </Field>
 
-        <Field label="Email address" htmlFor="investor-email">
+        <Field
+          label="Email address"
+          htmlFor="investor-email"
+          error={fieldErrors.email}
+        >
           <Input
             id="investor-email"
             name="email"
@@ -72,7 +128,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
           />
         </Field>
 
-        <Field label="Phone number" htmlFor="investor-phone">
+        <Field
+          label="Phone number"
+          htmlFor="investor-phone"
+          error={fieldErrors.phone}
+        >
           <Input
             id="investor-phone"
             name="phone"
@@ -82,7 +142,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
           />
         </Field>
 
-        <Field label="Capital range" htmlFor="investor-band">
+        <Field
+          label="Capital range"
+          htmlFor="investor-band"
+          error={fieldErrors.capitalBand}
+        >
           <Select id="investor-band" name="capitalBand" defaultValue="">
             <option value="" disabled>
               Choose a range
@@ -95,7 +159,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
           </Select>
         </Field>
 
-        <Field label="Project type" htmlFor="investor-interest">
+        <Field
+          label="Project type"
+          htmlFor="investor-interest"
+          error={fieldErrors.projectInterest}
+        >
           <Select id="investor-interest" name="projectInterest" defaultValue="">
             <option value="" disabled>
               Choose one
@@ -109,7 +177,11 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
         </Field>
       </div>
 
-      <Field label="Message" htmlFor="investor-message">
+      <Field
+        label="Message"
+        htmlFor="investor-message"
+        error={fieldErrors.message}
+      >
         <Textarea
           id="investor-message"
           name="message"
@@ -121,17 +193,32 @@ export function InvestorEnquiryForm({ preview = true }: { preview?: boolean }) {
       <Checkbox
         id="investor-consent"
         name="consent"
-        label="I have read the privacy policy and consent to Rakuxon City contacting me about this enquiry."
+        error={fieldErrors.consent}
+        label={
+          <>
+            I have read the{" "}
+            <Link
+              href="/privacy"
+              className="text-accent underline underline-offset-4"
+            >
+              privacy notice
+            </Link>{" "}
+            and consent to Rakuxon City contacting me about this enquiry.
+          </>
+        }
       />
 
-      {mailto ? <NotLiveNotice mailto={mailto} /> : null}
+      <TurnstileWidget onToken={setTurnstileToken} />
+
+      <FormStatus state={state} message={message} />
 
       <div>
         <button
           type="submit"
-          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none"
+          disabled={state === "submitting"}
+          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
         >
-          Send enquiry
+          {state === "submitting" ? "Sending…" : "Send enquiry"}
         </button>
       </div>
     </form>
