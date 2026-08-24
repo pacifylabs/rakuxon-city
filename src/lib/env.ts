@@ -25,7 +25,16 @@ const envSchema = z.object({
    * (og:image, canonicals) are built from it; without it Next falls back to
    * localhost and every shared link points nowhere.
    */
-  NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
+  /*
+   * Vercel sets an unset public env var to "", not undefined, per the note
+   * above — z.url() rejects an empty string, which threw
+   * "Invalid environment configuration" at startup with no NEXT_PUBLIC_SITE_URL
+   * set. Routed through emptyToUndefined first so the default actually applies.
+   */
+  NEXT_PUBLIC_SITE_URL: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.url().default("http://localhost:3000"),
+  ),
 
   /**
    * Prisma datasource, a Postgres connection string. OPTIONAL BY DESIGN.

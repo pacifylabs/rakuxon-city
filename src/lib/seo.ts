@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { env } from "@/lib/env";
 import { site } from "@/lib/site";
 
 /**
@@ -12,10 +13,16 @@ import { site } from "@/lib/site";
 const SEPARATOR = " — ";
 
 export function origin(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
-    /\/$/,
-    "",
-  );
+  /*
+   * Routed through the validated `env` module rather than reading
+   * `process.env` here directly. That module already guards against the bug
+   * that broke the Vercel build: an unset NEXT_PUBLIC_SITE_URL arrives as ""
+   * on Vercel, not undefined, which `??` does not catch — so `origin()` was
+   * returning "" and `new URL("")` in the root layout's metadataBase threw
+   * ERR_INVALID_URL at build time. env.ts now treats "" as unset before
+   * applying its default, so `env.NEXT_PUBLIC_SITE_URL` is always a valid URL.
+   */
+  return env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
 }
 
 export function absoluteUrl(path: string): string {

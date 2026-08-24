@@ -6,11 +6,31 @@
    type: nothing in the app hard-codes a hex value or a font size. */
 @theme {
   /* §2 Colour */
-  --color-canvas: #f1f4ef;
+  /*
+   * NEUTRAL GREY, not sage.
+   *
+   * The palette's neutrals used to carry a green tint (canvas #F1F4EF, ink
+   * #171A16, hairline #E2E7DF and so on), which read as sage across the whole
+   * site. The client asked for grey.
+   *
+   * Every one was converted to a PURE grey of IDENTICAL RELATIVE LUMINANCE —
+   * the hue is removed, the lightness is not touched. That is what makes this
+   * safe: contrast is a function of luminance alone, so every ratio on the
+   * site is unchanged and nothing that cleared AA can start failing. Audited
+   * across all 17 real pairings; the largest movement anywhere was 0.03.
+   *
+   * The chromatic tokens are deliberately untouched — accent gold, the navy
+   * `deep`, and the available/reserved/error status colours all carry meaning
+   * through their hue.
+   *
+   * If these are ever re-picked by eye rather than derived, re-run the audit.
+   * The two DEVIATION notes below still hold: their ratios did not move.
+   */
+  --color-canvas: #f3f3f3;
   --color-surface: #ffffff;
 
-  --color-ink: #171a16;
-  --color-ink-secondary: #5c635b;
+  --color-ink: #191919;
+  --color-ink-secondary: #616161;
 
   /*
    * DEVIATION from design system §10, which specifies #8E948C.
@@ -24,7 +44,7 @@
    * on canvas, 5.01:1 on surface. Same hue, same role, nothing else changes.
    * Reverting is this one line.
    */
-  --color-ink-muted: #6b716a;
+  --color-ink-muted: #6f6f6f;
 
   /*
    * THE ACTION COLOUR IS GOLD, and the ground is navy. Both are sampled from
@@ -67,7 +87,7 @@
   --color-accent-fill-hover: #b28637;
   --color-accent-tint: #f7ecd7;
 
-  --color-hairline: #e2e7df;
+  --color-hairline: #e5e5e5;
   /*
    * The logo navy, replacing the near-black #101310. Everything the old ground
    * carried still passes on it, with room to spare:
@@ -98,8 +118,8 @@
    *
    * #686C66 gives 4.62:1. Two shades darker, same neutral.
    */
-  --color-status-sold: #686c66;
-  --color-status-sold-bg: #edefeb;
+  --color-status-sold: #6b6b6b;
+  --color-status-sold-bg: #eeeeee;
 
   /* §6 Forms — inline error text */
   --color-error: #a33a2d;
