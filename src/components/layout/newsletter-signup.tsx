@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/field";
+import { site } from "@/lib/site";
 
 /**
  * The footer sign-up.
@@ -45,10 +46,10 @@ export function NewsletterSignup() {
         <p role="status" className="mt-3 text-caption text-accent-fill">
           The list is not open yet — nothing was stored. Email{" "}
           <a
-            href="mailto:hello@rakuxoncity.com?subject=Newsletter"
+            href={`mailto:${site.email}?subject=Newsletter`}
             className="underline underline-offset-4"
           >
-            hello@rakuxoncity.com
+            {site.email}
           </a>{" "}
           and we will add you when it launches.
         </p>

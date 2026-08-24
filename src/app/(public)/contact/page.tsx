@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { site, telHref } from "@/lib/site";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
 import { Container, Section } from "@/components/ui/container";
 
@@ -30,20 +31,61 @@ export default function ContactPage() {
               now.
             </p>
 
-            {/* TODO: real figures — client contact details before launch. */}
+            {/*
+              Every route here is actionable rather than text to copy out. The
+              per-lane addresses that used to sit here (land@, homes@,
+              partnerships@) were designed rather than confirmed, so they are
+              gone — one real address is worth more than three plausible ones.
+              See lib/site.ts.
+            */}
             <dl className="mt-10 space-y-5">
-              {[
-                ["Land enquiries", "land@rakuxoncity.com"],
-                ["Home enquiries", "homes@rakuxoncity.com"],
-                ["Development partnerships", "partnerships@rakuxoncity.com"],
-                ["Phone", "+234 800 000 0000"],
-                ["Where we are", "Lagos · Ogun · FCT Abuja"],
-              ].map(([label, value]) => (
-                <div key={label}>
-                  <dt className="text-caption text-ink-muted">{label}</dt>
-                  <dd className="mt-1 text-body text-ink">{value}</dd>
-                </div>
-              ))}
+              <div>
+                <dt className="text-caption text-ink-muted">Email</dt>
+                <dd className="mt-1 text-body">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                  >
+                    {site.email}
+                  </a>
+                </dd>
+              </div>
+
+              <div>
+                <dt className="text-caption text-ink-muted">Phone</dt>
+                <dd className="mt-1 text-body">
+                  <a
+                    href={telHref}
+                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                  >
+                    {site.phone.display}
+                  </a>
+                  <span className="mt-1 block text-caption text-ink-muted">
+                    {site.phone.note}
+                  </span>
+                </dd>
+              </div>
+
+              <div>
+                <dt className="text-caption text-ink-muted">WhatsApp</dt>
+                <dd className="mt-1 text-body">
+                  <a
+                    href={site.phone.whatsapp}
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                  >
+                    Message the same number
+                  </a>
+                </dd>
+              </div>
+
+              <div>
+                <dt className="text-caption text-ink-muted">Where we sell</dt>
+                <dd className="mt-1 text-body text-ink">
+                  {site.regionsServed.join(" · ")}
+                </dd>
+              </div>
             </dl>
           </div>
 

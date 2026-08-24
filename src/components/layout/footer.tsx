@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { NewsletterSignup } from "@/components/layout/newsletter-signup";
+import { site, telHref } from "@/lib/site";
 
 /**
  * 04_DESIGN_SYSTEM.md §6 — a `deep` bar across the full width, with
@@ -17,12 +18,9 @@ import { NewsletterSignup } from "@/components/layout/newsletter-signup";
  * that it stays a quiet credibility surface rather than a public pitch. It is
  * given a button here because it is the footer's one real call to action.
  */
-const socials = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "X", href: "https://x.com" },
-  { label: "Facebook", href: "https://facebook.com" },
-];
+/* Real, verified group accounts — see lib/site.ts for where they came from
+   and why the care brand's own channels were not copied across. */
+const socials = site.socials;
 
 /** Navigation only. Privacy and Terms are notices, and sit in the bottom rule. */
 const siteLinks = [
@@ -66,23 +64,25 @@ export function Footer() {
               <ul className="mt-5 space-y-3">
                 <li>
                   <a
-                    href="mailto:hello@rakuxoncity.com"
+                    href={`mailto:${site.email}`}
                     className="text-body text-canvas/90 transition-colors hover:text-canvas"
                   >
-                    hello@rakuxoncity.com
+                    {site.email}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="tel:+2348000000000"
+                    href={telHref}
                     className="text-body text-canvas/90 transition-colors hover:text-canvas"
                   >
-                    {/* TODO: real figures — client contact details before launch. */}
-                    +234 800 000 0000
+                    {site.phone.display}
                   </a>
+                  <span className="mt-1 block text-caption text-canvas/60">
+                    {site.phone.note}
+                  </span>
                 </li>
                 <li className="text-body text-canvas/90">
-                  Lagos · Ogun · FCT Abuja
+                  {site.regionsServed.join(" · ")}
                 </li>
               </ul>
 

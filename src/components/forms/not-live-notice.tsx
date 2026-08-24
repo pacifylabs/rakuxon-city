@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/cn";
+import { site } from "@/lib/site";
 
-const CONTACT_EMAIL = "hello@rakuxoncity.com";
+const CONTACT_EMAIL = site.email;
 
 /**
  * The honest half of an inert form.
