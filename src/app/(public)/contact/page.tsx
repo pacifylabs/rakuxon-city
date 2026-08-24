@@ -16,7 +16,20 @@ export const metadata = pageMetadata({
  * enquiries, which is worth remembering when the client asks why the dashboard
  * count is lower than the number of calls they took.
  */
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: PageProps<"/contact">) {
+  /*
+   * FR-3.1 — an enquiry arriving from a buyer guide is recorded as RESOURCE,
+   * not CONTACT, and names the guide. That is the difference between "someone
+   * used the contact form" and "someone who has just read about Governor's
+   * consent wants to talk", which is worth a great deal to whoever picks it up.
+   */
+  const query = await searchParams;
+  const fromResource =
+    (Array.isArray(query.from) ? query.from[0] : query.from) === "resource";
+  const guide = Array.isArray(query.guide) ? query.guide[0] : query.guide;
+
   return (
     <Section className="pt-10 lg:pt-16">
       <Container>
@@ -92,7 +105,10 @@ export default function ContactPage() {
 
           <div className="lg:col-span-6 lg:col-start-7">
             <div className="rounded-card border border-hairline bg-surface p-6 lg:p-8">
-              <EnquiryForm />
+              <EnquiryForm
+                source={fromResource ? "RESOURCE" : "CONTACT"}
+                fromGuide={fromResource ? (guide ?? null) : null}
+              />
             </div>
           </div>
         </div>

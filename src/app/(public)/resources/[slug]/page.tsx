@@ -175,7 +175,7 @@ export default async function ArticlePage({
                     tell you what the documentation position actually is.
                   </p>
                   <Link
-                    href="/contact"
+                    href={`/contact?from=resource&guide=${article.slug}`}
                     className="mt-5 inline-block text-body text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
                   >
                     Ask us
@@ -195,7 +195,14 @@ export default async function ArticlePage({
               fits and what the documentation position is on each one.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <ButtonLink href="/contact">
+              {/*
+                Carries the guide it came from. Without this an enquiry that
+                started on "What a C of O actually proves" arrives on the sales
+                desk indistinguishable from a cold contact, and the one useful
+                thing about it — that this buyer is reading about title before
+                they buy — is lost.
+              */}
+              <ButtonLink href={`/contact?from=resource&guide=${article.slug}`}>
                 Tell us what you are looking for
               </ButtonLink>
               <ButtonLink variant="secondary" href="/land">

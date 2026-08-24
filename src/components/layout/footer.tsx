@@ -50,7 +50,6 @@ const siteLinks = [
 const legalLinks = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-
 ];
 
 export function Footer() {

@@ -35,6 +35,7 @@ export function EnquiryForm({
   listingReference,
   source = "CONTACT",
   showInspectionDate = false,
+  fromGuide = null,
 }: {
   /** The database id, which is what the API routes on — FR-3.3. */
   listingId?: string;
@@ -43,6 +44,8 @@ export function EnquiryForm({
   source?: EnquirySource;
   /** FR-3.2 — home detail pages only. */
   showInspectionDate?: boolean;
+  /** The buyer guide this enquiry started from, where it started on one. */
+  fromGuide?: string | null;
 }) {
   const pathname = usePathname();
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
@@ -86,7 +89,9 @@ export function EnquiryForm({
         submit({
           source,
           listingId: listingId ?? null,
-          pagePath: pathname,
+          // The guide travels in the page path, so the sales desk sees where
+          // the enquiry began without a schema change.
+          pagePath: fromGuide ? `${pathname}?guide=${fromGuide}` : pathname,
           campaign:
             new URLSearchParams(window.location.search).get("utm_campaign") ??
             null,

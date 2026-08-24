@@ -1,5 +1,6 @@
 import { Container, Section } from "@/components/ui/container";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
+import { site, telHref } from "@/lib/site";
 
 /**
  * 01_SITE_ARCHITECTURE.md §5.1 item 8 — the page ends where every page on this
@@ -19,22 +20,42 @@ export function EnquiryBand() {
               and the timeline and we will come back with what actually fits —
               including whether we have nothing suitable.
             </p>
+            {/*
+              The per-lane addresses that used to sit here (land@, homes@) were
+              designed rather than confirmed, and were removed from the contact
+              page for that reason — leaving them here would have published
+              addresses the site elsewhere admits it cannot vouch for.
+              See lib/site.ts and TODO §2.1.
+            */}
             <dl className="mt-10 space-y-4">
-              {[
-                ["Land enquiries", "land@rakuxoncity.com"],
-                ["Home enquiries", "homes@rakuxoncity.com"],
-              ].map(([label, value]) => (
-                <div key={label}>
-                  <dt className="text-caption text-ink-muted">{label}</dt>
-                  <dd className="text-body text-ink">{value}</dd>
-                </div>
-              ))}
+              <div>
+                <dt className="text-caption text-ink-muted">Email</dt>
+                <dd className="text-body">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                  >
+                    {site.email}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-caption text-ink-muted">Phone</dt>
+                <dd className="text-body">
+                  <a
+                    href={telHref}
+                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                  >
+                    {site.phone.display}
+                  </a>
+                </dd>
+              </div>
             </dl>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
             <div className="rounded-card border border-hairline bg-surface p-6 lg:p-8">
-              <EnquiryForm />
+              <EnquiryForm source="GENERAL" />
             </div>
           </div>
         </div>
