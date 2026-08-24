@@ -330,6 +330,23 @@ flagged rather than quietly built.
 
 ## 2. Real content required — **launch gate**
 
+### 1.22 The hero no longer renders §5.1's category eyebrow
+
+`01_SITE_ARCHITECTURE.md` §5.1 specifies a category list in the hero —
+Residential land · Commercial plots · Completed homes. It has been removed at
+the client's instruction, who found the hero too busy.
+
+The reasoning, so it can be reversed knowingly: the list duplicated what the
+lane picker directly beneath it already says, and the hero was carrying six
+competing elements. The picker was kept over the eyebrow because it carries
+live counts and it navigates, where the eyebrow only labels.
+
+The estate caption card went at the same time — a second focal point opposite
+the headline. The slides still rotate, now as ambient imagery rather than a
+labelled carousel.
+
+**§5.1 should be amended rather than left contradicted by the build.**
+
 ### 1.17 Rate limiting is per-instance
 
 `src/lib/rate-limit.ts` holds its windows in process memory. On a platform that
