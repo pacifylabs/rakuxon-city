@@ -51,7 +51,11 @@ const sections: LegalSection[] = [
   {
     heading: "Imagery",
     body: [
-      "Photographs of properties on this site are currently representative images rather than photographs of the specific plot or home listed. Credits for them are published on our image credits page.",
+      {
+        text: "Photographs of properties on this site are currently representative images rather than photographs of the specific plot or home listed. Credits for them are published on our ",
+        link: { href: "/credits", label: "image credits page", rel: "license" },
+        after: ".",
+      },
       "Where a home is sold off plan, any visual of the finished building is an artist's impression and is labelled as such on the listing.",
       "Site plans and layout drawings show intended arrangement and are subject to change. Do not rely on them to establish a boundary; boundaries are established by a registered survey and walked on the ground.",
     ],

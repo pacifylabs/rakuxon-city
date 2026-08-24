@@ -35,13 +35,22 @@ const siteLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+/*
+ * "Image credits" was removed from this row at the client's request.
+ *
+ * The /credits PAGE still exists and is still linked — from the terms of use,
+ * under Imagery. That matters: 22 of the 25 stand-in photographs are CC BY,
+ * which requires attribution "in a manner reasonable to the medium". Dropping
+ * the page, or leaving it unreachable, would put those images outside their
+ * licence. Moving the link is fine; losing it is not.
+ *
+ * The page also carries `rel="license"` from the terms, so a crawler can find
+ * the attribution even though it is no longer in the footer.
+ */
 const legalLinks = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  // CC BY requires attribution "in a manner reasonable to the medium". The
-  // on-image label is gone, so this link is what keeps 22 of the 25 stand-in
-  // photographs inside their licence.
-  { label: "Image credits", href: "/credits" },
+
 ];
 
 export function Footer() {

@@ -451,10 +451,16 @@ Every one carries `Media.isStandIn = true`, which is what the admin will filter
 on in Phase 7 to find the images still needing replacement.
 
 **The on-image "Representative image" label has been removed** at the client's
-instruction. Attribution moved to `/credits`, linked from the footer and built
-from the photography manifest, which is how CC BY expects a website to credit —
-removing the label with nothing replacing it would have put 22 images outside
-their licence.
+instruction, and the footer link to `/credits` has since been removed too.
+
+Attribution therefore now hangs on ONE link: the terms of use, under Imagery,
+which carries `rel="license"` to `/credits`. That page is built from the
+photography manifest, so a credit cannot drift from its image.
+
+**Do not remove that link.** 22 of the 25 photographs are CC BY, which requires
+attribution "in a manner reasonable to the medium". With the on-image label
+gone and the footer link gone, the terms link is the only thing keeping those
+images inside their licence.
 
 The honesty cost is real and is worth stating plainly: a visitor now sees a
 photograph of a house in Hawaii above a listing that states a survey number and
