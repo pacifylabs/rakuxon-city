@@ -27,7 +27,9 @@ import snapshot from "../src/data/snapshot.json";
 const failures: string[] = [];
 
 function check(label: string, condition: boolean, detail = "") {
-  console.log(`${condition ? "PASS" : "FAIL"}  ${label}${detail ? ` — ${detail}` : ""}`);
+  console.log(
+    `${condition ? "PASS" : "FAIL"}  ${label}${detail ? ` — ${detail}` : ""}`,
+  );
   if (!condition) failures.push(label);
 }
 
@@ -84,7 +86,11 @@ function main() {
       readFileSync(file, "utf8"),
     ),
   );
-  check("no YouTube red anywhere in the video components", reds.length === 0, reds.join(", "));
+  check(
+    "no YouTube red anywhere in the video components",
+    reds.length === 0,
+    reds.join(", "),
+  );
   check(
     "the play control uses the accent fill",
     /bg-accent/.test(facadeSource) && /size-14/.test(facadeSource),
@@ -103,7 +109,9 @@ function main() {
   // --- Seeded data ----------------------------------------------------------
   const videos = (snapshot as { videos: { slug: string; youtubeId: string }[] })
     .videos;
-  const malformed = videos.filter((video) => !isValidYoutubeId(video.youtubeId));
+  const malformed = videos.filter(
+    (video) => !isValidYoutubeId(video.youtubeId),
+  );
   check(
     "every seeded video carries a well-formed YouTube ID",
     malformed.length === 0,
@@ -111,7 +119,9 @@ function main() {
       `${videos.length} checked`,
   );
 
-  const noUrls = videos.filter((video) => /https?:|youtu/.test(video.youtubeId));
+  const noUrls = videos.filter((video) =>
+    /https?:|youtu/.test(video.youtubeId),
+  );
   check(
     "IDs are stored bare, never as pasted URLs",
     noUrls.length === 0,
@@ -142,7 +152,9 @@ function main() {
 
   console.log();
   if (failures.length > 0) {
-    console.log(`${failures.length} video check(s) failed: ${failures.join(", ")}`);
+    console.log(
+      `${failures.length} video check(s) failed: ${failures.join(", ")}`,
+    );
     process.exit(1);
   }
   console.log("All video checks passed.");

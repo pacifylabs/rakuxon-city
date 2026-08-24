@@ -22,6 +22,7 @@ import { join } from "node:path";
 import { randomBytes, scryptSync } from "node:crypto";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
+import { articleBodies } from "./article-bodies";
 import {
   ArticleCategory,
   ArticleStatus,
@@ -1842,7 +1843,15 @@ async function main() {
         excerpt: seed.excerpt,
         // Full article bodies arrive with the client's copy at the Phase 8
         // content gate; the excerpt is what the homepage teaser renders.
-        body: `${seed.excerpt}\n\nFull article copy pending client sign-off.`,
+        /*
+         * Real copy, keyed by slug. Falls back to the excerpt only if a guide
+         * is added here without a body being written for it — better a short
+         * page than a page announcing that its own copy is missing.
+         *
+         * See prisma/article-bodies.ts: NOT yet reviewed by a lawyer, and a
+         * launch gate in TODO.md §2.
+         */
+        body: articleBodies[seed.slug] ?? seed.excerpt,
         coverImageId: cover.id,
         status: ArticleStatus.PUBLISHED,
         publishedAt: new Date(Date.now() - index * 86_400_000 * 9),

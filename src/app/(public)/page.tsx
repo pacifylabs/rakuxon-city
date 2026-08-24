@@ -51,7 +51,6 @@ export default async function HomePage() {
   const [
     counts,
     estates,
-    heroEstates,
     spotlight,
     testimonials,
     articles,
@@ -60,7 +59,7 @@ export default async function HomePage() {
     videos,
   ] = await Promise.all([
     getLaneCounts(),
-    getFeaturedEstates(2),
+    // One list, three estates, feeding both the hero and the block below it.
     getFeaturedEstates(3),
     getSpotlightListings(8),
     getTestimonials(),
@@ -71,7 +70,7 @@ export default async function HomePage() {
   ]);
 
   /** The estate rows, shaped for the hero. Slide order follows estate order. */
-  const heroSlides = heroEstates.map((estate) => ({
+  const heroSlides = estates.map((estate) => ({
     slug: estate.slug,
     name: estate.name,
     location: estate.location,

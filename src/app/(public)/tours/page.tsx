@@ -23,9 +23,7 @@ export const metadata: Metadata = {
 };
 
 /** FR-V1.4 — every video, filterable by kind and estate, paginated at twelve. */
-export default async function ToursPage({
-  searchParams,
-}: PageProps<"/tours">) {
+export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
   const filters = parseVideoFilters(await searchParams);
 
   const [{ videos, total, page, pageCount }, options] = await Promise.all([

@@ -42,10 +42,13 @@ export function BuyingSteps({
   className?: string;
 }) {
   return (
-    <section className={cn("rounded-card border border-hairline p-6 lg:p-8", className)}>
-      <h2 className="text-heading text-ink">
-        How buying this {noun} works
-      </h2>
+    <section
+      className={cn(
+        "rounded-card border border-hairline p-6 lg:p-8",
+        className,
+      )}
+    >
+      <h2 className="text-heading text-ink">How buying this {noun} works</h2>
       <p className="mt-3 max-w-[54ch] text-body text-ink-secondary">
         Four steps, in this order. We do not take money before the third one.
       </p>

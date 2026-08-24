@@ -83,10 +83,7 @@ export default async function PlotDetailPage({
         </Container>
       </Section>
 
-      <VideoStructuredData
-        videos={videos}
-        siteUrl={env.NEXT_PUBLIC_SITE_URL}
-      />
+      <VideoStructuredData videos={videos} siteUrl={env.NEXT_PUBLIC_SITE_URL} />
 
       {/*
         §7 — the ribbon sits directly beneath the gallery, before the

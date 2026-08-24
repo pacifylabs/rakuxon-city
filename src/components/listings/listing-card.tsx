@@ -95,7 +95,6 @@ export function ListingCard({
         ) : (
           <div className="size-full bg-accent-tint" />
         )}
-
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5">

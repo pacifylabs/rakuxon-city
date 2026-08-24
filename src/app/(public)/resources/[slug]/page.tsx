@@ -95,16 +95,22 @@ export default async function ArticlePage({
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="max-w-[68ch] lg:col-span-7">
               {/*
-              Plain paragraphs for now. FR-5.3 wants headings, images, tables and
-              internal links to listings — that arrives with the rich text editor
-              in Phase 7, alongside the client's real copy.
-            */}
+                Paragraphs, with `**lead-in**` emphasis at the start of a line.
+                Several guides are structured as checklists where each point
+                opens with its own short heading, and rendering those as literal
+                asterisks was worse than not having them.
+
+                Deliberately the whole of the formatting supported. FR-5.3 wants
+                headings, images, tables and internal links to listings, which
+                arrives with the rich text editor in Phase 7 — this is enough to
+                render the copy that exists, and no more.
+              */}
               {article.body.split("\n\n").map((paragraph) => (
                 <p
                   key={paragraph}
                   className="mb-6 text-body-l text-ink-secondary"
                 >
-                  {paragraph}
+                  {renderEmphasis(paragraph)}
                 </p>
               ))}
             </div>
@@ -168,5 +174,22 @@ export default async function ArticlePage({
         </Container>
       </Section>
     </>
+  );
+}
+
+/**
+ * Splits a paragraph on `**...**` and renders those runs as `ink` rather than
+ * `ink-secondary`. Weight is not used — no font-weight above 500 exists in this
+ * type scale, so emphasis is carried by colour, as it is everywhere else here.
+ */
+function renderEmphasis(paragraph: string) {
+  return paragraph.split(/(\*\*[^*]+\*\*)/g).map((part, index) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={index} className="font-medium text-ink">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    ),
   );
 }

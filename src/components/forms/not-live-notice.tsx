@@ -65,8 +65,8 @@ export function NotLiveNotice({
         className,
       )}
     >
-      <span className="text-accent">Not open yet.</span> Online enquiries
-      go live shortly. In the meantime, email{" "}
+      <span className="text-accent">Not open yet.</span> Online enquiries go
+      live shortly. In the meantime, email{" "}
       <a
         href={mailto}
         className="text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"

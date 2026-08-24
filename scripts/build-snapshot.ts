@@ -141,7 +141,13 @@ async function main() {
             },
           },
           estate: {
-            select: { id: true, slug: true, name: true, location: true, state: true },
+            select: {
+              id: true,
+              slug: true,
+              name: true,
+              location: true,
+              state: true,
+            },
           },
         },
       }),

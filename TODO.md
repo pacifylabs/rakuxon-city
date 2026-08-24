@@ -24,11 +24,11 @@ Both values are sampled from the mark: gold `#C4933C` (hue 38.4°), navy
 
 Gold as an action colour has one trap, and it is why there are three tokens:
 
-| Token | Value | On canvas | On surface | On navy | Permitted use |
-|---|---|---|---|---|---|
-| `--color-accent` | `#806028` | 5.23 | 5.80 | — | Text and borders on light grounds |
-| `--color-accent-fill` | `#C4933C` | 2.50 | — | 5.44 | A **ground** under navy text; text on navy. Never text on canvas |
-| `--color-accent-tint` | `#F7ECD7` | — | — | — | Pale wash; carries `--color-accent` text at 4.95 |
+| Token                 | Value     | On canvas | On surface | On navy | Permitted use                                                    |
+| --------------------- | --------- | --------- | ---------- | ------- | ---------------------------------------------------------------- |
+| `--color-accent`      | `#806028` | 5.23      | 5.80       | —       | Text and borders on light grounds                                |
+| `--color-accent-fill` | `#C4933C` | 2.50      | —          | 5.44    | A **ground** under navy text; text on navy. Never text on canvas |
+| `--color-accent-tint` | `#F7ECD7` | —         | —          | —       | Pale wash; carries `--color-accent` text at 4.95                 |
 
 A gold light enough to read as gold is far too light to be text on a near-white
 canvas — `#C4933C` is 2.50 there. So filled buttons carry **navy** text, not
@@ -254,12 +254,12 @@ Two consequences to be aware of:
 The client chose to anchor the hero on a full-width photograph. That moved the
 homepage LCP element from a text node to an image, and the cost is measured:
 
-| | Text hero | Photographic hero |
-|---|---|---|
-| Mobile performance (median of 3) | 94 | 89 |
-| LCP | ~2s | 3.5–4.0s |
-| Accessibility / best practices / SEO | 100 | 100 |
-| CLS | 0 | 0 |
+|                                      | Text hero | Photographic hero |
+| ------------------------------------ | --------- | ----------------- |
+| Mobile performance (median of 3)     | 94        | 89                |
+| LCP                                  | ~2s       | 3.5–4.0s          |
+| Accessibility / best practices / SEO | 100       | 100               |
+| CLS                                  | 0         | 0                 |
 
 **PRD §6 requires LCP under 2.5s on a mid-range Android over 3G.** The homepage
 no longer meets it.
@@ -275,7 +275,7 @@ What was already done, and what it bought:
 
 None of it moved LCP much, and the reason is worth recording so nobody repeats
 the work: the hero transfers in **13ms** on the real connection. The 3.8s is
-Lighthouse's *simulated* slow-4G, where LCP is dominated by ~2s of Load Delay —
+Lighthouse's _simulated_ slow-4G, where LCP is dominated by ~2s of Load Delay —
 discovery and queueing behind 508KB of total page weight — not by the image's
 size. Shrinking it further will not help. A font-preload experiment (dropping
 Inter's preload) was measured and made no difference either; that hypothesis is
@@ -330,6 +330,26 @@ flagged rather than quietly built.
 
 ## 2. Real content required — **launch gate**
 
+### 2.0 Buyer-guide copy is unreviewed — **legal sign-off required**
+
+`prisma/article-bodies.ts` carries full body copy for all twelve guides,
+written at the client's instruction to replace the placeholder line that left
+those pages visibly empty. Roughly 3,000 characters each, against ~200 before.
+
+**No lawyer has read it.** It describes the Land Use Act 1978, Certificates of
+Occupancy, Governor's consent under s.22, excision, gazette, charting at the
+Surveyor-General's office, and ordinary payment-plan practice. It was written
+carefully and it is not legal advice.
+
+This matters more here than it would on most sites. The whole position of
+Rakuxon City is that it tells buyers the truth about documentation — including
+where its own title is weak. Publishing anything inaccurate in a guide costs
+more credibility than an empty page would have.
+
+**Before launch:** the client's solicitor reads all twelve and either signs off
+or replaces them. The file is deliberately separate from `seed.ts` so it can be
+handed to a reviewer on its own.
+
 ### 2.1 Trust-band figures are invented
 
 `src/components/home/trust-band.tsx` — years operating, plots sold, estates
@@ -352,10 +372,20 @@ hero, the FAQ collage and the article covers. Three are genuinely Nigerian
 elsewhere, because no open-licensed source carries Nigerian residential
 exteriors — Picsum, Wikimedia and Openverse were all searched.
 
-Every one carries `Media.isStandIn = true` and renders behind a visible
-**"Representative image"** label, with the fuller _"— not the actual plot"_ on
-detail pages. Clearing the flag on upload removes the label, one image at a
-time, without a code change.
+Every one carries `Media.isStandIn = true`, which is what the admin will filter
+on in Phase 7 to find the images still needing replacement.
+
+**The on-image "Representative image" label has been removed** at the client's
+instruction. Attribution moved to `/credits`, linked from the footer and built
+from the photography manifest, which is how CC BY expects a website to credit —
+removing the label with nothing replacing it would have put 22 images outside
+their licence.
+
+The honesty cost is real and is worth stating plainly: a visitor now sees a
+photograph of a house in Hawaii above a listing that states a survey number and
+a title type, with nothing on the page saying it is not that plot. That is
+acceptable for a preview and is not acceptable at launch, which makes replacing
+this photography a harder gate than it was, not a softer one.
 
 **Licence constraint worth knowing.** Every image is cropped to the design
 system's ratios, which makes a derivative work. That rules out CC BY-ND and

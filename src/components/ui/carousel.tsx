@@ -98,8 +98,7 @@ export function Carousel({
       const track = trackRef.current;
       if (!track) return;
 
-      const end =
-        track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
       if (end) {
         track.scrollTo({ left: 0, behavior: "smooth" });
       } else {
@@ -209,7 +208,9 @@ function CarouselControl({
       className={cn(
         "group flex flex-col items-center gap-2",
         "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
-        disabled ? "cursor-not-allowed text-ink-muted" : "cursor-pointer text-ink",
+        disabled
+          ? "cursor-not-allowed text-ink-muted"
+          : "cursor-pointer text-ink",
       )}
     >
       <span className="text-body">

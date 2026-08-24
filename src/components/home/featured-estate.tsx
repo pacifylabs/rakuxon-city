@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowGlyph, ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/container";
+import { useCallback, useEffect, useState } from "react";
+import { cn } from "@/lib/cn";
 
 type Estate = {
   slug: string;
@@ -24,41 +28,88 @@ type Estate = {
  * The featured estate block from the reference: a large 16:9 frame carrying the
  * estate label, and a smaller secondary estate beside it.
  *
+ * Both frames now advance together through the estates, at the client's
+ * request, so the pair reads as one moving unit rather than two fixed cards.
+ * The lead shows estate N and the smaller frame shows N+1, which means no slide
+ * ever repeats the same photograph on both sides.
+ *
+ * Every field on screen — name, location, description, listing count — comes
+ * from the estate record itself, so a slide cannot go stale as stock moves and
+ * Phase 7 needs no separate slide table to administer.
+ *
+ * PERFORMANCE: none of these images is eager. They sit below the fold and the
+ * hero's first slide is the LCP element; preloading anything here competes with
+ * it for bandwidth on exactly the 3G connection PRD §6 targets. See TODO §1.16.
+ *
  * The floating callout overlapping this imagery is the first of exactly two
  * lifted elements on the page (04_DESIGN_SYSTEM.md §5). The second is the FAQ
  * panel. Everything else is flat with a hairline.
  */
+const SLIDE_MS = 7000;
 export function FeaturedEstate({ estates }: { estates: Estate[] }) {
-  const [lead, secondary] = estates;
+  const count = estates.length;
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(true);
+
+  /** Never starts under reduced motion, and responds if that changes mid-visit. */
+  useEffect(() => {
+    if (count < 2) return;
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setPlaying(!query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, [count]);
+
+  useEffect(() => {
+    if (!playing || count < 2) return;
+    const timer = window.setInterval(() => {
+      // Advancing something nobody is looking at wastes battery on a phone.
+      if (document.hidden) return;
+      setActive((current) => (current + 1) % count);
+    }, SLIDE_MS);
+    return () => window.clearInterval(timer);
+  }, [playing, count]);
+
+  const go = useCallback((index: number) => {
+    setActive(index);
+    setPlaying(false);
+  }, []);
+
+  const lead = estates[active];
+  // N+1, so the two frames never show the same estate on the same slide.
+  const secondary = count > 1 ? estates[(active + 1) % count] : undefined;
   if (!lead) return null;
 
   return (
     <Section className="pt-0 lg:pt-0">
       <Container>
-        <div className="grid gap-6 lg:grid-cols-12">
+        <div
+          className="grid gap-6 lg:grid-cols-12"
+          onMouseEnter={() => setPlaying(false)}
+          onMouseLeave={() => count > 1 && setPlaying(true)}
+          onFocusCapture={() => setPlaying(false)}
+        >
           <div className="relative lg:col-span-8">
-            <figure className="relative aspect-16/9 overflow-hidden rounded-image-l">
-              {lead.image ? (
-                <Image
-                  src={lead.image.url}
-                  alt={lead.image.alt}
-                  fill
-                  /*
-                   * Deliberately NOT `priority`.
-                   *
-                   * It carried it while the hero was type on bare canvas and
-                   * this was the page's LCP element. The hero now leads with a
-                   * photograph, so `priority` here preloaded the largest
-                   * payload on the page — 85KB, below the fold — in direct
-                   * competition with the real LCP image, which then sat ~2s in
-                   * Load Delay waiting for bandwidth.
-                   */
-                  loading="lazy"
-                  sizes="(min-width: 1024px) 66vw, 100vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="size-full bg-accent-tint" />
+            <figure className="relative aspect-16/9 overflow-hidden rounded-image-l bg-accent-tint">
+              {/* Every estate is mounted and crossfaded, so switching slides
+                  does not refetch an image the browser already holds. */}
+              {estates.map((estate, index) =>
+                estate.image ? (
+                  <Image
+                    key={estate.slug}
+                    src={estate.image.url}
+                    alt={estate.image.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 66vw, 100vw"
+                    aria-hidden={index !== active}
+                    className={cn(
+                      "object-cover transition-opacity duration-1000 ease-out",
+                      index === active ? "opacity-100" : "opacity-0",
+                    )}
+                  />
+                ) : null,
               )}
 
               <figcaption className="absolute top-0 right-0 flex max-w-[85%] items-center gap-3 rounded-bl-image-l bg-canvas py-2 pl-4 lg:gap-4 lg:py-3 lg:pl-6">
@@ -70,8 +121,6 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                   {lead.name}
                 </span>
               </figcaption>
-
-              {/* Bottom-right: the lifted callout overlaps the bottom-left corner. */}
             </figure>
 
             {/* Elevation 1 of 2 — the callout overlapping the hero imagery. */}
@@ -103,17 +152,25 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
 
           {secondary ? (
             <div className="flex flex-col lg:col-span-4">
-              <figure className="relative aspect-4/3 overflow-hidden rounded-image-l">
-                {secondary.image ? (
-                  <Image
-                    src={secondary.image.url}
-                    alt={secondary.image.alt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover"
-                  />
-                ) : (
-                  <div className="size-full bg-accent-tint" />
+              <figure className="relative aspect-4/3 overflow-hidden rounded-image-l bg-accent-tint">
+                {estates.map((estate) =>
+                  estate.image ? (
+                    <Image
+                      key={estate.slug}
+                      src={estate.image.url}
+                      alt={estate.image.alt}
+                      fill
+                      loading="lazy"
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      aria-hidden={estate.slug !== secondary.slug}
+                      className={cn(
+                        "object-cover transition-opacity duration-1000 ease-out",
+                        estate.slug === secondary.slug
+                          ? "opacity-100"
+                          : "opacity-0",
+                      )}
+                    />
+                  ) : null,
                 )}
                 <figcaption className="absolute right-0 bottom-0 flex max-w-[85%] items-center gap-3 rounded-tl-image-l bg-canvas py-2 pl-4">
                   <span
@@ -126,12 +183,14 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 </figcaption>
               </figure>
 
-              <p className="mt-6 text-heading text-ink">
-                {secondary.location}, {secondary.state}
-              </p>
-              <p className="mt-3 line-clamp-4 text-body text-ink-secondary">
-                {secondary.description}
-              </p>
+              <div aria-live="polite">
+                <p className="mt-6 text-heading text-ink">
+                  {secondary.location}, {secondary.state}
+                </p>
+                <p className="mt-3 line-clamp-4 text-body text-ink-secondary">
+                  {secondary.description}
+                </p>
+              </div>
 
               <Link
                 href={`/estates/${secondary.slug}`}
@@ -144,14 +203,35 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
           ) : null}
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center gap-4 lg:mt-24">
+        <div className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-4 lg:mt-24">
           <ButtonLink variant="secondary" href={`/estates/${lead.slug}`}>
             Explore {lead.name}
           </ButtonLink>
-          <p className="text-body text-ink-muted">
+          <p className="text-body text-ink-muted" aria-live="polite">
             <span className="tabular">{lead.listingCount}</span> listings in
             this estate · {lead.location}, {lead.state}
           </p>
+
+          {count > 1 ? (
+            <div className="ml-auto flex items-center gap-3">
+              {estates.map((estate, index) => (
+                <button
+                  key={estate.slug}
+                  type="button"
+                  onClick={() => go(index)}
+                  aria-label={`Show ${estate.name}`}
+                  aria-current={index === active ? "true" : undefined}
+                  className={cn(
+                    "h-1 cursor-pointer rounded-full transition-all duration-300",
+                    "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none",
+                    index === active
+                      ? "w-10 bg-accent"
+                      : "w-5 bg-ink-muted/40 hover:bg-ink-muted",
+                  )}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </Container>
     </Section>

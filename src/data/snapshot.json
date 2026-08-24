@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-23T14:13:16.735Z",
+  "generatedAt": "2026-08-24T04:38:24.483Z",
   "listings": [
     {
-      "id": "cmt5vpgei004e6l3p9ii63dm9",
+      "id": "cmt6quu0h004edi3p6edlxnvy",
       "slug": "emerald-ridge-4-bed-detached",
       "reference": "RXC-HME-0001",
       "type": "HOME",
       "title": "Four-bedroom detached house, Emerald Ridge",
       "description": "A completed four-bedroom detached house on a 500 square metre plot, finished and ready for occupation. All rooms en-suite, with a detached boys' quarters and a fitted kitchen.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "185000000",
@@ -17,9 +17,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T14:04:44.490Z",
-      "updatedAt": "2026-08-23T14:04:44.490Z",
-      "publishedAt": "2026-08-23T14:04:44.247Z",
+      "createdAt": "2026-08-24T04:36:43.505Z",
+      "updatedAt": "2026-08-24T04:36:43.505Z",
+      "publishedAt": "2026-08-24T04:36:43.250Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -41,7 +41,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpgei004e6l3p9ii63dm9",
+        "listingId": "cmt6quu0h004edi3p6edlxnvy",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DETACHED",
@@ -62,13 +62,13 @@
       }
     },
     {
-      "id": "cmt5vphzm004h6l3pcvud9qv3",
+      "id": "cmt6quwiu004hdi3p7led2fzl",
       "slug": "emerald-ridge-3-bed-terrace",
       "reference": "RXC-HME-0002",
       "type": "HOME",
       "title": "Three-bedroom terrace, Emerald Ridge",
       "description": "A three-bedroom terrace unit in the estate's second phase, currently at roofing stage with handover scheduled for the second quarter of next year.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "96500000",
@@ -82,9 +82,9 @@
         "durationMonths": 12
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:46.546Z",
-      "updatedAt": "2026-08-23T14:04:46.546Z",
-      "publishedAt": "2026-08-23T14:04:46.294Z",
+      "createdAt": "2026-08-24T04:36:46.758Z",
+      "updatedAt": "2026-08-24T04:36:46.758Z",
+      "publishedAt": "2026-08-24T04:36:46.509Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -106,7 +106,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vphzm004h6l3pcvud9qv3",
+        "listingId": "cmt6quwiu004hdi3p7led2fzl",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "TERRACE",
@@ -126,13 +126,13 @@
       }
     },
     {
-      "id": "cmt5vpjmj004k6l3pejryheo0",
+      "id": "cmt6quyix004kdi3p18pb3naj",
       "slug": "emerald-ridge-5-bed-off-plan",
       "reference": "RXC-HME-0003",
       "type": "HOME",
       "title": "Five-bedroom detached house, Emerald Ridge",
       "description": "An off-plan five-bedroom detached house on the estate's premium row, available to a buyer who wants input on the finishing schedule. Because the specification is agreed per buyer, pricing is discussed directly.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": null,
@@ -141,9 +141,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:48.667Z",
-      "updatedAt": "2026-08-23T14:04:48.667Z",
-      "publishedAt": "2026-08-23T14:04:48.409Z",
+      "createdAt": "2026-08-24T04:36:49.353Z",
+      "updatedAt": "2026-08-24T04:36:49.353Z",
+      "publishedAt": "2026-08-24T04:36:49.085Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -165,7 +165,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpjmj004k6l3pejryheo0",
+        "listingId": "cmt6quyix004kdi3p18pb3naj",
         "bedrooms": 5,
         "bathrooms": 6,
         "houseType": "DETACHED",
@@ -186,13 +186,13 @@
       }
     },
     {
-      "id": "cmt5vpl87004n6l3po23dr3nb",
+      "id": "cmt6qv0jv004ndi3pqvlz6cw9",
       "slug": "cornerstone-gardens-3-bed-bungalow",
       "reference": "RXC-HME-0004",
       "type": "HOME",
       "title": "Three-bedroom bungalow, Cornerstone Gardens",
       "description": "A completed three-bedroom bungalow on 450 square metres, built as the estate's show unit and now released for sale.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "58000000",
@@ -205,9 +205,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:50.743Z",
-      "updatedAt": "2026-08-23T14:04:50.743Z",
-      "publishedAt": "2026-08-23T14:04:50.482Z",
+      "createdAt": "2026-08-24T04:36:51.979Z",
+      "updatedAt": "2026-08-24T04:36:51.979Z",
+      "publishedAt": "2026-08-24T04:36:51.717Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -229,7 +229,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpl87004n6l3po23dr3nb",
+        "listingId": "cmt6qv0jv004ndi3pqvlz6cw9",
         "bedrooms": 3,
         "bathrooms": 3,
         "houseType": "BUNGALOW",
@@ -249,13 +249,13 @@
       }
     },
     {
-      "id": "cmt5vpmsu004q6l3pou4hytid",
+      "id": "cmt6qv25a004qdi3pjipykglf",
       "slug": "cornerstone-gardens-4-bed-semi-detached",
       "reference": "RXC-HME-0005",
       "type": "HOME",
       "title": "Four-bedroom semi-detached house, Cornerstone Gardens",
       "description": "A four-bedroom semi-detached unit at block stage, with handover scheduled for the fourth quarter of next year. Structured payment plan available across the build period.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "74000000",
@@ -268,9 +268,9 @@
         "durationMonths": 15
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:52.782Z",
-      "updatedAt": "2026-08-23T14:04:52.782Z",
-      "publishedAt": "2026-08-23T14:04:52.537Z",
+      "createdAt": "2026-08-24T04:36:54.046Z",
+      "updatedAt": "2026-08-24T04:36:54.046Z",
+      "publishedAt": "2026-08-24T04:36:53.797Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -292,7 +292,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpmsu004q6l3pou4hytid",
+        "listingId": "cmt6qv25a004qdi3pjipykglf",
         "bedrooms": 4,
         "bathrooms": 4,
         "houseType": "SEMI_DETACHED",
@@ -311,13 +311,13 @@
       }
     },
     {
-      "id": "cmt5vpofn004t6l3pveqs1u55",
+      "id": "cmt6qv4l2004tdi3pinlbinc9",
       "slug": "sabon-lugbe-2-bed-apartment",
       "reference": "RXC-HME-0006",
       "type": "HOME",
       "title": "Two-bedroom apartment, Sabon Lugbe Court",
       "description": "A completed two-bedroom apartment in a delivered estate with management already in place. Suited to a first purchase or a rental holding.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "42000000",
@@ -326,9 +326,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:54.900Z",
-      "updatedAt": "2026-08-23T14:04:54.900Z",
-      "publishedAt": "2026-08-23T14:04:54.642Z",
+      "createdAt": "2026-08-24T04:36:57.206Z",
+      "updatedAt": "2026-08-24T04:36:57.206Z",
+      "publishedAt": "2026-08-24T04:36:56.957Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -350,7 +350,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpofn004t6l3pveqs1u55",
+        "listingId": "cmt6qv4l2004tdi3pinlbinc9",
         "bedrooms": 2,
         "bathrooms": 3,
         "houseType": "APARTMENT",
@@ -370,13 +370,13 @@
       }
     },
     {
-      "id": "cmt5vpq4c004w6l3pxnfb3ma0",
+      "id": "cmt6qv66d004wdi3ptrel4v1w",
       "slug": "sabon-lugbe-4-bed-duplex",
       "reference": "RXC-HME-0007",
       "type": "HOME",
       "title": "Four-bedroom duplex, Sabon Lugbe Court",
       "description": "An off-plan four-bedroom duplex on the estate's last remaining corner plot, with construction beginning once the plot is allocated.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "148000000",
@@ -390,9 +390,9 @@
         "durationMonths": 18
       },
       "featured": true,
-      "createdAt": "2026-08-23T14:04:57.084Z",
-      "updatedAt": "2026-08-23T14:04:57.084Z",
-      "publishedAt": "2026-08-23T14:04:56.837Z",
+      "createdAt": "2026-08-24T04:36:59.269Z",
+      "updatedAt": "2026-08-24T04:36:59.269Z",
+      "publishedAt": "2026-08-24T04:36:59.014Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -414,7 +414,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpq4c004w6l3pxnfb3ma0",
+        "listingId": "cmt6qv66d004wdi3ptrel4v1w",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DUPLEX",
@@ -434,13 +434,13 @@
       }
     },
     {
-      "id": "cmt5vprqt004z6l3pbebh39h8",
+      "id": "cmt6qv805004zdi3pgm1y0pjl",
       "slug": "sabon-lugbe-3-bed-terrace",
       "reference": "RXC-HME-0008",
       "type": "HOME",
       "title": "Three-bedroom terrace, Sabon Lugbe Court",
       "description": "Sold in February. A three-bedroom terrace in the delivered court, listed here as evidence of what the estate has handed over.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "88000000",
@@ -449,9 +449,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:59.189Z",
-      "updatedAt": "2026-08-23T14:04:59.189Z",
-      "publishedAt": "2026-08-23T14:04:58.931Z",
+      "createdAt": "2026-08-24T04:37:01.637Z",
+      "updatedAt": "2026-08-24T04:37:01.637Z",
+      "publishedAt": "2026-08-24T04:37:01.373Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -473,7 +473,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vprqt004z6l3pbebh39h8",
+        "listingId": "cmt6qv805004zdi3pgm1y0pjl",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "TERRACE",
@@ -492,13 +492,13 @@
       }
     },
     {
-      "id": "cmt5vptcu00526l3poeqofscl",
+      "id": "cmt6qva920052di3px83gbwor",
       "slug": "emerald-ridge-3-bed-semi-detached",
       "reference": "RXC-HME-0009",
       "type": "HOME",
       "title": "Three-bedroom semi-detached house, Emerald Ridge",
       "description": "A three-bedroom semi-detached house under construction on the estate's second row, roofed and plastered, with handover scheduled for the first quarter. All rooms en-suite.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "78000000",
@@ -512,9 +512,9 @@
         "durationMonths": 15
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:05:01.278Z",
-      "updatedAt": "2026-08-23T14:05:01.278Z",
-      "publishedAt": "2026-08-23T14:05:01.026Z",
+      "createdAt": "2026-08-24T04:37:04.550Z",
+      "updatedAt": "2026-08-24T04:37:04.550Z",
+      "publishedAt": "2026-08-24T04:37:04.295Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -536,7 +536,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vptcu00526l3poeqofscl",
+        "listingId": "cmt6qva920052di3px83gbwor",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "SEMI_DETACHED",
@@ -555,13 +555,13 @@
       }
     },
     {
-      "id": "cmt5vpv0c00556l3psdllcl25",
+      "id": "cmt6qvcab0055di3p48em1zda",
       "slug": "emerald-ridge-2-bed-terrace-off-plan",
       "reference": "RXC-HME-0010",
       "type": "HOME",
       "title": "Two-bedroom terrace, Emerald Ridge",
       "description": "A two-bedroom terrace released off plan on the estate's third row, priced at the launch rate. Foundations are set and the block is scheduled to top out before the rains.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "52000000",
@@ -574,9 +574,9 @@
         "durationMonths": 24
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:05:03.420Z",
-      "updatedAt": "2026-08-23T14:05:03.420Z",
-      "publishedAt": "2026-08-23T14:05:03.176Z",
+      "createdAt": "2026-08-24T04:37:07.187Z",
+      "updatedAt": "2026-08-24T04:37:07.187Z",
+      "publishedAt": "2026-08-24T04:37:06.931Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -598,7 +598,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpv0c00556l3psdllcl25",
+        "listingId": "cmt6qvcab0055di3p48em1zda",
         "bedrooms": 2,
         "bathrooms": 3,
         "houseType": "TERRACE",
@@ -608,22 +608,18 @@
         "landArea": "180",
         "floorPlanId": null,
         "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
-        "features": [
-          "Fitted kitchen",
-          "Private terrace",
-          "Estate management"
-        ],
+        "features": ["Fitted kitchen", "Private terrace", "Estate management"],
         "floorPlan": null
       }
     },
     {
-      "id": "cmt5vpwla00586l3pt31g7hxl",
+      "id": "cmt6qve9n0058di3pl34p137s",
       "slug": "cornerstone-gardens-2-bed-bungalow",
       "reference": "RXC-HME-0011",
       "type": "HOME",
       "title": "Two-bedroom bungalow, Cornerstone Gardens",
       "description": "A completed two-bedroom bungalow on a 300 square metre plot, the smallest unit built here. Finished and ready for occupation, with a walled compound and a borehole on the plot.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "38500000",
@@ -636,9 +632,9 @@
         "durationMonths": 12
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:05:05.470Z",
-      "updatedAt": "2026-08-23T14:05:05.470Z",
-      "publishedAt": "2026-08-23T14:05:05.223Z",
+      "createdAt": "2026-08-24T04:37:09.755Z",
+      "updatedAt": "2026-08-24T04:37:09.755Z",
+      "publishedAt": "2026-08-24T04:37:09.499Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -660,7 +656,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpwla00586l3pt31g7hxl",
+        "listingId": "cmt6qve9n0058di3pl34p137s",
         "bedrooms": 2,
         "bathrooms": 3,
         "houseType": "BUNGALOW",
@@ -670,22 +666,18 @@
         "landArea": "300",
         "floorPlanId": null,
         "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, borehole and overhead tank.",
-        "features": [
-          "Walled compound",
-          "Borehole on plot",
-          "Fitted kitchen"
-        ],
+        "features": ["Walled compound", "Borehole on plot", "Fitted kitchen"],
         "floorPlan": null
       }
     },
     {
-      "id": "cmt5vpybf005b6l3pedfo92di",
+      "id": "cmt6qvfvn005bdi3pt4pg8hhz",
       "slug": "cornerstone-gardens-5-bed-duplex",
       "reference": "RXC-HME-0012",
       "type": "HOME",
       "title": "Five-bedroom duplex, Cornerstone Gardens",
       "description": "A five-bedroom duplex on a 600 square metre corner plot, completed and furnished to shell standard above the ground floor. Detached boys' quarters and parking for four.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "132000000",
@@ -694,9 +686,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T14:05:07.707Z",
-      "updatedAt": "2026-08-23T14:05:07.707Z",
-      "publishedAt": "2026-08-23T14:05:07.437Z",
+      "createdAt": "2026-08-24T04:37:11.843Z",
+      "updatedAt": "2026-08-24T04:37:11.843Z",
+      "publishedAt": "2026-08-24T04:37:11.572Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -718,7 +710,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpybf005b6l3pedfo92di",
+        "listingId": "cmt6qvfvn005bdi3pt4pg8hhz",
         "bedrooms": 5,
         "bathrooms": 6,
         "houseType": "DUPLEX",
@@ -738,13 +730,13 @@
       }
     },
     {
-      "id": "cmt5vpzwp005e6l3p26lh4bre",
+      "id": "cmt6qvj0k005edi3pllzp7y4h",
       "slug": "sabon-lugbe-court-3-bed-apartment",
       "reference": "RXC-HME-0013",
       "type": "HOME",
       "title": "Three-bedroom apartment, Sabon Lugbe Court",
       "description": "A three-bedroom apartment on the first floor of the northern block, completed and handed over. Lift-served, with allocated parking and a share of the estate generator.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "64000000",
@@ -753,9 +745,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:05:09.769Z",
-      "updatedAt": "2026-08-23T14:05:09.769Z",
-      "publishedAt": "2026-08-23T14:05:09.513Z",
+      "createdAt": "2026-08-24T04:37:15.908Z",
+      "updatedAt": "2026-08-24T04:37:15.908Z",
+      "publishedAt": "2026-08-24T04:37:15.657Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -777,7 +769,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vpzwp005e6l3p26lh4bre",
+        "listingId": "cmt6qvj0k005edi3pllzp7y4h",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "APARTMENT",
@@ -787,22 +779,18 @@
         "landArea": "0",
         "floorPlanId": null,
         "finishingSpec": "Ceramic tiling, fitted kitchen, POP ceilings, estate standby power.",
-        "features": [
-          "Lift-served",
-          "Allocated parking",
-          "Estate management"
-        ],
+        "features": ["Lift-served", "Allocated parking", "Estate management"],
         "floorPlan": null
       }
     },
     {
-      "id": "cmt5vq1j8005h6l3p8vglqqnh",
+      "id": "cmt6qvkz7005hdi3pg6yeds5z",
       "slug": "sabon-lugbe-court-4-bed-detached",
       "reference": "RXC-HME-0014",
       "type": "HOME",
       "title": "Four-bedroom detached house, Sabon Lugbe Court",
       "description": "A four-bedroom detached house on the court's outer ring, completed in 2024 and unoccupied since. All rooms en-suite, with a study, a detached boys' quarters and a walled compound.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "168000000",
@@ -811,9 +799,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:05:11.876Z",
-      "updatedAt": "2026-08-23T14:05:11.876Z",
-      "publishedAt": "2026-08-23T14:05:11.613Z",
+      "createdAt": "2026-08-24T04:37:18.451Z",
+      "updatedAt": "2026-08-24T04:37:18.451Z",
+      "publishedAt": "2026-08-24T04:37:18.202Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -835,7 +823,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vq1j8005h6l3p8vglqqnh",
+        "listingId": "cmt6qvkz7005hdi3pg6yeds5z",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DETACHED",
@@ -855,7 +843,7 @@
       }
     },
     {
-      "id": "cmt5vq35y005k6l3pg74h0nik",
+      "id": "cmt6qvmxw005kdi3psm7bl6et",
       "slug": "gwarinpa-4-bed-terrace",
       "reference": "RXC-HME-0015",
       "type": "HOME",
@@ -870,9 +858,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:05:13.990Z",
-      "updatedAt": "2026-08-23T14:05:13.990Z",
-      "publishedAt": "2026-08-23T14:05:13.744Z",
+      "createdAt": "2026-08-24T04:37:20.996Z",
+      "updatedAt": "2026-08-24T04:37:20.996Z",
+      "publishedAt": "2026-08-24T04:37:20.739Z",
       "estate": null,
       "media": [
         {
@@ -889,7 +877,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vq35y005k6l3pg74h0nik",
+        "listingId": "cmt6qvmxw005kdi3psm7bl6et",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "TERRACE",
@@ -908,7 +896,7 @@
       }
     },
     {
-      "id": "cmt5vq4tc005n6l3pljouccgb",
+      "id": "cmt6qvq03005ndi3p9lglf84b",
       "slug": "sangotedo-4-bed-detached-off-plan",
       "reference": "RXC-HME-0016",
       "type": "HOME",
@@ -923,9 +911,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:05:16.128Z",
-      "updatedAt": "2026-08-23T14:05:16.128Z",
-      "publishedAt": "2026-08-23T14:05:15.848Z",
+      "createdAt": "2026-08-24T04:37:24.963Z",
+      "updatedAt": "2026-08-24T04:37:24.963Z",
+      "publishedAt": "2026-08-24T04:37:24.710Z",
       "estate": null,
       "media": [
         {
@@ -942,7 +930,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vq4tc005n6l3pljouccgb",
+        "listingId": "cmt6qvq03005ndi3p9lglf84b",
         "bedrooms": 4,
         "bathrooms": 5,
         "houseType": "DETACHED",
@@ -961,13 +949,13 @@
       }
     },
     {
-      "id": "cmt5vq6f0005q6l3pj5xpm52y",
+      "id": "cmt6qvsb7005qdi3pkqvmmuab",
       "slug": "cornerstone-gardens-3-bed-terrace-sold",
       "reference": "RXC-HME-0017",
       "type": "HOME",
       "title": "Three-bedroom terrace, Cornerstone Gardens",
       "description": "Sold in February to a buyer on a twelve-month plan. Completed, handed over, and documented with the deed registered at closing.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "61000000",
@@ -976,9 +964,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:05:18.204Z",
-      "updatedAt": "2026-08-23T14:05:18.204Z",
-      "publishedAt": "2026-08-23T14:05:17.953Z",
+      "createdAt": "2026-08-24T04:37:27.955Z",
+      "updatedAt": "2026-08-24T04:37:27.955Z",
+      "publishedAt": "2026-08-24T04:37:27.665Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1000,7 +988,7 @@
       ],
       "landDetail": null,
       "homeDetail": {
-        "listingId": "cmt5vq6f0005q6l3pj5xpm52y",
+        "listingId": "cmt6qvsb7005qdi3pkqvmmuab",
         "bedrooms": 3,
         "bathrooms": 4,
         "houseType": "TERRACE",
@@ -1019,13 +1007,13 @@
       }
     },
     {
-      "id": "cmt5vo749000f6l3puuylprrc",
+      "id": "cmt6qtcfe000fdi3p5y18w2b9",
       "slug": "emerald-ridge-plot-a14",
       "reference": "RXC-LND-0001",
       "type": "LAND",
       "title": "Plot A14, Emerald Ridge",
       "description": "A 500 square metre residential plot on the first row inside the estate gate, fully dry and sand-filled, with the access road tarred to the boundary. Registered survey and a Certificate of Occupancy already issued in the estate's name.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "18500000",
@@ -1039,9 +1027,9 @@
         "durationMonths": 12
       },
       "featured": true,
-      "createdAt": "2026-08-23T14:03:45.801Z",
-      "updatedAt": "2026-08-23T14:03:45.801Z",
-      "publishedAt": "2026-08-23T14:03:45.555Z",
+      "createdAt": "2026-08-24T04:35:34.058Z",
+      "updatedAt": "2026-08-24T04:35:34.058Z",
+      "publishedAt": "2026-08-24T04:35:33.803Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1062,44 +1050,42 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vo749000f6l3puuylprrc",
+        "listingId": "cmt6qtcfe000fdi3p5y18w2b9",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
-        "additionalTitleTypes": [
-          "DEED_OF_ASSIGNMENT"
-        ],
+        "additionalTitleTypes": ["DEED_OF_ASSIGNMENT"],
         "surveyNumber": "LS/D/LA2231",
         "topography": "Dry, level, sand-filled",
         "roadAccess": "Tarred road to plot boundary",
         "documents": [
           {
-            "id": "cmt5vo80f000g6l3pz0weeayg",
-            "landDetailId": "cmt5vo749000f6l3puuylprrc",
+            "id": "cmt6qtd19000gdi3p4w84jrt4",
+            "landDetailId": "cmt6qtcfe000fdi3p5y18w2b9",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vo80f000h6l3p0wnrsr5k",
-            "landDetailId": "cmt5vo749000f6l3puuylprrc",
+            "id": "cmt6qtd19000hdi3p9fquiul3",
+            "landDetailId": "cmt6qtcfe000fdi3p5y18w2b9",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vo80f000i6l3prkhgx48p",
-            "landDetailId": "cmt5vo749000f6l3puuylprrc",
+            "id": "cmt6qtd19000idi3pv4o8cvz3",
+            "landDetailId": "cmt6qtcfe000fdi3p5y18w2b9",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5vo80f000j6l3pjhruuthr",
-            "landDetailId": "cmt5vo749000f6l3puuylprrc",
+            "id": "cmt6qtd19000jdi3ps7xow0ts",
+            "landDetailId": "cmt6qtcfe000fdi3p5y18w2b9",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -1110,13 +1096,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vo973000m6l3pe9gzgeq2",
+      "id": "cmt6qte8r000mdi3pzz4317qd",
       "slug": "emerald-ridge-corner-block-c",
       "reference": "RXC-LND-0002",
       "type": "LAND",
       "title": "Corner block C, Emerald Ridge",
       "description": "A 1,000 square metre double-frontage corner block at the junction of the estate's two main roads. Suited to a larger private build or a small terrace development. Pricing is handled directly because terms vary with intended use.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": null,
@@ -1125,9 +1111,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:03:48.495Z",
-      "updatedAt": "2026-08-23T14:03:48.495Z",
-      "publishedAt": "2026-08-23T14:03:48.242Z",
+      "createdAt": "2026-08-24T04:35:36.411Z",
+      "updatedAt": "2026-08-24T04:35:36.411Z",
+      "publishedAt": "2026-08-24T04:35:36.157Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1148,7 +1134,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vo973000m6l3pe9gzgeq2",
+        "listingId": "cmt6qte8r000mdi3pzz4317qd",
         "plotSize": "1000",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -1158,24 +1144,24 @@
         "roadAccess": "Double frontage, both roads tarred",
         "documents": [
           {
-            "id": "cmt5vo9tg000n6l3pzb6pwktb",
-            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
+            "id": "cmt6qteyc000ndi3pbv1c5bd5",
+            "landDetailId": "cmt6qte8r000mdi3pzz4317qd",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vo9tg000o6l3pnjjlbhcx",
-            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
+            "id": "cmt6qteyc000odi3pc49gj1rw",
+            "landDetailId": "cmt6qte8r000mdi3pzz4317qd",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vo9tg000p6l3pxhnr4vl8",
-            "landDetailId": "cmt5vo973000m6l3pe9gzgeq2",
+            "id": "cmt6qteyc000pdi3pwc4purws",
+            "landDetailId": "cmt6qte8r000mdi3pzz4317qd",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -1186,13 +1172,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vob06000s6l3prkj78zrx",
+      "id": "cmt6qtg7g000sdi3pserl54ee",
       "slug": "emerald-ridge-plot-b07",
       "reference": "RXC-LND-0003",
       "type": "LAND",
       "title": "Plot B07, Emerald Ridge",
       "description": "Five hundred square metres on the second row, backing onto the estate green buffer. Governor's consent obtained on the parent title and perfected for this plot.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "12750000",
@@ -1205,9 +1191,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:03:50.838Z",
-      "updatedAt": "2026-08-23T14:03:50.838Z",
-      "publishedAt": "2026-08-23T14:03:50.586Z",
+      "createdAt": "2026-08-24T04:35:38.956Z",
+      "updatedAt": "2026-08-24T04:35:38.956Z",
+      "publishedAt": "2026-08-24T04:35:38.695Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1228,7 +1214,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vob06000s6l3prkj78zrx",
+        "listingId": "cmt6qtg7g000sdi3pserl54ee",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "GOVERNORS_CONSENT",
@@ -1238,24 +1224,24 @@
         "roadAccess": "Tarred road, 9m right of way",
         "documents": [
           {
-            "id": "cmt5vobm7000t6l3pladu7wrt",
-            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
+            "id": "cmt6qthnl000tdi3pnufc74jf",
+            "landDetailId": "cmt6qtg7g000sdi3pserl54ee",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vobm7000u6l3pp38cuj72",
-            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
+            "id": "cmt6qthnl000udi3pisovje7b",
+            "landDetailId": "cmt6qtg7g000sdi3pserl54ee",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vobm7000v6l3ph2lzpkll",
-            "landDetailId": "cmt5vob06000s6l3prkj78zrx",
+            "id": "cmt6qthnl000vdi3pznaf9ipf",
+            "landDetailId": "cmt6qtg7g000sdi3pserl54ee",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -1266,13 +1252,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vocx9000y6l3p6hpekzbz",
+      "id": "cmt6qtiv9000ydi3pjqggvkhj",
       "slug": "emerald-ridge-plot-d22",
       "reference": "RXC-LND-0004",
       "type": "LAND",
       "title": "Plot D22, Emerald Ridge",
       "description": "A 450 square metre plot currently under reservation. Gazetted land, with the estate's excision published in the Lagos State gazette.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "9400000",
@@ -1281,9 +1267,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:03:53.325Z",
-      "updatedAt": "2026-08-23T14:03:53.325Z",
-      "publishedAt": "2026-08-23T14:03:53.007Z",
+      "createdAt": "2026-08-24T04:35:42.405Z",
+      "updatedAt": "2026-08-24T04:35:42.405Z",
+      "publishedAt": "2026-08-24T04:35:42.144Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1304,28 +1290,26 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vocx9000y6l3p6hpekzbz",
+        "listingId": "cmt6qtiv9000ydi3pjqggvkhj",
         "plotSize": "450",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
-        "additionalTitleTypes": [
-          "EXCISION"
-        ],
+        "additionalTitleTypes": ["EXCISION"],
         "surveyNumber": "LS/D/LA2271",
         "topography": "Dry, level",
         "roadAccess": "Graded road, tarring scheduled",
         "documents": [
           {
-            "id": "cmt5vodmc000z6l3pzhh1kujw",
-            "landDetailId": "cmt5vocx9000y6l3p6hpekzbz",
+            "id": "cmt6qtjhe000zdi3p3qgknllf",
+            "landDetailId": "cmt6qtiv9000ydi3pjqggvkhj",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vodmc00106l3phqwahnx0",
-            "landDetailId": "cmt5vocx9000y6l3p6hpekzbz",
+            "id": "cmt6qtjhe0010di3p11bop2yv",
+            "landDetailId": "cmt6qtiv9000ydi3pjqggvkhj",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1336,13 +1320,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vof6000136l3p9d49hgs6",
+      "id": "cmt6qtkpf0013di3p9m0megc9",
       "slug": "cornerstone-gardens-plot-14",
       "reference": "RXC-LND-0005",
       "type": "LAND",
       "title": "Plot 14, Cornerstone Gardens",
       "description": "Five hundred square metres off the Lagos–Ibadan expressway, sold with a deed of assignment registered against the estate's parent title. Popular with first-time builders.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "6200000",
@@ -1356,9 +1340,9 @@
         "durationMonths": 24
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:03:56.232Z",
-      "updatedAt": "2026-08-23T14:03:56.232Z",
-      "publishedAt": "2026-08-23T14:03:55.938Z",
+      "createdAt": "2026-08-24T04:35:44.787Z",
+      "updatedAt": "2026-08-24T04:35:44.787Z",
+      "publishedAt": "2026-08-24T04:35:44.527Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1379,7 +1363,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vof6000136l3p9d49hgs6",
+        "listingId": "cmt6qtkpf0013di3p9m0megc9",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "DEED_OF_ASSIGNMENT",
@@ -1389,24 +1373,24 @@
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5vofs300146l3ps07bw2xy",
-            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
+            "id": "cmt6qtlov0014di3peapqo1k2",
+            "landDetailId": "cmt6qtkpf0013di3p9m0megc9",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vofs300156l3pfypydtjt",
-            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
+            "id": "cmt6qtlov0015di3pj2d6g72g",
+            "landDetailId": "cmt6qtkpf0013di3p9m0megc9",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vofs300166l3p6f0iudad",
-            "landDetailId": "cmt5vof6000136l3p9d49hgs6",
+            "id": "cmt6qtlov0016di3pjr4o98ex",
+            "landDetailId": "cmt6qtkpf0013di3p9m0megc9",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -1417,13 +1401,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vohcu00196l3prsfdrfs4",
+      "id": "cmt6qtmwj0019di3pdq1ldsjt",
       "slug": "cornerstone-gardens-plot-31",
       "reference": "RXC-LND-0006",
       "type": "LAND",
       "title": "Plot 31, Cornerstone Gardens",
       "description": "A 464 square metre plot on excised land, with the excision confirmed and the survey registered. The most affordable stock currently held in the estate.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "4850000",
@@ -1436,9 +1420,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:03:59.070Z",
-      "updatedAt": "2026-08-23T14:03:59.070Z",
-      "publishedAt": "2026-08-23T14:03:58.493Z",
+      "createdAt": "2026-08-24T04:35:47.635Z",
+      "updatedAt": "2026-08-24T04:35:47.635Z",
+      "publishedAt": "2026-08-24T04:35:47.368Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1459,28 +1443,26 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vohcu00196l3prsfdrfs4",
+        "listingId": "cmt6qtmwj0019di3pdq1ldsjt",
         "plotSize": "464",
         "plotUnit": "SQM",
         "titleType": "EXCISION",
-        "additionalTitleTypes": [
-          "GAZETTE"
-        ],
+        "additionalTitleTypes": ["GAZETTE"],
         "surveyNumber": "OG/2204/2023",
         "topography": "Dry, slight incline",
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5voi61001a6l3pwrl26jbl",
-            "landDetailId": "cmt5vohcu00196l3prsfdrfs4",
+            "id": "cmt6qtnio001adi3p25ack6pp",
+            "landDetailId": "cmt6qtmwj0019di3pdq1ldsjt",
             "type": "EXCISION_CERTIFICATE",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5voi61001b6l3piwdry8im",
-            "landDetailId": "cmt5vohcu00196l3prsfdrfs4",
+            "id": "cmt6qtnio001bdi3pth4tuzm6",
+            "landDetailId": "cmt6qtmwj0019di3pdq1ldsjt",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1491,13 +1473,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vojfi001e6l3pflbeujf2",
+      "id": "cmt6qtq0v001edi3ps7b8oenx",
       "slug": "cornerstone-gardens-plot-47",
       "reference": "RXC-LND-0007",
       "type": "LAND",
       "title": "Plot 47, Cornerstone Gardens",
       "description": "Five hundred square metres at the northern edge of the estate. This plot is sold on a registered survey only — the excision covering this section has been applied for but not yet granted, and the price reflects that. Read the documentation panel before enquiring.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "3100000",
@@ -1506,9 +1488,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:01.758Z",
-      "updatedAt": "2026-08-23T14:04:01.758Z",
-      "publishedAt": "2026-08-23T14:04:01.517Z",
+      "createdAt": "2026-08-24T04:35:51.679Z",
+      "updatedAt": "2026-08-24T04:35:51.679Z",
+      "publishedAt": "2026-08-24T04:35:51.426Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1529,7 +1511,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vojfi001e6l3pflbeujf2",
+        "listingId": "cmt6qtq0v001edi3ps7b8oenx",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "SURVEY_ONLY",
@@ -1539,16 +1521,16 @@
         "roadAccess": "Graded road, unpaved",
         "documents": [
           {
-            "id": "cmt5vok1a001f6l3pasy988vq",
-            "landDetailId": "cmt5vojfi001e6l3pflbeujf2",
+            "id": "cmt6qtqmj001fdi3p1h9qz14c",
+            "landDetailId": "cmt6qtq0v001edi3ps7b8oenx",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vok1a001g6l3p9nv98u75",
-            "landDetailId": "cmt5vojfi001e6l3pflbeujf2",
+            "id": "cmt6qtqmj001gdi3plx115l6e",
+            "landDetailId": "cmt6qtq0v001edi3ps7b8oenx",
             "type": "PURCHASE_RECEIPT",
             "note": null,
             "mediaId": null,
@@ -1559,13 +1541,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vol73001j6l3pz7xk0ike",
+      "id": "cmt6qts9f001jdi3po0rog1we",
       "slug": "cornerstone-gardens-plot-09",
       "reference": "RXC-LND-0008",
       "type": "LAND",
       "title": "Plot 09, Cornerstone Gardens",
       "description": "Sold in March. Kept visible because stock that moves is the clearest signal a buyer has that an estate is real.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "5600000",
@@ -1574,9 +1556,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:04.047Z",
-      "updatedAt": "2026-08-23T14:04:04.047Z",
-      "publishedAt": "2026-08-23T14:04:03.803Z",
+      "createdAt": "2026-08-24T04:35:54.579Z",
+      "updatedAt": "2026-08-24T04:35:54.579Z",
+      "publishedAt": "2026-08-24T04:35:54.322Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -1597,7 +1579,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vol73001j6l3pz7xk0ike",
+        "listingId": "cmt6qts9f001jdi3po0rog1we",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
@@ -1607,16 +1589,16 @@
         "roadAccess": "Graded estate road",
         "documents": [
           {
-            "id": "cmt5volss001k6l3pgjjl3a5u",
-            "landDetailId": "cmt5vol73001j6l3pz7xk0ike",
+            "id": "cmt6qtszz001kdi3ps4mly7hj",
+            "landDetailId": "cmt6qts9f001jdi3po0rog1we",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5volss001l6l3p6dpru2he",
-            "landDetailId": "cmt5vol73001j6l3pz7xk0ike",
+            "id": "cmt6qtszz001ldi3pnw1l5ne1",
+            "landDetailId": "cmt6qts9f001jdi3po0rog1we",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1627,13 +1609,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5von1u001o6l3pxj92hb7b",
+      "id": "cmt6qtvlo001odi3pqn2jy1ll",
       "slug": "sabon-lugbe-plot-n03",
       "reference": "RXC-LND-0009",
       "type": "LAND",
       "title": "Plot N03, Sabon Lugbe Court",
       "description": "Six hundred square metres held back at the northern boundary of a delivered estate, with a Certificate of Occupancy already in place and every service connected to the plot line.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "26000000",
@@ -1642,9 +1624,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T14:04:06.450Z",
-      "updatedAt": "2026-08-23T14:04:06.450Z",
-      "publishedAt": "2026-08-23T14:04:06.123Z",
+      "createdAt": "2026-08-24T04:35:58.908Z",
+      "updatedAt": "2026-08-24T04:35:58.908Z",
+      "publishedAt": "2026-08-24T04:35:58.655Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -1665,7 +1647,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5von1u001o6l3pxj92hb7b",
+        "listingId": "cmt6qtvlo001odi3pqn2jy1ll",
         "plotSize": "600",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -1675,32 +1657,32 @@
         "roadAccess": "Paved road, services at boundary",
         "documents": [
           {
-            "id": "cmt5vonn9001p6l3pkx63h4uu",
-            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
+            "id": "cmt6qtx2g001pdi3pdo16qn7b",
+            "landDetailId": "cmt6qtvlo001odi3pqn2jy1ll",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vonn9001q6l3p7c082c76",
-            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
+            "id": "cmt6qtx2g001qdi3pzss8a09m",
+            "landDetailId": "cmt6qtvlo001odi3pqn2jy1ll",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vonn9001r6l3pdjzm22df",
-            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
+            "id": "cmt6qtx2g001rdi3pikhgxicj",
+            "landDetailId": "cmt6qtvlo001odi3pqn2jy1ll",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5vonn9001s6l3prajp0el9",
-            "landDetailId": "cmt5von1u001o6l3pxj92hb7b",
+            "id": "cmt6qtx2g001sdi3p2jrik0k0",
+            "landDetailId": "cmt6qtvlo001odi3pqn2jy1ll",
             "type": "SERVICE_CONNECTION",
             "note": null,
             "mediaId": null,
@@ -1711,13 +1693,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5voovd001v6l3p2jy9i0g8",
+      "id": "cmt6qty92001vdi3pcz35p6kx",
       "slug": "sabon-lugbe-two-plot-parcel",
       "reference": "RXC-LND-0010",
       "type": "LAND",
       "title": "Two-plot parcel, Sabon Lugbe Court",
       "description": "Two adjoining plots at the estate's northern boundary, offered together for a single build or a pair of semi-detached units. Terms depend on the intended development, so pricing is discussed directly.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": null,
@@ -1726,9 +1708,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:08.809Z",
-      "updatedAt": "2026-08-23T14:04:08.809Z",
-      "publishedAt": "2026-08-23T14:04:08.558Z",
+      "createdAt": "2026-08-24T04:36:02.342Z",
+      "updatedAt": "2026-08-24T04:36:02.342Z",
+      "publishedAt": "2026-08-24T04:36:02.091Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -1749,7 +1731,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5voovd001v6l3p2jy9i0g8",
+        "listingId": "cmt6qty92001vdi3pcz35p6kx",
         "plotSize": "2",
         "plotUnit": "PLOTS",
         "titleType": "GOVERNORS_CONSENT",
@@ -1759,16 +1741,16 @@
         "roadAccess": "Paved road frontage",
         "documents": [
           {
-            "id": "cmt5vophi001w6l3pe7phe7tm",
-            "landDetailId": "cmt5voovd001v6l3p2jy9i0g8",
+            "id": "cmt6qtz89001wdi3ptv6fvtzs",
+            "landDetailId": "cmt6qty92001vdi3pcz35p6kx",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vophi001x6l3p07wmpdah",
-            "landDetailId": "cmt5voovd001v6l3p2jy9i0g8",
+            "id": "cmt6qtz89001xdi3pa4ch2eap",
+            "landDetailId": "cmt6qty92001vdi3pcz35p6kx",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -1779,13 +1761,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5voqpw00206l3p3ijkav8p",
+      "id": "cmt6qu0fs0020di3pfqaaqzs3",
       "slug": "sabon-lugbe-plot-n07",
       "reference": "RXC-LND-0011",
       "type": "LAND",
       "title": "Plot N07, Sabon Lugbe Court",
       "description": "Six hundred square metres awaiting final documentation review before publication. Held as a draft so it cannot reach the public site until the title paperwork has been signed off.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "15000000",
@@ -1794,8 +1776,8 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:11.204Z",
-      "updatedAt": "2026-08-23T14:04:11.204Z",
+      "createdAt": "2026-08-24T04:36:05.176Z",
+      "updatedAt": "2026-08-24T04:36:05.176Z",
       "publishedAt": null,
       "estate": {
         "slug": "sabon-lugbe-court",
@@ -1817,7 +1799,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5voqpw00206l3p3ijkav8p",
+        "listingId": "cmt6qu0fs0020di3pfqaaqzs3",
         "plotSize": "600",
         "plotUnit": "SQM",
         "titleType": "DEED_OF_ASSIGNMENT",
@@ -1827,8 +1809,8 @@
         "roadAccess": "Paved road frontage",
         "documents": [
           {
-            "id": "cmt5vorat00216l3pfz1vremw",
-            "landDetailId": "cmt5voqpw00206l3p3ijkav8p",
+            "id": "cmt6qu1110021di3plho4w1cp",
+            "landDetailId": "cmt6qu0fs0020di3pfqaaqzs3",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -1839,13 +1821,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vos9s00236l3pjkf0bmt1",
+      "id": "cmt6qu20s0023di3pprk26crp",
       "slug": "emerald-ridge-plot-a02",
       "reference": "RXC-LND-0012",
       "type": "LAND",
       "title": "Plot A02, Emerald Ridge",
       "description": "Sold in January to a returning buyer. Excised land with the survey registered and the deed executed at handover.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "7300000",
@@ -1854,9 +1836,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:13.216Z",
-      "updatedAt": "2026-08-23T14:04:13.216Z",
-      "publishedAt": "2026-08-23T14:04:12.970Z",
+      "createdAt": "2026-08-24T04:36:07.229Z",
+      "updatedAt": "2026-08-24T04:36:07.229Z",
+      "publishedAt": "2026-08-24T04:36:06.981Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1877,7 +1859,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vos9s00236l3pjkf0bmt1",
+        "listingId": "cmt6qu20s0023di3pprk26crp",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "EXCISION",
@@ -1887,24 +1869,24 @@
         "roadAccess": "Tarred road",
         "documents": [
           {
-            "id": "cmt5vosup00246l3pbw2b5xox",
-            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "id": "cmt6qu2m50024di3px621vgyh",
+            "landDetailId": "cmt6qu20s0023di3pprk26crp",
             "type": "EXCISION_CERTIFICATE",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vosup00256l3pt0sgv4fn",
-            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "id": "cmt6qu2m50025di3pzaz6qhbq",
+            "landDetailId": "cmt6qu20s0023di3pprk26crp",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vosup00266l3pew06vqgn",
-            "landDetailId": "cmt5vos9s00236l3pjkf0bmt1",
+            "id": "cmt6qu2m50026di3pwubszmj4",
+            "landDetailId": "cmt6qu20s0023di3pprk26crp",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -1915,13 +1897,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vou1z00296l3pfegwgijj",
+      "id": "cmt6qu3wb0029di3pxrq529mc",
       "slug": "emerald-ridge-plot-b19",
       "reference": "RXC-LND-0013",
       "type": "LAND",
       "title": "Plot B19, Emerald Ridge",
       "description": "A 300 square metre plot on the second row, priced for a first-time buyer. Dry and sand-filled, with drainage completed along the row and the access road graded to the boundary.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "11200000",
@@ -1934,9 +1916,9 @@
         "durationMonths": 12
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:15.527Z",
-      "updatedAt": "2026-08-23T14:04:15.527Z",
-      "publishedAt": "2026-08-23T14:04:15.259Z",
+      "createdAt": "2026-08-24T04:36:09.659Z",
+      "updatedAt": "2026-08-24T04:36:09.659Z",
+      "publishedAt": "2026-08-24T04:36:09.327Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -1957,7 +1939,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vou1z00296l3pfegwgijj",
+        "listingId": "cmt6qu3wb0029di3pxrq529mc",
         "plotSize": "300",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -1967,24 +1949,24 @@
         "roadAccess": "Graded road to boundary",
         "documents": [
           {
-            "id": "cmt5voun8002a6l3pptp1n2rj",
-            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "id": "cmt6qu4iv002adi3pq8p6kbkv",
+            "landDetailId": "cmt6qu3wb0029di3pxrq529mc",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5voun8002b6l3paw690esq",
-            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "id": "cmt6qu4iv002bdi3p5l3m2yo4",
+            "landDetailId": "cmt6qu3wb0029di3pxrq529mc",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5voun8002c6l3pujukb8dh",
-            "landDetailId": "cmt5vou1z00296l3pfegwgijj",
+            "id": "cmt6qu4iv002cdi3pz15dr3ru",
+            "landDetailId": "cmt6qu3wb0029di3pxrq529mc",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -1995,13 +1977,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vovv0002f6l3p91n647a3",
+      "id": "cmt6qu6i7002fdi3pxyvif9un",
       "slug": "emerald-ridge-plot-e04",
       "reference": "RXC-LND-0014",
       "type": "LAND",
       "title": "Plot E04, Emerald Ridge",
       "description": "An 800 square metre double allocation on the estate's eastern edge, backing onto the buffer planting rather than another plot. Suited to a single large build.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "31000000",
@@ -2010,9 +1992,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T14:04:17.868Z",
-      "updatedAt": "2026-08-23T14:04:17.868Z",
-      "publishedAt": "2026-08-23T14:04:17.596Z",
+      "createdAt": "2026-08-24T04:36:13.039Z",
+      "updatedAt": "2026-08-24T04:36:13.039Z",
+      "publishedAt": "2026-08-24T04:36:12.285Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -2033,52 +2015,50 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vovv0002f6l3p91n647a3",
+        "listingId": "cmt6qu6i7002fdi3pxyvif9un",
         "plotSize": "800",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
-        "additionalTitleTypes": [
-          "DEED_OF_ASSIGNMENT"
-        ],
+        "additionalTitleTypes": ["DEED_OF_ASSIGNMENT"],
         "surveyNumber": "LS/D/LA2251",
         "topography": "Dry, gently sloping",
         "roadAccess": "Tarred road frontage",
         "documents": [
           {
-            "id": "cmt5vowgr002g6l3p6s2yiv64",
-            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "id": "cmt6qu73u002gdi3p5d76ct3c",
+            "landDetailId": "cmt6qu6i7002fdi3pxyvif9un",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vowgr002h6l3pqa0azbrc",
-            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "id": "cmt6qu73u002hdi3pq4vpvwtz",
+            "landDetailId": "cmt6qu6i7002fdi3pxyvif9un",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vowgr002i6l3pvwkfanrc",
-            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "id": "cmt6qu73u002idi3pkuv9luac",
+            "landDetailId": "cmt6qu6i7002fdi3pxyvif9un",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5vowgr002j6l3petn9glrv",
-            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "id": "cmt6qu73u002jdi3pfe94szia",
+            "landDetailId": "cmt6qu6i7002fdi3pxyvif9un",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
             "position": 3
           },
           {
-            "id": "cmt5vowgr002k6l3puv28ypz3",
-            "landDetailId": "cmt5vovv0002f6l3p91n647a3",
+            "id": "cmt6qu73u002kdi3paxnkuerm",
+            "landDetailId": "cmt6qu6i7002fdi3pxyvif9un",
             "type": "SERVICE_CONNECTION",
             "note": null,
             "mediaId": null,
@@ -2089,13 +2069,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5voxn6002n6l3pettuy3yk",
+      "id": "cmt6qu8ok002ndi3pabubnm81",
       "slug": "cornerstone-gardens-plot-52",
       "reference": "RXC-LND-0015",
       "type": "LAND",
       "title": "Plot 52, Cornerstone Gardens",
       "description": "A 450 square metre plot on the estate's inner ring, sold on gazette with the survey registered. Excision has been granted over the wider parcel and the estate layout is approved.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "4400000",
@@ -2109,9 +2089,9 @@
         "durationMonths": 18
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:20.178Z",
-      "updatedAt": "2026-08-23T14:04:20.178Z",
-      "publishedAt": "2026-08-23T14:04:19.931Z",
+      "createdAt": "2026-08-24T04:36:15.860Z",
+      "updatedAt": "2026-08-24T04:36:15.860Z",
+      "publishedAt": "2026-08-24T04:36:15.607Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -2132,44 +2112,42 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5voxn6002n6l3pettuy3yk",
+        "listingId": "cmt6qu8ok002ndi3pabubnm81",
         "plotSize": "450",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
-        "additionalTitleTypes": [
-          "EXCISION"
-        ],
+        "additionalTitleTypes": ["EXCISION"],
         "surveyNumber": "OG/SV/8841",
         "topography": "Dry, level",
         "roadAccess": "Graded internal road",
         "documents": [
           {
-            "id": "cmt5voy8u002o6l3p064drhta",
-            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "id": "cmt6qu9ps002odi3p9grkjfly",
+            "landDetailId": "cmt6qu8ok002ndi3pabubnm81",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5voy8u002p6l3pho9698ey",
-            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "id": "cmt6qu9ps002pdi3p5s4dq1ef",
+            "landDetailId": "cmt6qu8ok002ndi3pabubnm81",
             "type": "EXCISION_CERTIFICATE",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5voy8u002q6l3poawshmyn",
-            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "id": "cmt6qu9ps002qdi3pbjwoponh",
+            "landDetailId": "cmt6qu8ok002ndi3pabubnm81",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5voy8u002r6l3pqranfiqd",
-            "landDetailId": "cmt5voxn6002n6l3pettuy3yk",
+            "id": "cmt6qu9ps002rdi3ppnpi2d84",
+            "landDetailId": "cmt6qu8ok002ndi3pabubnm81",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -2180,13 +2158,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vozh9002u6l3p2dd71rac",
+      "id": "cmt6quazb002udi3p1c0702zc",
       "slug": "cornerstone-gardens-plot-63",
       "reference": "RXC-LND-0016",
       "type": "LAND",
       "title": "Plot 63, Cornerstone Gardens",
       "description": "A 250 square metre plot at the estate's western boundary, the smallest allocation offered here. Level and dry, with the boundary wall completed along the western run.",
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "location": "Mowe-Ofada",
       "state": "Ogun",
       "price": "2650000",
@@ -2199,9 +2177,9 @@
         "durationMonths": 24
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:22.557Z",
-      "updatedAt": "2026-08-23T14:04:22.557Z",
-      "publishedAt": "2026-08-23T14:04:22.309Z",
+      "createdAt": "2026-08-24T04:36:18.839Z",
+      "updatedAt": "2026-08-24T04:36:18.839Z",
+      "publishedAt": "2026-08-24T04:36:18.590Z",
       "estate": {
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
@@ -2222,7 +2200,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vozh9002u6l3p2dd71rac",
+        "listingId": "cmt6quazb002udi3p1c0702zc",
         "plotSize": "250",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
@@ -2232,24 +2210,24 @@
         "roadAccess": "Graded internal road",
         "documents": [
           {
-            "id": "cmt5vp02m002v6l3pki7ocki0",
-            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
+            "id": "cmt6qubm5002vdi3pgpgoizai",
+            "landDetailId": "cmt6quazb002udi3p1c0702zc",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp02m002w6l3pclol97wa",
-            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
+            "id": "cmt6qubm5002wdi3p1on5r14m",
+            "landDetailId": "cmt6quazb002udi3p1c0702zc",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vp02m002x6l3p00yec9dy",
-            "landDetailId": "cmt5vozh9002u6l3p2dd71rac",
+            "id": "cmt6qubm5002xdi3pftzc6xly",
+            "landDetailId": "cmt6quazb002udi3p1c0702zc",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -2260,13 +2238,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vp1dp00306l3psuvcpfgj",
+      "id": "cmt6qucu70030di3p722xwz2f",
       "slug": "sabon-lugbe-court-plot-n11",
       "reference": "RXC-LND-0017",
       "type": "LAND",
       "title": "Plot N11, Sabon Lugbe Court",
       "description": "A 600 square metre plot held back at the northern boundary of a delivered court, with Governor's consent obtained and the deed registered. Mains water and power run to the boundary.",
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "location": "Lugbe",
       "state": "FCT Abuja",
       "price": "34500000",
@@ -2275,9 +2253,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:25.021Z",
-      "updatedAt": "2026-08-23T14:04:25.021Z",
-      "publishedAt": "2026-08-23T14:04:24.775Z",
+      "createdAt": "2026-08-24T04:36:21.247Z",
+      "updatedAt": "2026-08-24T04:36:21.247Z",
+      "publishedAt": "2026-08-24T04:36:20.994Z",
       "estate": {
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
@@ -2298,44 +2276,42 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vp1dp00306l3psuvcpfgj",
+        "listingId": "cmt6qucu70030di3p722xwz2f",
         "plotSize": "600",
         "plotUnit": "SQM",
         "titleType": "GOVERNORS_CONSENT",
-        "additionalTitleTypes": [
-          "DEED_OF_ASSIGNMENT"
-        ],
+        "additionalTitleTypes": ["DEED_OF_ASSIGNMENT"],
         "surveyNumber": "FCT/SV/11207",
         "topography": "Dry, level",
         "roadAccess": "Tarred estate road",
         "documents": [
           {
-            "id": "cmt5vp20800316l3pqd0g14xl",
-            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "id": "cmt6qudfl0031di3pdcby6ys4",
+            "landDetailId": "cmt6qucu70030di3p722xwz2f",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp20900326l3p2flf4zkx",
-            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "id": "cmt6qudfl0032di3pjzj62wry",
+            "landDetailId": "cmt6qucu70030di3p722xwz2f",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vp20900336l3p09ikyxbi",
-            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "id": "cmt6qudfl0033di3p1vbja0ot",
+            "landDetailId": "cmt6qucu70030di3p722xwz2f",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5vp20900346l3p82kah5ea",
-            "landDetailId": "cmt5vp1dp00306l3psuvcpfgj",
+            "id": "cmt6qudfl0034di3pqmg2trci",
+            "landDetailId": "cmt6qucu70030di3p722xwz2f",
             "type": "SERVICE_CONNECTION",
             "note": null,
             "mediaId": null,
@@ -2346,7 +2322,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vp38100376l3pz8xd5cjq",
+      "id": "cmt6quemc0037di3pkg008sik",
       "slug": "epe-farm-parcel-two-hectares",
       "reference": "RXC-LND-0018",
       "type": "LAND",
@@ -2361,9 +2337,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:27.409Z",
-      "updatedAt": "2026-08-23T14:04:27.409Z",
-      "publishedAt": "2026-08-23T14:04:27.163Z",
+      "createdAt": "2026-08-24T04:36:23.556Z",
+      "updatedAt": "2026-08-24T04:36:23.556Z",
+      "publishedAt": "2026-08-24T04:36:23.302Z",
       "estate": null,
       "media": [
         {
@@ -2379,7 +2355,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vp38100376l3pz8xd5cjq",
+        "listingId": "cmt6quemc0037di3pkg008sik",
         "plotSize": "2",
         "plotUnit": "HECTARES",
         "titleType": "SURVEY_ONLY",
@@ -2389,16 +2365,16 @@
         "roadAccess": "Laterite access track from the expressway",
         "documents": [
           {
-            "id": "cmt5vp3v200386l3p0ole7wi5",
-            "landDetailId": "cmt5vp38100376l3pz8xd5cjq",
+            "id": "cmt6quf7t0038di3p9e56b1tb",
+            "landDetailId": "cmt6quemc0037di3pkg008sik",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp3v200396l3pmx4g7p0v",
-            "landDetailId": "cmt5vp38100376l3pz8xd5cjq",
+            "id": "cmt6quf7t0039di3pb9mcn569",
+            "landDetailId": "cmt6quemc0037di3pkg008sik",
             "type": "PURCHASE_RECEIPT",
             "note": null,
             "mediaId": null,
@@ -2409,7 +2385,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vp58j003c6l3p74h24gta",
+      "id": "cmt6qugs1003cdi3pkb0qupl1",
       "slug": "ikorodu-plot-agric-road",
       "reference": "RXC-LND-0019",
       "type": "LAND",
@@ -2428,9 +2404,9 @@
         "durationMonths": 9
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:30.019Z",
-      "updatedAt": "2026-08-23T14:04:30.019Z",
-      "publishedAt": "2026-08-23T14:04:29.745Z",
+      "createdAt": "2026-08-24T04:36:26.353Z",
+      "updatedAt": "2026-08-24T04:36:26.353Z",
+      "publishedAt": "2026-08-24T04:36:26.098Z",
       "estate": null,
       "media": [
         {
@@ -2446,36 +2422,34 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vp58j003c6l3p74h24gta",
+        "listingId": "cmt6qugs1003cdi3pkb0qupl1",
         "plotSize": "400",
         "plotUnit": "SQM",
         "titleType": "EXCISION",
-        "additionalTitleTypes": [
-          "GAZETTE"
-        ],
+        "additionalTitleTypes": ["GAZETTE"],
         "surveyNumber": "LS/D/LA3104",
         "topography": "Dry, level",
         "roadAccess": "Direct frontage to a tarred road",
         "documents": [
           {
-            "id": "cmt5vp5tj003d6l3pr8eyr7pk",
-            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "id": "cmt6quhqe003ddi3pik4ah0dh",
+            "landDetailId": "cmt6qugs1003cdi3pkb0qupl1",
             "type": "EXCISION_CERTIFICATE",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp5tj003e6l3prvnptzu3",
-            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "id": "cmt6quhqe003edi3pkut4irhu",
+            "landDetailId": "cmt6qugs1003cdi3pkb0qupl1",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vp5tk003f6l3pxe5esvx6",
-            "landDetailId": "cmt5vp58j003c6l3p74h24gta",
+            "id": "cmt6quhqe003fdi3p7shpm28w",
+            "landDetailId": "cmt6qugs1003cdi3pkb0qupl1",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
@@ -2486,7 +2460,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vp719003i6l3pz6e31o5u",
+      "id": "cmt6quk1v003idi3pi43xjxjr",
       "slug": "sangotedo-plot-block-f",
       "reference": "RXC-LND-0020",
       "type": "LAND",
@@ -2501,9 +2475,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": true,
-      "createdAt": "2026-08-23T14:04:32.349Z",
-      "updatedAt": "2026-08-23T14:04:32.349Z",
-      "publishedAt": "2026-08-23T14:04:32.085Z",
+      "createdAt": "2026-08-24T04:36:30.595Z",
+      "updatedAt": "2026-08-24T04:36:30.595Z",
+      "publishedAt": "2026-08-24T04:36:30.338Z",
       "estate": null,
       "media": [
         {
@@ -2519,53 +2493,50 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vp719003i6l3pz6e31o5u",
+        "listingId": "cmt6quk1v003idi3pi43xjxjr",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
-        "additionalTitleTypes": [
-          "GOVERNORS_CONSENT",
-          "DEED_OF_ASSIGNMENT"
-        ],
+        "additionalTitleTypes": ["GOVERNORS_CONSENT", "DEED_OF_ASSIGNMENT"],
         "surveyNumber": "LS/D/LA2988",
         "topography": "Dry, level, fenced",
         "roadAccess": "Tarred road, kerbed",
         "documents": [
           {
-            "id": "cmt5vp7n2003j6l3p75l4216g",
-            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "id": "cmt6qul15003jdi3psic9xo9z",
+            "landDetailId": "cmt6quk1v003idi3pi43xjxjr",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp7n2003k6l3pgztloj0r",
-            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "id": "cmt6qul15003kdi3pki059yy6",
+            "landDetailId": "cmt6quk1v003idi3pi43xjxjr",
             "type": "GOVERNORS_CONSENT",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vp7n2003l6l3p0qpnoptr",
-            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "id": "cmt6qul15003ldi3pu0fymx43",
+            "landDetailId": "cmt6quk1v003idi3pi43xjxjr",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 2
           },
           {
-            "id": "cmt5vp7n2003m6l3pdnq6xmbc",
-            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "id": "cmt6qul15003mdi3p60gopn2f",
+            "landDetailId": "cmt6quk1v003idi3pi43xjxjr",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 3
           },
           {
-            "id": "cmt5vp7n2003n6l3p0epgy1k9",
-            "landDetailId": "cmt5vp719003i6l3pz6e31o5u",
+            "id": "cmt6qul15003ndi3pogt11ind",
+            "landDetailId": "cmt6quk1v003idi3pi43xjxjr",
             "type": "SERVICE_CONNECTION",
             "note": null,
             "mediaId": null,
@@ -2576,7 +2547,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vp91c003q6l3pw1t3k4a1",
+      "id": "cmt6qum8b003qdi3pf4t67j13",
       "slug": "simawa-plot-block-j",
       "reference": "RXC-LND-0021",
       "type": "LAND",
@@ -2595,9 +2566,9 @@
         "durationMonths": 24
       },
       "featured": false,
-      "createdAt": "2026-08-23T14:04:34.944Z",
-      "updatedAt": "2026-08-23T14:04:34.944Z",
-      "publishedAt": "2026-08-23T14:04:34.684Z",
+      "createdAt": "2026-08-24T04:36:33.419Z",
+      "updatedAt": "2026-08-24T04:36:33.419Z",
+      "publishedAt": "2026-08-24T04:36:33.170Z",
       "estate": null,
       "media": [
         {
@@ -2613,7 +2584,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vp91c003q6l3pw1t3k4a1",
+        "listingId": "cmt6qum8b003qdi3pf4t67j13",
         "plotSize": "300",
         "plotUnit": "SQM",
         "titleType": "GAZETTE",
@@ -2623,24 +2594,24 @@
         "roadAccess": "Laterite road, motorable year round",
         "documents": [
           {
-            "id": "cmt5vp9ng003r6l3p1j0livv3",
-            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "id": "cmt6qumv3003rdi3pno7y7cvz",
+            "landDetailId": "cmt6qum8b003qdi3pf4t67j13",
             "type": "GAZETTE_PUBLICATION",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vp9ng003s6l3pak4zxyhm",
-            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "id": "cmt6qumv3003sdi3pftmt07ae",
+            "landDetailId": "cmt6qum8b003qdi3pf4t67j13",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vp9ng003t6l3ptn08n4gk",
-            "landDetailId": "cmt5vp91c003q6l3pw1t3k4a1",
+            "id": "cmt6qumv3003tdi3pcgsjbou5",
+            "landDetailId": "cmt6qum8b003qdi3pf4t67j13",
             "type": "ALLOCATION_LETTER",
             "note": null,
             "mediaId": null,
@@ -2651,7 +2622,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vpatv003w6l3pwwr3p7jh",
+      "id": "cmt6quo26003wdi3pfd77ztz7",
       "slug": "kuje-parcel-one-acre",
       "reference": "RXC-LND-0022",
       "type": "LAND",
@@ -2666,9 +2637,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:37.267Z",
-      "updatedAt": "2026-08-23T14:04:37.267Z",
-      "publishedAt": "2026-08-23T14:04:37.022Z",
+      "createdAt": "2026-08-24T04:36:35.790Z",
+      "updatedAt": "2026-08-24T04:36:35.790Z",
+      "publishedAt": "2026-08-24T04:36:35.537Z",
       "estate": null,
       "media": [
         {
@@ -2684,7 +2655,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vpatv003w6l3pwwr3p7jh",
+        "listingId": "cmt6quo26003wdi3pfd77ztz7",
         "plotSize": "1",
         "plotUnit": "ACRES",
         "titleType": "DEED_OF_ASSIGNMENT",
@@ -2694,24 +2665,24 @@
         "roadAccess": "Laterite road from the Kuje–Gwagwalada road",
         "documents": [
           {
-            "id": "cmt5vpbfg003x6l3pitaajvqu",
-            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "id": "cmt6quons003xdi3px37vubbq",
+            "landDetailId": "cmt6quo26003wdi3pfd77ztz7",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vpbfg003y6l3po6rbfw93",
-            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "id": "cmt6quons003ydi3px2lvd01j",
+            "landDetailId": "cmt6quo26003wdi3pfd77ztz7",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vpbfg003z6l3pggik4csk",
-            "landDetailId": "cmt5vpatv003w6l3pwwr3p7jh",
+            "id": "cmt6quons003zdi3pwndnvbto",
+            "landDetailId": "cmt6quo26003wdi3pfd77ztz7",
             "type": "PURCHASE_RECEIPT",
             "note": null,
             "mediaId": null,
@@ -2722,7 +2693,7 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vpcna00426l3pa1cinnmr",
+      "id": "cmt6qupz70042di3pnh705js7",
       "slug": "abeokuta-plot-oke-mosan",
       "reference": "RXC-LND-0023",
       "type": "LAND",
@@ -2737,9 +2708,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:39.622Z",
-      "updatedAt": "2026-08-23T14:04:39.622Z",
-      "publishedAt": "2026-08-23T14:04:39.323Z",
+      "createdAt": "2026-08-24T04:36:38.275Z",
+      "updatedAt": "2026-08-24T04:36:38.275Z",
+      "publishedAt": "2026-08-24T04:36:38.027Z",
       "estate": null,
       "media": [
         {
@@ -2755,7 +2726,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vpcna00426l3pa1cinnmr",
+        "listingId": "cmt6qupz70042di3pnh705js7",
         "plotSize": "700",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -2765,24 +2736,24 @@
         "roadAccess": "Tarred road frontage",
         "documents": [
           {
-            "id": "cmt5vpd9t00436l3pjxfhp413",
-            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "id": "cmt6quqnk0043di3ppqnkl8vx",
+            "landDetailId": "cmt6qupz70042di3pnh705js7",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vpd9t00446l3pcst99y73",
-            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "id": "cmt6quqnk0044di3p1moodivg",
+            "landDetailId": "cmt6qupz70042di3pnh705js7",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vpd9t00456l3puzg0f3fs",
-            "landDetailId": "cmt5vpcna00426l3pa1cinnmr",
+            "id": "cmt6quqnk0045di3pxj77pxcc",
+            "landDetailId": "cmt6qupz70042di3pnh705js7",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
             "mediaId": null,
@@ -2793,13 +2764,13 @@
       "homeDetail": null
     },
     {
-      "id": "cmt5vpei400486l3plza1qdfh",
+      "id": "cmt6qus1j0048di3po7oa5ybt",
       "slug": "emerald-ridge-plot-c11",
       "reference": "RXC-LND-0024",
       "type": "LAND",
       "title": "Plot C11, Emerald Ridge",
       "description": "A 500 square metre plot sold in March. Certificate of Occupancy issued, survey registered and the deed executed at handover.",
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "location": "Ibeju-Lekki",
       "state": "Lagos",
       "price": "17900000",
@@ -2808,9 +2779,9 @@
       "paymentPlanAvailable": false,
       "paymentPlanTerms": null,
       "featured": false,
-      "createdAt": "2026-08-23T14:04:42.028Z",
-      "updatedAt": "2026-08-23T14:04:42.028Z",
-      "publishedAt": "2026-08-23T14:04:41.764Z",
+      "createdAt": "2026-08-24T04:36:40.951Z",
+      "updatedAt": "2026-08-24T04:36:40.951Z",
+      "publishedAt": "2026-08-24T04:36:40.695Z",
       "estate": {
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
@@ -2831,7 +2802,7 @@
         }
       ],
       "landDetail": {
-        "listingId": "cmt5vpei400486l3plza1qdfh",
+        "listingId": "cmt6qus1j0048di3po7oa5ybt",
         "plotSize": "500",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
@@ -2841,24 +2812,24 @@
         "roadAccess": "Tarred road to plot boundary",
         "documents": [
           {
-            "id": "cmt5vpf4q00496l3pwbnk9lez",
-            "landDetailId": "cmt5vpei400486l3plza1qdfh",
+            "id": "cmt6qusn50049di3pkxq5p6uq",
+            "landDetailId": "cmt6qus1j0048di3po7oa5ybt",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
             "mediaId": null,
             "position": 0
           },
           {
-            "id": "cmt5vpf4q004a6l3pjyjxp57c",
-            "landDetailId": "cmt5vpei400486l3plza1qdfh",
+            "id": "cmt6qusn5004adi3prqdydyvx",
+            "landDetailId": "cmt6qus1j0048di3po7oa5ybt",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
             "mediaId": null,
             "position": 1
           },
           {
-            "id": "cmt5vpf4q004b6l3ph2ar4c34",
-            "landDetailId": "cmt5vpei400486l3plza1qdfh",
+            "id": "cmt6qusn5004bdi3pp63ikibi",
+            "landDetailId": "cmt6qus1j0048di3po7oa5ybt",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
             "mediaId": null,
@@ -2871,7 +2842,7 @@
   ],
   "estates": [
     {
-      "id": "cmt5vo4k9000b6l3peedz8uiy",
+      "id": "cmt6qt98q000bdi3pyxhvez1o",
       "slug": "cornerstone-gardens",
       "name": "Cornerstone Gardens",
       "location": "Mowe-Ofada",
@@ -2887,8 +2858,8 @@
         "Green buffer zone"
       ],
       "status": "ACTIVE",
-      "createdAt": "2026-08-23T14:03:42.489Z",
-      "updatedAt": "2026-08-23T14:03:42.489Z",
+      "createdAt": "2026-08-24T04:35:29.930Z",
+      "updatedAt": "2026-08-24T04:35:29.930Z",
       "media": [
         {
           "position": 0,
@@ -2904,7 +2875,7 @@
       ]
     },
     {
-      "id": "cmt5vo3de00096l3pnqtvxr5d",
+      "id": "cmt6qt81w0009di3ppanl5wv6",
       "slug": "emerald-ridge",
       "name": "Emerald Ridge Estate",
       "location": "Ibeju-Lekki",
@@ -2922,8 +2893,8 @@
         "Recreation park"
       ],
       "status": "ACTIVE",
-      "createdAt": "2026-08-23T14:03:40.946Z",
-      "updatedAt": "2026-08-23T14:03:40.946Z",
+      "createdAt": "2026-08-24T04:35:28.388Z",
+      "updatedAt": "2026-08-24T04:35:28.388Z",
       "media": [
         {
           "position": 0,
@@ -2939,7 +2910,7 @@
       ]
     },
     {
-      "id": "cmt5vo5u0000d6l3pk5m941f2",
+      "id": "cmt6qtan8000ddi3p876l8opk",
       "slug": "sabon-lugbe-court",
       "name": "Sabon Lugbe Court",
       "location": "Lugbe",
@@ -2955,8 +2926,8 @@
         "Children's play area"
       ],
       "status": "DELIVERED",
-      "createdAt": "2026-08-23T14:03:44.136Z",
-      "updatedAt": "2026-08-23T14:03:44.136Z",
+      "createdAt": "2026-08-24T04:35:31.748Z",
+      "updatedAt": "2026-08-24T04:35:31.748Z",
       "media": [
         {
           "position": 0,
@@ -2974,17 +2945,17 @@
   ],
   "articles": [
     {
-      "id": "cmt5vq7t8005t6l3pu96nuh6f",
+      "id": "cmt6qvtpr005tdi3p5xno0agp",
       "slug": "what-a-certificate-of-occupancy-actually-proves",
       "title": "What a Certificate of Occupancy actually proves",
       "category": "TITLE_AND_DOCUMENTATION",
       "excerpt": "A C of O is the strongest title most Nigerian buyers will encounter, and it still does not answer every question. Here is what it covers, what it does not, and what to ask for alongside it.",
-      "body": "A C of O is the strongest title most Nigerian buyers will encounter, and it still does not answer every question. Here is what it covers, what it does not, and what to ask for alongside it.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq7m2005s6l3peqlkbwe7",
+      "body": "Start with the fact that surprises most first-time buyers: nobody in Nigeria owns land outright. The Land Use Act of 1978 vested all land in each state in the Governor, to be held in trust for the people. What you can hold is a right of occupancy — a long lease from the state, usually for ninety-nine years. A Certificate of Occupancy is the document evidencing that right.\n\nThat makes a C of O the strongest ordinary title a buyer will encounter, and it is worth having. It is also narrower than its reputation suggests, and understanding the gap is what protects you.\n\nA C of O proves the state granted a right of occupancy over a described parcel, to a named holder, from a stated date, subject to conditions. Those conditions matter and are rarely read. Most certificates carry a development covenant — build within a period, typically two years — and require the holder to pay ground rent. Both are enforceable, and a certificate can in principle be revoked for breach.\n\nHere is what a C of O does not prove. It does not prove the person selling to you is the person named on it. It does not prove the certificate is genuine. It does not prove that the same parcel was not granted to somebody else earlier, which happens more often than the market likes to admit. And it does not prove the seller has the right to transfer it to you at all.\n\nThat last point is the one that costs people money. Under section 22 of the Land Use Act, a holder of a statutory right of occupancy cannot transfer it without the Governor's consent. A sale without consent is not a clean transfer, however much was paid and however many documents were signed. Consent takes time and costs money, and a seller who is vague about who is obtaining it, and when, is telling you something.\n\nSo the C of O is the beginning of your enquiry, not the end of it. Three things go with it.\n\nThe first is a search at the state land registry. You, or your solicitor, submit the particulars and the registry confirms what is actually recorded against that parcel — the registered holder, any mortgages, any encumbrances. A photocopy handed to you by a seller confirms none of that. The search is inexpensive and it is the single most useful thing you can do.\n\nThe second is a registered survey plan, so that the certificate can be tied to a specific piece of ground. A certificate describes a parcel by coordinates. Without a survey you cannot be certain the parcel described is the parcel you were shown.\n\nThe third is the chain of documents between the person named on the certificate and you: the deed of assignment, and the Governor's consent to it. Ask to see the chain in full. If part of it is missing, ask what is being done about it and when.\n\nWhere an estate is sold under a single global certificate covering the whole scheme, individual buyers do not each receive their own C of O. They receive a deed from the estate owner, and the consent process runs against the global title. That is a normal and legitimate structure. What matters is that it is explained to you plainly, and that the documents you receive say what everyone agrees they say.\n\nOn our own listings, the title type is stated before the price, and where a plot is sold on something less than a C of O, the listing says so in those words.",
+      "coverImageId": "cmt6qvtif005sdi3pdo3w4yic",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-23T14:05:20.011Z",
-      "createdAt": "2026-08-23T14:05:20.012Z",
-      "updatedAt": "2026-08-23T14:05:20.012Z",
+      "publishedAt": "2026-08-24T04:37:29.773Z",
+      "createdAt": "2026-08-24T04:37:29.775Z",
+      "updatedAt": "2026-08-24T04:37:29.775Z",
       "coverImage": {
         "url": "/images/photography/article-1.jpg",
         "alt": "Surveyors conducting a cadastral land survey",
@@ -2995,17 +2966,17 @@
       }
     },
     {
-      "id": "cmt5vq9fl00616l3poknqw4pi",
+      "id": "cmt6qvw6c0061di3p76qx2c7d",
       "slug": "excision-and-gazette-explained",
       "title": "Excision and gazette, explained without the jargon",
       "category": "TITLE_AND_DOCUMENTATION",
       "excerpt": "Most land sold in Lagos and Ogun sits somewhere on the road between family land and a Certificate of Occupancy. Excision and gazette are the two milestones on that road, and knowing which one a plot has reached tells you most of what you need.",
-      "body": "Most land sold in Lagos and Ogun sits somewhere on the road between family land and a Certificate of Occupancy. Excision and gazette are the two milestones on that road, and knowing which one a plot has reached tells you most of what you need.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq98j00606l3p6qqhp2ac",
+      "body": "Two words appear constantly in Nigerian land adverts and are almost never explained. If you understand them, you can read a listing properly.\n\nBegin with the problem they solve. When the Land Use Act vested land in the state, governments across the country also acquired large areas outright for public purposes — roads, schemes, future development. Land inside those acquisitions is committed. No individual can obtain good title over it, whatever the family occupying it believes and whatever they are willing to sell you.\n\nExcision is the state releasing a defined portion of that acquired land back to the original land-owning community. It is a deliberate government act. Once excised, that portion is no longer committed, and title over it can properly be granted, transferred and registered.\n\nA gazette is the official state publication in which the excision is recorded. It is the proof. It names the village or family, describes the area released, and gives the survey particulars. When a seller says land is excised, the honest follow-up is simple: which gazette, what number, what year, and what page. A seller who cannot answer that has told you the excision is a claim rather than a fact.\n\nRead the gazette against the survey. This is where the market's most common disappointment lives. Excisions are granted over a defined area, and that area is frequently smaller than the land the community actually occupies and sells. A gazette can be entirely genuine and the specific plot you are being offered can still sit outside the excised portion. The document proves something real about somewhere — the survey is what proves it is about your plot.\n\nThe way to close that gap is charting. Your surveyor submits the survey plan to the office of the state Surveyor-General, and it is checked against the government's own records to establish what the land falls within: an excision, a committed acquisition, a road setback, a drainage right of way. Charting is cheap and quick relative to what it tells you. Anyone buying land without a C of O should treat it as compulsory rather than optional.\n\nWhere does excised land sit against a Certificate of Occupancy? Below it, but legitimately so. Land properly excised and gazetted, held by the family that received it, sold with a registered survey and a deed, is a real position with a real path forward — the buyer or the estate can apply for a certificate over it in due course. It is not the same as holding one already, and the price should reflect the difference.\n\nTwo practical cautions. A gazette is not a title document; it says land was released to a community, not that any particular person within that community may sell it to you. Establish who within the family has authority to sell, and get the signatures of the accredited representatives rather than of whoever appeared on the day. And be wary of an excision described as pending or in process. Applications can sit for years and many are never granted. Pending is not a state of title. It is a hope, and hopes should not be priced as facts.",
+      "coverImageId": "cmt6qvvyi0060di3pvyi6gehc",
       "status": "PUBLISHED",
-      "publishedAt": "2026-07-18T14:05:22.113Z",
-      "createdAt": "2026-08-23T14:05:22.113Z",
-      "updatedAt": "2026-08-23T14:05:22.113Z",
+      "publishedAt": "2026-07-19T04:37:32.964Z",
+      "createdAt": "2026-08-24T04:37:32.964Z",
+      "updatedAt": "2026-08-24T04:37:32.964Z",
       "coverImage": {
         "url": "/images/photography/article-1.jpg",
         "alt": "Surveyors conducting a cadastral land survey",
@@ -3016,17 +2987,17 @@
       }
     },
     {
-      "id": "cmt5vq9ul00636l3pb0yybwsz",
+      "id": "cmt6qvwlq0063di3pwwilx0l6",
       "slug": "when-a-survey-plan-is-all-there-is",
       "title": "When a registered survey is all there is",
       "category": "TITLE_AND_DOCUMENTATION",
       "excerpt": "Some plots are sold on a survey and nothing more. That is not automatically a fraud, but it is a different purchase with a different risk, and it should carry a different price.",
-      "body": "Some plots are sold on a survey and nothing more. That is not automatically a fraud, but it is a different purchase with a different risk, and it should carry a different price.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq9nh00626l3pii65vn5z",
+      "body": "Some plots are sold on a registered survey and nothing else. No certificate, no excision, no gazette. It is a real position in this market, it is not automatically a fraud, and it is where a great deal of money is lost. It deserves a plain explanation rather than a warning.\n\nA survey plan is a document prepared by a licensed surveyor that fixes a parcel of ground in space. It carries coordinates, beacon numbers, dimensions and an area, and once lodged it carries a registration number issued by the state Surveyor-General. A registered survey answers one question completely and one question not at all.\n\nThe question it answers is where. Given a registered survey you can go to the ground, find the beacons, and know that the land you are standing on is the land in the document. That is not a small thing. A surprising share of disputes are simply two people describing different ground in similar words.\n\nThe question it does not answer is whose. A survey plan says nothing about ownership. It does not say the seller owns the land, that they are entitled to sell it, or that the state agrees any of it. A survey can be perfectly genuine, properly registered, and describe land the seller has no right to transfer.\n\nBetween the two sits the thing you must actually do, which is charting. Submit the survey to the Surveyor-General's office and have it checked against government records. Charting tells you whether the parcel is under acquisition, whether it has been excised, whether it sits in a right of way or a road setback. Land under a committed acquisition cannot be regularised by anyone at any price, and charting is how you find that out before you pay rather than after.\n\nIf it charts clean and is not excised, you are buying from a family or community on the strength of customary ownership, evidenced by a deed and witnessed by accredited family representatives. Whether that is acceptable depends on facts you can establish: who the family is, who is authorised to sign, whether other branches dispute the sale, whether the same land has been sold before. Ask directly. Ask for the family's own documents. Ask what happened to the neighbouring plots and to the people who bought them.\n\nPrice is the last piece, and the most misread. Survey-only land is cheaper, and it should be, because the buyer is taking on both risk and future cost. Regularisation, where it is available, is a process with fees and a timeline that is rarely short. A plot at a third of the price of a titled plot down the road is not necessarily a bargain; it may simply be correctly priced for what it is. The bargain is the plot priced as survey-only that turns out to have a clean path to title. The trap is the plot priced near a titled plot on the strength of a promise.\n\nWe sell some plots on a registered survey only. Those listings say exactly that, on the card and on the page, before the price. They set out what we hold and what we do not, and the price reflects the position. We would rather sell you that plot with your eyes open than have you find out afterwards.",
+      "coverImageId": "cmt6qvwe60062di3plhfhylag",
       "status": "PUBLISHED",
-      "publishedAt": "2026-07-09T14:05:22.652Z",
-      "createdAt": "2026-08-23T14:05:22.653Z",
-      "updatedAt": "2026-08-23T14:05:22.653Z",
+      "publishedAt": "2026-07-10T04:37:33.518Z",
+      "createdAt": "2026-08-24T04:37:33.518Z",
+      "updatedAt": "2026-08-24T04:37:33.518Z",
       "coverImage": {
         "url": "/images/photography/article-2.jpg",
         "alt": "Signing a property document",
@@ -3037,17 +3008,17 @@
       }
     },
     {
-      "id": "cmt5vq87u005v6l3pa3t7bioz",
+      "id": "cmt6qvu4z005vdi3piuhp091u",
       "slug": "how-to-verify-a-plot-before-you-pay",
       "title": "How to verify a plot before you pay for it",
       "category": "BUYING_PROCESS",
       "excerpt": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.",
-      "body": "The searches, the site visit, and the questions that separate a genuine allocation from a story. None of it is expensive, and all of it is cheaper than the alternative.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq80d005u6l3pxw4vd2xw",
+      "body": "Verification is a sequence, and the order matters. Each step is cheap relative to the purchase, and each one can end the process before you spend anything on the next.\n\nStart with the documents, in copy. Ask the seller for what they hold: the certificate or the gazette, the registered survey, the deed by which they acquired, and any consent already obtained. A seller unwilling to release copies for your solicitor has answered your most important question already. Read what arrives against what you were told. Names, dates and described areas should match, and where they do not, ask why before you go further.\n\nSecond, conduct a search at the state land registry. Your solicitor submits the particulars and the registry reports what is recorded: the registered holder, the instrument numbers, any mortgage or caution or pending litigation. This is the step that separates a document from the truth about a document. It costs little and it is the closest thing to certainty available.\n\nThird, chart the survey. Send the survey plan to the office of the Surveyor-General to be checked against government records. Charting establishes whether the land is under government acquisition, whether it falls inside an excision, and whether it is affected by a road setback, a drainage alignment or a power line. Do this even where a certificate exists — it confirms the parcel on the paper is the parcel on the ground.\n\nFourth, visit the site, and walk the boundaries with the survey in hand. Find the beacons. Confirm the plot has genuine access rather than a route across somebody else's land that exists only in a marketing brochure. Look at what is happening on the adjoining plots, because it tells you what will happen to yours.\n\nFifth, ask about the land locally. Speak to neighbours, to people building nearby, to whoever is on site. Ask whether the seller is known, whether there is any dispute over this land, and whether anyone else has claimed it. This costs an afternoon and it surfaces the kind of problem that never appears in a registry file.\n\nSixth, establish who is entitled to sign. For an estate, that is the company, and you should confirm it is properly incorporated and that the person signing has authority. For family land, it is the accredited representatives, and the identity of those representatives is a question of fact you should establish independently rather than accept.\n\nOnly then, pay — and pay into a company account, against a receipt, with a written agreement that records the price, what is being transferred, what documents you will receive, and when. Never pay cash to an individual. Never pay against a promise that the paperwork will follow.\n\nTwo things worth saying plainly. Use your own solicitor, not the seller's, and not one the seller recommends. The fee is small next to the purchase and their duty is to you alone. And be suspicious of urgency. Pressure to pay today, to secure a price before it rises, to avoid missing an allocation, is the most reliable warning sign in this market. Land that is genuinely available on Monday is genuinely available on Friday. Anyone who needs your money before you have finished checking is telling you what checking would reveal.",
+      "coverImageId": "cmt6qvtxm005udi3pxwa9u7fl",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-14T14:05:20.538Z",
-      "createdAt": "2026-08-23T14:05:20.538Z",
-      "updatedAt": "2026-08-23T14:05:20.538Z",
+      "publishedAt": "2026-08-15T04:37:30.322Z",
+      "createdAt": "2026-08-24T04:37:30.323Z",
+      "updatedAt": "2026-08-24T04:37:30.323Z",
       "coverImage": {
         "url": "/images/photography/article-2.jpg",
         "alt": "Signing a property document",
@@ -3058,17 +3029,17 @@
       }
     },
     {
-      "id": "cmt5vqa9400656l3ppoecfy5f",
+      "id": "cmt6qvx0k0065di3pwjh4wmah",
       "slug": "the-site-visit-checklist",
       "title": "The site visit checklist we give our own buyers",
       "category": "BUYING_PROCESS",
       "excerpt": "What to look at, what to photograph and who to speak to on the day you walk the plot. Twenty minutes of attention on site saves a year of correspondence later.",
-      "body": "What to look at, what to photograph and who to speak to on the day you walk the plot. Twenty minutes of attention on site saves a year of correspondence later.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqa1y00646l3piwdylpph",
+      "body": "A site visit is not a viewing. You are not there to be impressed; you are there to establish facts that are difficult to establish anywhere else. Go with the survey plan, go in daylight, and if you can, go once with the seller and once without.\n\n**Find the beacons.** The survey plan gives beacon numbers and coordinates. Locate them on the ground and confirm the plot you are standing on is the plot in the document. If the beacons cannot be found, or the seller is reluctant to walk the boundary, stop there. Take a surveyor if you are not confident; a few hours of their time is trivial against the cost of the wrong plot.\n\n**Check the access.** Can a vehicle reach the plot today, in the rain? An access road on a layout drawing is a plan, not a road. Establish whether the route crosses land belonging to someone else, and whether that has been formally dealt with. Landlocked plots are common and are very hard to resell.\n\n**Look at the levels.** Stand on the plot and work out where water goes. Land at the bottom of a slope collects everything that falls above it. Ask what the plot looks like in September, at the height of the rains, and be sceptical of an answer given in January. Filling and reinforcing a low plot can cost more than the plot did.\n\n**Look for signs of occupation or use.** Crops, footpaths, structures, graves, dumped material. Each represents somebody with an interest or a habit, and each is a conversation you would rather have now.\n\n**Read the neighbours.** What is being built around the plot, and to what standard? Is anyone actually building, or has nothing moved in two years? Are there completed houses with people living in them? An estate where people have moved in is an estate that delivered. Ask a resident how their allocation went and how long their documents took.\n\n**Look for the marks of a dispute.** Painted warnings on walls, notices of ownership, court references, competing signboards. These are worth taking seriously even when the seller has an explanation.\n\n**Check what the estate promised against what exists.** Perimeter fencing, gatehouse, drainage, graded roads, electricity. Note what is built, what is started and what is only drawn. Ask for dates on the rest, in writing.\n\n**Establish distances yourself.** Drive from the plot to the nearest main road, market, hospital and school, and time it. Marketing distances are measured optimistically and often in a straight line.\n\n**Ask about the neighbours' documents.** What title did people who bought here receive, and how long did it take? Has anyone completed the process? This is the most useful question on the list and almost nobody asks it.\n\n**Photograph everything.** The beacons, the boundaries, the access, the surrounding plots, the signage. Date-stamped photographs settle arguments later and cost nothing now.\n\nFinally, notice how you are being handled. A seller who walks the boundary with you, points out the low corner, and tells you which documents are outstanding is a seller with less to hide than one who keeps you in the car and talks about appreciation. We give our own buyers this list, and we would rather you use it on us than not use it at all.",
+      "coverImageId": "cmt6qvwtc0064di3pn5y21htb",
       "status": "PUBLISHED",
-      "publishedAt": "2026-06-30T14:05:23.175Z",
-      "createdAt": "2026-08-23T14:05:23.176Z",
-      "updatedAt": "2026-08-23T14:05:23.176Z",
+      "publishedAt": "2026-07-01T04:37:34.052Z",
+      "createdAt": "2026-08-24T04:37:34.052Z",
+      "updatedAt": "2026-08-24T04:37:34.052Z",
       "coverImage": {
         "url": "/images/photography/article-3.jpg",
         "alt": "Reviewing payment paperwork at a desk",
@@ -3079,17 +3050,17 @@
       }
     },
     {
-      "id": "cmt5vqanz00676l3pe5pcl3xb",
+      "id": "cmt6qvxfr0067di3p60gfw8ca",
       "slug": "questions-to-ask-a-land-seller",
       "title": "Eleven questions to ask before you pay a deposit",
       "category": "BUYING_PROCESS",
       "excerpt": "A seller who answers all eleven plainly is a seller you can work with. One who deflects on any of them has told you something useful.",
-      "body": "A seller who answers all eleven plainly is a seller you can work with. One who deflects on any of them has told you something useful.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqagd00666l3po2lfcb03",
+      "body": "Ask these before a deposit, and ask for the answers in writing. A seller who answers all eleven plainly is worth dealing with. A seller who is vague on more than one is telling you where the problem is.\n\n**1. What exactly is the title on this plot?** Not \"it is good title\" — the actual position. A certificate, an excision, a registered survey and nothing more. Get the words, and get them written down.\n\n**2. Whose name is on the documents?** And what is the chain between that person and the person selling to me? Ask to see every link, including any deed and any consent already granted.\n\n**3. May I have copies for my solicitor?** The answer should be yes without hesitation. Anything else ends the conversation.\n\n**4. Has the land been charted?** If yes, ask for the result. If no, ask whether you may chart it before paying, and treat a refusal as decisive.\n\n**5. Is any part of the plot affected by a government acquisition, a road setback, a drainage alignment or a power line?** Ask it as a direct question and get a direct answer, because a partial answer here is the one most likely to be technically true and materially misleading.\n\n**6. Who signs, and on what authority?** For a company, confirm incorporation and the signatory's authority. For family land, ask who the accredited representatives are and how you can verify that independently.\n\n**7. What is the total cost of ownership?** The plot price is rarely the whole figure. Ask about deed of assignment fees, survey fees, development or infrastructure levies, consent fees, agency, legal, and anything payable at allocation. Ask for the full schedule before you commit to the first payment.\n\n**8. What exactly will I receive, and when?** A receipt, a contract of sale, a deed, an allocation letter, a survey in your name. Ask for each item with a timeline attached, and be direct about what happens if the timeline slips.\n\n**9. Has this plot been sold before?** And has any plot on this scheme been the subject of a dispute or a claim? Ask it plainly and watch the answer.\n\n**10. Where do I pay, and to whom?** The answer should be a company account, against an invoice and a receipt. Never cash, never an individual's personal account, never a third party you have not been introduced to.\n\n**11. What happens if I miss an instalment?** Cover this before you sign, not when it happens. Ask about the grace period, the penalty, whether the plot can be reallocated, and what is refunded if the plan is terminated — the amount, the deductions, and the timeline.\n\nTwo habits worth building. Put the questions in an email, so the answers arrive in writing and become part of the record. And ask the same question twice on different days if the first answer was vague; consistency is informative.\n\nNone of this is adversarial. A serious seller expects these questions and has the answers ready. We publish most of them on the listing before you have to ask.",
+      "coverImageId": "cmt6qvx8j0066di3pym1xm1ce",
       "status": "PUBLISHED",
-      "publishedAt": "2026-06-21T14:05:23.711Z",
-      "createdAt": "2026-08-23T14:05:23.711Z",
-      "updatedAt": "2026-08-23T14:05:23.711Z",
+      "publishedAt": "2026-06-22T04:37:34.599Z",
+      "createdAt": "2026-08-24T04:37:34.599Z",
+      "updatedAt": "2026-08-24T04:37:34.599Z",
       "coverImage": {
         "url": "/images/photography/article-4.jpg",
         "alt": "Modern housing set among mature planting",
@@ -3100,17 +3071,17 @@
       }
     },
     {
-      "id": "cmt5vq8mv005x6l3p83rpoup5",
+      "id": "cmt6qvuy2005xdi3px8zhw2qi",
       "slug": "reading-a-land-payment-plan",
       "title": "Reading a land payment plan without getting caught out",
       "category": "PAYMENT_PLANS",
       "excerpt": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.",
-      "body": "Deposit, duration, and what happens if you miss an instalment. The three terms that decide whether a plan is workable, and the clauses worth reading twice.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq8fu005w6l3pm2wigu8l",
+      "body": "A payment plan makes land reachable for people who cannot pay in one sum, and that is a genuinely good thing. It also introduces terms that most buyers never read until they need them. Read them at the start, when you have leverage, rather than at the end, when you do not.\n\n**Find the real price.** Compare the outright price against the total of all instalments. The difference is what the plan costs. Sellers often describe a plan as interest-free while quoting a higher headline price for it, which is a price difference by another name. It may still be worth paying — that is your decision — but you should make it knowing the number.\n\n**Check what is included.** A quoted plot price frequently excludes the deed of assignment fee, survey fee, development or infrastructure levy, and any charge payable at allocation. Ask for the complete schedule of every payment due from first instalment to final documents, and ask whether the excluded items are fixed or subject to change.\n\n**Establish whether the price can move.** Some plans allow the developer to revise the price during the term. Whether or not that is acceptable, you must know it exists before you sign, and you should know what triggers it and by how much.\n\n**Understand what a deposit secures.** Ask specifically whether your deposit reserves an identified plot with a number, or a place in a scheme with allocation to follow. Those are very different things, and the second is where disappointment usually starts.\n\n**Read the default terms before you need them.** Grace period, late fee, and what happens to a plan that falls seriously behind. Ask whether the plot can be reallocated, what is refunded on termination, what is deducted, and how long a refund takes. Get the deduction expressed as a number or a percentage, not as a phrase.\n\n**Ask when title transfers.** In almost every plan, documents are issued on completion, not on the first payment. That is normal. What is not acceptable is being unclear about it. Ask what you hold in the meantime — a contract of sale and receipts — and what happens to your position if the developer runs into difficulty before you complete.\n\n**Check whether early completion is allowed, and whether it is rewarded.** Many buyers find their circumstances improve. Ask whether you can pay off the balance early, whether there is a discount for doing so, and whether there is a penalty.\n\n**Ask whether the plan is transferable.** If your circumstances change, can you assign the plan to somebody else, and on what terms?\n\n**Match the instalments to your actual income,** not to your best month. The most common reason a plan fails is not fraud; it is a schedule agreed optimistically. A longer plan you will certainly finish is better than a shorter one you might not.\n\n**Keep every receipt, and reconcile them.** Ask for a statement of account periodically and check it against your own records. Disagreements about how much has been paid are common and are much easier to resolve early.\n\nOur own plans and their terms are set out on each listing that offers one. If anything in this guide is not answered there, ask us, and we will put the answer in writing.",
+      "coverImageId": "cmt6qvucs005wdi3pfvd8u37l",
       "status": "PUBLISHED",
-      "publishedAt": "2026-08-05T14:05:21.078Z",
-      "createdAt": "2026-08-23T14:05:21.079Z",
-      "updatedAt": "2026-08-23T14:05:21.079Z",
+      "publishedAt": "2026-08-06T04:37:31.369Z",
+      "createdAt": "2026-08-24T04:37:31.370Z",
+      "updatedAt": "2026-08-24T04:37:31.370Z",
       "coverImage": {
         "url": "/images/photography/article-3.jpg",
         "alt": "Reviewing payment paperwork at a desk",
@@ -3121,17 +3092,17 @@
       }
     },
     {
-      "id": "cmt5vqb6800696l3pr4dbe0kh",
+      "id": "cmt6qvxuz0069di3p9b2t89vz",
       "slug": "deposit-and-default-what-happens",
       "title": "What actually happens when you miss an instalment",
       "category": "PAYMENT_PLANS",
       "excerpt": "Forfeiture, reallocation, restructuring or a refund minus charges. The four outcomes a plan can specify, and why the difference between them belongs in writing before you sign.",
-      "body": "Forfeiture, reallocation, restructuring or a refund minus charges. The four outcomes a plan can specify, and why the difference between them belongs in writing before you sign.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqay000686l3pecx6j674",
+      "body": "Nobody plans to miss an instalment. Incomes move, businesses have bad quarters, families have emergencies. What matters is that you know the consequences before you need to, because the terms are agreed at the beginning and almost never renegotiated in a crisis.\n\n**The grace period.** Most plans allow a window past the due date before a payment counts as late. Find out how long it is and whether it applies to every instalment or only some. Diarise the date rather than relying on being reminded.\n\n**The late fee.** Usually a percentage of the overdue amount, sometimes a flat charge, occasionally compounding. Ask which, and ask for a worked example on your own instalment so the number is concrete.\n\n**Sustained default.** This is the part to read carefully. Plans typically define a point — a number of missed instalments, or a period in arrears — at which the developer may terminate. Establish exactly where that line is, whether you get written notice before it is crossed, and how long that notice gives you.\n\n**What happens to the plot.** On termination the plot generally returns to the developer's inventory and may be reallocated. If you have been paying against an identified plot number, understand that you can lose that specific plot and be offered an alternative later.\n\n**What comes back to you.** The question that matters most, and the one asked least. Refund terms vary widely. Some plans refund payments made less an administrative deduction. Some deduct a percentage that rises with how far into the term you were. Some refund only when the plot is resold to somebody else, which can take a long time. A few offer nothing at all beyond a defined point. Get the actual terms in writing, with the deduction as a figure and the payment window as a period.\n\n**Whether you can restructure instead.** Many developers would rather extend a plan than terminate it, because reallocation costs them time. Ask, before you sign, whether restructuring is available and on what terms. Then, if you do run into difficulty, tell them early. A buyer who explains in month one has options a buyer who disappears until month five does not.\n\n**Keep the record straight.** Every payment against a receipt, into the company account, with a reference. Ask for a statement of account and reconcile it. A meaningful share of default disputes are not really about default — they are about a payment that was made and not recorded.\n\n**Two things to avoid.** Do not rely on a verbal assurance that the company is flexible in practice; kindness is not a term of a contract, and the person who assured you may not be there. And do not let arrears accumulate silently in the hope that a good month will clear them, because the terms usually harden as arrears grow.\n\nOn our own listings, the payment plan terms — including the default and refund position — are stated on the listing rather than kept for the contract. If a term would upset you to discover later, we would rather you saw it now and chose differently.",
+      "coverImageId": "cmt6qvxns0068di3psy09ceb9",
       "status": "PUBLISHED",
-      "publishedAt": "2026-06-12T14:05:24.367Z",
-      "createdAt": "2026-08-23T14:05:24.368Z",
-      "updatedAt": "2026-08-23T14:05:24.368Z",
+      "publishedAt": "2026-06-13T04:37:35.146Z",
+      "createdAt": "2026-08-24T04:37:35.147Z",
+      "updatedAt": "2026-08-24T04:37:35.147Z",
       "coverImage": {
         "url": "/images/photography/article-1.jpg",
         "alt": "Surveyors conducting a cadastral land survey",
@@ -3142,17 +3113,17 @@
       }
     },
     {
-      "id": "cmt5vqbkb006b6l3pa7vpd7jf",
+      "id": "cmt6qvygz006bdi3probkcc2u",
       "slug": "paying-in-full-versus-a-plan",
       "title": "Paying in full against paying on a plan",
       "category": "PAYMENT_PLANS",
       "excerpt": "Outright purchase usually buys a discount and a faster allocation. A plan buys time. Which is worth more depends on facts about you, not about the plot.",
-      "body": "Outright purchase usually buys a discount and a faster allocation. A plan buys time. Which is worth more depends on facts about you, not about the plot.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqbdb006a6l3pd9pshgwn",
+      "body": "Both are legitimate. Which is right depends on facts about you, not on which the seller prefers, and it is worth taking a moment over because the difference compounds.\n\n**What paying in full buys you.** A lower total price, in almost every case. Faster documentation, because most sellers only begin the deed and consent process on completion. A simpler position if anything goes wrong, since you are a completed buyer rather than a party to a live contract. And no exposure to a default clause you might one day need.\n\n**What it costs you.** All of your liquidity, at once, in a market where liquidity is difficult to recover — land is not quickly turned back into cash. It also concentrates timing risk: you commit everything at a single moment on a single plot.\n\n**What a plan buys you.** Access, most obviously; a plan is often the difference between buying and not buying. It preserves cash for emergencies and other opportunities. It lets you start at today's price and pay over time, which in a market where land prices have generally risen has favoured the buyer. And it spreads commitment, so a problem discovered in month three has cost you three instalments rather than everything.\n\n**What it costs you.** More in total, whether that appears as interest or as a higher plan price. Documents later. Exposure to default terms. And, on some schemes, exposure to price revision during the term.\n\n**The arithmetic worth doing.** Take the outright price and the total of all instalments, and find the difference. Divide it by the plan's length to see what you are paying per month for the arrangement. Then ask honestly what else that money would have done. If your capital is genuinely earning more elsewhere, or is your only buffer against an emergency, a plan can be the better decision even though it costs more. If the money is sitting idle, paying in full usually wins.\n\n**The honest questions.** Is your income stable enough that you will certainly finish? Do you have a reserve for the months that go wrong? Would paying in full leave you with nothing set aside? A plan you complete comfortably beats an outright purchase that leaves you exposed, and an outright purchase beats a plan you default on in month nine.\n\n**A middle path most buyers overlook.** A larger deposit with a shorter term. It reduces the total cost against a long plan, gets you to documents sooner, and still leaves a working reserve. Many sellers will structure this and few volunteer it, so ask.\n\n**A caution on both.** Whichever you choose, do the verification first — search, charting, site visit, documents. Neither route protects you from buying the wrong land. Paying in full for a plot under government acquisition simply means losing more, faster.\n\nOur listings that offer a plan show its terms alongside the outright price, so the comparison can be made on the page rather than reconstructed from a conversation.",
+      "coverImageId": "cmt6qvy9v006adi3p9dbhvf7r",
       "status": "PUBLISHED",
-      "publishedAt": "2026-06-03T14:05:24.874Z",
-      "createdAt": "2026-08-23T14:05:24.875Z",
-      "updatedAt": "2026-08-23T14:05:24.875Z",
+      "publishedAt": "2026-06-04T04:37:35.939Z",
+      "createdAt": "2026-08-24T04:37:35.939Z",
+      "updatedAt": "2026-08-24T04:37:35.939Z",
       "coverImage": {
         "url": "/images/photography/article-2.jpg",
         "alt": "Signing a property document",
@@ -3163,17 +3134,17 @@
       }
     },
     {
-      "id": "cmt5vq91f005z6l3pp8wvcaxx",
+      "id": "cmt6qvvqx005zdi3pb27d7b3k",
       "slug": "what-estate-service-charges-cover",
       "title": "What service charges cover in a managed estate",
       "category": "ESTATE_LIVING",
       "excerpt": "Security, drainage, road maintenance and power. What a service charge is buying, how it is usually set, and what to check before you commit to one.",
-      "body": "Security, drainage, road maintenance and power. What a service charge is buying, how it is usually set, and what to check before you commit to one.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vq8u4005y6l3p9di8cpds",
+      "body": "A service charge is what keeps an estate working after the developer has sold the last plot. Buyers tend to treat it as an annoyance, which it is not; the estates that hold their value are the ones that collect it and spend it well. What matters is knowing what you are paying for, how the figure is arrived at, and what happens if it rises.\n\n**Typically covered.** Security — the gatehouse, personnel, and often lighting at the perimeter. Estate roads and drainage, which need clearing before the rains and repair after them. Common-area electricity, including street lighting and any shared pumps. Refuse collection. Landscaping and maintenance of green areas. Management costs, meaning the people who administer all of the above. Where an estate has a borehole and reticulated water, that appears here too.\n\n**Typically not covered.** Anything inside your own boundary. Your electricity, your water consumption where it is metered, your building maintenance, your own security arrangements. Nor, usually, capital projects — a new borehole or a road rebuilt from the base is often a separate levy rather than part of the annual charge.\n\n**How it is calculated.** Ask directly. Common bases are a flat charge per plot, a rate per square metre, or a share of a budgeted total. A per-square-metre basis means a larger plot pays more, which may or may not suit you. Ask whether undeveloped plots pay, and at what rate — some estates charge them less, which is fair while nothing is occupied and becomes contentious later.\n\n**Ask for the budget and the accounts.** A well-run estate publishes a budget before the year and accounts after it. Ask to see both. An estate that cannot show you where last year's money went is telling you something about how this year's will be spent.\n\n**Ask how it changes.** Whether increases require a residents' vote or are set by the managers, whether there is a cap, and what the charge has actually been for the last three years. That last figure is more informative than any assurance about the future.\n\n**Ask who manages it,** and whether that is the developer, a separate facility manager, or a residents' association. Ask when control transfers to residents, because the point at which an estate stops being run by its developer is a real milestone and is often undocumented.\n\n**Ask what happens if people do not pay.** Non-payment is the most common cause of estate decline. Ask what enforcement exists and whether it is used. An estate with no answer will eventually have no lighting.\n\n**Budget for it as an ongoing cost of ownership.** For a plot you are not yet building on, service charge may be your only recurring outgoing, and it runs whether or not you have started. Include it in the figure you use to decide whether the purchase works, alongside ground rent and any land use charge that applies in your state.\n\nFor each of our estates, what the charge covers, how it is calculated and who manages it is set out on the estate page. If you are comparing us against another scheme, ask them the same questions.",
+      "coverImageId": "cmt6qvv5s005ydi3pjzadj05d",
       "status": "PUBLISHED",
-      "publishedAt": "2026-07-27T14:05:21.601Z",
-      "createdAt": "2026-08-23T14:05:21.603Z",
-      "updatedAt": "2026-08-23T14:05:21.603Z",
+      "publishedAt": "2026-07-28T04:37:32.407Z",
+      "createdAt": "2026-08-24T04:37:32.409Z",
+      "updatedAt": "2026-08-24T04:37:32.409Z",
       "coverImage": {
         "url": "/images/photography/article-4.jpg",
         "alt": "Modern housing set among mature planting",
@@ -3184,17 +3155,17 @@
       }
     },
     {
-      "id": "cmt5vqbzn006d6l3pmtrduk5j",
+      "id": "cmt6qvz3b006ddi3ppt2ybyi7",
       "slug": "what-to-expect-after-allocation",
       "title": "What to expect in the year after allocation",
       "category": "ESTATE_LIVING",
       "excerpt": "Beaconing, the building approval, the development timeline and the first service charge. The sequence that follows allocation, and roughly what each stage costs.",
-      "body": "Beaconing, the building approval, the development timeline and the first service charge. The sequence that follows allocation, and roughly what each stage costs.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqbru006c6l3pp4oklvgn",
+      "body": "Allocation is the point at which a plot stops being a purchase and becomes yours in a practical sense. What follows is a sequence most buyers have not been told about, and the gap between expectation and reality is where frustration lives.\n\n**The allocation letter, and the plot number.** You should receive written confirmation identifying a specific plot on the layout. Check the number against the layout drawing and against what you were shown on the ground. If a number was reserved for you earlier, confirm it has not changed.\n\n**Physical identification on site.** Arrange to be shown your plot with a surveyor, and have the corners located. If the estate is providing beacons in your name, establish when. This is worth doing promptly; boundaries are far easier to settle before neighbouring plots are built on.\n\n**Your own survey.** In most schemes you will receive or commission a survey plan drawn in your name, lodged and registered. Ask who does this, whether the fee was included in what you have already paid, and how long it takes.\n\n**The deed.** The deed of assignment transferring the interest to you is prepared, executed by both parties, and stamped. Ask for a realistic timeline rather than an optimistic one, and ask what stage it is at when the date passes. Have your own solicitor read it before you sign.\n\n**Governor's consent, where it applies.** This is the longest step by a distance, and the one least within the developer's control. Consent applications routinely take many months and sometimes considerably longer. It is not evidence of a problem. What matters is that the application has genuinely been submitted, that you can be told its reference and status, and that nobody has implied it would be quick.\n\n**Registration.** Once consent is obtained, the instrument is registered and you hold a complete, recorded position. This is the end of the documentary process and the point at which resale becomes straightforward.\n\n**Service charge begins.** Usually from allocation, not from when you build. Budget for it from the start.\n\n**Building, if you are building.** Estates run development controls — approved designs, setbacks, materials, a window within which you must start, and often a schedule of construction hours. Get the building guidelines at allocation and read them before you commission a design, not after.\n\n**What to do throughout.** Keep every document in one place: allocation letter, receipts, survey, deed, correspondence. Ask for a written status update at intervals rather than waiting to be told. And put questions in email, so that answers are recorded.\n\n**A realistic frame.** From allocation to full registration is a process measured in months rather than weeks, and in some states considerably longer. A developer who tells you otherwise is either inexperienced or managing you. Our own position on each estate — what has been obtained, what is in progress, and what has not been started — is published on the estate page, including where the answer is unflattering.",
+      "coverImageId": "cmt6qvyv9006cdi3pbz3euq95",
       "status": "PUBLISHED",
-      "publishedAt": "2026-05-25T14:05:25.427Z",
-      "createdAt": "2026-08-23T14:05:25.427Z",
-      "updatedAt": "2026-08-23T14:05:25.427Z",
+      "publishedAt": "2026-05-26T04:37:36.743Z",
+      "createdAt": "2026-08-24T04:37:36.743Z",
+      "updatedAt": "2026-08-24T04:37:36.743Z",
       "coverImage": {
         "url": "/images/photography/article-3.jpg",
         "alt": "Reviewing payment paperwork at a desk",
@@ -3205,17 +3176,17 @@
       }
     },
     {
-      "id": "cmt5vqceb006f6l3pimzs6lqn",
+      "id": "cmt6qvzhx006fdi3pfualev3p",
       "slug": "building-approvals-in-a-managed-estate",
       "title": "Building approvals inside a managed estate",
       "category": "ESTATE_LIVING",
       "excerpt": "Estate design rules sit on top of the state's own approval process, not instead of it. Here is how the two fit together, and where buyers most often lose time.",
-      "body": "Estate design rules sit on top of the state's own approval process, not instead of it. Here is how the two fit together, and where buyers most often lose time.\n\nFull article copy pending client sign-off.",
-      "coverImageId": "cmt5vqc6t006e6l3p72giz8x4",
+      "body": "Building inside a managed estate involves two separate permissions, and confusing them is the most common cause of a stalled project. One comes from the estate. The other comes from the government. You need both, and neither substitutes for the other.\n\n**The estate's approval.** Managed estates run development controls to protect the character and value of the scheme. Expect requirements covering permitted building types and heights, minimum build cost or finish standard, setbacks from boundaries, roof and external material specifications, fencing and gate design, and where refuse and generators may sit. Expect a window within which you must commence — commonly one to two years from allocation — and a period within which the exterior must be completed, so the estate is not left with permanent shells.\n\n**How that process runs.** You submit your architectural drawings to the estate's management for review against the guidelines, usually with a fee. Revisions are common. Once approved you receive written consent to build, and typically a construction schedule setting site hours, access routes, and where materials may be stored. Ask whether a refundable deposit against damage to estate roads and drainage is required, because it is frequently not mentioned until the day.\n\n**The government's approval.** Separately, you need statutory planning permission from the relevant state or local planning authority. Requirements vary by state but generally include your title documents, a survey plan, architectural drawings, structural drawings and calculations, mechanical and electrical drawings, and often a soil test. Fees are assessed on the development. This is the approval that makes your building lawful. An estate's consent is a private contractual permission and does not replace it.\n\n**Where an estate can help.** Some developers process statutory approval for the whole scheme, or assist individual buyers with it. That is genuinely valuable — ask early whether it is offered, what it covers, and what it costs. But confirm what has actually been obtained rather than accepting that it is handled.\n\n**A timing point worth planning around.** Where a plot's own title is still in process, statutory approval may not be obtainable until documents are complete. If your estate's development window starts running before your documents do, raise it in writing at allocation and get the position confirmed. Do not discover it when the window expires.\n\n**Practical advice.** Engage professionals registered to practise in the state — an architect and, where the structure requires it, an engineer. Their stamps are part of what makes a submission acceptable. Budget for approvals as a real line item rather than an afterthought; between estate fees, statutory fees and professional fees the total is meaningful.\n\n**On building without approval.** It happens frequently and it is a poor decision. Unapproved structures can attract stop-work notices, penalties, and in serious cases demolition. They also complicate resale and make finance difficult, because a buyer's solicitor will ask for the approval you do not have.\n\nFor each of our estates, the building guidelines, the development window and the estate's own approval process are set out on the estate page, and we will tell you plainly what statutory approval has been obtained for the scheme and what remains yours to obtain.",
+      "coverImageId": "cmt6qvzap006edi3pbrclpzwn",
       "status": "PUBLISHED",
-      "publishedAt": "2026-05-16T14:05:25.955Z",
-      "createdAt": "2026-08-23T14:05:25.955Z",
-      "updatedAt": "2026-08-23T14:05:25.955Z",
+      "publishedAt": "2026-05-17T04:37:37.269Z",
+      "createdAt": "2026-08-24T04:37:37.269Z",
+      "updatedAt": "2026-08-24T04:37:37.269Z",
       "coverImage": {
         "url": "/images/photography/article-4.jpg",
         "alt": "Modern housing set among mature planting",
@@ -3228,62 +3199,62 @@
   ],
   "testimonials": [
     {
-      "id": "cmt5vqpo4006w6l3p93fryxid",
+      "id": "cmt6qwgsc006wdi3p83bd8xss",
       "name": "Tunde Adeyemi",
       "role": "Bought a plot at Emerald Ridge",
       "quote": "I had been shown three other estates where nobody could produce a survey on the day. Here the documents were on the table before I asked, and the plot I walked was the plot on the plan.",
       "avatarId": null,
       "published": true,
       "position": 0,
-      "createdAt": "2026-08-23T14:05:43.156Z"
+      "createdAt": "2026-08-24T04:37:59.676Z"
     },
     {
-      "id": "cmt5vqpo4006x6l3p6ngkh99o",
+      "id": "cmt6qwgsc006xdi3pbchlq155",
       "name": "Ngozi Eze",
       "role": "Bought a home at Sabon Lugbe Court",
       "quote": "We paid over fourteen months and moved in the week after the final instalment cleared. No renegotiation, no extra charges at handover.",
       "avatarId": null,
       "published": true,
       "position": 1,
-      "createdAt": "2026-08-23T14:05:43.156Z"
+      "createdAt": "2026-08-24T04:37:59.676Z"
     },
     {
-      "id": "cmt5vqpo4006y6l3pctb81gxk",
+      "id": "cmt6qwgsc006ydi3pu6u3bvex",
       "name": "Yusuf Danjuma",
       "role": "Bought two plots at Cornerstone Gardens",
       "quote": "They told me plainly which plots had excision granted and which did not, and priced them differently. That is the first time anyone has done that with me.",
       "avatarId": null,
       "published": true,
       "position": 2,
-      "createdAt": "2026-08-23T14:05:43.156Z"
+      "createdAt": "2026-08-24T04:37:59.676Z"
     }
   ],
   "videos": [
     {
-      "id": "cmt5vqdmd006h6l3prcupanax",
+      "id": "cmt6qw0q8006hdi3p6m3qf68h",
       "slug": "emerald-ridge-estate-overview",
       "youtubeId": "sywocKB9UcU",
       "title": "A drive through the estate",
       "description": "The gate, the internal road network and the completed drainage, filmed on one pass through the estate.",
       "kind": "ESTATE_OVERVIEW",
-      "posterMediaId": "cmt5vqct7006g6l3pteujjjs9",
+      "posterMediaId": "cmt6qvzxo006gdi3peln7kwlb",
       "durationSeconds": null,
       "listingId": null,
-      "estateId": "cmt5vo3de00096l3pnqtvxr5d",
+      "estateId": "cmt6qt81w0009di3ppanl5wv6",
       "isStandIn": true,
       "attribution": "Real Estate with Sally",
       "featured": true,
       "sortOrder": 0,
-      "publishedAt": "2026-08-23T14:05:26.765Z",
-      "createdAt": "2026-08-23T14:05:27.541Z",
-      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "publishedAt": "2026-08-24T04:37:38.093Z",
+      "createdAt": "2026-08-24T04:37:38.864Z",
+      "updatedAt": "2026-08-24T04:37:38.864Z",
       "poster": {
         "url": "/images/photography/estate-emerald-ridge.jpg",
         "alt": "Aerial view of a laid-out residential development"
       },
       "listing": null,
       "estate": {
-        "id": "cmt5vo3de00096l3pnqtvxr5d",
+        "id": "cmt6qt81w0009di3ppanl5wv6",
         "slug": "emerald-ridge",
         "name": "Emerald Ridge Estate",
         "location": "Ibeju-Lekki",
@@ -3291,29 +3262,29 @@
       }
     },
     {
-      "id": "cmt5vqf8g006j6l3pczsm5m55",
+      "id": "cmt6qw2cr006jdi3peyrasdx9",
       "slug": "emerald-ridge-plot-a14-drone-tour",
       "youtubeId": "PwwZSvyJ97U",
       "title": "Drone tour over the Lekki corridor",
       "description": "An aerial pass over the corridor the estate sits on, showing the road position and how far the development has reached.",
       "kind": "DRONE_TOUR",
-      "posterMediaId": "cmt5vqefz006i6l3prjd942cf",
+      "posterMediaId": "cmt6qw1jf006idi3prcis81hz",
       "durationSeconds": null,
-      "listingId": "cmt5vo749000f6l3puuylprrc",
+      "listingId": "cmt6qtcfe000fdi3p5y18w2b9",
       "estateId": null,
       "isStandIn": true,
       "attribution": "Benjamin Landclick",
       "featured": true,
       "sortOrder": 1,
-      "publishedAt": "2026-08-23T14:05:28.869Z",
-      "createdAt": "2026-08-23T14:05:29.632Z",
-      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "publishedAt": "2026-08-24T04:37:40.171Z",
+      "createdAt": "2026-08-24T04:37:40.971Z",
+      "updatedAt": "2026-08-24T04:37:40.971Z",
       "poster": {
         "url": "/images/photography/land-terrain-01.jpg",
         "alt": "Open cultivated land in Niger State, Nigeria"
       },
       "listing": {
-        "id": "cmt5vo749000f6l3puuylprrc",
+        "id": "cmt6qtcfe000fdi3p5y18w2b9",
         "slug": "emerald-ridge-plot-a14",
         "title": "Plot A14, Emerald Ridge",
         "type": "LAND",
@@ -3327,29 +3298,29 @@
       "estate": null
     },
     {
-      "id": "cmt5vqgsw006l6l3p256fr7wk",
+      "id": "cmt6qw4pu006ldi3pk6ud8y6e",
       "slug": "emerald-ridge-plot-a14-walkthrough",
       "youtubeId": "mRkfUz4BEro",
       "title": "What gets built on a plot this size",
       "description": "A walkthrough of a completed house on a comparable plot, for a sense of what five hundred square metres carries.",
       "kind": "WALKTHROUGH",
-      "posterMediaId": "cmt5vqg0k006k6l3pnmdxp74m",
+      "posterMediaId": "cmt6qw3wc006kdi3p1i4v5xkm",
       "durationSeconds": null,
-      "listingId": "cmt5vo749000f6l3puuylprrc",
+      "listingId": "cmt6qtcfe000fdi3p5y18w2b9",
       "estateId": null,
       "isStandIn": true,
       "attribution": "Eden Oasis",
       "featured": false,
       "sortOrder": 2,
-      "publishedAt": "2026-08-23T14:05:30.903Z",
-      "createdAt": "2026-08-23T14:05:31.664Z",
-      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "publishedAt": "2026-08-24T04:37:43.274Z",
+      "createdAt": "2026-08-24T04:37:44.034Z",
+      "updatedAt": "2026-08-24T04:37:44.034Z",
       "poster": {
         "url": "/images/photography/home-01.jpg",
         "alt": "Completed detached house with a covered porch and lawn"
       },
       "listing": {
-        "id": "cmt5vo749000f6l3puuylprrc",
+        "id": "cmt6qtcfe000fdi3p5y18w2b9",
         "slug": "emerald-ridge-plot-a14",
         "title": "Plot A14, Emerald Ridge",
         "type": "LAND",
@@ -3363,30 +3334,30 @@
       "estate": null
     },
     {
-      "id": "cmt5vqidu006n6l3pa1933kaa",
+      "id": "cmt6qw6pv006ndi3pnq2u3wpg",
       "slug": "cornerstone-gardens-estate-overview",
       "youtubeId": "FHIwNvemi_g",
       "title": "Inside the estate gates",
       "description": "A tour of a managed estate of comparable size, filmed from the gatehouse through to the inner ring.",
       "kind": "ESTATE_OVERVIEW",
-      "posterMediaId": "cmt5vqhm9006m6l3ppfgd6nt3",
+      "posterMediaId": "cmt6qw5wc006mdi3pzhf0xe66",
       "durationSeconds": null,
       "listingId": null,
-      "estateId": "cmt5vo4k9000b6l3peedz8uiy",
+      "estateId": "cmt6qt98q000bdi3pyxhvez1o",
       "isStandIn": true,
       "attribution": "Tolu Ademulegun",
       "featured": true,
       "sortOrder": 3,
-      "publishedAt": "2026-08-23T14:05:32.978Z",
-      "createdAt": "2026-08-23T14:05:33.714Z",
-      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "publishedAt": "2026-08-24T04:37:45.843Z",
+      "createdAt": "2026-08-24T04:37:46.627Z",
+      "updatedAt": "2026-08-24T04:37:46.627Z",
       "poster": {
         "url": "/images/photography/estate-cornerstone-gardens.jpg",
         "alt": "Residential street lined with mature trees"
       },
       "listing": null,
       "estate": {
-        "id": "cmt5vo4k9000b6l3peedz8uiy",
+        "id": "cmt6qt98q000bdi3pyxhvez1o",
         "slug": "cornerstone-gardens",
         "name": "Cornerstone Gardens",
         "location": "Mowe-Ofada",
@@ -3394,29 +3365,29 @@
       }
     },
     {
-      "id": "cmt5vqjy1006p6l3p1urbgsp7",
+      "id": "cmt6qw8wq006pdi3pvy3ixo0d",
       "slug": "epe-parcel-aerial",
       "youtubeId": "kZpKPC1bk00",
       "title": "Aerial over the Epe approach",
       "description": "Scenic aerial footage along the corridor the parcel sits on, showing the surrounding land use.",
       "kind": "DRONE_TOUR",
-      "posterMediaId": "cmt5vqj65006o6l3p18mzzinb",
+      "posterMediaId": "cmt6qw7zt006odi3p2confbyu",
       "durationSeconds": null,
-      "listingId": "cmt5vp38100376l3pz8xd5cjq",
+      "listingId": "cmt6quemc0037di3pkg008sik",
       "estateId": null,
       "isStandIn": true,
       "attribution": "Relaxation Corner",
       "featured": true,
       "sortOrder": 4,
-      "publishedAt": "2026-08-23T14:05:34.985Z",
-      "createdAt": "2026-08-23T14:05:35.737Z",
-      "updatedAt": "2026-08-23T14:13:09.658Z",
+      "publishedAt": "2026-08-24T04:37:48.694Z",
+      "createdAt": "2026-08-24T04:37:49.466Z",
+      "updatedAt": "2026-08-24T04:37:49.466Z",
       "poster": {
         "url": "/images/photography/land-terrain-05.jpg",
         "alt": "Open sandy plot bordered by palms and low bush, northern Nigeria"
       },
       "listing": {
-        "id": "cmt5vp38100376l3pz8xd5cjq",
+        "id": "cmt6quemc0037di3pkg008sik",
         "slug": "epe-farm-parcel-two-hectares",
         "title": "Two-hectare parcel, Epe",
         "type": "LAND",
@@ -3428,29 +3399,29 @@
       "estate": null
     },
     {
-      "id": "cmt5vqlki006r6l3pxru9hp0l",
+      "id": "cmt6qwbhh006rdi3ps7aesh3i",
       "slug": "emerald-ridge-4-bed-walkthrough",
       "youtubeId": "lYM7MIvJkW8",
       "title": "Four-bedroom walkthrough",
       "description": "A room-by-room walkthrough of a completed detached house, to the same finishing specification.",
       "kind": "WALKTHROUGH",
-      "posterMediaId": "cmt5vqkrv006q6l3p98s5l6x9",
+      "posterMediaId": "cmt6qwana006qdi3pg9rg4zm5",
       "durationSeconds": null,
-      "listingId": "cmt5vpgei004e6l3p9ii63dm9",
+      "listingId": "cmt6quu0h004edi3p6edlxnvy",
       "estateId": null,
       "isStandIn": true,
       "attribution": "Favour Sv",
       "featured": false,
       "sortOrder": 5,
-      "publishedAt": "2026-08-23T14:05:37.064Z",
-      "createdAt": "2026-08-23T14:05:37.842Z",
-      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "publishedAt": "2026-08-24T04:37:52.002Z",
+      "createdAt": "2026-08-24T04:37:52.806Z",
+      "updatedAt": "2026-08-24T04:37:52.806Z",
       "poster": {
         "url": "/images/photography/home-02.jpg",
         "alt": "Residential building at structural stage under scaffolding"
       },
       "listing": {
-        "id": "cmt5vpgei004e6l3p9ii63dm9",
+        "id": "cmt6quu0h004edi3p6edlxnvy",
         "slug": "emerald-ridge-4-bed-detached",
         "title": "Four-bedroom detached house, Emerald Ridge",
         "type": "HOME",
@@ -3464,29 +3435,29 @@
       "estate": null
     },
     {
-      "id": "cmt5vqn77006t6l3pb2rdm2d7",
+      "id": "cmt6qwee9006tdi3pr0j797cf",
       "slug": "cornerstone-gardens-bungalow-walkthrough",
       "youtubeId": "SC3_OOy4nJ0",
       "title": "Inside a completed bungalow",
       "description": "A walkthrough of finished homes at this end of the market, filmed room by room.",
       "kind": "WALKTHROUGH",
-      "posterMediaId": "cmt5vqmdj006s6l3p87nmooxm",
+      "posterMediaId": "cmt6qwd6o006sdi3p7q0knujr",
       "durationSeconds": null,
-      "listingId": "cmt5vpl87004n6l3po23dr3nb",
+      "listingId": "cmt6qv0jv004ndi3pqvlz6cw9",
       "estateId": null,
       "isStandIn": true,
       "attribution": "Tayo Aina",
       "featured": false,
       "sortOrder": 6,
-      "publishedAt": "2026-08-23T14:05:39.157Z",
-      "createdAt": "2026-08-23T14:05:39.955Z",
-      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "publishedAt": "2026-08-24T04:37:55.263Z",
+      "createdAt": "2026-08-24T04:37:56.577Z",
+      "updatedAt": "2026-08-24T04:37:56.577Z",
       "poster": {
         "url": "/images/photography/home-03.jpg",
         "alt": "Contemporary detached house with large glazing"
       },
       "listing": {
-        "id": "cmt5vpl87004n6l3po23dr3nb",
+        "id": "cmt6qv0jv004ndi3pqvlz6cw9",
         "slug": "cornerstone-gardens-3-bed-bungalow",
         "title": "Three-bedroom bungalow, Cornerstone Gardens",
         "type": "HOME",
@@ -3500,30 +3471,30 @@
       "estate": null
     },
     {
-      "id": "cmt5vqovo006v6l3pvedqz7qd",
+      "id": "cmt6qwfzw006vdi3pyeiu7wfh",
       "slug": "sabon-lugbe-court-neighbourhood",
       "youtubeId": "ySZpkjEeBzE",
       "title": "The neighbourhood around the court",
       "description": "A look at the surrounding residential area, the roads into it and what is already built there.",
       "kind": "ESTATE_OVERVIEW",
-      "posterMediaId": "cmt5vqo1c006u6l3p24e1rhzw",
+      "posterMediaId": "cmt6qwf70006udi3pqk3a6oba",
       "durationSeconds": null,
       "listingId": null,
-      "estateId": "cmt5vo5u0000d6l3pk5m941f2",
+      "estateId": "cmt6qtan8000ddi3p876l8opk",
       "isStandIn": true,
       "attribution": "Steven Ndukwu",
       "featured": false,
       "sortOrder": 7,
-      "publishedAt": "2026-08-23T14:05:41.296Z",
-      "createdAt": "2026-08-23T14:05:42.132Z",
-      "updatedAt": "2026-08-23T14:13:08.878Z",
+      "publishedAt": "2026-08-24T04:37:57.881Z",
+      "createdAt": "2026-08-24T04:37:58.652Z",
+      "updatedAt": "2026-08-24T04:37:58.652Z",
       "poster": {
         "url": "/images/photography/estate-sabon-lugbe-court.jpg",
         "alt": "Delivered houses in a row along an estate street"
       },
       "listing": null,
       "estate": {
-        "id": "cmt5vo5u0000d6l3pk5m941f2",
+        "id": "cmt6qtan8000ddi3p876l8opk",
         "slug": "sabon-lugbe-court",
         "name": "Sabon Lugbe Court",
         "location": "Lugbe",
@@ -3534,10 +3505,10 @@
   "placements": [
     {
       "key": "homepage.collage.1",
-      "mediaId": "cmt5vo1v800046l3p5ig1ff6x",
+      "mediaId": "cmt6qt6660004di3pp4y9rfr9",
       "label": "FAQ collage — left",
       "guidance": "3:4 portrait. Plot boundary and access road.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/images/photography/collage-1.jpg",
         "alt": "Access lane running between plots",
@@ -3549,10 +3520,10 @@
     },
     {
       "key": "homepage.collage.2",
-      "mediaId": "cmt5vo1v900056l3pxqo0phce",
+      "mediaId": "cmt6qt6660005di3pexb3xnni",
       "label": "FAQ collage — centre",
       "guidance": "4:3. A completed home exterior.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/images/photography/collage-2.jpg",
         "alt": "Established houses along a residential avenue",
@@ -3564,10 +3535,10 @@
     },
     {
       "key": "homepage.collage.3",
-      "mediaId": "cmt5vo1v900066l3ptmu72w38",
+      "mediaId": "cmt6qt6660006di3p2xi7c47r",
       "label": "FAQ collage — right",
       "guidance": "3:4 portrait. An estate street view.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/images/photography/collage-3.jpg",
         "alt": "House exterior seen from the street",
@@ -3579,10 +3550,10 @@
     },
     {
       "key": "homepage.hero",
-      "mediaId": "cmt5vo1o700036l3plcr6j49g",
+      "mediaId": "cmt6qt5za0003di3pegb3e3hl",
       "label": "Homepage hero image",
       "guidance": "16:9. A wide establishing shot across an estate.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/images/photography/hero-estate.jpg",
         "alt": "Aerial view across a residential neighbourhood",
@@ -3594,10 +3565,10 @@
     },
     {
       "key": "site.logo",
-      "mediaId": "cmt5vo22s00076l3po7kg7c5u",
+      "mediaId": "cmt6qt6th0007di3pvmo57dwg",
       "label": "Site logo",
       "guidance": "Wide mark, transparent background. Renders at 32px tall in the header.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/logo.png",
         "alt": "Rakuxon City",
@@ -3609,10 +3580,10 @@
     },
     {
       "key": "site.ogImage",
-      "mediaId": "cmt5vo1o700036l3plcr6j49g",
+      "mediaId": "cmt6qt5za0003di3pegb3e3hl",
       "label": "Social share image",
       "guidance": "16:9. Shown when a link to the site is shared.",
-      "updatedAt": "2026-08-23T14:03:39.859Z",
+      "updatedAt": "2026-08-24T04:35:27.302Z",
       "media": {
         "url": "/images/photography/hero-estate.jpg",
         "alt": "Aerial view across a residential neighbourhood",
