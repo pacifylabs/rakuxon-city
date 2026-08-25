@@ -1,130 +1,110 @@
 @import "tailwindcss";
 
-/* Design tokens — 04_DESIGN_SYSTEM.md §10, translated from the Tailwind v3
-   config block to the v4 @theme syntax. Values are unchanged; only the
-   declaration form differs. This block is the source of truth for colour and
-   type: nothing in the app hard-codes a hex value or a font size. */
+/* Design tokens — 04_DESIGN_SYSTEM.md §10 (v2.0), translated from the
+   Tailwind v3 config block to the v4 @theme syntax. Values are unchanged;
+   only the declaration form differs. This block is the source of truth for
+   colour and type: nothing in the app hard-codes a hex value or a font size.
+
+   PALETTE v2.0 — charcoal / ivory / champagne, replacing v1.0's sage-then-gold
+   history in full. Every colour token below is new; typography, layout,
+   radii, and motion are untouched, per §1: "Structure, type, layout, and
+   motion are unchanged." */
 @theme {
-  /* §2 Colour */
-  /*
-   * NEUTRAL GREY, not sage.
-   *
-   * The palette's neutrals used to carry a green tint (canvas #F1F4EF, ink
-   * #171A16, hairline #E2E7DF and so on), which read as sage across the whole
-   * site. The client asked for grey.
-   *
-   * Every one was converted to a PURE grey of IDENTICAL RELATIVE LUMINANCE —
-   * the hue is removed, the lightness is not touched. That is what makes this
-   * safe: contrast is a function of luminance alone, so every ratio on the
-   * site is unchanged and nothing that cleared AA can start failing. Audited
-   * across all 17 real pairings; the largest movement anywhere was 0.03.
-   *
-   * The chromatic tokens are deliberately untouched — accent gold, the navy
-   * `deep`, and the available/reserved/error status colours all carry meaning
-   * through their hue.
-   *
-   * If these are ever re-picked by eye rather than derived, re-run the audit.
-   * The two DEVIATION notes below still hold: their ratios did not move.
-   */
-  --color-canvas: #f3f3f3;
+  /* §2 Colour — brand swatches. Exposed directly as utilities (bg-charcoal,
+     bg-ivory, text-taupe, …) per §10's JS block, and reused by the semantic
+     tier below via var() so a hex value exists in exactly one place. */
+  --color-charcoal: #171918;
+  --color-charcoal-deep: #0d0f0e;
+  --color-charcoal-soft: #242725;
+  --color-ivory: #f5f1e8;
+  --color-ivory-light: #faf8f3;
+  --color-champagne: #c5a46d;
+  --color-champagne-light: #d8bf91;
+  --color-champagne-dark: #a88650;
+  --color-taupe: #a69b8a;
+  --color-taupe-light: #d2c9ba;
+
+  /* §2 Semantic — the names components actually reach for. */
+  --color-background: var(--color-ivory-light);
+  --color-foreground: var(--color-charcoal);
   --color-surface: #ffffff;
-
-  --color-ink: #191919;
-  --color-ink-secondary: #616161;
-
-  /*
-   * DEVIATION from design system §10, which specifies #8E948C.
-   *
-   * §2 assigns ink-muted to captions and metadata and §3 sets those at 13px,
-   * but #8E948C gives 2.80:1 on canvas and 3.10:1 on surface — below the 4.5:1
-   * that PRD §6 (WCAG 2.1 AA) and acceptance criterion 9 both require. The two
-   * documents cannot both hold.
-   *
-   * #6B716A is the smallest darkening that clears AA on both grounds: 4.51:1
-   * on canvas, 5.01:1 on surface. Same hue, same role, nothing else changes.
-   * Reverting is this one line.
-   */
-  --color-ink-muted: #6f6f6f;
+  --color-surface-muted: var(--color-ivory);
+  --color-primary: var(--color-charcoal);
+  --color-primary-hover: var(--color-charcoal-deep);
+  --color-accent: var(--color-champagne);
+  --color-accent-hover: var(--color-champagne-dark);
+  --color-accent-light: var(--color-champagne-light);
+  --color-accent-tint: #f0e7d6;
 
   /*
-   * THE ACTION COLOUR IS GOLD, and the ground is navy. Both are sampled from
-   * the logo: gold #C4933C (hue 38.4°), navy #0E254E. Sage is retired.
+   * DEVIATION from design system §10, which specifies #8A6A2F for
+   * `accent-text`.
    *
-   * DEVIATION from design system §11 ("no second accent colour. Sage carries
-   * everything") and §2. Instructed by the client so the site matches the brand
-   * mark it carries on every page. §11 needs amending — see TODO §1.1.
+   * §7 puts this colour as TYPE inside an `accent-tint` badge — the title-type
+   * badge, "the point of the palette." Measured: #8A6A2F on #F0E7D6 is
+   * 4.09:1, under the 4.5:1 AA floor for text. The doc's own audit table only
+   * checked accent-text against `ivory-light` (4.8:1, correct) and missed its
+   * more demanding pairing against its own tint.
    *
-   * Gold as an action colour has one trap, and it is the reason there are three
-   * tokens rather than one. A gold light enough to look gold is far too light
-   * to be read as text on the light canvas:
-   *
-   *   #C4933C on canvas  =  2.50   illegible
-   *   #C4933C on navy    =  5.44   fine
-   *
-   * So the family splits by job, not by taste:
-   *
-   *   --color-accent          #806028   5.23 on canvas, 5.80 on surface.
-   *                           TEXT and borders on light grounds — links, icon
-   *                           strokes, rules. Reads bronze rather than gold;
-   *                           that is what AA costs on a near-white canvas.
-   *
-   *   --color-accent-fill     #C4933C   The logo gold, used as a GROUND with
-   *                           navy text over it (5.44). This is what makes a
-   *                           button actually look gold. NEVER use it as text
-   *                           on canvas. Safe as text on navy.
-   *
-   *   --color-accent-tint     #F7ECD7   Pale wash for badges and quiet panels.
-   *                           Paired with --color-accent text: 4.95.
-   *
-   * Filled buttons therefore carry NAVY text, not white. White on #C4933C is
-   * 2.77 and fails outright — if a button ever looks wrong, that is the mistake
-   * to check for first.
+   * #81632C clears every ground it is actually used on: 4.56 on accent-tint,
+   * 5.27 on ivory-light, 5.59 on white. Same hue, darkened until the worst
+   * case holds.
    */
-  --color-accent: #806028;
-  --color-accent-hover: #6b5021;
-  --color-accent-fill: #c4933c;
-  /* 4.56 under navy text — the darkest hover that still clears AA. */
-  --color-accent-fill-hover: #b28637;
-  --color-accent-tint: #f7ecd7;
+  --color-accent-text: #81632c;
 
-  --color-hairline: #e5e5e5;
+  /* §2 Semantic, continued */
+  --color-line: #ded8cc;
+
   /*
-   * The logo navy, replacing the near-black #101310. Everything the old ground
-   * carried still passes on it, with room to spare:
-   *   canvas text        13.58
-   *   white              15.07
-   *   accent-fill gold    5.44
-   */
-  --color-deep: #0e254e;
-
-  /* §2 Status — quiet by design, they appear on every card */
-  --color-status-available: #3e7350;
-  --color-status-available-bg: #e7efe8;
-  /*
-   * DEVIATION from design system §2, which specifies #8A6A1F — the third and
-   * last of these. 4.40:1 on its own background, against the 4.5:1 AA floor.
-   * #87671D gives 4.59:1. Same amber.
-   */
-  --color-status-reserved: #87671d;
-  --color-status-reserved-bg: #f6efdd;
-  /*
-   * DEVIATION from design system §2, which specifies #6B6F69.
+   * DEVIATION from design system §10, which specifies #9A907C for
+   * `border-input`.
    *
-   * Same conflict as ink-muted above, and narrower: #6B6F69 on its own
-   * background gives 4.42:1 against the 4.5:1 AA floor. This pair carries the
-   * Sold badge and, more importantly, the survey-only title ribbon — the one
-   * place §7 insists on stating a weak documentation position plainly. It
-   * should not be the hardest text on the site to read.
+   * §2 rule 3: "Form controls use border-input, not border. WCAG 1.4.11
+   * requires 3:1 for the boundary of an interactive component." Measured:
+   * #9A907C on ivory-light is 2.97:1 — the token built to satisfy 1.4.11
+   * missed its own floor by 0.03.
    *
-   * #686C66 gives 4.62:1. Two shades darker, same neutral.
+   * #998F7B clears it: 3.01 on ivory-light, 3.20 on white surface.
    */
-  --color-status-sold: #6b6b6b;
-  --color-status-sold-bg: #eeeeee;
+  --color-line-input: #998f7b;
+  --color-line-dark: #3a3d3b;
 
-  /* §6 Forms — inline error text */
-  --color-error: #a33a2d;
+  /*
+   * DEVIATION from design system §10, which specifies #746F66 for
+   * `muted-text`. Darkened twice, for two different real pairings the doc's
+   * own audit table did not check.
+   *
+   * First: §2 assigns this to "body copy, supporting paragraphs, captions" —
+   * text that appears on both `background` (ivory-light) and `surface-muted`
+   * (ivory), per §6's alternating quiet panels. #746F66 gave 4.70:1 on
+   * ivory-light but 4.43:1 on ivory — under the 4.5 floor.
+   *
+   * Second: the notice/callout panels across the site (investor strip, legal
+   * notices, "Still deciding what to buy?") set body copy in `muted` on
+   * `accent-tint`, a warmer, darker ground than either neutral above.
+   * Lighthouse caught this one directly: 4.13:1 on accent-tint, failing.
+   *
+   * #6C6860 clears every ground actually in use: 5.23 on ivory-light, 4.92 on
+   * ivory, 5.55 on white, 4.52 on accent-tint. Same hue throughout.
+   */
+  --color-muted: #6c6860;
 
-  /* §3 Typography */
+  /* §2 — non-text only. Decorative glyphs and disabled states; 2.47:1 on
+     ivory-light, correctly excluded from text use by §2 rule 2. */
+  --color-faint: #a69f93;
+
+  --color-success: #536b57;
+  --color-error: #9a4f4f;
+
+  /* §2 Status colours — quiet by design, redefined in full for v2.0. */
+  --color-status-available: #3f5544;
+  --color-status-available-bg: #e4eae3;
+  --color-status-reserved: #7a5c28;
+  --color-status-reserved-bg: #f0e7d6;
+  --color-status-sold: #6b655c;
+  --color-status-sold-bg: #ede9e0;
+
+  /* §3 Typography — unchanged from v1.0 */
   --font-display: var(--font-instrument-sans), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
 
@@ -161,7 +141,7 @@
   --radius-control: 8px;
   --radius-card: 12px;
   --radius-image-l: 16px;
-  --shadow-lift: 0 2px 12px rgba(23, 26, 22, 0.06);
+  --shadow-lift: 0 2px 12px rgba(23, 25, 24, 0.07);
 }
 
 /* §3 Mobile type scale. Display steps drop one notch below `lg`; body sizes
@@ -176,10 +156,10 @@
 }
 
 @layer base {
-  /* §11 — the canvas tint is the identity. The page is never white. */
+  /* §12 — the ivory tint is the identity. The page is never pure white. */
   body {
-    background-color: var(--color-canvas);
-    color: var(--color-ink);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
@@ -228,29 +208,11 @@
 }
 
 /*
- * The hero's "moving background", done as a transform rather than a video.
+ * REMOVED — the hero's drift/Ken Burns keyframe used to live here.
  *
- * The client asked for motion behind the hero. A looping MP4 would have been
- * 2–5MB against a 3G performance target this page already misses (TODO §1.16),
- * so the motion is a 28s drift across an image the page has downloaded anyway:
- * zero extra bytes, GPU-composited, no layout work per frame.
- *
- * Applied via `motion-safe:` so it never runs for someone who asked for less
- * motion. The scale floor of 1.06 matters — at 1.0 the pan would expose the
- * container edge.
+ * 07_FEATURE_HERO.md §5.4 forbids it outright: "Crossfade only — opacity
+ * transition, 800ms. No zoom, no Ken Burns, no parallax. Motion over a 2MB
+ * image on a mid-range phone stutters and looks cheap." The full-bleed hero
+ * now crossfades only, in hero.tsx. Nothing else on the site referenced this
+ * keyframe, so it left rather than sitting unused.
  */
-@keyframes hero-drift {
-  0% {
-    transform: scale(1.06) translate3d(0, 0, 0);
-  }
-  50% {
-    transform: scale(1.12) translate3d(-1.5%, -1%, 0);
-  }
-  100% {
-    transform: scale(1.06) translate3d(0, 0, 0);
-  }
-}
-
-@theme {
-  --animate-hero-drift: hero-drift 28s ease-in-out infinite;
-}

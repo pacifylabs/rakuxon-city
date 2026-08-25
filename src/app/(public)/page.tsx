@@ -72,13 +72,15 @@ export default async function HomePage() {
     getFeaturedVideos(4),
   ]);
 
-  /** The estate rows, shaped for the hero. Slide order follows estate order. */
+  /**
+   * The estate rows, shaped for the hero. Slide order follows estate order.
+   * Only slug/name/image travel now — 07_FEATURE_HERO.md's content block
+   * doesn't carry a labelled estate caption the way the old hero did, so the
+   * rest of the estate row was dropped rather than passed and left unused.
+   */
   const heroSlides = estates.map((estate) => ({
     slug: estate.slug,
     name: estate.name,
-    location: estate.location,
-    state: estate.state,
-    listingCount: estate.listingCount,
     image: estate.image
       ? { url: estate.image.url, alt: estate.image.alt }
       : null,
@@ -90,7 +92,7 @@ export default async function HomePage() {
           FAQ markup, built from the same array the accordion renders. */}
       <JsonLd data={faqJsonLd(questions)} />
 
-      <Hero counts={counts} slides={heroSlides} />
+      <Hero slides={heroSlides} />
       <FeaturedEstate estates={estates} />
       <TwoLane counts={counts} />
       <TrustBand deliveredEstates={delivered} />

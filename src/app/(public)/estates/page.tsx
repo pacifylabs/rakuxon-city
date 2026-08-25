@@ -89,22 +89,22 @@ export default async function EstatesPage() {
                       >
                         {statusLabels[estate.status]}
                       </Badge>
-                      <p className="text-caption text-ink-muted">
+                      <p className="text-caption text-muted">
                         {estate.location}, {estate.state}
                       </p>
                     </div>
 
-                    <h2 className="mt-4 text-display-m text-ink transition-colors group-hover:text-accent">
+                    <h2 className="mt-4 text-display-m text-foreground transition-colors group-hover:text-accent-text">
                       {estate.name}
                     </h2>
-                    <p className="mt-4 line-clamp-3 max-w-[52ch] text-body text-ink-secondary">
+                    <p className="mt-4 line-clamp-3 max-w-[52ch] text-body text-muted">
                       {estate.description}
                     </p>
 
-                    <p className="mt-auto pt-6 text-caption text-ink-muted">
+                    <p className="mt-auto pt-6 text-caption text-muted">
                       {estate.availableCount > 0 ? (
                         <>
-                          <span className="tabular text-body text-accent">
+                          <span className="tabular text-body text-accent-text">
                             {estate.availableCount}
                           </span>{" "}
                           {estate.availableCount === 1 ? "listing" : "listings"}{" "}
@@ -115,7 +115,7 @@ export default async function EstatesPage() {
                       )}
                     </p>
 
-                    <span className="mt-4 inline-flex items-center gap-2 text-body text-accent">
+                    <span className="mt-4 inline-flex items-center gap-2 text-body text-accent-text">
                       See the estate
                       <ArrowGlyph />
                     </span>
@@ -134,14 +134,14 @@ export default async function EstatesPage() {
           */}
           <div
             className={cn(
-              "flex flex-col justify-center rounded-image-l border border-hairline bg-surface p-8 lg:p-10",
+              "flex flex-col justify-center rounded-image-l border border-line bg-surface p-8 lg:p-10",
               estates.length % 2 === 0 && "lg:col-span-2",
             )}
           >
-            <p className="text-display-m text-ink">
+            <p className="text-display-m text-foreground">
               The next one is already in acquisition
             </p>
-            <p className="mt-4 max-w-[46ch] text-body text-ink-secondary">
+            <p className="mt-4 max-w-[46ch] text-body text-muted">
               We buy and title land before we subdivide it, so an estate appears
               here only once the paperwork is in hand. Tell us the area you are
               looking at and we will say what is coming.

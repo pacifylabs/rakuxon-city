@@ -65,7 +65,7 @@ export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
           ]}
         />
 
-        <p className="mt-6 text-caption text-ink-muted">
+        <p className="mt-6 text-caption text-muted">
           <span className="tabular">{total}</span>{" "}
           {total === 1 ? "tour" : "tours"}
           {filtered
@@ -76,16 +76,16 @@ export default async function ToursPage({ searchParams }: PageProps<"/tours">) {
         </p>
 
         {videos.length === 0 ? (
-          <div className="mt-8 rounded-card border border-hairline bg-surface p-8 lg:p-12">
-            <p className="text-heading text-ink">No tours match that</p>
-            <p className="mt-4 max-w-[52ch] text-body text-ink-secondary">
+          <div className="mt-8 rounded-card border border-line bg-surface p-8 lg:p-12">
+            <p className="text-heading text-foreground">No tours match that</p>
+            <p className="mt-4 max-w-[52ch] text-body text-muted">
               We film as estates reach each stage, so the library is thinner
               than the listing count. Clearing the filters shows everything
               published so far.
             </p>
             <Link
               href="/tours"
-              className="mt-6 inline-block text-body text-accent underline underline-offset-4 hover:text-accent-hover"
+              className="mt-6 inline-block text-body text-accent-text underline underline-offset-4 hover:text-foreground"
             >
               Clear filters
             </Link>

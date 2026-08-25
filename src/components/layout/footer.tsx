@@ -54,7 +54,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative z-10 bg-deep">
+    <footer className="relative z-10 bg-charcoal-deep">
       <Container>
         <div className="py-16 lg:py-20">
           {/*
@@ -63,17 +63,19 @@ export function Footer() {
             link columns are single words — equal quarters gave the widest space
             to the content that needed least. 4 / 2 / 2 / 4 tracks the content.
 
-            Two columns at `sm`, four at `lg`, and the gold rule above the
-            bottom row ties it to the rest of the palette.
+            Two columns at `sm`, four at `lg`. The bottom-row divider is
+            `line-dark`, not champagne — §2's dark-section rule reserves
+            champagne for text and reserves the rule itself for the title
+            ribbon (§7).
           */}
           <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="text-eyebrow text-accent-fill">Contact us</p>
+              <p className="text-eyebrow text-accent-light">Contact us</p>
               <ul className="mt-5 space-y-3">
                 <li>
                   <a
                     href={`mailto:${site.email}`}
-                    className="text-body text-canvas/90 transition-colors hover:text-canvas"
+                    className="text-body text-ivory-light/90 transition-colors hover:text-ivory-light"
                   >
                     {site.email}
                   </a>
@@ -81,15 +83,15 @@ export function Footer() {
                 <li>
                   <a
                     href={telHref}
-                    className="text-body text-canvas/90 transition-colors hover:text-canvas"
+                    className="text-body text-ivory-light/90 transition-colors hover:text-ivory-light"
                   >
                     {site.phone.display}
                   </a>
-                  <span className="mt-1 block text-caption text-canvas/60">
+                  <span className="mt-1 block text-caption text-ivory-light/60">
                     {site.phone.note}
                   </span>
                 </li>
-                <li className="text-body text-canvas/90">
+                <li className="text-body text-ivory-light/90">
                   {site.regionsServed.join(" · ")}
                 </li>
               </ul>
@@ -102,20 +104,20 @@ export function Footer() {
               */}
               <Link
                 href="/invest"
-                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-accent-fill px-5 text-body text-accent-fill transition-colors hover:bg-accent-fill/10 focus-visible:ring-2 focus-visible:ring-accent-fill focus-visible:outline-none"
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-accent-light px-5 text-body text-accent-light transition-colors hover:bg-accent-light/10 focus-visible:ring-2 focus-visible:ring-accent-light focus-visible:outline-none"
               >
                 Partner with us
               </Link>
             </div>
 
             <nav aria-label="Footer" className="lg:col-span-2">
-              <p className="text-eyebrow text-accent-fill">Explore</p>
+              <p className="text-eyebrow text-accent-light">Explore</p>
               <ul className="mt-5 space-y-3">
                 {siteLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-body text-canvas/90 transition-colors hover:text-canvas"
+                      className="text-body text-ivory-light/90 transition-colors hover:text-ivory-light"
                     >
                       {link.label}
                     </Link>
@@ -125,7 +127,7 @@ export function Footer() {
             </nav>
 
             <div className="lg:col-span-2">
-              <p className="text-eyebrow text-accent-fill">Share with us</p>
+              <p className="text-eyebrow text-accent-light">Share with us</p>
               <ul className="mt-5 space-y-3">
                 {socials.map((social) => (
                   <li key={social.label}>
@@ -133,7 +135,7 @@ export function Footer() {
                       href={social.href}
                       rel="noreferrer noopener"
                       target="_blank"
-                      className="text-body text-canvas/90 transition-colors hover:text-canvas"
+                      className="text-body text-ivory-light/90 transition-colors hover:text-ivory-light"
                     >
                       {social.label}
                     </a>
@@ -143,14 +145,14 @@ export function Footer() {
             </div>
 
             <div className="lg:col-span-4">
-              <p className="text-eyebrow text-accent-fill">Newsletter</p>
+              <p className="text-eyebrow text-accent-light">Newsletter</p>
               {/* Live-looking, and honest on press — see NewsletterSignup. */}
               <NewsletterSignup />
             </div>
           </div>
 
-          <div className="mt-16 flex flex-col gap-4 border-t border-accent-fill/25 pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-caption text-canvas/75">
+          <div className="mt-16 flex flex-col gap-4 border-t border-line-dark pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-caption text-ivory-light/75">
               © {new Date().getFullYear()} Rakuxon City. All rights reserved.
             </p>
 
@@ -159,12 +161,12 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-caption text-canvas/75 transition-colors hover:text-canvas"
+                  className="text-caption text-ivory-light/75 transition-colors hover:text-ivory-light"
                 >
                   {link.label}
                 </Link>
               ))}
-              <p className="text-caption text-canvas/75">A Rakuxon company</p>
+              <p className="text-caption text-ivory-light/75">A Rakuxon company</p>
             </div>
           </div>
         </div>

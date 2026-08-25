@@ -77,7 +77,7 @@ export default function CreditsPage() {
         */}
         <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7 xl:col-span-8">
-            <p className="text-body text-ink-secondary">
+            <p className="text-body text-muted">
               {photographs.length > 0 ? (
                 <>
                   <span className="tabular">{photographs.length}</span> images,
@@ -89,7 +89,7 @@ export default function CreditsPage() {
               )}
             </p>
 
-            <p className="mt-4 text-body text-ink-secondary">
+            <p className="mt-4 text-body text-muted">
               Every image is cropped to fit this site&rsquo;s layouts, which
               makes a derivative work. Only licences permitting that are used —
               no NoDerivatives, and no ShareAlike.
@@ -100,11 +100,11 @@ export default function CreditsPage() {
                 {photographs.map((photograph) => (
                   <li
                     key={photograph.name}
-                    className="flex flex-col justify-between gap-4 rounded-card border border-hairline bg-surface p-5"
+                    className="flex flex-col justify-between gap-4 rounded-card border border-line bg-surface p-5"
                   >
                     <div className="min-w-0">
-                      <p className="text-body text-ink">{photograph.title}</p>
-                      <p className="mt-1 text-caption text-ink-muted">
+                      <p className="text-body text-foreground">{photograph.title}</p>
+                      <p className="mt-1 text-caption text-muted">
                         {photograph.creator}
                       </p>
                     </div>
@@ -114,7 +114,7 @@ export default function CreditsPage() {
                         href={photograph.licenseUrl}
                         rel="noreferrer noopener license"
                         target="_blank"
-                        className="text-caption text-accent transition-colors hover:text-accent-hover"
+                        className="text-caption text-accent-text transition-colors hover:text-foreground"
                       >
                         {photograph.license}
                       </a>
@@ -122,7 +122,7 @@ export default function CreditsPage() {
                         href={photograph.sourceUrl}
                         rel="noreferrer noopener"
                         target="_blank"
-                        className="text-caption text-ink-muted transition-colors hover:text-ink"
+                        className="text-caption text-muted transition-colors hover:text-foreground"
                       >
                         Original
                       </a>
@@ -134,26 +134,26 @@ export default function CreditsPage() {
           </div>
 
           <aside className="lg:col-span-5 xl:col-span-4">
-            <div className="rounded-card border border-hairline bg-surface p-6 lg:sticky lg:top-8">
-              <p className="text-heading text-ink">Why these are here</p>
-              <p className="mt-3 text-body text-ink-secondary">
+            <div className="rounded-card border border-line bg-surface p-6 lg:sticky lg:top-8">
+              <p className="text-heading text-foreground">Why these are here</p>
+              <p className="mt-3 text-body text-muted">
                 None of these photographs show the actual plots, homes or
                 estates we sell. They stand in while our own photography is
                 produced, and they are replaced one at a time as it lands.
               </p>
-              <p className="mt-4 text-body text-ink-secondary">
+              <p className="mt-4 text-body text-muted">
                 Where a home is sold off plan, any visual of the finished
                 building is an artist&rsquo;s impression and says so on the
                 listing.
               </p>
 
-              <dl className="mt-6 border-t border-hairline pt-5">
-                <dt className="text-caption text-ink-muted">Licences in use</dt>
+              <dl className="mt-6 border-t border-line pt-5">
+                <dt className="text-caption text-muted">Licences in use</dt>
                 <dd className="mt-2 flex flex-wrap gap-2">
                   {licences.map((licence) => (
                     <span
                       key={licence}
-                      className="rounded-full bg-accent-tint px-3 py-1 text-caption text-accent"
+                      className="rounded-full bg-accent-tint px-3 py-1 text-caption text-accent-text"
                     >
                       {licence}
                     </span>

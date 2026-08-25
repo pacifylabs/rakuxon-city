@@ -84,9 +84,9 @@ Add to `04_DESIGN_SYSTEM.md` §6.
 ### Video card
 Follows the listing card exactly: `surface` fill, `radius-card`, hairline border, no shadow. Poster image at 16:9 with `radius-card` on the top corners.
 
-- **Play control:** 56px circle, `accent` fill, white triangle glyph, centred on the poster. **Never YouTube's red button** — it clashes with the sage palette and reads as a third-party widget rather than part of the site.
+- **Play control:** 56px circle, `charcoal` fill, `ivory-light` triangle glyph, centred on the poster. **Never YouTube's red button**, and never champagne — gold over photography is explicitly forbidden in design system §8, and a red button reads as a third-party widget rather than part of the site.
 - Duration pill bottom-right of the poster: `deep` at 70% opacity, white `caption` text, `radius-pill`.
-- Kind badge top-left, using the existing badge base in `accent-tint`: *Drone tour*, *Walkthrough*, *Estate overview*, *Progress update*.
+- Kind badge top-left, using the existing badge base — `accent-tint` fill with `accent-text` type: *Drone tour*, *Walkthrough*, *Estate overview*, *Progress update*.
 - Title at `heading` beneath the poster, parent listing or estate name at `caption` in `ink-muted`.
 
 ### Homepage section

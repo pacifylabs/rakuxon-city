@@ -17,13 +17,13 @@ export function ListingEmptyState({
   const noun = track === "land" ? "plots" : "homes";
 
   return (
-    <div className="rounded-card border border-hairline bg-surface p-8 lg:p-12">
-      <p className="max-w-[24ch] text-display-m text-ink">
+    <div className="rounded-card border border-line bg-surface p-8 lg:p-12">
+      <p className="max-w-[24ch] text-display-m text-foreground">
         {filtered
           ? `No ${noun} match those filters right now`
           : `No ${noun} are listed at the moment`}
       </p>
-      <p className="mt-5 max-w-[54ch] text-body text-ink-secondary">
+      <p className="mt-5 max-w-[54ch] text-body text-muted">
         Stock moves quickly and we do not list everything the day it becomes
         available. Tell us what you are looking for — the size, the area and the
         budget — and we will come back to you when something fits, including if

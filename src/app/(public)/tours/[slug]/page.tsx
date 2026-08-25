@@ -88,41 +88,41 @@ export default async function TourPage({ params }: PageProps<"/tours/[slug]">) {
           {/* FR-V1.5 — full width, and still a facade: a shared link that
               costs a megabyte before playing is a link that does not open. */}
           <VideoFacade video={video} priority>
-            <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent">
+            <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent-text">
               {videoKindLabels[video.kind]}
             </Badge>
             {duration ? (
-              <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-deep/70 px-2.5 py-1 text-caption text-white">
+              <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-charcoal-deep/70 px-2.5 py-1 text-caption text-ivory-light">
                 {duration}
               </span>
             ) : null}
           </VideoFacade>
 
-          <h1 className="mt-8 text-display-m text-ink">{video.title}</h1>
+          <h1 className="mt-8 text-display-m text-foreground">{video.title}</h1>
 
           {video.context ? (
-            <p className="mt-3 text-body text-ink-muted">{video.context}</p>
+            <p className="mt-3 text-body text-muted">{video.context}</p>
           ) : null}
 
           {video.description ? (
-            <p className="mt-6 max-w-[62ch] text-body-l text-ink-secondary">
+            <p className="mt-6 max-w-[62ch] text-body-l text-muted">
               {video.description}
             </p>
           ) : null}
 
           {video.parent ? (
-            <div className="mt-10 rounded-card border border-hairline bg-surface p-6 lg:p-8">
-              <p className="text-caption text-ink-muted">
+            <div className="mt-10 rounded-card border border-line bg-surface p-6 lg:p-8">
+              <p className="text-caption text-muted">
                 This tour belongs to
               </p>
-              <p className="mt-2 text-heading text-ink">{video.parent.name}</p>
+              <p className="mt-2 text-heading text-foreground">{video.parent.name}</p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <ButtonLink href={video.parent.href}>
                   View the listing
                 </ButtonLink>
                 <Link
                   href="/contact"
-                  className="text-body text-accent underline underline-offset-4 hover:text-accent-hover"
+                  className="text-body text-accent-text underline underline-offset-4 hover:text-foreground"
                 >
                   Ask about it
                 </Link>
@@ -133,7 +133,7 @@ export default async function TourPage({ params }: PageProps<"/tours/[slug]">) {
           <p className="mt-10">
             <Link
               href="/tours"
-              className="text-body text-accent underline underline-offset-4 hover:text-accent-hover"
+              className="text-body text-accent-text underline underline-offset-4 hover:text-foreground"
             >
               All video tours
             </Link>

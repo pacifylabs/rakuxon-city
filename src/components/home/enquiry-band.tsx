@@ -12,10 +12,10 @@ export function EnquiryBand() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
-            <h2 className="max-w-[16ch] text-display-l text-ink">
+            <h2 className="max-w-[16ch] text-display-l text-foreground">
               Tell us what you are looking for
             </h2>
-            <p className="mt-6 max-w-[42ch] text-body text-ink-secondary">
+            <p className="mt-6 max-w-[42ch] text-body text-muted">
               Land or a house, in any of our three estates. Tell us the budget
               and the timeline and we will come back with what actually fits —
               including whether we have nothing suitable.
@@ -29,22 +29,22 @@ export function EnquiryBand() {
             */}
             <dl className="mt-10 space-y-4">
               <div>
-                <dt className="text-caption text-ink-muted">Email</dt>
+                <dt className="text-caption text-muted">Email</dt>
                 <dd className="text-body">
                   <a
                     href={`mailto:${site.email}`}
-                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-4 transition-colors hover:text-accent-text hover:underline"
                   >
                     {site.email}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-caption text-ink-muted">Phone</dt>
+                <dt className="text-caption text-muted">Phone</dt>
                 <dd className="text-body">
                   <a
                     href={telHref}
-                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-4 transition-colors hover:text-accent-text hover:underline"
                   >
                     {site.phone.display}
                   </a>
@@ -54,7 +54,7 @@ export function EnquiryBand() {
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
-            <div className="rounded-card border border-hairline bg-surface p-6 lg:p-8">
+            <div className="rounded-card border border-line bg-surface p-6 lg:p-8">
               <EnquiryForm source="GENERAL" />
             </div>
           </div>

@@ -44,12 +44,12 @@ export function BuyingSteps({
   return (
     <section
       className={cn(
-        "rounded-card border border-hairline p-6 lg:p-8",
+        "rounded-card border border-line p-6 lg:p-8",
         className,
       )}
     >
-      <h2 className="text-heading text-ink">How buying this {noun} works</h2>
-      <p className="mt-3 max-w-[54ch] text-body text-ink-secondary">
+      <h2 className="text-heading text-foreground">How buying this {noun} works</h2>
+      <p className="mt-3 max-w-[54ch] text-body text-muted">
         Four steps, in this order. We do not take money before the third one.
       </p>
 
@@ -58,13 +58,13 @@ export function BuyingSteps({
           <li key={step.title} className="flex gap-4">
             <span
               aria-hidden="true"
-              className="tabular shrink-0 text-caption text-accent"
+              className="tabular shrink-0 text-caption text-accent-text"
             >
               {String(index + 1).padStart(2, "0")}
             </span>
             <div>
-              <p className="text-body text-ink">{step.title}</p>
-              <p className="mt-2 text-caption text-ink-secondary">
+              <p className="text-body text-foreground">{step.title}</p>
+              <p className="mt-2 text-caption text-muted">
                 {step.body}
               </p>
             </div>

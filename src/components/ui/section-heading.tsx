@@ -56,28 +56,32 @@ export function SectionHeading({
     >
       <div className={headingColumns}>
         {eyebrow ? (
-          <p className="mb-4 text-eyebrow text-ink-muted">{eyebrow}</p>
+          <p className="mb-4 text-eyebrow text-muted">{eyebrow}</p>
         ) : null}
-        <h2 className="text-display-l text-ink">{heading}</h2>
+        <h2 className="text-display-l text-foreground">{heading}</h2>
       </div>
 
       {supporting || action || note || stats ? (
         <div className={cn("flex flex-col justify-start", supportingColumns)}>
           {supporting ? (
-            <p className="max-w-[46ch] text-body text-ink-secondary">
+            <p className="max-w-[46ch] text-body text-muted">
               {supporting}
             </p>
           ) : null}
 
           {action || note ? (
             <>
-              {/* Gold rather than hairline: one of the few marks §11's new secondary
-                  is allowed to carry. Decorative, so no contrast floor applies. */}
-              <hr className="mt-6 border-t border-accent/40" />
+              {/*
+                DEVIATION reverted: an earlier gold-palette session put champagne
+                here. Design system v2.0 §7 is explicit that the champagne rule
+                "appears nowhere else on the site" outside the title ribbon —
+                so this reverts to a plain hairline.
+              */}
+              <hr className="mt-6 border-t border-line" />
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
                 {action}
                 {note ? (
-                  <p className="max-w-[32ch] text-right text-body text-ink-muted">
+                  <p className="max-w-[32ch] text-right text-body text-muted">
                     {note}
                   </p>
                 ) : null}
@@ -86,11 +90,11 @@ export function SectionHeading({
           ) : null}
 
           {stats && stats.length > 0 ? (
-            <dl className="mt-8 grid grid-cols-3 gap-x-4 gap-y-2 border-t border-hairline pt-6">
+            <dl className="mt-8 grid grid-cols-3 gap-x-4 gap-y-2 border-t border-line pt-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <dt className="text-caption text-ink-muted">{stat.label}</dt>
-                  <dd className="tabular mt-1 text-display-m text-ink">
+                  <dt className="text-caption text-muted">{stat.label}</dt>
+                  <dd className="tabular mt-1 text-display-m text-foreground">
                     {stat.value}
                   </dd>
                 </div>

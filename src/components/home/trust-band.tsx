@@ -48,16 +48,16 @@ export function TrustBand({ deliveredEstates }: { deliveredEstates: number }) {
           wrapper for no accessibility gain.
         */}
         <ScrollReveal>
-          <ul className="mt-12 grid gap-x-6 gap-y-10 border-t border-hairline pt-10 sm:grid-cols-3 lg:mt-16">
+          <ul className="mt-12 grid gap-x-6 gap-y-10 border-t border-line pt-10 sm:grid-cols-3 lg:mt-16">
             {resolved.map((figure) => (
               <li key={figure.label}>
-                <p className="tabular text-display-l text-accent">
+                <p className="tabular text-display-l text-accent-text">
                   {figure.value}
-                  <span className="ml-2 text-heading text-ink-secondary">
+                  <span className="ml-2 text-heading text-muted">
                     {figure.unit}
                   </span>
                 </p>
-                <p className="mt-3 max-w-[26ch] text-body text-ink-secondary">
+                <p className="mt-3 max-w-[26ch] text-body text-muted">
                   {figure.label}
                 </p>
               </li>

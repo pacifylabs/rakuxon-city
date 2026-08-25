@@ -37,7 +37,7 @@ export function VideoCard({
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden rounded-card border border-hairline bg-surface",
+        "flex flex-col overflow-hidden rounded-card border border-line bg-surface",
         className,
       )}
     >
@@ -46,19 +46,19 @@ export function VideoCard({
         priority={priority}
         className="rounded-none rounded-t-card border-0"
       >
-        <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent">
+        <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent-text">
           {videoKindLabels[video.kind]}
         </Badge>
 
         {duration ? (
-          <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-deep/70 px-2.5 py-1 text-caption text-white">
+          <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-charcoal-deep/70 px-2.5 py-1 text-caption text-ivory-light">
             {duration}
           </span>
         ) : null}
       </VideoFacade>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-heading text-ink">
+        <h3 className="text-heading text-foreground">
           {/*
             The heading links to the shareable page rather than playing in
             place: §5 wants a card that can be sent to someone, and a card whose
@@ -66,14 +66,14 @@ export function VideoCard({
           */}
           <Link
             href={`/tours/${video.slug}`}
-            className="transition-colors hover:text-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            className="transition-colors hover:text-accent-text focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none"
           >
             {video.title}
           </Link>
         </h3>
 
         {video.parent ? (
-          <p className="mt-2 text-caption text-ink-muted">
+          <p className="mt-2 text-caption text-muted">
             {video.parent.name}
           </p>
         ) : null}

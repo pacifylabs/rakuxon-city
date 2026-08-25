@@ -23,7 +23,7 @@ export function PriceDisplay({
 }) {
   if (priceOnRequest || price === null) {
     return (
-      <p className={cn("text-heading text-ink-muted", className)}>
+      <p className={cn("text-heading text-muted", className)}>
         Price on request
       </p>
     );
@@ -32,7 +32,7 @@ export function PriceDisplay({
   return (
     <p
       className={cn(
-        "tabular text-ink",
+        "tabular text-foreground",
         size === "detail" ? "text-display-l" : "text-display-m",
         className,
       )}

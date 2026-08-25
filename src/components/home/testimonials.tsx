@@ -37,7 +37,7 @@ export function Testimonials({
 
         <figure className="mt-16 lg:mt-20">
           <QuoteGlyph />
-          <blockquote className="mx-auto mt-8 max-w-[46ch] text-center text-display-m text-ink">
+          <blockquote className="mx-auto mt-8 max-w-[46ch] text-center text-display-m text-foreground">
             {current.quote}
           </blockquote>
           <figcaption className="sr-only">
@@ -54,7 +54,7 @@ export function Testimonials({
                 aria-pressed={index === active}
                 className={cn(
                   "flex items-center gap-4 rounded-full p-1",
-                  "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+                  "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
                 )}
               >
                 <span
@@ -62,17 +62,17 @@ export function Testimonials({
                   className={cn(
                     "flex size-12 items-center justify-center rounded-full text-caption transition-colors",
                     index === active
-                      ? "bg-accent-fill text-deep"
-                      : "bg-accent-tint text-accent",
+                      ? "bg-accent text-charcoal-deep"
+                      : "bg-accent-tint text-accent-text",
                   )}
                 >
                   {initials(testimonial.name)}
                 </span>
                 <span className="text-left">
-                  <span className="block text-body font-medium text-ink">
+                  <span className="block text-body font-medium text-foreground">
                     {testimonial.name}
                   </span>
-                  <span className="block text-caption text-ink-muted">
+                  <span className="block text-caption text-muted">
                     {testimonial.role}
                   </span>
                 </span>

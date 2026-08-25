@@ -9,21 +9,28 @@ import {
 import type { DocumentType, TitleType } from "@/generated/prisma/enums";
 
 /**
- * The signature element — 04_DESIGN_SYSTEM.md §7.
+ * The signature element — 04_DESIGN_SYSTEM.md §7 (v2.0).
  *
  * A full-width band directly beneath the gallery, before the description and
  * before the price, because in this market the first question is not what a
  * plot costs but whether the seller can actually convey it.
  *
- * §7 says this is "the one place this design spends boldness", so a strong
- * title fills the band in solid `accent` rather than the quiet tint used
- * elsewhere. It is the loudest thing on the page by design, and it is still one
- * colour from the palette at one font weight.
+ * RESTRUCTURED for the palette change, not merely recoloured — this is what
+ * §7 itself asks for: "ivory band with a 2px champagne rule along its top
+ * edge", replacing the v1.0/gold-era treatment of a solid accent-filled band
+ * with light text. That older treatment is exactly what §12 forbids under
+ * this palette — light text on a solid accent fill measures ~2.1:1 — so it
+ * could not simply be recoloured in place; the band itself had to change.
  *
- * Where documentation is weaker — survey only — the band drops to the neutral
- * palette and shows what is *missing* beside what is held. Do not soften this.
- * A page that shows title honestly beats one that shows it selectively, and
- * that honesty is the entire argument of the site.
+ * The rule is the seal, and §7 is explicit that it "appears nowhere else on
+ * the site" — no other component in this codebase should render a champagne
+ * top-edge rule.
+ *
+ * Where documentation is weaker — survey only — the rule and badge render in
+ * the neutral `status-sold` family instead, and the ribbon states plainly
+ * what is missing beside what is held. Do not soften this. A page that shows
+ * title honestly beats one that shows it selectively, and that honesty is
+ * the entire argument of the site.
  */
 export function TitleRibbon({
   titleType,
@@ -47,7 +54,8 @@ export function TitleRibbon({
     <section
       aria-labelledby="title-documentation"
       className={cn(
-        weak ? "border-y border-hairline bg-status-sold-bg" : "bg-accent",
+        "border-t-2 border-b border-b-line",
+        weak ? "border-t-status-sold bg-status-sold-bg" : "border-t-accent bg-ivory",
         className,
       )}
     >
@@ -58,18 +66,13 @@ export function TitleRibbon({
               id="title-documentation"
               className={cn(
                 "text-eyebrow",
-                weak ? "text-status-sold" : "text-canvas",
+                weak ? "text-status-sold" : "text-accent-text",
               )}
             >
               Title and documentation
             </p>
 
-            <p
-              className={cn(
-                "mt-4 text-display-l",
-                weak ? "text-status-sold" : "text-canvas",
-              )}
-            >
+            <p className="mt-4 text-display-l text-foreground">
               {titleTypeLabel(titleType)}
             </p>
 
@@ -79,10 +82,10 @@ export function TitleRibbon({
                   <li
                     key={type}
                     className={cn(
-                      "rounded-full px-3 py-1 text-caption",
+                      "rounded-full px-3 py-1 text-caption ring-1",
                       weak
-                        ? "bg-canvas text-status-sold"
-                        : "bg-canvas text-accent",
+                        ? "bg-status-sold-bg text-status-sold ring-status-sold/25"
+                        : "bg-accent-tint text-accent-text ring-accent-text/25",
                     )}
                   >
                     also {titleTypeLabel(type).toLowerCase()}
@@ -91,12 +94,7 @@ export function TitleRibbon({
               </ul>
             ) : null}
 
-            <p
-              className={cn(
-                "tabular mt-5 text-body",
-                weak ? "text-ink-secondary" : "text-canvas",
-              )}
-            >
+            <p className="tabular mt-5 text-body text-muted">
               {surveyNumber
                 ? `Survey number ${surveyNumber}`
                 : "No survey number recorded against this plot yet."}
@@ -104,12 +102,7 @@ export function TitleRibbon({
           </div>
 
           <div className="lg:col-span-7">
-            <p
-              className={cn(
-                "text-caption",
-                weak ? "text-ink-secondary" : "text-canvas",
-              )}
-            >
+            <p className="text-caption text-muted">
               {documents.length > 0
                 ? `${documents.length} ${documents.length === 1 ? "document" : "documents"} held`
                 : "No documents held"}
@@ -120,23 +113,15 @@ export function TitleRibbon({
                 {documents.map((document) => (
                   <li
                     key={document.type}
-                    className={cn(
-                      "flex items-start gap-2.5 text-body",
-                      weak ? "text-ink" : "text-canvas",
-                    )}
+                    className="flex items-start gap-2.5 text-body text-foreground"
                   >
                     <CheckGlyph
-                      className={weak ? "text-status-sold" : "text-canvas"}
+                      className={weak ? "text-status-sold" : "text-accent-text"}
                     />
                     <span>
                       {documentLabels[document.type]}
                       {document.note ? (
-                        <span
-                          className={cn(
-                            "ml-2 text-caption",
-                            weak ? "text-ink-secondary" : "text-canvas",
-                          )}
-                        >
+                        <span className="ml-2 text-caption text-muted">
                           {document.note}
                         </span>
                       ) : null}
@@ -153,14 +138,12 @@ export function TitleRibbon({
             */}
             {weak && missing.length > 0 ? (
               <>
-                <p className="mt-8 text-caption text-ink-secondary">
-                  Not held on this plot
-                </p>
+                <p className="mt-8 text-caption text-muted">Not held on this plot</p>
                 <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                   {missing.map((type) => (
                     <li
                       key={type}
-                      className="flex items-start gap-2.5 text-body text-ink-secondary"
+                      className="flex items-start gap-2.5 text-body text-muted"
                     >
                       <DashGlyph />
                       {documentLabels[type]}
@@ -170,12 +153,7 @@ export function TitleRibbon({
               </>
             ) : null}
 
-            <p
-              className={cn(
-                "mt-8 max-w-[62ch] text-body",
-                weak ? "text-ink-secondary" : "text-canvas",
-              )}
-            >
+            <p className="mt-8 max-w-[62ch] text-body text-muted">
               {weak
                 ? "This plot is sold on a registered survey only. The excision or Governor’s consent covering it has not been granted, so there is no Certificate of Occupancy and no deed to register against it yet. The price reflects that position. We will show you exactly what exists before you pay anything, and we would encourage you to run your own search at the state land registry."
                 : "Copies of every document above are made available for your own verification before any payment. You are welcome to run a search at the state land registry, and we will support it."}
@@ -220,7 +198,7 @@ function DashGlyph() {
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden="true"
-      className="mt-1 size-4 shrink-0 text-ink-secondary"
+      className="mt-1 size-4 shrink-0 text-muted"
     >
       <circle
         cx="8"

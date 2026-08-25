@@ -77,7 +77,7 @@ export function Faq({ collage }: { collage: CollageImage[] }) {
 
           {/* Elevation 2 of 2. */}
           <div className="z-10 -mt-8 rounded-card bg-surface p-6 shadow-lift lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:mt-16 lg:p-10">
-            <p className="text-heading text-ink">Find your answers here</p>
+            <p className="text-heading text-foreground">Find your answers here</p>
             <Accordion items={questions} className="mt-4" />
           </div>
         </div>

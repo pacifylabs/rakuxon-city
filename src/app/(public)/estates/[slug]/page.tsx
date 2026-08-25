@@ -127,18 +127,18 @@ export default async function EstateDetailPage({
             >
               {statusLabels[estate.status]}
             </Badge>
-            <p className="text-caption text-ink-muted">
+            <p className="text-caption text-muted">
               {estate.location}, {estate.state} State
             </p>
           </div>
 
-          <h1 className="mt-4 max-w-[20ch] text-display-l text-ink">
+          <h1 className="mt-4 max-w-[20ch] text-display-l text-foreground">
             {estate.name}
           </h1>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-7">
-              <p className="text-body-l text-ink-secondary">
+              <p className="text-body-l text-muted">
                 {estate.description}
               </p>
 
@@ -147,22 +147,22 @@ export default async function EstateDetailPage({
                 The description alone left this column short against the
                 amenities list beside it — the gap the client marked.
               */}
-              <dl className="mt-8 grid grid-cols-3 gap-x-6 gap-y-2 border-t border-hairline pt-6">
+              <dl className="mt-8 grid grid-cols-3 gap-x-6 gap-y-2 border-t border-line pt-6">
                 <div>
-                  <dt className="text-caption text-ink-muted">Plots listed</dt>
-                  <dd className="tabular mt-1 text-display-m text-ink">
+                  <dt className="text-caption text-muted">Plots listed</dt>
+                  <dd className="tabular mt-1 text-display-m text-foreground">
                     {land.length}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-caption text-ink-muted">Homes listed</dt>
-                  <dd className="tabular mt-1 text-display-m text-ink">
+                  <dt className="text-caption text-muted">Homes listed</dt>
+                  <dd className="tabular mt-1 text-display-m text-foreground">
                     {homes.length}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-caption text-ink-muted">Available now</dt>
-                  <dd className="tabular mt-1 text-display-m text-accent">
+                  <dt className="text-caption text-muted">Available now</dt>
+                  <dd className="tabular mt-1 text-display-m text-accent-text">
                     {
                       [...land, ...homes].filter(
                         (listing) => listing.status === "AVAILABLE",
@@ -178,7 +178,7 @@ export default async function EstateDetailPage({
                 {estate.amenities.map((amenity) => (
                   <li
                     key={amenity}
-                    className="flex items-start gap-3 border-b border-hairline py-3 text-body text-ink-secondary first:pt-0"
+                    className="flex items-start gap-3 border-b border-line py-3 text-body text-muted first:pt-0"
                   >
                     <span
                       aria-hidden="true"
@@ -198,17 +198,17 @@ export default async function EstateDetailPage({
 
       <Section>
         <Container>
-          <h2 className="text-display-m text-ink">What is available here</h2>
+          <h2 className="text-display-m text-foreground">What is available here</h2>
 
           {/* FR-2.2 — an estate with nothing left still renders. */}
           {land.length === 0 && homes.length === 0 ? (
-            <div className="mt-8 rounded-card border border-hairline bg-surface p-8 lg:p-12">
-              <p className="text-heading text-ink">
+            <div className="mt-8 rounded-card border border-line bg-surface p-8 lg:p-12">
+              <p className="text-heading text-foreground">
                 {delivered
                   ? "This estate has been delivered in full"
                   : "Nothing is available in this estate right now"}
               </p>
-              <p className="mt-4 max-w-[54ch] text-body text-ink-secondary">
+              <p className="mt-4 max-w-[54ch] text-body text-muted">
                 {delivered
                   ? "Every unit here has been handed over. We keep the page up because a delivered estate is the strongest evidence we can offer that the next one will be delivered too."
                   : "Stock moves quickly. Tell us what you are looking for and we will let you know the moment something comes up here."}
@@ -223,7 +223,7 @@ export default async function EstateDetailPage({
           ) : (
             <>
               <nav aria-label="Listings in this estate" className="mt-8">
-                <ul className="flex gap-8 border-b border-hairline">
+                <ul className="flex gap-8 border-b border-line">
                   <Tab
                     href={`/estates/${estate.slug}`}
                     label="Plots"
@@ -259,12 +259,12 @@ export default async function EstateDetailPage({
                   ))}
                 </div>
               ) : active.length === 0 ? (
-                <p className="mt-8 max-w-[54ch] text-body text-ink-secondary">
+                <p className="mt-8 max-w-[54ch] text-body text-muted">
                   No {tab === "homes" ? "homes" : "plots"} are listed in this
                   estate at the moment.{" "}
                   <Link
                     href="/contact"
-                    className="text-accent hover:text-accent-hover"
+                    className="text-accent-text hover:text-foreground"
                   >
                     Tell us what you are looking for
                   </Link>{" "}
@@ -337,12 +337,12 @@ function Tab({
         className={cn(
           "-mb-px flex items-center gap-2 border-b-2 pb-4 text-body transition-colors",
           active
-            ? "border-accent text-accent"
-            : "border-transparent text-ink-secondary hover:text-ink",
+            ? "border-foreground text-accent-text"
+            : "border-transparent text-muted hover:text-foreground",
         )}
       >
         {label}
-        <span className="tabular text-caption text-ink-muted">{count}</span>
+        <span className="tabular text-caption text-muted">{count}</span>
       </Link>
     </li>
   );

@@ -53,7 +53,7 @@ export function titleTypeLabel(titleType: TitleType): string {
  * other badge on the card: a glyph specific to the title type, a medium label,
  * and a defined edge.
  *
- * Survey-only renders in the neutral status-sold palette rather than sage, with
+ * Survey-only renders in the neutral status-sold palette rather than champagne, with
  * its own glyph. That is deliberate and it is not a downgrade to hide: a site
  * that shows title honestly beats one that shows it selectively.
  */
@@ -74,13 +74,13 @@ export function TitleTypeBadge({
         "font-medium ring-1",
         weak
           ? "bg-status-sold-bg text-status-sold ring-status-sold/25"
-          : "bg-accent-tint text-accent ring-accent/25",
+          : "bg-accent-tint text-accent-text ring-accent-text/25",
       )}
     >
       <Glyph />
       {titleTypeLabels[titleType]}
       {extraCount > 0 ? (
-        <span className={weak ? "text-status-sold" : "text-accent"}>
+        <span className={weak ? "text-status-sold" : "text-accent-text"}>
           +{extraCount}
         </span>
       ) : null}
@@ -216,7 +216,7 @@ const buildStageLabels: Record<BuildStage, string> = {
 
 export function BuildStageBadge({ buildStage }: { buildStage: BuildStage }) {
   return (
-    <Badge className="bg-accent-tint text-accent">
+    <Badge className="bg-accent-tint text-accent-text">
       {buildStageLabels[buildStage]}
     </Badge>
   );

@@ -140,7 +140,7 @@ export function FilterBar({
                         <Link
                           href={hrefFor(filter.key, null)}
                           onClick={() => setOpen(null)}
-                          className="block rounded-control px-3 py-2 text-body text-ink-muted hover:bg-canvas"
+                          className="block rounded-control px-3 py-2 text-body text-muted hover:bg-background"
                         >
                           Any {filter.label.toLowerCase()}
                         </Link>
@@ -155,10 +155,10 @@ export function FilterBar({
                             option.value === current ? "true" : undefined
                           }
                           className={cn(
-                            "block rounded-control px-3 py-2 text-body hover:bg-canvas",
+                            "block rounded-control px-3 py-2 text-body hover:bg-background",
                             option.value === current
-                              ? "text-accent"
-                              : "text-ink-secondary",
+                              ? "text-accent-text"
+                              : "text-muted",
                           )}
                         >
                           {option.label}
@@ -192,7 +192,7 @@ export function FilterBar({
           {activeCount > 0 ? (
             <Link
               href={clearHref}
-              className="text-body text-accent transition-colors hover:text-accent-hover"
+              className="text-body text-accent-text transition-colors hover:text-foreground"
             >
               Clear {activeCount === 1 ? "filter" : `all ${activeCount}`}
             </Link>
@@ -224,11 +224,11 @@ export function FilterBar({
                           href={hrefFor("sort", option.value)}
                           onClick={() => setOpen(null)}
                           className={cn(
-                            "block rounded-control px-3 py-2 text-body hover:bg-canvas",
+                            "block rounded-control px-3 py-2 text-body hover:bg-background",
                             option.value ===
                               (searchParams.get("sort") ?? "newest")
-                              ? "text-accent"
-                              : "text-ink-secondary",
+                              ? "text-accent-text"
+                              : "text-muted",
                           )}
                         >
                           {option.label}
@@ -308,10 +308,10 @@ function Chip({
       type="button"
       className={cn(
         "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-body transition-colors",
-        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
         selected
-          ? "border-accent bg-accent-tint text-accent"
-          : "border-hairline bg-surface text-ink-secondary hover:border-ink-muted",
+          ? "border-accent-hover bg-accent-tint text-accent-text"
+          : "border-line bg-surface text-muted hover:border-muted",
         className,
       )}
       {...props}
@@ -332,7 +332,7 @@ function Dropdown({
   return (
     <div
       className={cn(
-        "absolute top-full z-30 mt-2 w-60 rounded-card border border-hairline bg-surface p-2",
+        "absolute top-full z-30 mt-2 w-60 rounded-card border border-line bg-surface p-2",
         align === "left" ? "left-0" : "right-0",
       )}
     >
@@ -446,20 +446,20 @@ function FilterPanel({
       }}
       aria-label={title}
       className={cn(
-        "max-h-[85dvh] bg-canvas p-0 text-ink backdrop:bg-deep/40",
+        "max-h-[85dvh] bg-background p-0 text-foreground backdrop:bg-charcoal-deep/40",
         variant === "sheet"
           ? "m-0 mt-auto w-full max-w-none rounded-t-image-l"
-          : "m-auto w-[min(34rem,calc(100vw-3rem))] rounded-card border border-hairline",
+          : "m-auto w-[min(34rem,calc(100vw-3rem))] rounded-card border border-line",
       )}
     >
       <div className="flex max-h-[85dvh] flex-col">
-        <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
-          <p className="text-heading text-ink">{title}</p>
+        <div className="flex items-center justify-between border-b border-line px-5 py-4">
+          <p className="text-heading text-foreground">{title}</p>
           <button
             type="button"
             onClick={() => dialogRef.current?.close()}
             aria-label={`Close ${title.toLowerCase()}`}
-            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:text-ink"
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full text-muted transition-colors hover:text-foreground"
           >
             <svg
               aria-hidden="true"
@@ -474,7 +474,7 @@ function FilterPanel({
         <div className="flex-1 overflow-y-auto px-5 py-6">
           {filters.map((filter) => (
             <fieldset key={filter.key} className="mb-8 last:mb-0">
-              <legend className="mb-3 text-caption text-ink-muted">
+              <legend className="mb-3 text-caption text-muted">
                 {filter.label}
               </legend>
               <div className="flex flex-wrap gap-2">
@@ -506,7 +506,7 @@ function FilterPanel({
 
           {sortOptions ? (
             <fieldset className="mt-8">
-              <legend className="mb-3 text-caption text-ink-muted">
+              <legend className="mb-3 text-caption text-muted">
                 Sort by
               </legend>
               <div className="flex flex-wrap gap-2">
@@ -526,16 +526,16 @@ function FilterPanel({
           ) : null}
         </div>
 
-        <div className="flex items-center gap-3 border-t border-hairline bg-surface px-5 py-4">
+        <div className="flex items-center gap-3 border-t border-line bg-surface px-5 py-4">
           <button
             type="button"
             onClick={clear}
             disabled={activeCount === 0}
             className={cn(
-              "min-h-12 rounded-full border border-hairline px-5 text-body transition-colors",
+              "min-h-12 rounded-full border border-line px-5 text-body transition-colors",
               activeCount === 0
-                ? "cursor-not-allowed text-ink-muted"
-                : "cursor-pointer text-ink-secondary hover:border-ink-muted",
+                ? "cursor-not-allowed text-muted"
+                : "cursor-pointer text-muted hover:border-muted",
             )}
           >
             Clear
@@ -544,8 +544,8 @@ function FilterPanel({
             type="button"
             onClick={apply}
             className={cn(
-              "min-h-12 flex-1 cursor-pointer rounded-full bg-accent-fill px-5 text-body text-deep transition-colors",
-              "hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
+              "min-h-12 flex-1 cursor-pointer rounded-full bg-primary px-5 text-body text-ivory-light transition-colors",
+              "hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:outline-none",
             )}
           >
             Show results
@@ -572,10 +572,10 @@ function SheetChip({
       aria-pressed={selected}
       className={cn(
         "min-h-11 cursor-pointer rounded-full border px-4 text-body transition-colors",
-        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
         selected
-          ? "border-accent bg-accent-tint text-accent"
-          : "border-hairline bg-surface text-ink-secondary",
+          ? "border-accent-hover bg-accent-tint text-accent-text"
+          : "border-line bg-surface text-muted",
       )}
     >
       {children}

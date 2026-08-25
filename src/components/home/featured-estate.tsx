@@ -82,7 +82,7 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
   if (!lead) return null;
 
   return (
-    <Section className="pt-0 lg:pt-0">
+    <Section>
       <Container>
         <div
           className="grid gap-6 lg:grid-cols-12"
@@ -112,12 +112,12 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 ) : null,
               )}
 
-              <figcaption className="absolute top-0 right-0 flex max-w-[85%] items-center gap-3 rounded-bl-image-l bg-canvas py-2 pl-4 lg:gap-4 lg:py-3 lg:pl-6">
+              <figcaption className="absolute top-0 right-0 flex max-w-[85%] items-center gap-3 rounded-bl-image-l bg-background py-2 pl-4 lg:gap-4 lg:py-3 lg:pl-6">
                 <span
-                  className="h-px w-6 shrink-0 bg-ink-muted lg:w-10"
+                  className="h-px w-6 shrink-0 bg-muted lg:w-10"
                   aria-hidden="true"
                 />
-                <span className="truncate text-body text-ink lg:text-heading">
+                <span className="truncate text-body text-foreground lg:text-heading">
                   {lead.name}
                 </span>
               </figcaption>
@@ -125,7 +125,7 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
 
             {/* Elevation 1 of 2 — the callout overlapping the hero imagery. */}
             <div className="relative z-10 mx-4 -mt-12 max-w-lg rounded-card bg-surface p-6 shadow-lift lg:mx-10 lg:-mt-16 lg:p-8">
-              <p className="text-heading text-ink">
+              <p className="text-heading text-foreground">
                 Title checked before it is listed
               </p>
               <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
@@ -137,7 +137,7 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                 ].map((point) => (
                   <li
                     key={point}
-                    className="flex items-start gap-2 text-body text-ink-secondary"
+                    className="flex items-start gap-2 text-body text-muted"
                   >
                     <span
                       className="mt-2 size-1.5 shrink-0 rounded-full bg-accent"
@@ -172,29 +172,29 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                     />
                   ) : null,
                 )}
-                <figcaption className="absolute right-0 bottom-0 flex max-w-[85%] items-center gap-3 rounded-tl-image-l bg-canvas py-2 pl-4">
+                <figcaption className="absolute right-0 bottom-0 flex max-w-[85%] items-center gap-3 rounded-tl-image-l bg-background py-2 pl-4">
                   <span
-                    className="h-px w-6 shrink-0 bg-ink-muted lg:w-8"
+                    className="h-px w-6 shrink-0 bg-muted lg:w-8"
                     aria-hidden="true"
                   />
-                  <span className="truncate text-body text-ink">
+                  <span className="truncate text-body text-foreground">
                     {secondary.name}
                   </span>
                 </figcaption>
               </figure>
 
               <div aria-live="polite">
-                <p className="mt-6 text-heading text-ink">
+                <p className="mt-6 text-heading text-foreground">
                   {secondary.location}, {secondary.state}
                 </p>
-                <p className="mt-3 line-clamp-4 text-body text-ink-secondary">
+                <p className="mt-3 line-clamp-4 text-body text-muted">
                   {secondary.description}
                 </p>
               </div>
 
               <Link
                 href={`/estates/${secondary.slug}`}
-                className="mt-5 inline-flex items-center gap-2 text-body text-accent transition-colors hover:text-accent-hover"
+                className="mt-5 inline-flex items-center gap-2 text-body text-accent-text transition-colors hover:text-foreground"
               >
                 See all estates
                 <ArrowGlyph />
@@ -207,7 +207,7 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
           <ButtonLink variant="secondary" href={`/estates/${lead.slug}`}>
             Explore {lead.name}
           </ButtonLink>
-          <p className="text-body text-ink-muted" aria-live="polite">
+          <p className="text-body text-muted" aria-live="polite">
             <span className="tabular">{lead.listingCount}</span> listings in
             this estate · {lead.location}, {lead.state}
           </p>
@@ -223,10 +223,10 @@ export function FeaturedEstate({ estates }: { estates: Estate[] }) {
                   aria-current={index === active ? "true" : undefined}
                   className={cn(
                     "h-1 cursor-pointer rounded-full transition-all duration-300",
-                    "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:outline-none",
+                    "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none",
                     index === active
                       ? "w-10 bg-accent"
-                      : "w-5 bg-ink-muted/40 hover:bg-ink-muted",
+                      : "w-5 bg-muted/40 hover:bg-muted",
                   )}
                 />
               ))}

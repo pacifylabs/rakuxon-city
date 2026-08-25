@@ -36,14 +36,14 @@ export function LocationBlock({
   return (
     <div
       className={cn(
-        "rounded-card border border-hairline bg-surface p-6 lg:p-8",
+        "rounded-card border border-line bg-surface p-6 lg:p-8",
         layout === "wide" &&
           "lg:grid lg:grid-cols-12 lg:items-center lg:gap-10",
       )}
     >
       <div className={cn(layout === "wide" && "lg:col-span-7")}>
-        <p className="text-heading text-ink">Where it is</p>
-        <p className="mt-3 text-body text-ink-secondary">
+        <p className="text-heading text-foreground">Where it is</p>
+        <p className="mt-3 text-body text-muted">
           {estateName ? `${estateName}, ` : ""}
           {location}, {state} State.
         </p>
@@ -51,7 +51,7 @@ export function LocationBlock({
           href={`https://www.openstreetmap.org/search?query=${query}`}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-5 inline-flex items-center gap-2 text-body text-accent transition-colors hover:text-accent-hover"
+          className="mt-5 inline-flex items-center gap-2 text-body text-accent-text transition-colors hover:text-foreground"
         >
           Open in maps
           <ArrowGlyph />
@@ -60,9 +60,9 @@ export function LocationBlock({
 
       <p
         className={cn(
-          "text-caption text-ink-muted",
+          "text-caption text-muted",
           layout === "wide"
-            ? "mt-5 border-t border-hairline pt-5 lg:col-span-5 lg:mt-0 lg:border-t-0 lg:border-l lg:border-hairline lg:pt-0 lg:pl-10"
+            ? "mt-5 border-t border-line pt-5 lg:col-span-5 lg:mt-0 lg:border-t-0 lg:border-l lg:border-line lg:pt-0 lg:pl-10"
             : "mt-5",
         )}
       >

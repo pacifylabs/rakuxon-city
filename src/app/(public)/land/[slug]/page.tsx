@@ -82,10 +82,10 @@ export default async function PlotDetailPage({
         <Container>
           <BackLink href="/land" label="All plots" />
 
-          <h1 className="max-w-[22ch] text-display-m text-ink">
+          <h1 className="max-w-[22ch] text-display-m text-foreground">
             {listing.title}
           </h1>
-          <p className="mt-3 text-body text-ink-secondary">
+          <p className="mt-3 text-body text-muted">
             {listing.location}, {listing.state} State
             {listing.estate ? ` · ${listing.estate.name}` : ""}
           </p>
@@ -151,8 +151,8 @@ export default async function PlotDetailPage({
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-7">
-              <h2 className="text-heading text-ink">About this plot</h2>
-              <p className="mt-5 max-w-[62ch] text-body-l text-ink-secondary">
+              <h2 className="text-heading text-foreground">About this plot</h2>
+              <p className="mt-5 max-w-[62ch] text-body-l text-muted">
                 {listing.description}
               </p>
 
@@ -196,7 +196,7 @@ export default async function PlotDetailPage({
                 {listing.estate ? (
                   <Link
                     href={`/estates/${listing.estate.slug}`}
-                    className="inline-flex items-center gap-2 text-body text-accent transition-colors hover:text-accent-hover"
+                    className="inline-flex items-center gap-2 text-body text-accent-text transition-colors hover:text-foreground"
                   >
                     See everything in {listing.estate.name}
                     <ArrowGlyph />

@@ -55,7 +55,7 @@ export function ColumnRules() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 hidden justify-center lg:flex"
     >
-      <div className="h-full w-full max-w-[1280px] border-x border-hairline/40" />
+      <div className="h-full w-full max-w-[1280px] border-x border-line/40" />
     </div>
   );
 }

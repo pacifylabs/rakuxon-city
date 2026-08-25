@@ -58,7 +58,7 @@ export function SearchField({
       <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
-        className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 fill-none stroke-ink-muted stroke-[1.5]"
+        className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 fill-none stroke-muted stroke-[1.5]"
       >
         <circle cx="9" cy="9" r="6" />
         <path d="M13.5 13.5 17 17" strokeLinecap="round" />
@@ -73,8 +73,8 @@ export function SearchField({
         placeholder={placeholder}
         // `search` inputs get a webkit clear button that sits on top of ours.
         className={cn(
-          "min-h-12 w-full rounded-full border border-hairline bg-surface pr-28 pl-11 text-body text-ink",
-          "placeholder:text-ink-muted focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+          "min-h-12 w-full rounded-full border border-line bg-surface pr-28 pl-11 text-body text-foreground",
+          "placeholder:text-muted focus-visible:border-foreground focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
           "[&::-webkit-search-cancel-button]:hidden",
         )}
       />
@@ -90,7 +90,7 @@ export function SearchField({
                 : ""
             }`}
             aria-label="Clear search"
-            className="flex size-9 items-center justify-center rounded-full text-ink-muted transition-colors hover:text-ink"
+            className="flex size-9 items-center justify-center rounded-full text-muted transition-colors hover:text-foreground"
           >
             <svg
               aria-hidden="true"
@@ -105,8 +105,8 @@ export function SearchField({
         <button
           type="submit"
           className={cn(
-            "min-h-9 cursor-pointer rounded-full bg-accent-fill px-4 text-caption text-deep transition-colors",
-            "hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
+            "min-h-9 cursor-pointer rounded-full bg-primary px-4 text-caption text-ivory-light transition-colors",
+            "hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:outline-none",
           )}
         >
           Search

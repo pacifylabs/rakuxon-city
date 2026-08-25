@@ -75,8 +75,8 @@ export function ListingCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-card border border-hairline bg-surface",
-        "transition-colors duration-300 hover:border-ink-muted",
+        "group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface",
+        "transition-colors duration-300 hover:border-muted",
         className,
       )}
     >
@@ -111,7 +111,7 @@ export function ListingCard({
         </div>
 
         {/* 2 — name */}
-        <h3 className="text-heading text-ink">
+        <h3 className="text-heading text-foreground">
           <Link
             href={href}
             className="after:absolute after:inset-0 focus-visible:underline focus-visible:outline-none"
@@ -121,7 +121,7 @@ export function ListingCard({
         </h3>
 
         {/* 3 — one-line description */}
-        <p className="line-clamp-2 text-caption text-ink-secondary">
+        <p className="line-clamp-2 text-caption text-muted">
           {listing.description}
         </p>
 
@@ -133,7 +133,7 @@ export function ListingCard({
         />
 
         {/* 5 — sub-line */}
-        <p className="text-caption text-ink-muted">{subline}</p>
+        <p className="text-caption text-muted">{subline}</p>
 
         {/* 6 — status, bottom-left */}
         <div className="mt-auto flex items-end justify-between gap-4 pt-3">

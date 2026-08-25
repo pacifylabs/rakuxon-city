@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Network Test - Rakuxon City</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #faf8f3;
+      color: #171918;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .instructions {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      border: 1px solid #ded8cc;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #ded8cc;
+    }
+    .checklist li:last-child {
+      border-bottom: none;
+    }
+    .status {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid #ded8cc;
+      border-radius: 4px;
+      margin-right: 0.75rem;
+      vertical-align: middle;
+    }
+    code {
+      background: #f5f1e8;
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .note {
+      background: #f0e7d6;
+      border-left: 4px solid #c5a46d;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .link-box {
+      background: #e4eae3;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    a {
+      color: #8a6a2f;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Hero Implementation Network Test</h1>
+  
+  <div class="instructions">
+    <h2>Testing Criterion #3: Only one image fetched before load</h2>
+    
+    <p><strong>Follow these steps to verify network behavior:</strong></p>
+    
+    <ol>
+      <li>Open Chrome DevTools (Cmd+Option+I)</li>
+      <li>Go to the <strong>Network</strong> tab</li>
+      <li>Filter by <code>Img</code> to show only images</li>
+      <li>Check "Disable cache" to force fresh loads</li>
+      <li>Navigate to the homepage: <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+      <li>Watch the network waterfall</li>
+    </ol>
+
+    <div class="note">
+      <strong>✓ Expected behavior (PASS):</strong>
+      <ul>
+        <li>Only ONE hero image loads before the page <code>load</code> event fires</li>
+        <li>The first image should have <code>Priority: High</code> or <code>fetchpriority="high"</code></li>
+        <li>Additional hero images (2 & 3) load AFTER the load event completes</li>
+        <li>Check timing: subsequent images should appear in network panel only after ~1-2 seconds</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h2>Manual Verification Checklist</h2>
+    
+    <ul class="checklist">
+      <li>
+        <span class="status"></span>
+        <strong>Height:</strong> Hero is 92svh on mobile, 88svh on desktop (not 100vh)
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Network:</strong> Only 1 hero image fetched before load event
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Contrast:</strong> White text readable on ALL three background images
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Rotation:</strong> Images crossfade every 7 seconds (no zoom/Ken Burns)
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Pause - Scroll:</strong> Rotation stops when hero scrolls out of view
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Pause - Tab:</strong> Rotation stops when tab is hidden (switch tabs to test)
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Pause - Motion:</strong> Open DevTools > Rendering > Emulate "prefers-reduced-motion: reduce" - rotation stops
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Navigation:</strong> Pill nav with blur at top, solid bar with border after scroll
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Feature Panel:</strong> Visible on desktop (lg+), hidden on mobile/tablet
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Champagne:</strong> Gold appears ONLY on: "papers" word, "Explore properties" button, and panel seal icons
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Button Text:</strong> "Explore properties" button has CHARCOAL text, not white
+      </li>
+      <li>
+        <span class="status"></span>
+        <strong>Clean Seam:</strong> Hero ends with clean horizontal edge into ivory section (no wave/diagonal)
+      </li>
+    </ul>
+  </div>
+
+  <div class="instructions">
+    <h2>Lighthouse Performance Audit</h2>
+    
+    <p><strong>To verify criterion #9:</strong></p>
+    
+    <ol>
+      <li>Build the production site: <code>npm run build</code></li>
+      <li>Start production server: <code>npm start</code> or <code>npx serve@latest .next</code></li>
+      <li>Open Chrome DevTools Lighthouse tab</li>
+      <li>Configure:
+        <ul>
+          <li>Mode: Navigation</li>
+          <li>Device: Mobile</li>
+          <li>Categories: Performance, Accessibility</li>
+          <li>Throttling: Simulated throttling (default)</li>
+        </ul>
+      </li>
+      <li>Run audit and verify:
+        <ul>
+          <li><strong>Performance score ≥ 85</strong></li>
+          <li><strong>Accessibility score ≥ 95</strong></li>
+          <li><strong>LCP (Largest Contentful Paint) &lt; 2.5s</strong></li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="note">
+      <strong>Note:</strong> The hero image is the LCP element. If LCP exceeds 2.5s on mobile simulation,
+      check that:
+      <ul>
+        <li>The first image has <code>priority</code> and <code>fetchPriority="high"</code></li>
+        <li>A blur placeholder is present (eliminates layout shift)</li>
+        <li>AVIF/WebP formats are being served</li>
+        <li>Image sizes are within budget (≤250KB mobile, ≤500KB desktop)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="link-box">
+    <strong>Quick Links:</strong><br>
+    <a href="http://localhost:3000" target="_blank">→ Homepage (localhost:3000)</a><br>
+    <a href="http://localhost:3001" target="_blank">→ Homepage (localhost:3001 - if port 3000 is busy)</a>
+  </div>
+
+  <div class="instructions" style="margin-top: 2rem;">
+    <h2>Screenshot Requirements</h2>
+    
+    <p>Per spec §9, capture screenshots to verify across all rotation images:</p>
+    
+    <ol>
+      <li><strong>Desktop (1440px):</strong>
+        <ul>
+          <li>Screenshot 1: Hero with Emerald Ridge image</li>
+          <li>Screenshot 2: Hero with Cornerstone Gardens image</li>
+          <li>Screenshot 3: Hero with Sabon Lugbe Court image</li>
+        </ul>
+      </li>
+      <li><strong>Mobile (375px):</strong>
+        <ul>
+          <li>Screenshot of hero showing proper height and mobile layout</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>Use browser DevTools to set viewport size, or use responsive design mode.</p>
+  </div>
+</body>
+</html>

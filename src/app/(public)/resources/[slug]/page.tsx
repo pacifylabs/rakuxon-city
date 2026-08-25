@@ -95,14 +95,14 @@ export default async function ArticlePage({
         <Container>
           <BackLink href="/resources" label="All buyer guides" />
 
-          <p className="text-eyebrow text-ink-muted">
+          <p className="text-eyebrow text-muted">
             {categoryLabels[article.category]}
           </p>
-          <h1 className="mt-4 max-w-[22ch] text-display-l text-ink">
+          <h1 className="mt-4 max-w-[22ch] text-display-l text-foreground">
             {article.title}
           </h1>
           {article.publishedAt ? (
-            <p className="mt-4 text-caption text-ink-muted">
+            <p className="mt-4 text-caption text-muted">
               {formatMonthYear(article.publishedAt)}
             </p>
           ) : null}
@@ -140,7 +140,7 @@ export default async function ArticlePage({
               {article.body.split("\n\n").map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="mb-6 text-body-l text-ink-secondary"
+                  className="mb-6 text-body-l text-muted"
                 >
                   {renderEmphasis(paragraph)}
                 </p>
@@ -149,18 +149,18 @@ export default async function ArticlePage({
 
             {related.length > 0 ? (
               <aside className="lg:col-span-4 lg:col-start-9">
-                <p className="text-eyebrow text-ink-muted">Read next</p>
-                <ul className="mt-5 divide-y divide-hairline border-t border-hairline">
+                <p className="text-eyebrow text-muted">Read next</p>
+                <ul className="mt-5 divide-y divide-line border-t border-line">
                   {related.map((entry) => (
                     <li key={entry.slug}>
                       <Link
                         href={`/resources/${entry.slug}`}
                         className="group block py-5"
                       >
-                        <p className="text-caption text-ink-muted">
+                        <p className="text-caption text-muted">
                           {categoryLabels[entry.category]}
                         </p>
-                        <p className="mt-2 text-body text-ink transition-colors group-hover:text-accent">
+                        <p className="mt-2 text-body text-foreground transition-colors group-hover:text-accent-text">
                           {entry.title}
                         </p>
                       </Link>
@@ -168,15 +168,15 @@ export default async function ArticlePage({
                   ))}
                 </ul>
 
-                <div className="mt-10 rounded-card border border-hairline p-6">
-                  <p className="text-body text-ink">Not sure what applies?</p>
-                  <p className="mt-3 text-caption text-ink-secondary">
+                <div className="mt-10 rounded-card border border-line p-6">
+                  <p className="text-body text-foreground">Not sure what applies?</p>
+                  <p className="mt-3 text-caption text-muted">
                     Send us the plot or the area you are looking at and we will
                     tell you what the documentation position actually is.
                   </p>
                   <Link
                     href={`/contact?from=resource&guide=${article.slug}`}
-                    className="mt-5 inline-block text-body text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
+                    className="mt-5 inline-block text-body text-accent-text underline underline-offset-4 transition-colors hover:text-foreground"
                   >
                     Ask us
                   </Link>
@@ -186,11 +186,11 @@ export default async function ArticlePage({
           </div>
 
           {/* FR-5.2 — every article closes with a contextual enquiry action. */}
-          <div className="mt-12 rounded-card border border-hairline bg-accent-tint p-8 lg:mt-16 lg:p-12">
-            <p className="max-w-[24ch] text-display-m text-ink">
+          <div className="mt-12 rounded-card border border-line bg-accent-tint p-8 lg:mt-16 lg:p-12">
+            <p className="max-w-[24ch] text-display-m text-foreground">
               Still deciding what to buy?
             </p>
-            <p className="mt-5 max-w-[56ch] text-body text-ink-secondary">
+            <p className="mt-5 max-w-[56ch] text-body text-muted">
               Tell us the size, the area and the budget. We will tell you what
               fits and what the documentation position is on each one.
             </p>
@@ -224,7 +224,7 @@ export default async function ArticlePage({
 function renderEmphasis(paragraph: string) {
   return paragraph.split(/(\*\*[^*]+\*\*)/g).map((part, index) =>
     part.startsWith("**") && part.endsWith("**") ? (
-      <strong key={index} className="font-medium text-ink">
+      <strong key={index} className="font-medium text-foreground">
         {part.slice(2, -2)}
       </strong>
     ) : (

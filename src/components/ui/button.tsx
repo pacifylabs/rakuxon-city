@@ -3,26 +3,43 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /**
- * 04_DESIGN_SYSTEM.md §6. Four variants, no more.
+ * 04_DESIGN_SYSTEM.md §6 (v2.0). Five variants.
  *
- * Labels are verb-first and sentence case — "Explore properties", never
- * "Submit". Only one accent-filled action belongs in a viewport (§2), so
- * reach for `secondary` or `text` by default and `primary` deliberately.
+ * PALETTE v2.0 changed what `primary` means, not just its colour.
+ *
+ * Under v1.0/the gold deviation, `primary` WAS the gold-filled call to
+ * action, used wherever a page needed its strongest button — which was most
+ * pages, most of the time. v2.0 splits that one role into two:
+ *
+ *   - `primary`: charcoal fill, ivory-light label. The ordinary strong
+ *     action — "Explore properties", "Browse plots", "See all estates".
+ *     Reach for this by default.
+ *   - `accent`: champagne fill, charcoal label. ONE per view, reserved for
+ *     the single highest-intent action — enquiring, booking an inspection,
+ *     scheduling a viewing. Never the default. Never more than one visible
+ *     at a time.
+ *
+ * Every call site that used the old gold `primary` was re-examined against
+ * that "one per view" budget when this migrated — most became `primary`
+ * (charcoal), and only the actual enquiry/booking actions kept the gold fill,
+ * now spelled `accent`.
  */
-type Variant = "primary" | "secondary" | "text" | "icon";
+type Variant = "primary" | "accent" | "secondary" | "text" | "icon";
 
 const base =
   "inline-flex items-center justify-center gap-2 font-medium transition-colors duration-200 " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 " +
-  "focus-visible:ring-offset-canvas disabled:cursor-not-allowed disabled:opacity-45";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 " +
+  "focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-45";
 
 const variants: Record<Variant, string> = {
   primary:
-    "text-body rounded-full bg-accent-fill px-6 py-3 text-deep hover:bg-accent-fill-hover",
+    "text-body rounded-full bg-primary px-6 py-3 text-ivory-light hover:bg-primary-hover",
+  accent:
+    "text-body rounded-full bg-accent px-6 py-3 text-foreground hover:bg-accent-hover",
   secondary:
-    "text-body rounded-full border border-accent bg-surface px-6 py-3 text-accent hover:bg-accent-tint",
-  text: "text-body rounded-full text-accent hover:text-accent-hover",
-  icon: "size-10 shrink-0 rounded-full bg-accent-fill text-deep hover:bg-accent-fill-hover",
+    "text-body rounded-full border border-foreground bg-surface px-6 py-3 text-foreground hover:bg-surface-muted",
+  text: "text-body rounded-full text-accent-text hover:text-foreground",
+  icon: "size-10 shrink-0 rounded-full bg-primary text-ivory-light hover:bg-primary-hover",
 };
 
 type ButtonProps = {

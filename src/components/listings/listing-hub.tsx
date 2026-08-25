@@ -98,13 +98,13 @@ export function ListingHub({
           }))}
         />
 
-        <p className="mt-6 text-caption text-ink-muted">
+        <p className="mt-6 text-caption text-muted">
           <span className="tabular">{total}</span>{" "}
           {total === 1 ? noun : `${noun}s`}
           {filters.q ? (
             <>
               {total === 1 ? " matches" : " match"} “
-              <span className="text-ink-secondary">{filters.q}</span>”
+              <span className="text-muted">{filters.q}</span>”
               {filtered && hasOtherFilters ? " and your filters" : ""}
             </>
           ) : filtered ? (

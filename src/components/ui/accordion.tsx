@@ -25,7 +25,7 @@ export function Accordion({
   const baseId = useId();
 
   return (
-    <div className={cn("divide-y divide-hairline", className)}>
+    <div className={cn("divide-y divide-line", className)}>
       {items.map((item, index) => {
         const isOpen = open === index;
         const panelId = `${baseId}-panel-${index}`;
@@ -41,14 +41,14 @@ export function Accordion({
                 aria-controls={panelId}
                 onClick={() => setOpen(isOpen ? null : index)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-6 py-5 text-left text-body text-ink",
-                  "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+                  "flex w-full items-center justify-between gap-6 py-5 text-left text-body text-foreground",
+                  "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
                 )}
               >
                 <span>{item.question}</span>
                 <span
                   aria-hidden="true"
-                  className="shrink-0 text-lg leading-none text-accent"
+                  className="shrink-0 text-lg leading-none text-accent-text"
                 >
                   {isOpen ? "−" : "+"}
                 </span>
@@ -61,7 +61,7 @@ export function Accordion({
               hidden={!isOpen}
               className="pb-5"
             >
-              <p className="max-w-[62ch] text-body text-ink-secondary">
+              <p className="max-w-[62ch] text-body text-muted">
                 {item.answer}
               </p>
             </div>

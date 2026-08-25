@@ -37,18 +37,18 @@ export function VideoBlock({
 
   return (
     <section className={cn("", className)} aria-labelledby="video-tour">
-      <h2 id="video-tour" className="text-heading text-ink">
+      <h2 id="video-tour" className="text-heading text-foreground">
         Video tour
       </h2>
 
       <div className="mt-6">
         <VideoFacade key={current.slug} video={current}>
-          <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent">
+          <Badge className="pointer-events-none absolute top-3 left-3 bg-accent-tint text-accent-text">
             {videoKindLabels[current.kind]}
           </Badge>
 
           {duration ? (
-            <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-deep/70 px-2.5 py-1 text-caption text-white">
+            <span className="tabular pointer-events-none absolute right-3 bottom-3 rounded-full bg-charcoal-deep/70 px-2.5 py-1 text-caption text-ivory-light">
               {duration}
             </span>
           ) : null}
@@ -56,9 +56,9 @@ export function VideoBlock({
       </div>
 
       <div className="mt-4">
-        <p className="text-body text-ink">{current.title}</p>
+        <p className="text-body text-foreground">{current.title}</p>
         {current.description ? (
-          <p className="mt-2 max-w-[62ch] text-body text-ink-secondary">
+          <p className="mt-2 max-w-[62ch] text-body text-muted">
             {current.description}
           </p>
         ) : null}
@@ -80,15 +80,15 @@ export function VideoBlock({
                   aria-current={isCurrent ? "true" : undefined}
                   className={cn(
                     "group block w-full cursor-pointer text-left",
-                    "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+                    "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
                   )}
                 >
                   <span
                     className={cn(
                       "relative block aspect-video overflow-hidden rounded-control border",
                       isCurrent
-                        ? "border-accent"
-                        : "border-hairline group-hover:border-ink-muted",
+                        ? "border-foreground"
+                        : "border-line group-hover:border-muted",
                     )}
                   >
                     <Image
@@ -105,7 +105,7 @@ export function VideoBlock({
                   <span
                     className={cn(
                       "mt-2 block text-caption",
-                      isCurrent ? "text-accent" : "text-ink-secondary",
+                      isCurrent ? "text-accent-text" : "text-muted",
                     )}
                   >
                     {videoKindLabels[video.kind]}

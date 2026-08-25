@@ -110,14 +110,14 @@ export function Gallery({
           role="dialog"
           aria-modal="true"
           aria-label={images[open].alt}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-deep/90 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal-deep/90 p-6"
           onClick={close}
         >
           <button
             type="button"
             onClick={close}
             aria-label="Close gallery"
-            className="absolute top-6 right-6 text-2xl leading-none text-canvas"
+            className="absolute top-6 right-6 text-2xl leading-none text-ivory-light"
           >
             ×
           </button>
@@ -159,7 +159,7 @@ function GalleryTile({
       onClick={onOpen}
       className={cn(
         "group relative aspect-4/3 overflow-hidden rounded-card",
-        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
         className,
       )}
     >

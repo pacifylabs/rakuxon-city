@@ -13,13 +13,13 @@ export function InvestorStrip() {
   return (
     <Section>
       <Container>
-        <div className="grid gap-8 rounded-card border border-hairline bg-accent-tint p-8 lg:grid-cols-12 lg:items-center lg:p-12">
+        <div className="grid gap-8 rounded-card border border-line bg-accent-tint p-8 lg:grid-cols-12 lg:items-center lg:p-12">
           <div className="lg:col-span-8">
-            <p className="text-eyebrow text-accent">Partner with us</p>
-            <p className="mt-4 max-w-[24ch] text-display-m text-ink">
+            <p className="text-eyebrow text-accent-text">Partner with us</p>
+            <p className="mt-4 max-w-[24ch] text-display-m text-foreground">
               Funding development on land we already own
             </p>
-            <p className="mt-5 max-w-[60ch] text-body text-ink-secondary">
+            <p className="mt-5 max-w-[60ch] text-body text-muted">
               We work with a small number of private partners on estate
               development. The arrangement is set per project and discussed
               directly — there is nothing to sign up for on this page.

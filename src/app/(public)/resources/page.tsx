@@ -135,7 +135,7 @@ export default async function ResourcesPage({
         </nav>
 
         {articles.length === 0 ? (
-          <p className="mt-10 max-w-[54ch] text-body text-ink-secondary">
+          <p className="mt-10 max-w-[54ch] text-body text-muted">
             Nothing published under this heading yet. The other categories have
             guides in them, and we add to these as questions come up.
           </p>
@@ -184,28 +184,28 @@ function LeadArticle({ article }: { article: ArticleRow }) {
       </Link>
 
       <div className="lg:col-span-5">
-        <p className="text-eyebrow text-ink-muted">
+        <p className="text-eyebrow text-muted">
           Latest · {categoryLabels[article.category]}
         </p>
-        <h2 className="mt-4 text-display-m text-ink">
+        <h2 className="mt-4 text-display-m text-foreground">
           <Link
             href={`/resources/${article.slug}`}
-            className="transition-colors hover:text-accent"
+            className="transition-colors hover:text-accent-text"
           >
             {article.title}
           </Link>
         </h2>
-        <p className="mt-5 max-w-[52ch] text-body-l text-ink-secondary">
+        <p className="mt-5 max-w-[52ch] text-body-l text-muted">
           {article.excerpt}
         </p>
         {article.publishedAt ? (
-          <p className="mt-5 text-caption text-ink-muted">
+          <p className="mt-5 text-caption text-muted">
             {formatMonthYear(article.publishedAt)}
           </p>
         ) : null}
         <Link
           href={`/resources/${article.slug}`}
-          className="mt-6 inline-block text-body text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
+          className="mt-6 inline-block text-body text-accent-text underline underline-offset-4 transition-colors hover:text-foreground"
         >
           Read the guide
         </Link>
@@ -232,15 +232,15 @@ function ArticleCard({ article }: { article: ArticleRow }) {
           )}
         </div>
 
-        <p className="mt-5 text-caption text-ink-muted">
+        <p className="mt-5 text-caption text-muted">
           {categoryLabels[article.category]}
         </p>
-        <h3 className="mt-2 text-heading text-ink transition-colors group-hover:text-accent">
+        <h3 className="mt-2 text-heading text-foreground transition-colors group-hover:text-accent-text">
           {article.title}
         </h3>
-        <p className="mt-3 text-body text-ink-secondary">{article.excerpt}</p>
+        <p className="mt-3 text-body text-muted">{article.excerpt}</p>
         {article.publishedAt ? (
-          <p className="mt-3 text-caption text-ink-muted">
+          <p className="mt-3 text-caption text-muted">
             {formatMonthYear(article.publishedAt)}
           </p>
         ) : null}
@@ -264,10 +264,10 @@ function CategoryChip({
       aria-current={active ? "true" : undefined}
       className={cn(
         "inline-flex min-h-11 items-center rounded-full border px-4 text-body transition-colors",
-        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
         active
-          ? "border-accent bg-accent-tint text-accent"
-          : "border-hairline bg-surface text-ink-secondary hover:border-ink-muted",
+          ? "border-accent-hover bg-accent-tint text-accent-text"
+          : "border-line bg-surface text-muted hover:border-muted",
       )}
     >
       {children}

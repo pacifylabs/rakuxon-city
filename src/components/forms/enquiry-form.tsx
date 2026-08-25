@@ -54,22 +54,22 @@ export function EnquiryForm({
   if (state === "succeeded") {
     return (
       <div role="status" className="flex flex-col gap-4">
-        <p className="text-heading text-ink">Thank you — we have it.</p>
-        <p className="text-body text-ink-secondary">
+        <p className="text-heading text-foreground">Thank you — we have it.</p>
+        <p className="text-body text-muted">
           A member of the team will be in touch. Your reference is{" "}
-          <span className="tabular text-ink">{reference}</span>, and we have
+          <span className="tabular text-foreground">{reference}</span>, and we have
           emailed you a copy.
         </p>
-        <p className="text-body text-ink-secondary">
+        <p className="text-body text-muted">
           When we reply we will send the documentation position on the property
           — the title type, the survey number, and what we hold — so you can
           begin your own checks.
         </p>
-        <p className="text-caption text-ink-muted">
+        <p className="text-caption text-muted">
           We handle your details as set out in our{" "}
           <Link
             href="/privacy"
-            className="text-accent underline underline-offset-4"
+            className="text-accent-text underline underline-offset-4"
           >
             privacy notice
           </Link>
@@ -215,7 +215,7 @@ export function EnquiryForm({
             I have read the{" "}
             <Link
               href="/privacy"
-              className="text-accent underline underline-offset-4"
+              className="text-accent-text underline underline-offset-4"
             >
               privacy notice
             </Link>{" "}
@@ -232,7 +232,7 @@ export function EnquiryForm({
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="min-h-11 cursor-pointer rounded-full bg-accent-fill px-6 py-3 text-body text-deep transition-colors hover:bg-accent-fill-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
+          className="min-h-11 cursor-pointer rounded-full bg-accent px-6 py-3 text-body text-charcoal-deep transition-colors hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
         >
           {state === "submitting" ? "Sending…" : "Send enquiry"}
         </button>

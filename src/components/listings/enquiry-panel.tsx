@@ -35,7 +35,7 @@ export function EnquiryPanel({
 
   return (
     <div className="lg:sticky lg:top-8">
-      <div className="rounded-card border border-hairline bg-surface p-6">
+      <div className="rounded-card border border-line bg-surface p-6">
         <div className="flex items-start justify-between gap-4">
           <PriceDisplay
             price={price}
@@ -45,15 +45,15 @@ export function EnquiryPanel({
           <StatusBadge status={status} />
         </div>
 
-        <p className="tabular mt-3 text-caption text-ink-muted">
+        <p className="tabular mt-3 text-caption text-muted">
           Reference {reference}
         </p>
 
-        <div className="mt-6 border-t border-hairline pt-6">
+        <div className="mt-6 border-t border-line pt-6">
           {sold ? (
             <>
-              <p className="text-heading text-ink">This one has been sold</p>
-              <p className="mt-3 text-body text-ink-secondary">
+              <p className="text-heading text-foreground">This one has been sold</p>
+              <p className="mt-3 text-body text-muted">
                 We have kept the page up because stock that moves is the
                 clearest evidence an estate is real. Tell us what you are
                 looking for and we will let you know when something comparable
@@ -67,7 +67,7 @@ export function EnquiryPanel({
             </>
           ) : (
             <>
-              <p className="text-heading text-ink">{action}</p>
+              <p className="text-heading text-foreground">{action}</p>
               <div className="mt-5">
                 <EnquiryForm
                   listingId={listingId}

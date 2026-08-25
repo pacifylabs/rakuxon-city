@@ -35,11 +35,11 @@ export default async function ContactPage({
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
-            <p className="text-eyebrow text-ink-muted">Contact</p>
-            <h1 className="mt-6 max-w-[16ch] text-display-l text-ink">
+            <p className="text-eyebrow text-muted">Contact</p>
+            <h1 className="mt-6 max-w-[16ch] text-display-l text-foreground">
               Tell us what you are looking for
             </h1>
-            <p className="mt-6 max-w-[44ch] text-body text-ink-secondary">
+            <p className="mt-6 max-w-[44ch] text-body text-muted">
               The size, the area and the budget is enough to start. We will come
               back with what actually fits — including if that is nothing right
               now.
@@ -54,11 +54,11 @@ export default async function ContactPage({
             */}
             <dl className="mt-10 space-y-5">
               <div>
-                <dt className="text-caption text-ink-muted">Email</dt>
+                <dt className="text-caption text-muted">Email</dt>
                 <dd className="mt-1 text-body">
                   <a
                     href={`mailto:${site.email}`}
-                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-4 transition-colors hover:text-accent-text hover:underline"
                   >
                     {site.email}
                   </a>
@@ -66,28 +66,28 @@ export default async function ContactPage({
               </div>
 
               <div>
-                <dt className="text-caption text-ink-muted">Phone</dt>
+                <dt className="text-caption text-muted">Phone</dt>
                 <dd className="mt-1 text-body">
                   <a
                     href={telHref}
-                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-4 transition-colors hover:text-accent-text hover:underline"
                   >
                     {site.phone.display}
                   </a>
-                  <span className="mt-1 block text-caption text-ink-muted">
+                  <span className="mt-1 block text-caption text-muted">
                     {site.phone.note}
                   </span>
                 </dd>
               </div>
 
               <div>
-                <dt className="text-caption text-ink-muted">WhatsApp</dt>
+                <dt className="text-caption text-muted">WhatsApp</dt>
                 <dd className="mt-1 text-body">
                   <a
                     href={site.phone.whatsapp}
                     rel="noreferrer noopener"
                     target="_blank"
-                    className="text-ink underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-4 transition-colors hover:text-accent-text hover:underline"
                   >
                     Message the same number
                   </a>
@@ -95,8 +95,8 @@ export default async function ContactPage({
               </div>
 
               <div>
-                <dt className="text-caption text-ink-muted">Where we sell</dt>
-                <dd className="mt-1 text-body text-ink">
+                <dt className="text-caption text-muted">Where we sell</dt>
+                <dd className="mt-1 text-body text-foreground">
                   {site.regionsServed.join(" · ")}
                 </dd>
               </div>
@@ -104,7 +104,7 @@ export default async function ContactPage({
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
-            <div className="rounded-card border border-hairline bg-surface p-6 lg:p-8">
+            <div className="rounded-card border border-line bg-surface p-6 lg:p-8">
               <EnquiryForm
                 source={fromResource ? "RESOURCE" : "CONTACT"}
                 fromGuide={fromResource ? (guide ?? null) : null}
@@ -119,7 +119,7 @@ export default async function ContactPage({
           space the client marked. These are the three things people actually
           ask after sending an enquiry.
         */}
-        <dl className="mt-16 grid gap-8 border-t border-hairline pt-10 sm:grid-cols-3">
+        <dl className="mt-16 grid gap-8 border-t border-line pt-10 sm:grid-cols-3">
           {[
             {
               term: "When we reply",
@@ -138,8 +138,8 @@ export default async function ContactPage({
             },
           ].map((item) => (
             <div key={item.term}>
-              <dt className="text-heading text-ink">{item.term}</dt>
-              <dd className="mt-3 text-body text-ink-secondary">
+              <dt className="text-heading text-foreground">{item.term}</dt>
+              <dd className="mt-3 text-body text-muted">
                 {item.detail}
               </dd>
             </div>

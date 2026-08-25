@@ -53,7 +53,7 @@ export function BackLink({
       }}
       className={
         className ??
-        "inline-flex items-center gap-2 text-caption text-ink-muted transition-colors hover:text-accent"
+        "inline-flex items-center gap-2 text-caption text-muted transition-colors hover:text-accent-text"
       }
     >
       <svg

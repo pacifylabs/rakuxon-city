@@ -36,10 +36,10 @@ export function Pagination({
               aria-current={number === page ? "page" : undefined}
               className={cn(
                 "tabular flex size-11 items-center justify-center rounded-full border text-body transition-colors",
-                "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+                "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
                 number === page
-                  ? "border-accent bg-accent-tint text-accent"
-                  : "border-hairline bg-surface text-ink-secondary hover:border-ink-muted",
+                  ? "border-accent-hover bg-accent-tint text-accent-text"
+                  : "border-line bg-surface text-muted hover:border-muted",
               )}
             >
               {number}
@@ -72,7 +72,7 @@ function PageLink({
 }) {
   if (disabled) {
     return (
-      <span aria-hidden="true" className="px-4 text-body text-ink-muted">
+      <span aria-hidden="true" className="px-4 text-body text-muted">
         {children}
       </span>
     );
@@ -82,7 +82,7 @@ function PageLink({
     <Link
       href={href}
       aria-label={label}
-      className="px-4 text-body text-ink transition-colors hover:text-accent"
+      className="px-4 text-body text-foreground transition-colors hover:text-accent-text"
     >
       {children}
     </Link>

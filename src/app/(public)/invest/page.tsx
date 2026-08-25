@@ -61,11 +61,11 @@ export default async function InvestPage() {
     <>
       <Section className="pt-10 lg:pt-16">
         <Container>
-          <p className="text-eyebrow text-ink-muted">Partner with us</p>
-          <h1 className="mt-6 max-w-[18ch] text-display-xl text-ink">
+          <p className="text-eyebrow text-muted">Partner with us</p>
+          <h1 className="mt-6 max-w-[18ch] text-display-xl text-foreground">
             Development partnerships on land we already own
           </h1>
-          <p className="mt-8 max-w-[58ch] text-body-l text-ink-secondary">
+          <p className="mt-8 max-w-[58ch] text-body-l text-muted">
             Rakuxon City works with a small number of private partners to fund
             construction on estates we have already acquired and titled. This
             page explains how that works and who we are. It is not an offer, and
@@ -96,9 +96,9 @@ export default async function InvestPage() {
                 body: "There is no standard package and no published arrangement. What is appropriate depends on the project, its stage and what you want your involvement to be.",
               },
             ].map((item) => (
-              <div key={item.title} className="border-t border-hairline pt-6">
-                <p className="text-heading text-ink">{item.title}</p>
-                <p className="mt-4 text-body text-ink-secondary">{item.body}</p>
+              <div key={item.title} className="border-t border-line pt-6">
+                <p className="text-heading text-foreground">{item.title}</p>
+                <p className="mt-4 text-body text-muted">{item.body}</p>
               </div>
             ))}
           </div>
@@ -115,26 +115,26 @@ export default async function InvestPage() {
 
           <div className="mt-12 lg:mt-16">
             {delivered.length > 0 ? (
-              <ul className="divide-y divide-hairline border-y border-hairline">
+              <ul className="divide-y divide-line border-y border-line">
                 {delivered.map((estate) => (
                   <li
                     key={estate.slug}
                     className="flex flex-wrap items-baseline justify-between gap-4 py-6"
                   >
                     <div>
-                      <p className="text-display-m text-ink">{estate.name}</p>
-                      <p className="mt-2 text-body text-ink-secondary">
+                      <p className="text-display-m text-foreground">{estate.name}</p>
+                      <p className="mt-2 text-body text-muted">
                         {estate.location}, {estate.state} State
                       </p>
                     </div>
-                    <p className="text-body text-ink-muted">
+                    <p className="text-body text-muted">
                       {estate.status === "DELIVERED" ? "Delivered" : "Sold out"}
                     </p>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="max-w-[54ch] text-body text-ink-secondary">
+              <p className="max-w-[54ch] text-body text-muted">
                 {/* TODO: real figures — delivered project record, before launch. */}
                 Our delivery record is provided on request.
               </p>
@@ -153,12 +153,12 @@ export default async function InvestPage() {
           <ol className="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-12">
             {process.map((item) => (
               <li key={item.step} className="flex gap-6">
-                <span className="tabular shrink-0 text-display-m text-accent">
+                <span className="tabular shrink-0 text-display-m text-accent-text">
                   {item.step}
                 </span>
                 <div>
-                  <p className="text-heading text-ink">{item.title}</p>
-                  <p className="mt-3 max-w-[46ch] text-body text-ink-secondary">
+                  <p className="text-heading text-foreground">{item.title}</p>
+                  <p className="mt-3 max-w-[46ch] text-body text-muted">
                     {item.body}
                   </p>
                 </div>
@@ -170,11 +170,11 @@ export default async function InvestPage() {
 
       <Section>
         <Container>
-          <div className="rounded-card border border-hairline bg-accent-tint p-8 lg:p-12">
-            <p className="max-w-[26ch] text-display-m text-ink">
+          <div className="rounded-card border border-line bg-accent-tint p-8 lg:p-12">
+            <p className="max-w-[26ch] text-display-m text-foreground">
               If this is the kind of project you work on, tell us
             </p>
-            <p className="mt-5 max-w-[58ch] text-body text-ink-secondary">
+            <p className="mt-5 max-w-[58ch] text-body text-muted">
               The form asks a few questions so the right person picks it up. A
               member of the team will make contact to arrange a conversation.
             </p>

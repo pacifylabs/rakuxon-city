@@ -162,7 +162,7 @@ export function Carousel({
             type="button"
             onClick={stopForGood}
             aria-label={playing ? `Pause ${label}` : `Play ${label}`}
-            className="flex size-11 cursor-pointer items-center justify-center self-start rounded-full border border-hairline text-ink transition-colors hover:border-ink-muted focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            className="flex size-11 cursor-pointer items-center justify-center self-start rounded-full border border-line text-foreground transition-colors hover:border-muted focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none"
           >
             <svg viewBox="0 0 16 16" aria-hidden="true" className="size-3.5">
               {playing ? (
@@ -207,10 +207,10 @@ function CarouselControl({
       aria-label={label}
       className={cn(
         "group flex flex-col items-center gap-2",
-        "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
+        "focus-visible:ring-2 focus-visible:ring-foreground focus-visible:outline-none",
         disabled
-          ? "cursor-not-allowed text-ink-muted"
-          : "cursor-pointer text-ink",
+          ? "cursor-not-allowed text-muted"
+          : "cursor-pointer text-foreground",
       )}
     >
       <span className="text-body">

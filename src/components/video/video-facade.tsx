@@ -101,7 +101,7 @@ export function VideoFacade({
   return (
     <div
       className={cn(
-        "relative aspect-video overflow-hidden rounded-card bg-deep",
+        "relative aspect-video overflow-hidden rounded-card bg-charcoal-deep",
         className,
       )}
     >
@@ -142,13 +142,14 @@ export function VideoFacade({
             aria-label={`Play video: ${video.title}`}
             className={cn(
               "group absolute inset-0 flex cursor-pointer items-center justify-center",
-              "focus-visible:ring-2 focus-visible:ring-canvas focus-visible:outline-none focus-visible:ring-inset",
+              "focus-visible:ring-2 focus-visible:ring-ivory-light focus-visible:outline-none focus-visible:ring-inset",
             )}
           >
             {/*
-              §5 — a 56px accent circle with a white triangle. Never YouTube's
-              red button: it reads as a third-party widget dropped onto the page
-              rather than as part of the site, and it fights the sage palette.
+              §5 — a 56px champagne circle with a charcoal triangle, never
+              white (§12: white on champagne is ~2.1:1). Never YouTube's red
+              button either: it reads as a third-party widget dropped onto the
+              page rather than as part of the site.
             */}
             <span
               aria-hidden="true"
@@ -159,7 +160,7 @@ export function VideoFacade({
             >
               <svg
                 viewBox="0 0 24 24"
-                className="ml-0.5 size-6 fill-white"
+                className="ml-0.5 size-6 fill-foreground"
                 focusable="false"
               >
                 <path d="M8 5.5v13l11-6.5z" />
@@ -171,7 +172,7 @@ export function VideoFacade({
 
           {video.isStandIn ? (
             <p
-              className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full bg-canvas/90 px-3 py-1 text-caption text-ink-secondary"
+              className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full bg-background/90 px-3 py-1 text-caption text-muted"
               title={
                 video.attribution
                   ? `Video by ${video.attribution} on YouTube`
@@ -217,12 +218,12 @@ export function VideoUnavailable({
   return (
     <div
       className={cn(
-        "flex aspect-video flex-col items-center justify-center gap-3 rounded-card border border-hairline bg-status-sold-bg px-6 text-center",
+        "flex aspect-video flex-col items-center justify-center gap-3 rounded-card border border-line bg-status-sold-bg px-6 text-center",
         className,
       )}
     >
-      <p className="text-body text-ink-secondary">This video is unavailable.</p>
-      <p className="max-w-[42ch] text-caption text-ink-muted">
+      <p className="text-body text-muted">This video is unavailable.</p>
+      <p className="max-w-[42ch] text-caption text-muted">
         {title} has been removed or made private by its owner. Everything else
         on this page is unaffected.
       </p>
@@ -231,7 +232,7 @@ export function VideoUnavailable({
           href={watchUrl(youtubeId)}
           rel="noreferrer noopener"
           target="_blank"
-          className="text-caption text-accent underline underline-offset-4 hover:text-accent-hover"
+          className="text-caption text-accent-text underline underline-offset-4 hover:text-foreground"
         >
           Try it on YouTube
         </a>

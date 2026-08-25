@@ -41,8 +41,8 @@ export default async function AboutPage() {
     <>
       <Section className="pt-10 pb-0 lg:pt-16 lg:pb-0">
         <Container>
-          <p className="text-eyebrow text-ink-muted">About</p>
-          <h1 className="mt-6 max-w-[18ch] text-display-xl text-ink">
+          <p className="text-eyebrow text-muted">About</p>
+          <h1 className="mt-6 max-w-[18ch] text-display-xl text-foreground">
             We sell land the way we would want it sold to us
           </h1>
 
@@ -56,14 +56,14 @@ export default async function AboutPage() {
             <div className="flex flex-col justify-between gap-8 lg:col-span-5">
               <div>
                 {/* TODO: real figures — company story and history need client copy. */}
-                <p className="max-w-[52ch] text-body-l text-ink-secondary">
+                <p className="max-w-[52ch] text-body-l text-muted">
                   Rakuxon City develops and sells residential land and housing
                   across Lagos, Ogun and the Federal Capital Territory. We
                   acquire and title land ourselves, develop it into serviced
                   estates, and sell plots and completed homes directly to
                   buyers.
                 </p>
-                <p className="mt-6 max-w-[52ch] text-body text-ink-secondary">
+                <p className="mt-6 max-w-[52ch] text-body text-muted">
                   That order matters. Because we hold the title before we
                   subdivide, we can tell you exactly what covers your plot and
                   what does not — and we publish it on the listing rather than
@@ -71,28 +71,28 @@ export default async function AboutPage() {
                 </p>
               </div>
 
-              <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-hairline pt-8">
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-8">
                 <div>
-                  <dt className="text-caption text-ink-muted">We sell</dt>
-                  <dd className="mt-1 text-body text-ink">
+                  <dt className="text-caption text-muted">We sell</dt>
+                  <dd className="mt-1 text-body text-foreground">
                     Plots and completed homes
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-caption text-ink-muted">Directly</dt>
-                  <dd className="mt-1 text-body text-ink">
+                  <dt className="text-caption text-muted">Directly</dt>
+                  <dd className="mt-1 text-body text-foreground">
                     No agents in between
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-caption text-ink-muted">Where</dt>
-                  <dd className="mt-1 text-body text-ink">
+                  <dt className="text-caption text-muted">Where</dt>
+                  <dd className="mt-1 text-body text-foreground">
                     Lagos, Ogun and the FCT
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-caption text-ink-muted">Payment</dt>
-                  <dd className="mt-1 text-body text-ink">
+                  <dt className="text-caption text-muted">Payment</dt>
+                  <dd className="mt-1 text-body text-foreground">
                     Outright or on a plan
                   </dd>
                 </div>
@@ -122,7 +122,7 @@ export default async function AboutPage() {
       */}
       <Section className="pb-0 lg:pb-0">
         <Container>
-          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-hairline bg-hairline lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line lg:grid-cols-4">
             <Figure value={counts.land} label="plots available" />
             <Figure value={counts.homes} label="homes available" />
             <Figure value={estates.length} label="estates" />
@@ -156,12 +156,12 @@ export default async function AboutPage() {
                 body: "We provide copies of what we hold so you can run your own search at the state land registry. A buyer who checks is a buyer who stays.",
               },
             ].map((item, index) => (
-              <li key={item.title} className="border-t border-hairline pt-6">
-                <p className="tabular text-caption text-accent">
+              <li key={item.title} className="border-t border-line pt-6">
+                <p className="tabular text-caption text-accent-text">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-4 text-heading text-ink">{item.title}</p>
-                <p className="mt-4 text-body text-ink-secondary">{item.body}</p>
+                <p className="mt-4 text-heading text-foreground">{item.title}</p>
+                <p className="mt-4 text-body text-muted">{item.body}</p>
               </li>
             ))}
           </ol>
@@ -196,13 +196,13 @@ export default async function AboutPage() {
                     )}
                   </div>
 
-                  <p className="mt-5 text-heading text-ink transition-colors group-hover:text-accent">
+                  <p className="mt-5 text-heading text-foreground transition-colors group-hover:text-accent-text">
                     {estate.name}
                   </p>
-                  <p className="mt-2 text-body text-ink-secondary">
+                  <p className="mt-2 text-body text-muted">
                     {estate.location}, {estate.state} State
                   </p>
-                  <p className="mt-3 text-caption text-ink-muted">
+                  <p className="mt-3 text-caption text-muted">
                     {estate.status === "ACTIVE"
                       ? `Selling now · ${estate.availableCount} available`
                       : "Delivered"}
@@ -217,11 +217,11 @@ export default async function AboutPage() {
       <Section className="pt-0 lg:pt-0">
         <Container>
           {/* TODO: real figures — leadership team, names and photographs, before launch. */}
-          <div className="rounded-card border border-hairline bg-surface p-8 lg:p-12">
+          <div className="rounded-card border border-line bg-surface p-8 lg:p-12">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-6">
               <div className="lg:col-span-7">
-                <p className="text-heading text-ink">Leadership</p>
-                <p className="mt-4 max-w-[54ch] text-body text-ink-secondary">
+                <p className="text-heading text-foreground">Leadership</p>
+                <p className="mt-4 max-w-[54ch] text-body text-muted">
                   Profiles of the team are published here once the client has
                   approved names, roles and photographs. Until then, the people
                   who would answer your enquiry are the same people who priced
@@ -244,8 +244,8 @@ export default async function AboutPage() {
 function Figure({ value, label }: { value: number; label: string }) {
   return (
     <li className="bg-surface px-6 py-8">
-      <p className="tabular text-display-m text-ink">{value}</p>
-      <p className="mt-2 text-caption text-ink-muted">{label}</p>
+      <p className="tabular text-display-m text-foreground">{value}</p>
+      <p className="mt-2 text-caption text-muted">{label}</p>
     </li>
   );
 }

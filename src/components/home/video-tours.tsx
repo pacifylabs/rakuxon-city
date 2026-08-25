@@ -22,9 +22,9 @@ export function VideoTours({ videos }: { videos: VideoCardData[] }) {
     <Section>
       <Container>
         <div className="mx-auto max-w-[52ch] text-center">
-          <p className="mb-4 text-eyebrow text-ink-muted">Video tours</p>
-          <h2 className="text-display-l text-ink">See it before you visit</h2>
-          <p className="mx-auto mt-6 max-w-[46ch] text-body text-ink-secondary">
+          <p className="mb-4 text-eyebrow text-muted">Video tours</p>
+          <h2 className="text-display-l text-foreground">See it before you visit</h2>
+          <p className="mx-auto mt-6 max-w-[46ch] text-body text-muted">
             Most buyers cannot walk a plot before they commit, and diaspora
             buyers never can. A tour shows the access road, the boundaries and
             what is already built around it.
@@ -57,7 +57,7 @@ export function VideoTours({ videos }: { videos: VideoCardData[] }) {
         <div className="mt-10 text-center">
           <Link
             href="/tours"
-            className="text-body text-accent underline underline-offset-4 transition-colors hover:text-accent-hover"
+            className="text-body text-accent-text underline underline-offset-4 transition-colors hover:text-foreground"
           >
             All video tours
           </Link>

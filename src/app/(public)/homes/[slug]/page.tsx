@@ -95,16 +95,16 @@ export default async function HouseDetailPage({
           <div className="flex flex-wrap items-center gap-4">
             <BuildStageBadge buildStage={home.buildStage} />
             {home.handoverDate ? (
-              <p className="text-caption text-ink-muted">
+              <p className="text-caption text-muted">
                 Handover {formatHandover(home.handoverDate)}
               </p>
             ) : null}
           </div>
 
-          <h1 className="mt-4 max-w-[22ch] text-display-m text-ink">
+          <h1 className="mt-4 max-w-[22ch] text-display-m text-foreground">
             {listing.title}
           </h1>
-          <p className="mt-3 text-body text-ink-secondary">
+          <p className="mt-3 text-body text-muted">
             {listing.location}, {listing.state} State
             {listing.estate ? ` · ${listing.estate.name}` : ""}
           </p>
@@ -157,7 +157,7 @@ export default async function HouseDetailPage({
 
           {offPlan ? (
             // §8 — non-negotiable on off-plan listings.
-            <p className="mt-3 text-caption text-ink-muted">
+            <p className="mt-3 text-caption text-muted">
               Imagery is an artist&rsquo;s impression. This house is not yet
               built.
             </p>
@@ -169,8 +169,8 @@ export default async function HouseDetailPage({
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-7">
-              <h2 className="text-heading text-ink">About this home</h2>
-              <p className="mt-5 max-w-[62ch] text-body-l text-ink-secondary">
+              <h2 className="text-heading text-foreground">About this home</h2>
+              <p className="mt-5 max-w-[62ch] text-body-l text-muted">
                 {listing.description}
               </p>
 
@@ -219,10 +219,10 @@ export default async function HouseDetailPage({
               />
 
               <div className="mt-10">
-                <h2 className="text-heading text-ink">
+                <h2 className="text-heading text-foreground">
                   Finishing specification
                 </h2>
-                <p className="mt-4 max-w-[62ch] text-body text-ink-secondary">
+                <p className="mt-4 max-w-[62ch] text-body text-muted">
                   {home.finishingSpec}
                 </p>
 
@@ -231,7 +231,7 @@ export default async function HouseDetailPage({
                     {home.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-start gap-2 text-body text-ink-secondary"
+                        className="flex items-start gap-2 text-body text-muted"
                       >
                         <span
                           aria-hidden="true"
@@ -246,11 +246,11 @@ export default async function HouseDetailPage({
 
               {home.floorPlan ? (
                 <div className="mt-10">
-                  <h2 className="text-heading text-ink">Floor plan</h2>
+                  <h2 className="text-heading text-foreground">Floor plan</h2>
                   <Gallery images={[home.floorPlan]} className="mt-4" />
                 </div>
               ) : (
-                <p className="mt-10 text-caption text-ink-muted">
+                <p className="mt-10 text-caption text-muted">
                   {/* TODO: real figures — floor plans arrive with the client's drawings. */}
                   The floor plan for this unit is available on request.
                 </p>
@@ -273,7 +273,7 @@ export default async function HouseDetailPage({
                 {listing.estate ? (
                   <Link
                     href={`/estates/${listing.estate.slug}`}
-                    className="inline-flex items-center gap-2 text-body text-accent transition-colors hover:text-accent-hover"
+                    className="inline-flex items-center gap-2 text-body text-accent-text transition-colors hover:text-foreground"
                   >
                     See everything in {listing.estate.name}
                     <ArrowGlyph />

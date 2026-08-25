@@ -26,7 +26,7 @@ export function NewsletterSignup() {
 
   if (state === "done") {
     return (
-      <p role="status" className="mt-5 text-body text-canvas/90">
+      <p role="status" className="mt-5 text-body text-ivory-light/90">
         You are on the list. We will send a note to confirm the address before
         anything else arrives.
       </p>
@@ -85,19 +85,19 @@ export function NewsletterSignup() {
           aria-label="Email address"
           placeholder="Email address"
           aria-invalid={state === "failed"}
-          className="border-canvas/25 bg-canvas/5 text-canvas placeholder:text-canvas/45"
+          className="border-ivory-light/25 bg-ivory-light/5 text-ivory-light placeholder:text-ivory-light/45"
         />
         <button
           type="submit"
           disabled={state === "submitting"}
-          className="min-h-11 shrink-0 cursor-pointer rounded-full border border-accent-fill px-6 text-body text-accent-fill transition-colors hover:bg-accent-fill/10 focus-visible:ring-2 focus-visible:ring-accent-fill focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
+          className="min-h-11 shrink-0 cursor-pointer rounded-full border border-accent-light px-6 text-body text-accent-light transition-colors hover:bg-accent-light/10 focus-visible:ring-2 focus-visible:ring-accent-light focus-visible:outline-none disabled:cursor-wait disabled:opacity-60"
         >
           {state === "submitting" ? "Adding…" : "Subscribe"}
         </button>
       </div>
 
       {state === "failed" && error ? (
-        <p role="alert" className="mt-3 text-caption text-accent-fill">
+        <p role="alert" className="mt-3 text-caption text-error">
           {error} Or email{" "}
           <a
             href={`mailto:${site.email}?subject=Newsletter`}
@@ -108,7 +108,7 @@ export function NewsletterSignup() {
           .
         </p>
       ) : (
-        <p className="mt-3 text-caption text-canvas/75">
+        <p className="mt-3 text-caption text-ivory-light/75">
           Occasional notes on new stock and buyer guides. No more than monthly.
         </p>
       )}

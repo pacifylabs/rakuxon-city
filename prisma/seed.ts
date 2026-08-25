@@ -228,7 +228,7 @@ async function main() {
       width: 2172,
       height: 724,
       mimeType: "image/png",
-      sizeBytes: 502_823,
+      sizeBytes: 924_555,
       isStandIn: false,
     },
   });

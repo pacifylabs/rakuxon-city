@@ -48,23 +48,23 @@ export function TwoLane({
             <ScrollReveal key={lane.href} delayMs={index * 60}>
               <Link
                 href={lane.href}
-                className="group flex h-full flex-col justify-between gap-10 rounded-card border border-hairline bg-surface p-8 transition-colors hover:border-ink-muted lg:p-10"
+                className="group flex h-full flex-col justify-between gap-10 rounded-card border border-line bg-surface p-8 transition-colors hover:border-muted lg:p-10"
               >
                 <div>
-                  <p className="text-display-m text-ink">{lane.title}</p>
-                  <p className="mt-4 max-w-[38ch] text-body text-ink-secondary">
+                  <p className="text-display-m text-foreground">{lane.title}</p>
+                  <p className="mt-4 max-w-[38ch] text-body text-muted">
                     {lane.promise}
                   </p>
                 </div>
 
                 <div className="flex items-end justify-between gap-6">
-                  <p className="text-caption text-ink-muted">
-                    <span className="tabular text-body text-accent">
+                  <p className="text-caption text-muted">
+                    <span className="tabular text-body text-accent-text">
                       {lane.count}
                     </span>{" "}
                     {lane.unit}
                   </p>
-                  <span className="inline-flex items-center gap-2 text-body text-accent">
+                  <span className="inline-flex items-center gap-2 text-body text-accent-text">
                     Browse
                     <ArrowGlyph />
                   </span>

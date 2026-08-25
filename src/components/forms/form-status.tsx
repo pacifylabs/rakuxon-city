@@ -22,7 +22,7 @@ export function FormStatus({
   return (
     <p
       role="alert"
-      className="rounded-control border border-status-reserved/50 bg-status-reserved-bg px-4 py-3 text-body text-ink-secondary"
+      className="rounded-control border border-status-reserved/50 bg-status-reserved-bg px-4 py-3 text-body text-muted"
     >
       {message}
     </p>

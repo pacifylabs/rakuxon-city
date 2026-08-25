@@ -69,20 +69,20 @@ export function ResourcesTeaser({ articles }: { articles: Article[] }) {
                   </div>
 
                   <div className="mt-6 flex gap-6">
-                    <span className="tabular shrink-0 text-display-m text-accent">
+                    <span className="tabular shrink-0 text-display-m text-accent-text">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <h3 className="text-heading text-ink transition-colors group-hover:text-accent">
+                      <h3 className="text-heading text-foreground transition-colors group-hover:text-accent-text">
                         {article.title}
                       </h3>
-                      <p className="mt-2 text-caption text-ink-muted">
+                      <p className="mt-2 text-caption text-muted">
                         {categoryLabels[article.category]}
                         {article.publishedAt
                           ? ` · ${formatMonthYear(article.publishedAt)}`
                           : ""}
                       </p>
-                      <p className="mt-3 max-w-[46ch] text-body text-ink-secondary">
+                      <p className="mt-3 max-w-[46ch] text-body text-muted">
                         {article.excerpt}
                       </p>
                     </div>

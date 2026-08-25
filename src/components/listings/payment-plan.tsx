@@ -32,35 +32,35 @@ export function PaymentPlan({
   }[frequency];
 
   return (
-    <div className="rounded-card border border-hairline bg-surface p-6 lg:p-8">
-      <p className="text-heading text-ink">Payment plan</p>
+    <div className="rounded-card border border-line bg-surface p-6 lg:p-8">
+      <p className="text-heading text-foreground">Payment plan</p>
 
       <ul className="mt-6 grid gap-x-8 gap-y-5 sm:grid-cols-2">
         <li>
-          <p className="text-caption text-ink-muted">Deposit</p>
-          <p className="tabular mt-1 text-body text-ink">
+          <p className="text-caption text-muted">Deposit</p>
+          <p className="tabular mt-1 text-body text-foreground">
             {depositPercent}%
             {deposit === null ? "" : ` · ${formatNaira(deposit)}`}
           </p>
         </li>
         <li>
-          <p className="text-caption text-ink-muted">Balance over</p>
-          <p className="tabular mt-1 text-body text-ink">
+          <p className="text-caption text-muted">Balance over</p>
+          <p className="tabular mt-1 text-body text-foreground">
             {durationMonths} months · {instalments} {frequency} instalments
           </p>
         </li>
         {balance === null ? null : (
           <li>
-            <p className="text-caption text-ink-muted">Balance</p>
-            <p className="tabular mt-1 text-body text-ink">
+            <p className="text-caption text-muted">Balance</p>
+            <p className="tabular mt-1 text-body text-foreground">
               {formatNaira(balance)}
             </p>
           </li>
         )}
         {balance === null || instalments === undefined ? null : (
           <li>
-            <p className="text-caption text-ink-muted">Each instalment</p>
-            <p className="tabular mt-1 text-body text-ink">
+            <p className="text-caption text-muted">Each instalment</p>
+            <p className="tabular mt-1 text-body text-foreground">
               about {formatNaira(balance / instalments)}
             </p>
           </li>
@@ -68,12 +68,12 @@ export function PaymentPlan({
       </ul>
 
       {notes ? (
-        <p className="mt-6 max-w-[62ch] text-body text-ink-secondary">
+        <p className="mt-6 max-w-[62ch] text-body text-muted">
           {notes}
         </p>
       ) : null}
 
-      <p className="mt-6 text-caption text-ink-muted">
+      <p className="mt-6 text-caption text-muted">
         Indicative only. The schedule is confirmed in writing before any
         payment.
       </p>

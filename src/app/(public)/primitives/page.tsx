@@ -47,11 +47,11 @@ export default async function PrimitivesPage() {
   return (
     <Container>
       <Section>
-        <p className="text-eyebrow text-ink-muted">Internal</p>
-        <h1 className="mt-4 max-w-[18ch] text-display-xl text-ink">
+        <p className="text-eyebrow text-muted">Internal</p>
+        <h1 className="mt-4 max-w-[18ch] text-display-xl text-foreground">
           Design primitives
         </h1>
-        <p className="mt-6 max-w-[56ch] text-body text-ink-secondary">
+        <p className="mt-6 max-w-[56ch] text-body text-muted">
           Every variant built in Phase 2, rendered against the tokens in design
           system §10. Nothing here uses a font weight above 500, and no listing
           card carries a shadow.
@@ -60,44 +60,63 @@ export default async function PrimitivesPage() {
 
       <Row label="Type scale">
         <div className="space-y-4">
-          <p className="text-display-xl text-ink">Display xl — 64 / 1.05</p>
-          <p className="text-display-l text-ink">Display l — 48 / 1.1</p>
-          <p className="text-display-m text-ink">Display m — 36 / 1.15</p>
-          <p className="text-heading text-ink">Heading — 24 / 1.25</p>
-          <p className="text-body-l text-ink-secondary">Body l — 17 / 1.6</p>
-          <p className="text-body text-ink-secondary">Body — 15 / 1.6</p>
-          <p className="text-caption text-ink-muted">Caption — 13 / 1.5</p>
-          <p className="text-eyebrow text-ink-muted">Eyebrow — 12 / 1.4</p>
+          <p className="text-display-xl text-foreground">Display xl — 64 / 1.05</p>
+          <p className="text-display-l text-foreground">Display l — 48 / 1.1</p>
+          <p className="text-display-m text-foreground">Display m — 36 / 1.15</p>
+          <p className="text-heading text-foreground">Heading — 24 / 1.25</p>
+          <p className="text-body-l text-muted">Body l — 17 / 1.6</p>
+          <p className="text-body text-muted">Body — 15 / 1.6</p>
+          <p className="text-caption text-muted">Caption — 13 / 1.5</p>
+          <p className="text-eyebrow text-muted">Eyebrow — 12 / 1.4</p>
         </div>
       </Row>
 
-      <Row label="Colour">
+      <Row label="Colour — palette v2.0">
         <div className="flex flex-wrap gap-3">
           {[
-            ["canvas", "bg-canvas"],
+            ["background", "bg-background"],
             ["surface", "bg-surface"],
+            ["surface-muted", "bg-surface-muted"],
+            ["foreground", "bg-foreground"],
+            ["muted", "bg-muted"],
+            ["primary", "bg-primary"],
+            ["primary-hover", "bg-primary-hover"],
             ["accent", "bg-accent"],
             ["accent-hover", "bg-accent-hover"],
+            ["accent-text", "bg-accent-text"],
             ["accent-tint", "bg-accent-tint"],
-            ["hairline", "bg-hairline"],
-            ["ink", "bg-ink"],
-            ["ink-secondary", "bg-ink-secondary"],
-            ["ink-muted", "bg-ink-muted"],
-            ["deep", "bg-deep"],
+            ["accent-light", "bg-accent-light"],
+            ["charcoal-soft", "bg-charcoal-soft"],
+            ["charcoal-deep", "bg-charcoal-deep"],
+            ["ivory", "bg-ivory"],
+            ["ivory-light", "bg-ivory-light"],
+            ["taupe", "bg-taupe"],
+            ["taupe-light", "bg-taupe-light"],
+            ["line", "bg-line"],
+            ["line-input", "bg-line-input"],
+            ["line-dark", "bg-line-dark"],
+            ["success", "bg-success"],
+            ["error", "bg-error"],
           ].map(([name, className]) => (
             <div key={name} className="w-32">
               <div
-                className={`h-16 rounded-card border border-hairline ${className}`}
+                className={`h-16 rounded-card border border-line ${className}`}
               />
-              <p className="mt-2 text-caption text-ink-muted">{name}</p>
+              <p className="mt-2 text-caption text-muted">{name}</p>
             </div>
           ))}
         </div>
+        <p className="mt-4 max-w-[54ch] text-caption text-muted">
+          `faint` (§2, non-text only) and the three `status-*` pairs are
+          exercised by the badges below rather than swatched in isolation —
+          both only mean anything paired with the foreground they carry.
+        </p>
       </Row>
 
       <Row label="Buttons">
         <div className="flex flex-wrap items-center gap-4">
           <Button variant="primary">Explore properties</Button>
+          <Button variant="accent">Send enquiry</Button>
           <Button variant="secondary">Learn more</Button>
           <Button variant="text">Explore reviews</Button>
           <IconAction href="#" label="Open listing" />
@@ -108,6 +127,12 @@ export default async function PrimitivesPage() {
             Book an inspection
           </ButtonLink>
         </div>
+        <p className="mt-4 max-w-[54ch] text-caption text-muted">
+          `accent` (champagne fill, charcoal label) is reserved for the single
+          highest-intent action in a view — an enquiry-form submit, never
+          general navigation. Shown once here for reference; the rest of the
+          site keeps it to at most one visible button at a time.
+        </p>
       </Row>
 
       <Row label="Badges">
@@ -117,8 +142,9 @@ export default async function PrimitivesPage() {
               <TitleTypeBadge key={titleType} titleType={titleType} />
             ))}
           </div>
-          <p className="text-caption text-ink-muted">
-            Survey only renders in the neutral palette, not sage — §7.
+          <p className="text-caption text-muted">
+            Survey only renders in the neutral status-sold palette, not
+            champagne — §7. The gold rule belongs to a held title alone.
           </p>
           <div className="flex flex-wrap gap-3">
             {Object.values(BuildStage).map((buildStage) => (
@@ -130,7 +156,7 @@ export default async function PrimitivesPage() {
               <StatusBadge key={status} status={status} />
             ))}
           </div>
-          <Badge className="bg-accent-tint text-accent">Base badge</Badge>
+          <Badge className="bg-accent-tint text-accent-text">Base badge</Badge>
         </div>
       </Row>
 
@@ -211,7 +237,7 @@ export default async function PrimitivesPage() {
             <ListingCard key={listing.slug} listing={listing} />
           ))}
         </div>
-        <p className="mt-4 text-caption text-ink-muted">
+        <p className="mt-4 text-caption text-muted">
           Land leads with the title ribbon, homes with the build stage. Body
           order is identical across both.
         </p>
@@ -283,7 +309,7 @@ export default async function PrimitivesPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {[0, 1, 2].map((index) => (
             <ScrollReveal key={index} delayMs={index * 60}>
-              <div className="rounded-card border border-hairline bg-surface p-6 text-body text-ink-secondary">
+              <div className="rounded-card border border-line bg-surface p-6 text-body text-muted">
                 Revealed with a 12px rise, staggered {index * 60}ms. Held still
                 entirely under prefers-reduced-motion.
               </div>
@@ -295,14 +321,14 @@ export default async function PrimitivesPage() {
       <Row label="Elevation — the only two on the site">
         <div className="flex flex-wrap gap-6">
           <div className="max-w-sm rounded-card bg-surface p-6 shadow-lift">
-            <p className="text-heading text-ink">Hassle-free documentation</p>
-            <p className="mt-3 text-body text-ink-secondary">
+            <p className="text-heading text-foreground">Hassle-free documentation</p>
+            <p className="mt-3 text-body text-muted">
               The floating callout that overlaps the hero imagery.
             </p>
           </div>
           <div className="max-w-sm rounded-card bg-surface p-6 shadow-lift">
-            <p className="text-heading text-ink">Find your answers here</p>
-            <p className="mt-3 text-body text-ink-secondary">
+            <p className="text-heading text-foreground">Find your answers here</p>
+            <p className="mt-3 text-body text-muted">
               The FAQ panel that overlaps the image collage.
             </p>
           </div>
@@ -320,8 +346,8 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <Section className="border-t border-hairline">
-      <p className="mb-8 text-eyebrow text-ink-muted">{label}</p>
+    <Section className="border-t border-line">
+      <p className="mb-8 text-eyebrow text-muted">{label}</p>
       {children}
     </Section>
   );

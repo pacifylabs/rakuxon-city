@@ -13,11 +13,11 @@ export default function NotFound() {
   return (
     <Container as="main" className="relative z-10">
       <div className="flex min-h-[70vh] flex-col justify-center py-24">
-        <p className="text-eyebrow text-ink-muted">Not here yet</p>
-        <h1 className="mt-6 max-w-[20ch] text-display-l text-ink">
+        <p className="text-eyebrow text-muted">Not here yet</p>
+        <h1 className="mt-6 max-w-[20ch] text-display-l text-foreground">
           This part of the site is still being built
         </h1>
-        <p className="mt-6 max-w-[52ch] text-body text-ink-secondary">
+        <p className="mt-6 max-w-[52ch] text-body text-muted">
           The homepage is a visual preview. Listings, estates and the buyer
           guides arrive in the next stage of the build, and the enquiry form
           starts working in the stage after that.
