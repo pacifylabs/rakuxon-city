@@ -52,7 +52,7 @@ import { cn } from "@/lib/cn";
  * AVIF/WebP negotiation intact. Flagged for the client rather than decided
  * silently.
  */
-const SLIDE_MS = 7000;
+const SLIDE_MS = 4000; // Reduced from 7000ms to 4000ms for faster transitions
 
 /**
  * Per-estate hero crop and blur placeholder, keyed by the shared Media URL.

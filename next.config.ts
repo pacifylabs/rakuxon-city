@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
 
     /*
+     * Quality settings for image optimization.
+     * Hero images use quality 70 for better performance (larger images).
+     * Other images use default quality 75.
+     */
+    qualities: [70, 75],
+
+    /*
      * Optimised variants are cached for a year. They are immutable — the URL
      * carries the source path, width and quality — so a short TTL only means
      * re-encoding the same bytes on every cold hit, which is exactly the

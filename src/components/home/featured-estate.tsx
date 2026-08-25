@@ -45,7 +45,7 @@ type Estate = {
  * lifted elements on the page (04_DESIGN_SYSTEM.md §5). The second is the FAQ
  * panel. Everything else is flat with a hairline.
  */
-const SLIDE_MS = 7000;
+const SLIDE_MS = 4000; // Reduced from 7000ms to 4000ms for faster transitions
 export function FeaturedEstate({ estates }: { estates: Estate[] }) {
   const count = estates.length;
   const [active, setActive] = useState(0);
