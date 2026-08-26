@@ -102,11 +102,19 @@ function heroSrcFor(url: string): { url: string; blurDataURL?: string } {
  * this offline check and what actually ships. Deepened until the same worst
  * case read 4.74:1. Re-verify with the same method (see the recrop/verify
  * scripts run this session) before swapping any image in the rotation.
+ *
+ * REUSABILITY: Uses CSS variable --color-scrim-base (defined in globals.css)
+ * for the RGB values, enabling theme variants to adjust scrim color without
+ * modifying component code. The variable holds comma-separated RGB values
+ * (e.g., "13, 15, 14") for use with rgba().
  */
-const SCRIM_VERTICAL =
-  "linear-gradient(to top, rgba(13,15,14,0.90) 0%, rgba(13,15,14,0.76) 32%, rgba(13,15,14,0.42) 62%, rgba(13,15,14,0.30) 100%)";
-const SCRIM_HORIZONTAL =
-  "linear-gradient(to right, rgba(13,15,14,0.55) 0%, rgba(13,15,14,0) 55%)";
+function getScrimGradients() {
+  const scrimBase = "var(--color-scrim-base)";
+  return {
+    vertical: `linear-gradient(to top, rgba(${scrimBase},0.90) 0%, rgba(${scrimBase},0.76) 32%, rgba(${scrimBase},0.42) 62%, rgba(${scrimBase},0.30) 100%)`,
+    horizontal: `linear-gradient(to right, rgba(${scrimBase},0.55) 0%, rgba(${scrimBase},0) 55%)`,
+  };
+}
 
 export type HeroSlide = {
   slug: string;
@@ -122,6 +130,7 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
   const [readyForRest, setReadyForRest] = useState(false);
 
   const count = slides.length;
+  const scrimGradients = getScrimGradients();
 
   /** Never starts under reduced motion, and responds if that changes mid-visit. */
   useEffect(() => {
@@ -221,8 +230,8 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
       })}
 
       {/* §4 — the two scrim layers, verbatim structure, deepened per the note above. */}
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: SCRIM_VERTICAL }} />
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: SCRIM_HORIZONTAL }} />
+      <div aria-hidden="true" className="absolute inset-0" style={{ background: scrimGradients.vertical }} />
+      <div aria-hidden="true" className="absolute inset-0" style={{ background: scrimGradients.horizontal }} />
 
       <FeaturePanel />
 

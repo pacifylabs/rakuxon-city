@@ -96,6 +96,16 @@
   --color-success: #536b57;
   --color-error: #9a4f4f;
 
+  /* Hero scrim layers — rgba values for gradient overlays on photography.
+     Base color is charcoal-deep (#0d0f0e = rgb(13,15,14)). These variables
+     enable theme variants to adjust scrim opacity without hardcoding rgba
+     values in components. */
+  --color-scrim-base: 13, 15, 14; /* RGB values of charcoal-deep for rgba() */
+
+  /* Shadow layers — rgba values for elevation effects.
+     Base color is charcoal (#171918 = rgb(23,25,24)). */
+  --color-shadow-base: 23, 25, 24; /* RGB values of charcoal for rgba() */
+
   /* §2 Status colours — quiet by design, redefined in full for v2.0. */
   --color-status-available: #3f5544;
   --color-status-available-bg: #e4eae3;
@@ -141,7 +151,7 @@
   --radius-control: 8px;
   --radius-card: 12px;
   --radius-image-l: 16px;
-  --shadow-lift: 0 2px 12px rgba(23, 25, 24, 0.07);
+  --shadow-lift: 0 2px 12px rgba(var(--color-shadow-base), 0.07);
 }
 
 /* §3 Mobile type scale. Display steps drop one notch below `lg`; body sizes
@@ -155,6 +165,105 @@
   }
 }
 
+/* ============================================================================
+   THEME VARIANTS — Testing & Customization
+   ============================================================================
+   
+   These data-theme selectors allow easy theme color testing without modifying
+   components. To activate a theme variant:
+   
+   1. Set the data-theme attribute on <html> or <body>:
+      <body data-theme="sage-gold"> or <body data-theme="monochrome">
+   
+   2. Or toggle programmatically:
+      document.documentElement.dataset.theme = 'sage-gold';
+   
+   3. To revert: Remove the data-theme attribute or set to empty string.
+   
+   Only override the CSS variables you want to change. All components will
+   automatically use the new values since they reference semantic tokens.
+   
+   WCAG COMPLIANCE: Always verify contrast ratios when creating new themes:
+   - Text on backgrounds: 4.5:1 minimum (AA standard)
+   - UI components (borders, focus indicators): 3:1 minimum
+   - Use tools like WebAIM Contrast Checker or browser DevTools
+   ========================================================================= */
+
+/* Example Theme 1: Sage & Gold (v1.0 palette restoration)
+   Uncomment to test:
+
+[data-theme="sage-gold"] {
+  --color-accent: #8B7355;
+  --color-accent-hover: #75614A;
+  --color-accent-light: #A69080;
+  --color-accent-text: #6B5A47;
+  --color-accent-tint: #EDE9E3;
+}
+*/
+
+/* Example Theme 2: Monochrome (charcoal-only, no champagne)
+   Uncomment to test:
+
+[data-theme="monochrome"] {
+  --color-accent: var(--color-charcoal);
+  --color-accent-hover: var(--color-charcoal-deep);
+  --color-accent-light: var(--color-taupe-light);
+  --color-accent-text: var(--color-charcoal-deep);
+  --color-accent-tint: var(--color-ivory);
+}
+*/
+
+/* Dark Mode Theme - Full Implementation */
+[data-theme="dark"] {
+  /* Inverted backgrounds */
+  --color-background: var(--color-charcoal-deep);
+  --color-foreground: var(--color-ivory-light);
+  --color-surface: var(--color-charcoal);
+  --color-surface-muted: var(--color-charcoal-soft);
+  
+  /* Adjusted borders for dark backgrounds */
+  --color-line: #3a3d3b;
+  --color-line-input: #4a4e4b;
+  --color-line-dark: #ded8cc;
+  
+  /* Text colors adjusted for dark backgrounds */
+  --color-muted: var(--color-taupe-light);
+  --color-faint: #8a8478;
+  
+  /* Accent colors remain but with adjusted hover states */
+  --color-accent-text: var(--color-champagne-light);
+  --color-accent-tint: #2d2620;
+  
+  /* Primary button inverted */
+  --color-primary: var(--color-ivory-light);
+  --color-primary-hover: var(--color-ivory);
+  
+  /* Status colors adjusted for dark backgrounds */
+  --color-status-available: #6b9c7a;
+  --color-status-available-bg: #1e2921;
+  --color-status-reserved: #c5a46d;
+  --color-status-reserved-bg: #2d2620;
+  --color-status-sold: #b8b0a3;
+  --color-status-sold-bg: #28261f;
+  
+  /* Adjust scrim for lighter overlays on dark hero images */
+  --color-scrim-base: 13, 15, 14; /* Keep dark scrim for photos */
+  --color-shadow-base: 0, 0, 0; /* Pure black shadows in dark mode */
+  
+  /* Success/error adjusted */
+  --color-success: #7fa086;
+  --color-error: #c87373;
+}
+
+/* Dark mode specific adjustments for primary buttons */
+[data-theme="dark"] .bg-primary {
+  color: var(--color-charcoal);
+}
+
+[data-theme="dark"] .text-ivory-light {
+  color: var(--color-ivory-light);
+}
+
 @layer base {
   /* §12 — the ivory tint is the identity. The page is never pure white. */
   body {
@@ -163,6 +272,23 @@
     font-family: var(--font-sans);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+  }
+
+  /* Smooth theme transitions */
+  :root {
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  }
+
+  /* Apply transitions to elements that change with theme */
+  * {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  /* Opt-out for elements that need instant changes or custom timing */
+  *:where([class*="duration-"], [class*="transition-"], img, video, svg) {
+    transition-property: none;
   }
 
   /* §3 — only 400 and 500 exist. Headings inherit regular weight and take
