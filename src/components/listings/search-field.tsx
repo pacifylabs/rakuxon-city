@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 
 /**
@@ -26,6 +26,26 @@ export function SearchField({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const current = searchParams.get("q") ?? "";
+
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme
+    const checkTheme = () => {
+      const theme = document.documentElement.dataset.theme;
+      setIsDark(theme === "dark");
+    };
+    checkTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Controlled so the clear control can empty it, seeded from the URL so a
   // back-navigation puts the previous term back in the field.
@@ -105,8 +125,9 @@ export function SearchField({
         <button
           type="submit"
           className={cn(
-            "min-h-9 cursor-pointer rounded-full bg-primary px-4 text-caption text-ivory-light transition-colors",
+            "min-h-9 cursor-pointer rounded-full bg-primary px-4 text-caption transition-colors",
             "hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:outline-none",
+            isDark ? "text-charcoal" : "text-ivory-light",
           )}
         >
           Search

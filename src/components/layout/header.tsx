@@ -68,6 +68,25 @@ export function Header({
   const isHome = pathname === "/";
 
   const [pastHero, setPastHero] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme
+    const checkTheme = () => {
+      const theme = document.documentElement.dataset.theme;
+      setIsDark(theme === "dark");
+    };
+    checkTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!isHome) return;
@@ -146,9 +165,13 @@ export function Header({
                         overlay
                           ? cn(
                               "focus-visible:ring-foreground",
-                              active
-                                ? "text-foreground"
-                                : "text-muted hover:text-foreground",
+                              isDark
+                                ? active
+                                  ? "text-charcoal"
+                                  : "text-charcoal-soft hover:text-charcoal"
+                                : active
+                                  ? "text-foreground"
+                                  : "text-muted hover:text-foreground",
                             )
                           : cn(
                               "focus-visible:ring-foreground",
@@ -169,7 +192,11 @@ export function Header({
                         aria-hidden="true"
                         className={cn(
                           "absolute -bottom-1 left-0 h-px w-full origin-left transition-transform duration-200",
-                          overlay ? "bg-foreground" : "bg-foreground",
+                          overlay
+                            ? isDark
+                              ? "bg-charcoal"
+                              : "bg-foreground"
+                            : "bg-foreground",
                           active ? "scale-x-100" : "scale-x-0",
                         )}
                       />
