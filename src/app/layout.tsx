@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { organisationJsonLd, websiteJsonLd } from "@/lib/schema";
 import { origin } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { themeScript } from "@/lib/theme-script";
 import "./globals.css";
 
 /* 04_DESIGN_SYSTEM.md §3 — two faces, two weights. 600 and 700 are never
@@ -76,6 +77,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en-NG"
       className={`${instrumentSans.variable} ${inter.variable} h-full antialiased`}
     >
+      <head>
+        {/* Blocking script to prevent theme flash - runs before React hydration */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         {/* Site-wide graph. Page-level types reference these by @id rather
             than repeating the organisation on every page. */}

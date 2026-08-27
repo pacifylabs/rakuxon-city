@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/cn";
 
 /**
@@ -180,6 +181,9 @@ export function Header({
           </nav>
 
           <div className="flex items-center gap-3">
+            {/* Theme toggle button */}
+            <ThemeToggle />
+
             {/*
               07_FEATURE_HERO.md §6 — Contact us stays champagne fill /
               charcoal label in BOTH header states on the homepage, unlike
