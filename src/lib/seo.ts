@@ -12,6 +12,17 @@ import { site } from "@/lib/site";
  */
 const SEPARATOR = " — ";
 
+/**
+ * Default OG image dimensions for the fallback image.
+ * The og.jpg file in /public/images should match these dimensions for optimal display.
+ */
+const DEFAULT_OG_IMAGE = {
+  url: "/images/og.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Rakuxon City — land and homes, with the papers in order",
+};
+
 export function origin(): string {
   /*
    * Routed through the validated `env` module rather than reading
@@ -37,6 +48,9 @@ export function absoluteUrl(path: string): string {
  * Titles go through the root template (`%s — Rakuxon City`) unless
  * `absoluteTitle` is given — used on the homepage, so the brand is not
  * repeated twice in one title.
+ *
+ * Images are normalized to absolute URLs and fall back to the site's default
+ * OG image if none are provided, ensuring every page has a preview image.
  */
 export function pageMetadata({
   title,
@@ -45,6 +59,7 @@ export function pageMetadata({
   absoluteTitle,
   images,
   noIndex,
+  type = "website",
 }: {
   title: string;
   description: string;
@@ -53,9 +68,30 @@ export function pageMetadata({
   images?: { url: string; width?: number; height?: number; alt?: string }[];
   /** For pages that exist but should not be in the index — see /primitives. */
   noIndex?: boolean;
+  /** OpenGraph type - defaults to "website", can be "article" for blog posts */
+  type?: "website" | "article";
 }): Metadata {
   const url = absoluteUrl(path);
   const ogTitle = absoluteTitle ?? `${title}${SEPARATOR}${site.name}`;
+
+  // Normalize images to absolute URLs and add fallback
+  const normalizedImages = images && images.length > 0
+    ? images.map((img) => ({
+        url: absoluteUrl(img.url),
+        width: img.width,
+        height: img.height,
+        alt: img.alt || ogTitle,
+        type: "image/jpeg",
+      }))
+    : [
+        {
+          url: absoluteUrl(DEFAULT_OG_IMAGE.url),
+          width: DEFAULT_OG_IMAGE.width,
+          height: DEFAULT_OG_IMAGE.height,
+          alt: DEFAULT_OG_IMAGE.alt,
+          type: "image/jpeg",
+        },
+      ];
 
   return {
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
@@ -66,16 +102,18 @@ export function pageMetadata({
       title: ogTitle,
       description,
       url,
-      type: "website",
+      type,
       locale: "en_NG",
       siteName: site.name,
-      ...(images ? { images } : {}),
+      images: normalizedImages,
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
-      ...(images ? { images: images.map((image) => image.url) } : {}),
+      images: normalizedImages.map((img) => img.url),
+      creator: "@rakuxoncity", // TODO: Update with actual Twitter handle if available
+      site: "@rakuxoncity", // TODO: Update with actual Twitter handle if available
     },
   };
 }

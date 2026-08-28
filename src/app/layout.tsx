@@ -56,8 +56,24 @@ export const metadata: Metadata = {
     url: origin(),
     title: "Rakuxon City — land and homes, with the papers in order",
     description,
+    images: [
+      {
+        url: `${origin()}/images/og.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Rakuxon City — land and homes, with the papers in order",
+        type: "image/jpeg",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rakuxon City — land and homes, with the papers in order",
+    description,
+    images: [`${origin()}/images/og.jpg`],
+    creator: "@rakuxoncity", // TODO: Update with actual Twitter handle
+    site: "@rakuxoncity", // TODO: Update with actual Twitter handle
+  },
   robots: {
     index: true,
     follow: true,
@@ -68,6 +84,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
+  },
+  verification: {
+    // TODO: Add verification tokens when available
+    // google: "your-google-site-verification-code",
+    // yandex: "your-yandex-verification-code",
+    // bing: "your-bing-verification-code",
   },
 };
 

@@ -40,7 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     path: "/",
     images: og
-      ? [{ url: og.url, width: og.width, height: og.height, alt: og.alt }]
+      ? [{ 
+          url: og.url, 
+          width: og.width, 
+          height: og.height, 
+          alt: og.alt || "Rakuxon City — land and homes, with the papers in order"
+        }]
       : undefined,
   });
 }
