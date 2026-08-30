@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   BuildStage,
+  DocumentType,
   HouseType,
   ListingStatus,
   ListingType,
@@ -96,14 +97,30 @@ function checkListingInvariants(
 export const landDetailSchema = z.object({
   plotSize: z.number().positive(),
   plotUnit: z.enum(PlotUnit),
+  /** The strongest title held, and the one the card badge leads with. */
   titleType: z.enum(TitleType),
+  /** Anything else held alongside the lead. Rendered in the ribbon, never on a card. */
+  additionalTitleTypes: z.array(z.enum(TitleType)).default([]),
   surveyNumber: z.string().max(60).nullable().optional(),
   topography: z.string().max(200).nullable().optional(),
   roadAccess: z.string().max(200).nullable().optional(),
+  /*
+   * Corrected in Phase 7 to match the model.
+   *
+   * These were `{ label, mediaId }` free text when Phase 1 wrote this schema.
+   * The `20260823071305_typed_land_documents` migration replaced that with a
+   * `DocumentType` enum plus an optional `note`, and added
+   * `additionalTitleTypes` to LandDetail — but this schema was never brought
+   * along, so it had been describing a shape the database stopped accepting
+   * three migrations ago. Nothing caught it because nothing wrote a listing
+   * through it until now: the seed builds rows with the Prisma client
+   * directly, and the public site only reads.
+   */
   documents: z
     .array(
       z.object({
-        label: z.string().min(2).max(120),
+        type: z.enum(DocumentType),
+        note: z.string().max(200).nullable().optional(),
         mediaId: z.string().nullable().optional(),
       }),
     )
