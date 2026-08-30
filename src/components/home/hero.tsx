@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/cn";
 
 /**
