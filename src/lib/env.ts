@@ -16,6 +16,44 @@ const emptyToUndefined = z.preprocess(
   z.string().optional(),
 );
 
+/**
+ * Where this deployment actually lives.
+ *
+ * Every canonical, `og:image`, sitemap entry and the `Host` line in robots.txt
+ * is built from this. When it resolved to the localhost default in production,
+ * the live site published `http://localhost:3000` in all of them: crawlers
+ * fetched a sitemap of unreachable URLs, and social scrapers could not load a
+ * preview image. Nothing errored, because localhost is a perfectly valid URL —
+ * which is exactly why this needs a fallback rather than a default.
+ *
+ * Order matters:
+ *
+ *   1. NEXT_PUBLIC_SITE_URL — explicit, and the only one that can name the
+ *      canonical host when several resolve to the same site. Prefer it: this
+ *      project serves `www` and redirects the apex, and only a human knows
+ *      which of the two should appear in search results.
+ *   2. VERCEL_PROJECT_PRODUCTION_URL — the project's production domain,
+ *      preferring a custom domain when one is assigned. Stable across
+ *      deployments, so canonicals do not churn.
+ *   3. VERCEL_URL — this specific deployment. Right for a preview build,
+ *      wrong for production canonicals, hence last.
+ *   4. Nothing, so the schema default applies and local development works
+ *      with no configuration at all.
+ *
+ * Vercel supplies 2 and 3 without a protocol.
+ */
+function resolveSiteOrigin(raw: unknown): string | undefined {
+  if (typeof raw === "string" && raw.trim() !== "") return raw;
+
+  const vercelHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  if (vercelHost && vercelHost.trim() !== "") {
+    return `https://${vercelHost.replace(/^https?:\/\//, "")}`;
+  }
+
+  return undefined;
+}
+
 const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "test", "production"])
@@ -33,7 +71,7 @@ const envSchema = z.object({
    * set. Routed through emptyToUndefined first so the default actually applies.
    */
   NEXT_PUBLIC_SITE_URL: z.preprocess(
-    (val) => (val === "" ? undefined : val),
+    resolveSiteOrigin,
     z.url().default("http://localhost:3000"),
   ),
 
@@ -160,6 +198,24 @@ function loadEnv(): Env {
 }
 
 export const env = loadEnv();
+
+/*
+ * A production deployment publishing localhost URLs is a live SEO outage, not
+ * a warning-level detail. It is not thrown, because taking a working property
+ * site down over metadata would be the worse failure — but it is said plainly,
+ * once, at boot, where a deploy log will show it.
+ */
+if (
+  env.NODE_ENV === "production" &&
+  env.NEXT_PUBLIC_SITE_URL.includes("localhost")
+) {
+  console.error(
+    "[env] NEXT_PUBLIC_SITE_URL is unset and no Vercel domain was found, so " +
+      "canonicals, og:image, robots.txt and every sitemap URL will point at " +
+      "localhost and be unreachable to crawlers. Set NEXT_PUBLIC_SITE_URL to " +
+      "the public origin, e.g. https://www.example.com.",
+  );
+}
 
 /**
  * True when a real database is configured. Everything downstream branches on
