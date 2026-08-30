@@ -71,8 +71,8 @@ export const metadata: Metadata = {
     title: "Rakuxon City — land and homes, with the papers in order",
     description,
     images: [`${origin()}/images/og.jpg`],
-    creator: "@rakuxoncity", // TODO: Update with actual Twitter handle
-    site: "@rakuxoncity", // TODO: Update with actual Twitter handle
+    creator: site.xHandle,
+    site: site.xHandle,
   },
   robots: {
     index: true,

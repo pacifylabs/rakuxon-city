@@ -12,9 +12,15 @@ import { site } from "@/lib/site";
  */
 const SEPARATOR = " — ";
 
+/** Last editorial review, emitted as the `date` meta tag SEO tools look for. */
+export const SITE_DATE = "2026-08-30";
+
 /**
- * Default OG image dimensions for the fallback image.
- * The og.jpg file in /public/images should match these dimensions for optimal display.
+ * The share image, at the 1.91:1 that Facebook, LinkedIn and X lay a card out
+ * to. The file on disk is exactly 1200×630 — it was a 1274×932 screenshot
+ * declared as 1200×630 for a while, and the platforms letterboxed it to fit
+ * the numbers rather than the pixels. If the artwork is ever replaced, match
+ * these dimensions or change them here too.
  */
 const DEFAULT_OG_IMAGE = {
   url: "/images/og.jpg",
@@ -22,6 +28,31 @@ const DEFAULT_OG_IMAGE = {
   height: 630,
   alt: "Rakuxon City — land and homes, with the papers in order",
 };
+
+/**
+ * The MIME type for an image URL.
+ *
+ * Every image used to be declared `image/jpeg`, including listing photography
+ * that is routinely PNG or WebP. Facebook reads the declared type, so a PNG
+ * announced as a JPEG can be dropped from the card. Unknown extensions get no
+ * type at all, which the crawlers handle by sniffing.
+ */
+function imageMimeType(url: string): string | undefined {
+  const extension = url.split("?")[0].split(".").pop()?.toLowerCase();
+  switch (extension) {
+    case "jpg":
+    case "jpeg":
+      return "image/jpeg";
+    case "png":
+      return "image/png";
+    case "webp":
+      return "image/webp";
+    case "avif":
+      return "image/avif";
+    default:
+      return undefined;
+  }
+}
 
 export function origin(): string {
   /*
@@ -75,27 +106,32 @@ export function pageMetadata({
   const ogTitle = absoluteTitle ?? `${title}${SEPARATOR}${site.name}`;
 
   // Normalize images to absolute URLs and add fallback
-  const normalizedImages = images && images.length > 0
-    ? images.map((img) => ({
-        url: absoluteUrl(img.url),
-        width: img.width,
-        height: img.height,
-        alt: img.alt || ogTitle,
-        type: "image/jpeg",
-      }))
-    : [
-        {
-          url: absoluteUrl(DEFAULT_OG_IMAGE.url),
-          width: DEFAULT_OG_IMAGE.width,
-          height: DEFAULT_OG_IMAGE.height,
-          alt: DEFAULT_OG_IMAGE.alt,
-          type: "image/jpeg",
-        },
-      ];
+  const normalizedImages =
+    images && images.length > 0
+      ? images.map((img) => ({
+          url: absoluteUrl(img.url),
+          width: img.width,
+          height: img.height,
+          alt: img.alt || ogTitle,
+          type: imageMimeType(img.url),
+        }))
+      : [
+          {
+            url: absoluteUrl(DEFAULT_OG_IMAGE.url),
+            width: DEFAULT_OG_IMAGE.width,
+            height: DEFAULT_OG_IMAGE.height,
+            alt: DEFAULT_OG_IMAGE.alt,
+            type: imageMimeType(DEFAULT_OG_IMAGE.url),
+          },
+        ];
 
   return {
     title: absoluteTitle ? { absolute: absoluteTitle } : title,
     description,
+    // Carried per page, matching the sibling care project: some SEO tooling
+    // reads these from the page rather than inheriting them from the layout.
+    authors: [{ name: site.name, url: origin() }],
+    other: { date: SITE_DATE },
     alternates: { canonical: url },
     ...(noIndex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
@@ -112,8 +148,8 @@ export function pageMetadata({
       title: ogTitle,
       description,
       images: normalizedImages.map((img) => img.url),
-      creator: "@rakuxoncity", // TODO: Update with actual Twitter handle if available
-      site: "@rakuxoncity", // TODO: Update with actual Twitter handle if available
+      creator: site.xHandle,
+      site: site.xHandle,
     },
   };
 }

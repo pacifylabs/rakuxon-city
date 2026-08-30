@@ -50,6 +50,16 @@ export const site = {
     whatsapp: `https://wa.me/${PHONE_E164.replace("+", "")}`,
   },
 
+  /**
+   * The X account Twitter cards attribute to, confirmed by the client.
+   *
+   * Note this is NOT the same account as the X entry in `socials` below,
+   * which points at the group's @rakuxon. This one is the City brand's own.
+   * Both are intentional; if a card ever attributes to the wrong account,
+   * this is the value to change, not the socials link.
+   */
+  xHandle: "@rakuxoncity",
+
   /** Where the company sells. Real: it is where the seeded estates are. */
   regionsServed: ["Lagos", "Ogun", "FCT Abuja"],
 
