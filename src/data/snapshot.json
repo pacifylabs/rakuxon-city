@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T13:33:48.257Z",
+  "generatedAt": "2026-08-30T05:38:30.771Z",
   "listings": [
     {
       "id": "cmt8ym3bd004e6e3phikcfnbt",
@@ -2667,7 +2667,7 @@
       "paymentPlanTerms": null,
       "featured": false,
       "createdAt": "2026-08-25T17:49:17.401Z",
-      "updatedAt": "2026-08-25T17:49:17.401Z",
+      "updatedAt": "2026-08-29T16:44:45.500Z",
       "publishedAt": "2026-08-25T17:49:17.159Z",
       "estate": null,
       "media": [
@@ -2688,13 +2688,17 @@
         "plotSize": "1",
         "plotUnit": "ACRES",
         "titleType": "DEED_OF_ASSIGNMENT",
-        "additionalTitleTypes": [],
+        "additionalTitleTypes": [
+          "C_OF_O",
+          "GAZETTE",
+          "EXCISION"
+        ],
         "surveyNumber": "FCT/SV/11840",
         "topography": "Dry, level, lightly wooded",
         "roadAccess": "Laterite road from the Kuje–Gwagwalada road",
         "documents": [
           {
-            "id": "cmt8yly4s003x6e3pkxlc817k",
+            "id": "cmtejxg6m0005vk3ptrm2s2d6",
             "landDetailId": "cmt8ylxi1003w6e3p2jrafhot",
             "type": "DEED_OF_ASSIGNMENT",
             "note": null,
@@ -2702,7 +2706,7 @@
             "position": 0
           },
           {
-            "id": "cmt8yly4s003y6e3pstsq2sc7",
+            "id": "cmtejxg6m0006vk3p35n70gn4",
             "landDetailId": "cmt8ylxi1003w6e3p2jrafhot",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
@@ -2710,7 +2714,7 @@
             "position": 1
           },
           {
-            "id": "cmt8yly4s003z6e3p5bmmta4o",
+            "id": "cmtejxg6m0007vk3pm13lxlh8",
             "landDetailId": "cmt8ylxi1003w6e3p2jrafhot",
             "type": "PURCHASE_RECEIPT",
             "note": null,
@@ -2738,7 +2742,7 @@
       "paymentPlanTerms": null,
       "featured": false,
       "createdAt": "2026-08-25T17:49:20.352Z",
-      "updatedAt": "2026-08-25T17:49:20.352Z",
+      "updatedAt": "2026-08-29T15:44:35.767Z",
       "publishedAt": "2026-08-25T17:49:20.066Z",
       "estate": null,
       "media": [
@@ -2759,13 +2763,17 @@
         "plotSize": "700",
         "plotUnit": "SQM",
         "titleType": "C_OF_O",
-        "additionalTitleTypes": [],
+        "additionalTitleTypes": [
+          "C_OF_O",
+          "GAZETTE",
+          "EXCISION"
+        ],
         "surveyNumber": "OG/SV/7742",
         "topography": "Dry, level",
         "roadAccess": "Tarred road frontage",
         "documents": [
           {
-            "id": "cmt8ym0e500436e3pgb9ily23",
+            "id": "cmtejwzz70002vk3p1dd8sdsx",
             "landDetailId": "cmt8ylzs000426e3pypi65bex",
             "type": "CERTIFICATE_OF_OCCUPANCY",
             "note": null,
@@ -2773,7 +2781,7 @@
             "position": 0
           },
           {
-            "id": "cmt8ym0e500446e3pbnpqngiq",
+            "id": "cmtejwzz70003vk3pprtofuu2",
             "landDetailId": "cmt8ylzs000426e3pypi65bex",
             "type": "REGISTERED_SURVEY_PLAN",
             "note": null,
@@ -2781,7 +2789,7 @@
             "position": 1
           },
           {
-            "id": "cmt8ym0e500456e3pdzxyc0qf",
+            "id": "cmtejwzz70004vk3pb2jdgzmr",
             "landDetailId": "cmt8ylzs000426e3pypi65bex",
             "type": "ESTATE_LAYOUT_APPROVAL",
             "note": null,
@@ -2979,12 +2987,12 @@
       "title": "What a Certificate of Occupancy actually proves",
       "category": "TITLE_AND_DOCUMENTATION",
       "excerpt": "A C of O is the strongest title most Nigerian buyers will encounter, and it still does not answer every question. Here is what it covers, what it does not, and what to ask for alongside it.",
-      "body": "Start with the fact that surprises most first-time buyers: nobody in Nigeria owns land outright. The Land Use Act of 1978 vested all land in each state in the Governor, to be held in trust for the people. What you can hold is a right of occupancy — a long lease from the state, usually for ninety-nine years. A Certificate of Occupancy is the document evidencing that right.\n\nThat makes a C of O the strongest ordinary title a buyer will encounter, and it is worth having. It is also narrower than its reputation suggests, and understanding the gap is what protects you.\n\nA C of O proves the state granted a right of occupancy over a described parcel, to a named holder, from a stated date, subject to conditions. Those conditions matter and are rarely read. Most certificates carry a development covenant — build within a period, typically two years — and require the holder to pay ground rent. Both are enforceable, and a certificate can in principle be revoked for breach.\n\nHere is what a C of O does not prove. It does not prove the person selling to you is the person named on it. It does not prove the certificate is genuine. It does not prove that the same parcel was not granted to somebody else earlier, which happens more often than the market likes to admit. And it does not prove the seller has the right to transfer it to you at all.\n\nThat last point is the one that costs people money. Under section 22 of the Land Use Act, a holder of a statutory right of occupancy cannot transfer it without the Governor's consent. A sale without consent is not a clean transfer, however much was paid and however many documents were signed. Consent takes time and costs money, and a seller who is vague about who is obtaining it, and when, is telling you something.\n\nSo the C of O is the beginning of your enquiry, not the end of it. Three things go with it.\n\nThe first is a search at the state land registry. You, or your solicitor, submit the particulars and the registry confirms what is actually recorded against that parcel — the registered holder, any mortgages, any encumbrances. A photocopy handed to you by a seller confirms none of that. The search is inexpensive and it is the single most useful thing you can do.\n\nThe second is a registered survey plan, so that the certificate can be tied to a specific piece of ground. A certificate describes a parcel by coordinates. Without a survey you cannot be certain the parcel described is the parcel you were shown.\n\nThe third is the chain of documents between the person named on the certificate and you: the deed of assignment, and the Governor's consent to it. Ask to see the chain in full. If part of it is missing, ask what is being done about it and when.\n\nWhere an estate is sold under a single global certificate covering the whole scheme, individual buyers do not each receive their own C of O. They receive a deed from the estate owner, and the consent process runs against the global title. That is a normal and legitimate structure. What matters is that it is explained to you plainly, and that the documents you receive say what everyone agrees they say.\n\nOn our own listings, the title type is stated before the price, and where a plot is sold on something less than a C of O, the listing says so in those words.",
+      "body": "Start with the fact that surprises most first-time buyers: nobody in Nigeria owns land outright. The Land Use Act of 1978 vested all land in each state in the Governor, to be held in trust for the people. What you can hold is a right of occupancy, a long lease from the state, usually for ninety-nine years. A Certificate of Occupancy is the document evidencing that right.\r\n\r\nThat makes a C of O the strongest ordinary title a buyer will encounter, and it is worth having. It is also narrower than its reputation suggests, and understanding the gap is what protects you.\r\n\r\nA C of O proves the state granted a right of occupancy over a described parcel, to a named holder, from a stated date, subject to conditions. Those conditions matter and are rarely read. Most certificates carry a development covenant build within a period, typically two years and require the holder to pay ground rent. Both are enforceable, and a certificate can in principle be revoked for breach.\r\n\r\nHere is what a C of O does not prove. It does not prove the person selling to you is the person named on it. It does not prove the certificate is genuine. It does not prove that the same parcel was not granted to somebody else earlier, which happens more often than the market likes to admit. And it does not prove the seller has the right to transfer it to you at all.\r\n\r\nThat last point is the one that costs people money. Under section 22 of the Land Use Act, a holder of a statutory right of occupancy cannot transfer it without the Governor's consent. A sale without consent is not a clean transfer, however much was paid and however many documents were signed. Consent takes time and costs money, and a seller who is vague about who is obtaining it, and when, is telling you something.\r\n\r\nSo the C of O is the beginning of your enquiry, not the end of it. Three things go with it.\r\n\r\nThe first is a search at the state land registry. You, or your solicitor, submit the particulars and the registry confirms what is actually recorded against that parcel the registered holder, any mortgages, any encumbrances. A photocopy handed to you by a seller confirms none of that. The search is inexpensive and it is the single most useful thing you can do.\r\n\r\nThe second is a registered survey plan, so that the certificate can be tied to a specific piece of ground. A certificate describes a parcel by coordinates. Without a survey you cannot be certain the parcel described is the parcel you were shown.\r\n\r\nThe third is the chain of documents between the person named on the certificate and you: the deed of assignment, and the Governor's consent to it. Ask to see the chain in full. If part of it is missing, ask what is being done about it and when.\r\n\r\nWhere an estate is sold under a single global certificate covering the whole scheme, individual buyers do not each receive their own C of O. They receive a deed from the estate owner, and the consent process runs against the global title. That is a normal and legitimate structure. What matters is that it is explained to you plainly, and that the documents you receive say what everyone agrees they say.\r\n\r\nOn our own listings, the title type is stated before the price, and where a plot is sold on something less than a C of O, the listing says so in those words.",
       "coverImageId": "cmt8ymvhb005s6e3pui5b3umk",
       "status": "PUBLISHED",
       "publishedAt": "2026-08-25T17:50:01.673Z",
       "createdAt": "2026-08-25T17:50:01.674Z",
-      "updatedAt": "2026-08-25T17:50:01.674Z",
+      "updatedAt": "2026-08-29T16:11:20.856Z",
       "coverImage": {
         "url": "/images/photography/article-1.jpg",
         "alt": "Surveyors conducting a cadastral land survey",
@@ -3483,7 +3491,7 @@
       "updatedAt": "2026-08-25T17:50:31.594Z",
       "poster": {
         "url": "/images/photography/home-03.jpg",
-        "alt": "Contemporary detached house with large glazing"
+        "alt": "Contemporary detached house with large glazing at banana highland"
       },
       "listing": {
         "id": "cmt8ym87p004n6e3prt14o29r",
@@ -3609,16 +3617,16 @@
     },
     {
       "key": "site.ogImage",
-      "mediaId": "cmt8ykota00036e3pml22lpj4",
+      "mediaId": "cmtfdo64s00001h3pynsxghd3",
       "label": "Social share image",
-      "guidance": "16:9. Shown when a link to the site is shared.",
-      "updatedAt": "2026-08-25T17:48:20.783Z",
+      "guidance": "1200x630 exactly. Shown when a link to the site is shared on WhatsApp, Facebook, LinkedIn or X.",
+      "updatedAt": "2026-08-30T05:38:00.431Z",
       "media": {
-        "url": "/images/photography/hero-estate.jpg",
-        "alt": "Aerial view across a residential neighbourhood",
+        "url": "/images/og.jpg",
+        "alt": "Rakuxon City — land and homes, with the papers in order",
         "width": 1200,
-        "height": 675,
-        "isStandIn": true,
+        "height": 630,
+        "isStandIn": false,
         "attribution": null
       }
     }

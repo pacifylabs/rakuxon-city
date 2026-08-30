@@ -196,6 +196,31 @@ async function main() {
     },
   });
 
+  /*
+   * The social share card. Not part of the photography manifest: it is a
+   * designed asset at exactly 1200x630, the ratio Facebook, LinkedIn and X lay
+   * a share card out to, rather than a photograph cropped to fit.
+   *
+   * It lives in the library so the `site.ogImage` placement below can point at
+   * it and the client can swap the share image from the admin without a
+   * deploy. That slot used to point at the 16:9 hero photograph, which meant
+   * the homepage advertised a share image of the wrong shape while the correct
+   * one sat unused in /public/images.
+   */
+  const shareCard = await prisma.media.create({
+    data: {
+      url: "/images/og.jpg",
+      alt: "Rakuxon City — land and homes, with the papers in order",
+      width: 1200,
+      height: 630,
+      mimeType: "image/jpeg",
+      sizeBytes: 47848,
+      isStandIn: false,
+      attribution: null,
+      sourceUrl: null,
+    },
+  });
+
   const collage = await Promise.all(
     [
       {
@@ -246,9 +271,10 @@ async function main() {
       },
       {
         key: "site.ogImage",
-        mediaId: hero.id,
+        mediaId: shareCard.id,
         label: "Social share image",
-        guidance: "16:9. Shown when a link to the site is shared.",
+        guidance:
+          "1200x630 exactly. Shown when a link to the site is shared on WhatsApp, Facebook, LinkedIn or X.",
       },
       {
         key: "homepage.hero",
