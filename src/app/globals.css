@@ -255,13 +255,38 @@
   --color-error: #c87373;
 }
 
-/* Dark mode specific adjustments for primary buttons */
-[data-theme="dark"] .bg-primary {
-  color: var(--color-charcoal);
+/*
+ * Dark mode primary buttons.
+ *
+ * In dark mode `--color-primary` flips to ivory-light, so `.bg-primary` is a
+ * near-white pill and its label has to become charcoal to stay legible.
+ *
+ * A second rule used to sit here — `[data-theme="dark"] .text-ivory-light
+ * { color: var(--color-ivory-light) }` — which was redundant (the utility
+ * already sets exactly that colour) and actively harmful: every primary
+ * button in the codebase is `bg-primary text-ivory-light`, and because that
+ * rule had equal specificity but came later in the file, it won the cascade
+ * and repainted the label ivory on an ivory pill. The result was invisible
+ * button text on every primary action in dark mode, public site included.
+ * Removed rather than reordered — it did nothing else.
+ */
+/*
+ * The brand mark needs a pale ground in dark mode — it is a fixed navy+gold
+ * raster, not a recolourable shape. In light mode the chip is invisible
+ * because the sidebar is already pale, so only the dark case is declared.
+ */
+.dark-chip {
+  background-color: transparent;
+  padding: 0;
 }
 
-[data-theme="dark"] .text-ivory-light {
-  color: var(--color-ivory-light);
+[data-theme="dark"] .dark-chip {
+  background-color: var(--color-ivory-light);
+  padding: 0.375rem 0.625rem;
+}
+
+[data-theme="dark"] .bg-primary {
+  color: var(--color-charcoal);
 }
 
 @layer base {
