@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { db, hasDatabase } from "@/lib/db";
-import { env } from "@/lib/env";
+import { env, hasSuperAdminConfig } from "@/lib/env";
+import { ensureSuperAdmin, hasNoAdmin } from "@/lib/auth/bootstrap";
 import { getPlacement } from "@/lib/media";
 import { verifyPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
@@ -23,6 +24,23 @@ export default async function AdminLoginPage({
 }) {
   const { error, reset } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
+
+  /*
+   * Self-heal a deployment that has no admin at all.
+   *
+   * This runs only when SUPER_ADMIN_EMAIL and SUPER_ADMIN_PASSWORD are both
+   * set AND the users table holds no ADMIN — so it fires at most once in a
+   * deployment's life, and never once anyone can sign in. It exists so a
+   * fresh database cannot become permanently unreachable when nobody
+   * remembered to run `pnpm admin:bootstrap`.
+   *
+   * It creates an account; it never authenticates one. The credential still
+   * has to be typed into the form below and checked against the stored hash
+   * like anyone else's, and the new account carries `mustChangePassword`.
+   */
+  if (hasSuperAdminConfig && (await hasNoAdmin())) {
+    await ensureSuperAdmin();
+  }
 
   // Same "unavailable without config" contract as the rest of the site: no
   // crash, no form that can never succeed, just a plain statement of what is

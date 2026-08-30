@@ -1,5 +1,10 @@
 import "server-only";
-import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import {
+  randomBytes,
+  randomInt,
+  scryptSync,
+  timingSafeEqual,
+} from "node:crypto";
 
 /**
  * scrypt, not bcrypt — matching `prisma/seed.ts`, which chose it for exactly
@@ -71,16 +76,21 @@ const TEMP_PASSWORD_WORDS = [
  * guessing before `mustChangePassword` forces a real one on first login.
  */
 export function generateTemporaryPassword(): string {
+  /*
+   * `randomInt`, not `Math.random()`. Math.random is a fast non-cryptographic
+   * PRNG: its output is seeded from a small internal state, and V8's xorshift128+
+   * is recoverable from a modest run of outputs. That is fine for shuffling a
+   * carousel and wrong for a credential — two temporary passwords issued in
+   * one session would be enough to start predicting the next. `randomInt`
+   * draws from the same CSPRNG as `randomBytes` above, and rejects modulo bias
+   * rather than folding it in.
+   */
   const selected: string[] = [];
   for (let i = 0; i < 4; i++) {
-    const word =
-      TEMP_PASSWORD_WORDS[Math.floor(Math.random() * TEMP_PASSWORD_WORDS.length)];
-    selected.push(word);
+    selected.push(TEMP_PASSWORD_WORDS[randomInt(TEMP_PASSWORD_WORDS.length)]);
   }
 
-  const numbers = Math.floor(Math.random() * 100)
-    .toString()
-    .padStart(2, "0");
+  const numbers = randomInt(100).toString().padStart(2, "0");
   return `${selected.join("-")}-${numbers}`;
 }
 

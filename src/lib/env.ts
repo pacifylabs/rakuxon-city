@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import { validatePasswordStrength } from "@/lib/auth/password";
 
 /**
  * The single place `process.env` is read. Everything else imports from here,
@@ -102,6 +103,43 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: emptyToUndefined,
   CLOUDINARY_API_KEY: emptyToUndefined,
   CLOUDINARY_API_SECRET: emptyToUndefined,
+
+  /**
+   * Phase 7 — the first admin account, so a fresh deployment has a way in.
+   *
+   * These seed the account and nothing more. Sign-in always verifies against
+   * the hash in the database, never against this value, so once the admin
+   * changes their password — through Settings, or the forgot-password flow —
+   * this variable is inert. Rotating it afterwards does not change anyone's
+   * password, and clearing it does not lock anyone out.
+   *
+   * Email and password are required together: an email with no password
+   * cannot create an account, and a password with no email has nothing to
+   * attach to. Both empty is the normal state after launch.
+   */
+  SUPER_ADMIN_EMAIL: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z.email().optional(),
+  ),
+  /*
+   * Held to the same rules the change-password form enforces, and checked at
+   * boot rather than at first use — a deployment with a weak bootstrap
+   * password should fail loudly while someone is still watching the deploy,
+   * not create the account and reject the operator's own login later.
+   */
+  SUPER_ADMIN_PASSWORD: z.preprocess(
+    (val) => (val === "" ? undefined : val),
+    z
+      .string()
+      .superRefine((value, ctx) => {
+        for (const message of validatePasswordStrength(value).errors) {
+          ctx.addIssue({ code: "custom", message });
+        }
+      })
+      .optional(),
+  ),
+  /** Shown in the admin UI. Falls back to a neutral label when unset. */
+  SUPER_ADMIN_NAME: emptyToUndefined,
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -129,9 +167,31 @@ export const env = loadEnv();
  */
 export const hasDatabase = Boolean(env.DATABASE_URL);
 
+/**
+ * Both halves of the bootstrap admin, or neither.
+ *
+ * A half-set pair is a configuration mistake worth surfacing rather than
+ * quietly ignoring, so `assertSuperAdminConfig` below names which half is
+ * missing; this boolean is the cheap check for "should we try at all".
+ */
+export const hasSuperAdminConfig = Boolean(
+  env.SUPER_ADMIN_EMAIL && env.SUPER_ADMIN_PASSWORD,
+);
+
+/** The half-configured case, reported rather than guessed at. */
+export function superAdminConfigError(): string | null {
+  if (env.SUPER_ADMIN_EMAIL && !env.SUPER_ADMIN_PASSWORD) {
+    return "SUPER_ADMIN_EMAIL is set but SUPER_ADMIN_PASSWORD is not.";
+  }
+  if (!env.SUPER_ADMIN_EMAIL && env.SUPER_ADMIN_PASSWORD) {
+    return "SUPER_ADMIN_PASSWORD is set but SUPER_ADMIN_EMAIL is not.";
+  }
+  return null;
+}
+
 /** All three Cloudinary values, or none — a partial config cannot sign uploads. */
 export const hasCloudinary = Boolean(
   env.CLOUDINARY_CLOUD_NAME &&
-    env.CLOUDINARY_API_KEY &&
-    env.CLOUDINARY_API_SECRET,
+  env.CLOUDINARY_API_KEY &&
+  env.CLOUDINARY_API_SECRET,
 );

@@ -14,6 +14,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
+    "admin:bootstrap": "tsx --require ./scripts/server-only-stub.cjs scripts/bootstrap-admin.ts",
     "db:reset": "prisma migrate reset --force",
     "verify:seed": "tsx scripts/verify-seed.ts",
     "verify:og": "tsx scripts/verify-og-metadata.ts",
