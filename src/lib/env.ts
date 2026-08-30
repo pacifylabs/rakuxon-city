@@ -90,8 +90,18 @@ const envSchema = z.object({
   TURNSTILE_SITE_KEY: emptyToUndefined,
   TURNSTILE_SECRET_KEY: emptyToUndefined,
 
-  /** Phase 5 — media library uploads. */
-  BLOB_READ_WRITE_TOKEN: emptyToUndefined,
+  /**
+   * Phase 7 — Cloudinary, for media-library and profile-picture uploads.
+   *
+   * Replaces the Vercel Blob token this slot used to hold. All three are
+   * required together: the SDK cannot sign an upload without the secret, and
+   * a half-configured account fails at request time rather than at boot. The
+   * upload surfaces check `hasCloudinary` and say so plainly when it is unset,
+   * the same contract every other optional integration here follows.
+   */
+  CLOUDINARY_CLOUD_NAME: emptyToUndefined,
+  CLOUDINARY_API_KEY: emptyToUndefined,
+  CLOUDINARY_API_SECRET: emptyToUndefined,
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -118,3 +128,10 @@ export const env = loadEnv();
  * this rather than reading `process.env` again, so one place decides.
  */
 export const hasDatabase = Boolean(env.DATABASE_URL);
+
+/** All three Cloudinary values, or none — a partial config cannot sign uploads. */
+export const hasCloudinary = Boolean(
+  env.CLOUDINARY_CLOUD_NAME &&
+    env.CLOUDINARY_API_KEY &&
+    env.CLOUDINARY_API_SECRET,
+);

@@ -30,6 +30,26 @@ const nextConfig: NextConfig = {
      * "slow on the deployed site" symptom.
      */
     minimumCacheTTL: 31_536_000,
+
+    /*
+     * Cloudinary, for images uploaded through the Phase 7 admin.
+     *
+     * Without this, every admin-uploaded image 404s through next/image while
+     * the seeded ones (local files under /public) keep working — a failure
+     * mode that only appears after the first real upload, which is exactly
+     * when nobody is looking for it.
+     *
+     * Scoped to Cloudinary's delivery host rather than a wildcard:
+     * `next/image` is a fetch-and-re-serve proxy, so a permissive entry here
+     * would let any URL be laundered through this domain.
+     */
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+    ],
   },
 };
 
