@@ -69,12 +69,16 @@ export function rateLimit(
  * These headers are spoofable by anyone talking to the origin directly, so a
  * value here is a hint rather than an identity. It is used to rate limit and is
  * stored on the enquiry for abuse investigation; nothing is authorised by it.
+ *
+ * Takes anything with a `.get(name)` lookup rather than a `Request`, so a
+ * Server Action — which has no `Request` object — can pass the result of
+ * `headers()` from `next/headers` instead.
  */
-export function clientIp(request: Request): string | null {
-  const forwarded = request.headers.get("x-forwarded-for");
+export function clientIp(headers: { get(name: string): string | null }): string | null {
+  const forwarded = headers.get("x-forwarded-for");
   // Left-most entry is the original client; the rest are proxies.
   if (forwarded) return forwarded.split(",")[0]!.trim() || null;
-  return request.headers.get("x-real-ip");
+  return headers.get("x-real-ip");
 }
 
 /** Exposed for tests; there is no other reason to clear this. */

@@ -31,7 +31,7 @@ export const runtime = "nodejs";
 const RATE_LIMIT = { limit: 3, windowMs: 15 * 60 * 1000 };
 
 export async function POST(request: Request) {
-  const ip = clientIp(request);
+  const ip = clientIp(request.headers);
 
   const limited = rateLimit(`investor:${ip ?? "unknown"}`, RATE_LIMIT);
   if (!limited.allowed) {

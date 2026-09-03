@@ -187,11 +187,21 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
       // MODIFIED FROM SPEC: Changed from full-bleed to contained layout
       // Original: edge-to-edge with no margins
       // Current: centered with max-width + bottom margin for separation
-      className="relative isolate mt-28 mb-16 flex justify-center px-6 lg:mb-24 lg:px-16"
+      //
+      // Width matches `Container` (src/components/ui/container.tsx) exactly
+      // — `mx-auto w-full max-w-[1280px] px-6 lg:px-16` — rather than the
+      // `flex justify-center` + `max-w-screen-xl` this used before. The two
+      // are not the same box model: that version applied its padding
+      // *outside* the 1280px cap, so the capped box (and the photograph in
+      // it) landed 64px further out on each side than Header's `Container`,
+      // whose padding sits *inside* the cap. Invisible below ~1400px, where
+      // the cap isn't reached either way — obvious above it, where the hero
+      // photograph overhung the header's logo and nav by 64px a side.
+      className="relative isolate mx-auto mt-28 mb-16 w-full max-w-[1280px] px-6 lg:mb-24 lg:px-16"
       onMouseEnter={stopForGood}
       onFocusCapture={stopForGood}
     >
-      <div className="relative h-[92svh] w-full max-w-screen-xl overflow-hidden rounded-card lg:h-[88svh]">
+      <div className="relative h-[92svh] w-full overflow-hidden rounded-card lg:h-[88svh]">
       {slides.map((slide, index) => {
         if (!slide.image) return null;
         if (index > 0 && !readyForRest) return null; // §5.1, literally.

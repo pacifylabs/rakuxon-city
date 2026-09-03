@@ -1,14 +1,27 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { db, hasDatabase } from "@/lib/db";
 import { env, hasSuperAdminConfig } from "@/lib/env";
 import { ensureSuperAdmin, hasNoAdmin } from "@/lib/auth/bootstrap";
 import { getPlacement } from "@/lib/media";
 import { verifyPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { Field, Input } from "@/components/ui/field";
 import { AuthLayout } from "@/components/admin/auth-layout";
 import { FormError, FormSuccess } from "@/components/admin/ui";
+
+/*
+ * docs/PHASE_7_ADMIN_DASHBOARD.md's Security Considerations name this
+ * explicitly: "Login attempts: 5 per minute per IP." Per-IP and in-memory,
+ * same tradeoffs as `src/lib/rate-limit.ts` documents for the public forms —
+ * it stops credential-stuffing scripts and repeated guessing from one
+ * instance; it does not stop a distributed attacker. Worth having anyway:
+ * scrypt already makes each guess slow, and this makes guessing *loudly*
+ * slow well before that.
+ */
+const LOGIN_RATE_LIMIT = { limit: 5, windowMs: 60 * 1000 };
 
 const LOGO_FALLBACK = {
   url: "/logo.png",
@@ -65,6 +78,10 @@ export default async function AdminLoginPage({
   async function authenticate(formData: FormData) {
     "use server";
 
+    const ip = clientIp(await headers());
+    const limited = rateLimit(`admin-login:${ip ?? "unknown"}`, LOGIN_RATE_LIMIT);
+    if (!limited.allowed) redirect("/admin/login?error=rate_limited");
+
     const email = String(formData.get("email") ?? "")
       .trim()
       .toLowerCase();
@@ -98,7 +115,11 @@ export default async function AdminLoginPage({
         {reset === "1" ? (
           <FormSuccess message="Password updated. Sign in with your new one." />
         ) : null}
-        {error ? <FormError message="Incorrect email or password." /> : null}
+        {error === "rate_limited" ? (
+          <FormError message="Too many attempts. Wait a minute and try again." />
+        ) : error ? (
+          <FormError message="Incorrect email or password." />
+        ) : null}
 
         <form action={authenticate} className="flex flex-col gap-5">
           <Field label="Email" htmlFor="email">

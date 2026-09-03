@@ -98,6 +98,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en-NG"
       className={`${instrumentSans.variable} ${inter.variable} h-full antialiased`}
+      // themeScript below sets `data-theme` on this element before hydration,
+      // to paint the right theme on first frame instead of flashing the
+      // wrong one — so this element's attributes are expected to differ from
+      // what React rendered server-side. That is the one attribute this
+      // guards; anything else drifting here should still warn.
+      suppressHydrationWarning
     >
       <head>
         {/* Blocking script to prevent theme flash - runs before React hydration */}

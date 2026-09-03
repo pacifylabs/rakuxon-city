@@ -33,7 +33,7 @@ export const runtime = "nodejs";
 const RATE_LIMIT = { limit: 5, windowMs: 10 * 60 * 1000 };
 
 export async function POST(request: Request) {
-  const ip = clientIp(request);
+  const ip = clientIp(request.headers);
 
   // 1 — rate limit.
   const limited = rateLimit(`enquiry:${ip ?? "unknown"}`, RATE_LIMIT);
