@@ -39,7 +39,7 @@ export const site = {
    * conventional form for the domain and is the address the enquiry mailto
    * links point at, so it must be confirmed before launch — see TODO.md §2.1.
    */
-  email: "hello@rakuxoncity.com",
+  email: "info@rakuxoncity.com",
 
   phone: {
     e164: PHONE_E164,

@@ -445,7 +445,7 @@ to any of them.
 
 **Still unverified — needed before launch:**
 
-- `hello@rakuxoncity.com`. Conventional for the domain but not published
+- `info@rakuxoncity.com`. Conventional for the domain but not published
   anywhere, and it is the address every enquiry mailto now points at. Confirm
   the mailbox exists and is monitored.
 - Registered company name and RC number. Needed by the terms of use, first
