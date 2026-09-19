@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { db, hasDatabase } from "@/lib/db";
-import { env, hasSuperAdminConfig } from "@/lib/env";
+import { db } from "@/lib/db";
+import { env, hasDatabase, hasSuperAdminConfig } from "@/lib/env";
 import { ensureSuperAdmin, hasNoAdmin } from "@/lib/auth/bootstrap";
 import { getPlacement } from "@/lib/media";
 import { verifyPassword } from "@/lib/auth/password";
@@ -24,6 +24,8 @@ import { FormError, FormSuccess } from "@/components/admin/ui";
  * slow well before that.
  */
 const LOGIN_RATE_LIMIT = { limit: 5, windowMs: 60 * 1000 };
+
+export const dynamic = "force-dynamic";
 
 const LOGO_FALLBACK = {
   url: "/logo.png",
@@ -61,11 +63,20 @@ export default async function AdminLoginPage({
   // crash, no form that can never succeed, just a plain statement of what is
   // missing.
   if (!hasDatabase || !env.AUTH_SECRET) {
+    const missing = [
+      !hasDatabase ? "DATABASE_URL" : null,
+      !env.AUTH_SECRET ? "AUTH_SECRET" : null,
+    ].filter(Boolean);
+
     return (
       <AuthLayout
         logo={logo}
         title="Admin is unavailable"
-        description="The admin console is not set up on this deployment yet. Ask your developer to finish configuring it."
+        description={
+          missing.length > 0
+            ? `This deployment is missing ${missing.join(" and ")} in the Vercel Production environment. Add them, then use Deployments → Redeploy (saving variables alone does not update a live deployment).`
+            : "The admin console is not set up on this deployment yet."
+        }
       >
         <Link
           href="/"
