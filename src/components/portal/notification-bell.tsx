@@ -37,6 +37,15 @@ export function PortalNotificationBell({
     return () => document.removeEventListener("mousedown", onPointerDown);
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
   return (
     <div className="relative" ref={panelRef}>
       <button
@@ -55,38 +64,52 @@ export function PortalNotificationBell({
       </button>
 
       {open ? (
-        <div className="absolute right-0 z-50 mt-2 w-[min(100vw-2rem,22rem)] rounded-card border border-line bg-surface shadow-lg">
-          <div className="flex items-center justify-between border-b border-line px-4 py-3">
-            <p className="text-body font-medium text-foreground">Notifications</p>
-            {unreadCount > 0 ? (
-              <form action={markAllNotificationsRead}>
-                <button
-                  type="submit"
-                  className="cursor-pointer text-caption text-accent-text underline underline-offset-4"
-                >
-                  Mark all read
-                </button>
-              </form>
-            ) : null}
-          </div>
-          <ul className="max-h-80 overflow-y-auto">
-            {notifications.length === 0 ? (
-              <li className="px-4 py-6 text-caption text-muted">Nothing yet.</li>
-            ) : (
-              notifications.map((item) => (
-                <li
-                  key={item.id}
-                  className={cn(
-                    "border-b border-line last:border-b-0",
-                    !item.readAt && "bg-surface-muted/60",
-                  )}
-                >
-                  <NotificationRow item={item} onNavigate={() => setOpen(false)} />
-                </li>
-              ))
+        <>
+          <button
+            type="button"
+            aria-label="Close notifications"
+            className="fixed inset-0 z-40 bg-charcoal-deep/50 md:hidden"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className={cn(
+              "z-50 flex flex-col overflow-hidden rounded-card border border-line bg-surface shadow-lg",
+              "fixed inset-x-3 top-[calc(env(safe-area-inset-top,0px)+4.25rem)] max-h-[min(70dvh,calc(100dvh-5.5rem))]",
+              "md:absolute md:inset-x-auto md:right-0 md:top-full md:mt-2 md:w-[min(100vw-2rem,22rem)] md:max-h-80",
             )}
-          </ul>
-        </div>
+          >
+            <div className="flex shrink-0 items-center justify-between border-b border-line px-4 py-3">
+              <p className="text-body font-medium text-foreground">Notifications</p>
+              {unreadCount > 0 ? (
+                <form action={markAllNotificationsRead}>
+                  <button
+                    type="submit"
+                    className="cursor-pointer text-caption text-accent-text underline underline-offset-4"
+                  >
+                    Mark all read
+                  </button>
+                </form>
+              ) : null}
+            </div>
+            <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+              {notifications.length === 0 ? (
+                <li className="px-4 py-6 text-caption text-muted">Nothing yet.</li>
+              ) : (
+                notifications.map((item) => (
+                  <li
+                    key={item.id}
+                    className={cn(
+                      "border-b border-line last:border-b-0",
+                      !item.readAt && "bg-surface-muted/60",
+                    )}
+                  >
+                    <NotificationRow item={item} onNavigate={() => setOpen(false)} />
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        </>
       ) : null}
     </div>
   );
@@ -110,9 +133,11 @@ function NotificationRow({
 
   const content = (
     <>
-      <p className="text-body text-foreground">{item.title}</p>
+      <p className="text-body leading-snug text-foreground">{item.title}</p>
       {item.body ? (
-        <p className="mt-1 line-clamp-2 text-caption text-muted">{item.body}</p>
+        <p className="mt-1 line-clamp-3 text-caption leading-snug text-muted">
+          {item.body}
+        </p>
       ) : null}
       <p className="mt-2 text-[11px] text-muted">
         {new Date(item.createdAt).toLocaleDateString("en-NG", {
@@ -133,7 +158,7 @@ function NotificationRow({
           markRead();
           onNavigate();
         }}
-        className="block px-4 py-3 hover:bg-surface-muted"
+        className="block px-4 py-3 active:bg-surface-muted md:hover:bg-surface-muted"
       >
         {content}
       </Link>
@@ -147,7 +172,7 @@ function NotificationRow({
         markRead();
         onNavigate();
       }}
-      className="w-full cursor-pointer px-4 py-3 text-left hover:bg-surface-muted"
+      className="w-full cursor-pointer px-4 py-3 text-left active:bg-surface-muted md:hover:bg-surface-muted"
     >
       {content}
     </button>

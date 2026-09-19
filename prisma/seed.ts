@@ -15,6 +15,10 @@
  *
  *   pnpm db:seed
  *   SEED_SKIP_USERS=1 pnpm db:seed   — catalogue only; keeps existing users/admins
+ *
+ * Catalogue volume is capped below (~10 listings, 2 estates, 4 guides, 3 videos) so
+ * dev and demo databases stay small. Full seed arrays remain in-file for reference;
+ * only the curated slugs in `pickSeedsBySlug` are inserted.
  */
 
 import "dotenv/config";
@@ -52,6 +56,19 @@ const prisma = new PrismaClient({
 const skipUsers =
   process.env.SEED_SKIP_USERS === "1" ||
   process.env.SEED_SKIP_USERS === "true";
+
+function pickSeedsBySlug<T extends { slug: string }>(
+  seeds: T[],
+  slugs: readonly string[],
+): T[] {
+  return slugs.map((slug) => {
+    const row = seeds.find((entry) => entry.slug === slug);
+    if (!row) {
+      throw new Error(`Seed catalogue is missing slug "${slug}".`);
+    }
+    return row;
+  });
+}
 
 /**
  * scrypt from node:crypto rather than bcrypt or argon2: auth is Phase 7 and the
@@ -418,7 +435,12 @@ async function main() {
 
   const estates: Record<string, string> = {};
 
-  for (const seed of estateSeeds) {
+  const estatesToSeed = pickSeedsBySlug(estateSeeds, [
+    "emerald-ridge",
+    "cornerstone-gardens",
+  ]);
+
+  for (const seed of estatesToSeed) {
     const media = await prisma.media.create({
       data: photo(seed.image),
     });
@@ -1145,7 +1167,15 @@ async function main() {
     },
   ];
 
-  for (const [landIndex, seed] of landSeeds.entries()) {
+  const landsToSeed = pickSeedsBySlug(landSeeds, [
+    "emerald-ridge-plot-a14",
+    "emerald-ridge-corner-block-c",
+    "cornerstone-gardens-plot-47",
+    "cornerstone-gardens-plot-09",
+    "emerald-ridge-plot-d22",
+  ]);
+
+  for (const [landIndex, seed] of landsToSeed.entries()) {
     // Land gets Nigerian terrain photography; homes and estates get residential
     // photography from the wider open-licensed pool. All stand-ins either way.
     const media = await prisma.media.create({
@@ -1743,7 +1773,15 @@ async function main() {
     },
   ];
 
-  for (const seed of homeSeeds) {
+  const homesToSeed = pickSeedsBySlug(homeSeeds, [
+    "emerald-ridge-4-bed-detached",
+    "emerald-ridge-3-bed-terrace",
+    "emerald-ridge-5-bed-off-plan",
+    "cornerstone-gardens-3-bed-bungalow",
+    "cornerstone-gardens-3-bed-terrace-sold",
+  ]);
+
+  for (const seed of homesToSeed) {
     const media = await prisma.media.create({
       data: photo(seed.image),
     });
@@ -1898,7 +1936,9 @@ async function main() {
     },
   ];
 
-  for (const [index, seed] of articleSeeds.entries()) {
+  const articlesToSeed = articleSeeds.slice(0, 4);
+
+  for (const [index, seed] of articlesToSeed.entries()) {
     const cover = await prisma.media.create({
       data: {
         ...photo(seed.image),
@@ -2076,7 +2116,13 @@ async function main() {
     },
   ];
 
-  for (const seed of videoSeeds) {
+  const videosToSeed = pickSeedsBySlug(videoSeeds, [
+    "emerald-ridge-estate-overview",
+    "emerald-ridge-plot-a14-drone-tour",
+    "emerald-ridge-4-bed-walkthrough",
+  ]);
+
+  for (const seed of videosToSeed) {
     // Resolved by slug rather than carried through the loops above: a video
     // belongs to a listing or an estate that may be created hundreds of lines
     // earlier, and threading ids through would couple the two orderings.
@@ -2175,12 +2221,12 @@ async function main() {
       skipUsers
         ? `  users          kept existing (status history attributed to ${landSales.email} / ${homesSales.email})`
         : `  users          3 (admin ${admin.email}, land ${landSales.email}, homes ${homesSales.email})`,
-      `  estates        ${estateSeeds.length}`,
-      `  listings       ${listings} (${landSeeds.length} land, ${homeSeeds.length} homes)`,
+      `  estates        ${estatesToSeed.length}`,
+      `  listings       ${listings} (${landsToSeed.length} land, ${homesToSeed.length} homes)`,
       `  price on req.  ${por}`,
       `  survey only    ${surveyOnly}`,
       `  articles       ${articles}`,
-      `  videos         ${videoSeeds.length} (${videoSeeds.filter((v) => v.featured).length} featured)`,
+      `  videos         ${videosToSeed.length} (${videosToSeed.filter((v) => v.featured).length} featured)`,
       `  testimonials   ${testimonials}`,
     ].join("\n"),
   );
