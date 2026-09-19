@@ -54,6 +54,20 @@ function shell(heading: string, bodyHtml: string): string {
 </body></html>`;
 }
 
+function firstName(name: string): string {
+  return name.trim().split(/\s+/)[0] || name;
+}
+
+function ctaButton(href: string, label: string): string {
+  return `<p style="${FONT};margin:24px 0 0;">
+    <a href="${esc(href)}" style="display:inline-block;background:#171918;color:#FAF8F3;text-decoration:none;padding:12px 20px;border-radius:999px;font-size:15px;">${esc(label)}</a>
+  </p>`;
+}
+
+function bodyParagraph(html: string): string {
+  return `<p style="${FONT};margin:0 0 16px;font-size:15px;line-height:1.6;color:#726E65;">${html}</p>`;
+}
+
 function row(label: string, value: string): string {
   return `<tr>
     <td style="${FONT};padding:8px 16px 8px 0;font-size:13px;color:#726E65;vertical-align:top;white-space:nowrap;">${esc(label)}</td>
@@ -240,6 +254,305 @@ export function investorNotification(enquiry: {
       .filter(Boolean)
       .join("\n"),
   };
+}
+
+/** Password reset — admin staff or lister portal. */
+export function passwordResetEmail({
+  resetUrl,
+  accountLabel,
+}: {
+  resetUrl: string;
+  accountLabel: string;
+}) {
+  const subject = "Reset your Rakuxon City password";
+  const html = shell(
+    "Reset your password",
+    `${bodyParagraph(
+      `Someone asked to reset the password on your <strong style="color:#171918;font-weight:500;">${esc(accountLabel)}</strong> account.`,
+    )}
+     ${ctaButton(resetUrl, "Set a new password")}
+     ${bodyParagraph(
+       "The link works once and expires in an hour. If this was not you, ignore this email — nothing has changed.",
+     )}`,
+  );
+  const text = [
+    `Someone asked to reset the password on your ${accountLabel} account.`,
+    "",
+    `Open this link to set a new one: ${resetUrl}`,
+    "",
+    "The link works once and expires in an hour.",
+    "If this wasn't you, ignore this email — nothing has changed.",
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** After a successful password reset via email link. */
+export function passwordChangedEmail({
+  name,
+  signInUrl,
+}: {
+  name: string;
+  signInUrl: string;
+}) {
+  const subject = "Your password was updated — Rakuxon City";
+  const html = shell(
+    "Password updated",
+    `${bodyParagraph(`Hi ${esc(firstName(name))}, your password was changed successfully.`)}
+     ${bodyParagraph("If you did not make this change, contact us immediately.")}
+     ${ctaButton(signInUrl, "Sign in")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)}, your password was changed successfully.`,
+    "",
+    "If you did not make this change, contact us immediately.",
+    "",
+    signInUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** New lister after self-service registration. */
+export function portalWelcomeEmail({ name }: { name: string }) {
+  const portalUrl = `${origin()}/portal`;
+  const subject = "Welcome to the Rakuxon City lister portal";
+  const html = shell(
+    `Welcome, ${firstName(name)}`,
+    `${bodyParagraph(
+      "Your lister account is ready. You can add land or home listings, upload photos, and submit them for review.",
+    )}
+     ${bodyParagraph(
+       "Nothing goes live on the public site until our team approves a listing. We will email you when a decision is made.",
+     )}
+     ${ctaButton(portalUrl, "Open the portal")}
+     ${bodyParagraph(
+       `Questions? Reach us on <a href="mailto:${esc(site.email)}" style="color:#81632C;">${esc(site.email)}</a> or ${esc(site.phone.display)}.`,
+     )}`,
+  );
+  const text = [
+    `Welcome, ${firstName(name)}`,
+    "",
+    "Your lister account is ready. Add listings and submit them for review — nothing goes live until we approve.",
+    "",
+    portalUrl,
+    "",
+    `Questions: ${site.email} or ${site.phone.display}.`,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** Staff account created by an admin — includes one-time temporary password. */
+export function staffAccountCreatedEmail({
+  name,
+  email,
+  temporaryPassword,
+  signInUrl,
+}: {
+  name: string;
+  email: string;
+  temporaryPassword: string;
+  signInUrl: string;
+}) {
+  const subject = "Your Rakuxon City admin account";
+  const html = shell(
+    `Hi ${firstName(name)}`,
+    `${bodyParagraph("An admin account has been created for you on Rakuxon City.")}
+     ${bodyParagraph(
+       `Sign in with <strong style="color:#171918;font-weight:500;">${esc(email)}</strong> and this temporary password:`,
+     )}
+     <div style="margin:0 0 16px;padding:16px;background:#F5F1E8;border-radius:8px;">
+       <p style="${FONT};margin:0;font-size:15px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#171918;letter-spacing:0.04em;">${esc(temporaryPassword)}</p>
+     </div>
+     ${bodyParagraph("You will be asked to choose a new password on first sign-in.")}
+     ${ctaButton(signInUrl, "Sign in to admin")}
+     ${bodyParagraph("Do not share this password. If you did not expect this email, contact your team lead.")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)},`,
+    "",
+    "An admin account has been created for you on Rakuxon City.",
+    "",
+    `Email: ${email}`,
+    `Temporary password: ${temporaryPassword}`,
+    "",
+    "You will be asked to choose a new password on first sign-in.",
+    "",
+    signInUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** Admin-issued temporary password (Team → reset password). */
+export function staffTemporaryPasswordEmail({
+  name,
+  temporaryPassword,
+  signInUrl,
+}: {
+  name: string;
+  temporaryPassword: string;
+  signInUrl: string;
+}) {
+  const subject = "New temporary password — Rakuxon City admin";
+  const html = shell(
+    "New temporary password",
+    `${bodyParagraph(`Hi ${esc(firstName(name))}, an administrator reset your admin password.`)}
+     ${bodyParagraph("Sign in with this temporary password:")}
+     <div style="margin:0 0 16px;padding:16px;background:#F5F1E8;border-radius:8px;">
+       <p style="${FONT};margin:0;font-size:15px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#171918;letter-spacing:0.04em;">${esc(temporaryPassword)}</p>
+     </div>
+     ${bodyParagraph("You will be asked to choose a new password on sign-in.")}
+     ${ctaButton(signInUrl, "Sign in to admin")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)}, an administrator reset your admin password.`,
+    "",
+    `Temporary password: ${temporaryPassword}`,
+    "",
+    "You will be asked to choose a new password on sign-in.",
+    "",
+    signInUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** To the team inbox when a lister submits a listing for moderation. */
+export function listingSubmittedForReviewEmail({
+  listingTitle,
+  listerName,
+  listerEmail,
+  moderationUrl,
+}: {
+  listingTitle: string;
+  listerName: string;
+  listerEmail: string;
+  moderationUrl: string;
+}) {
+  const subject = `Listing ready for review: ${listingTitle}`;
+  const lines = [
+    row("Listing", listingTitle),
+    row("Submitted by", listerName),
+    row("Email", listerEmail),
+  ].join("");
+  const html = shell(
+    "Listing submitted for review",
+    `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">${lines}</table>
+     ${ctaButton(moderationUrl, "Open moderation queue")}`,
+  );
+  const text = [
+    "Listing submitted for review",
+    "",
+    `Listing: ${listingTitle}`,
+    `Submitted by: ${listerName}`,
+    `Email: ${listerEmail}`,
+    "",
+    moderationUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+export function listingApprovedEmail({
+  name,
+  listingTitle,
+  publicUrl,
+}: {
+  name: string;
+  listingTitle: string;
+  publicUrl: string;
+}) {
+  const subject = `Your listing is live: ${listingTitle}`;
+  const html = shell(
+    "Listing approved",
+    `${bodyParagraph(
+      `Hi ${esc(firstName(name))}, <strong style="color:#171918;font-weight:500;">${esc(listingTitle)}</strong> has been approved and is now visible on Rakuxon City.`,
+    )}
+     ${ctaButton(publicUrl, "View on the site")}
+     ${bodyParagraph("Enquiries about your listing will be forwarded to your email when visitors use the enquiry form.")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)}, "${listingTitle}" has been approved and is live.`,
+    "",
+    publicUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+export function listingRejectedEmail({
+  name,
+  listingTitle,
+  reason,
+  editUrl,
+}: {
+  name: string;
+  listingTitle: string;
+  reason: string;
+  editUrl: string;
+}) {
+  const subject = `Changes needed: ${listingTitle}`;
+  const html = shell(
+    "Listing not approved yet",
+    `${bodyParagraph(
+      `Hi ${esc(firstName(name))}, we reviewed <strong style="color:#171918;font-weight:500;">${esc(listingTitle)}</strong> and it is not ready to go live yet.`,
+    )}
+     <div style="margin:0 0 16px;padding:16px;background:#F5F1E8;border-radius:8px;">
+       <p style="${FONT};margin:0 0 6px;font-size:13px;color:#726E65;">Feedback from our team</p>
+       <p style="${FONT};margin:0;font-size:15px;line-height:1.6;color:#171918;white-space:pre-wrap;">${esc(reason)}</p>
+     </div>
+     ${bodyParagraph("Update the listing in the portal and submit it again when you are ready.")}
+     ${ctaButton(editUrl, "Edit listing")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)}, "${listingTitle}" was not approved yet.`,
+    "",
+    "Feedback:",
+    reason,
+    "",
+    editUrl,
+  ].join("\n");
+  return { subject, html, text };
+}
+
+/** Enquiry on a lister-owned listing — same facts, owner-facing copy. */
+export function listerListingEnquiryEmail(enquiry: EnquiryNotification) {
+  const subject = enquiry.listingTitle
+    ? `Enquiry on your listing: ${enquiry.listingTitle} (${enquiry.reference})`
+    : `Enquiry on your listing (${enquiry.reference})`;
+
+  const lines = [
+    row("Reference", enquiry.reference),
+    row("Name", enquiry.name),
+    row("Email", enquiry.email),
+    row("Phone", enquiry.phone),
+    enquiry.preferredInspectionDate
+      ? row("Inspection", enquiry.preferredInspectionDate.toDateString())
+      : "",
+  ]
+    .filter(Boolean)
+    .join("");
+
+  const html = shell(
+    enquiry.listingTitle
+      ? `New enquiry — ${enquiry.listingTitle}`
+      : "New enquiry on your listing",
+    `${bodyParagraph("Someone enquired about a property you listed on Rakuxon City.")}
+     <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">${lines}</table>
+     <div style="margin:24px 0 0;padding:16px;background:#F5F1E8;border-radius:8px;">
+       <p style="${FONT};margin:0 0 6px;font-size:13px;color:#726E65;">Message</p>
+       <p style="${FONT};margin:0;font-size:15px;line-height:1.6;color:#171918;white-space:pre-wrap;">${esc(enquiry.message)}</p>
+     </div>
+     <p style="${FONT};margin:20px 0 0;font-size:13px;color:#726E65;">Reply to this email to reach ${esc(enquiry.name)} directly.</p>`,
+  );
+
+  const text = [
+    subject,
+    "",
+    `Name:  ${enquiry.name}`,
+    `Email: ${enquiry.email}`,
+    `Phone: ${enquiry.phone}`,
+    "",
+    "Message:",
+    enquiry.message,
+  ].join("\n");
+
+  return { subject, html, text };
 }
 
 /** FR-4.5 — says only that the team will make contact. Nothing about terms. */

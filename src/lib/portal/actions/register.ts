@@ -8,6 +8,8 @@ import { hashPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { portalRegisterSchema } from "@/lib/validation/portal-register";
+import { sendEmail } from "@/lib/email/send";
+import { portalWelcomeEmail } from "@/lib/email/templates";
 import { UserRole } from "@/generated/prisma/enums";
 
 const REGISTER_LIMIT = { limit: 5, windowMs: 15 * 60 * 1000 };
@@ -67,6 +69,14 @@ export async function registerLister(
         },
       },
     },
+  });
+
+  const welcome = portalWelcomeEmail({ name: input.displayName });
+  void sendEmail({
+    to: input.email,
+    subject: welcome.subject,
+    html: welcome.html,
+    text: welcome.text,
   });
 
   await createSession(user.id);

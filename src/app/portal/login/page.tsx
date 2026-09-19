@@ -10,7 +10,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { Field, Input } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { AuthLayout } from "@/components/admin/auth-layout";
-import { FormError } from "@/components/admin/ui";
+import { FormError, FormSuccess } from "@/components/admin/ui";
 import { UserRole } from "@/generated/prisma/enums";
 
 const LOGIN_RATE_LIMIT = { limit: 5, windowMs: 60 * 1000 };
@@ -25,12 +25,12 @@ const LOGO_FALLBACK = {
 export default async function PortalLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; reset?: string }>;
 }) {
   const session = await getSession();
   if (session?.role === UserRole.LISTER) redirect("/portal");
 
-  const { error } = await searchParams;
+  const { error, reset } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
 
   if (!hasDatabase || !env.AUTH_SECRET) {
@@ -95,6 +95,9 @@ export default async function PortalLoginPage({
       }
     >
       <div className="flex flex-col gap-5">
+        {reset === "1" ? (
+          <FormSuccess message="Your password was updated. Sign in with your new password." />
+        ) : null}
         {error === "rate_limited" ? (
           <FormError message="Too many attempts. Wait a minute and try again." />
         ) : error ? (
@@ -122,6 +125,14 @@ export default async function PortalLoginPage({
               autoComplete="current-password"
             />
           </Field>
+          <p className="-mt-2 text-caption text-muted">
+            <Link
+              href="/portal/forgot-password"
+              className="text-accent-text underline underline-offset-4"
+            >
+              Forgot password?
+            </Link>
+          </p>
           <button
             type="submit"
             className="min-h-11 cursor-pointer rounded-full bg-primary px-6 text-body text-ivory-light transition-colors hover:bg-primary-hover"

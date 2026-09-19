@@ -101,14 +101,30 @@ const envSchema = z.object({
     z.string().min(32).optional(),
   ),
 
-  /** Phase 4 — Resend transactional email. */
+  /**
+   * Transactional email — SMTP (preferred, same vars as the main Rakuxon backend)
+   * or Resend as fallback.
+   */
+  SMTP_HOST: emptyToUndefined,
+  SMTP_PORT: z.preprocess(
+    (val) => (val === "" || val === undefined ? undefined : Number(val)),
+    z.number().int().positive().default(587),
+  ),
+  /** `"true"` for port 465 (implicit TLS), `"false"` for STARTTLS (587). */
+  SMTP_SECURE: emptyToUndefined,
+  SMTP_USER: emptyToUndefined,
+  SMTP_PASSWORD: emptyToUndefined,
+  /** e.g. `Rakuxon City <no-reply@rakuxon.com>` — nodemailer From header. */
+  SMTP_FROM: emptyToUndefined,
+  /** Resend fallback when SMTP is not set. */
   RESEND_API_KEY: z.preprocess(
     (val) => (val === "" ? undefined : val),
     z.string().startsWith("re_").optional(),
   ),
+  /** Used as From when SMTP_FROM is unset; also valid with Resend-only setup. */
   ENQUIRY_FROM_EMAIL: z.preprocess(
     (val) => (val === "" ? undefined : val),
-    z.email().optional(),
+    z.union([z.email(), z.string().min(3)]).optional(),
   ),
   /** Investor notifications go to their own target. Never the general inbox. */
   INVESTOR_NOTIFICATION_EMAIL: z.preprocess(

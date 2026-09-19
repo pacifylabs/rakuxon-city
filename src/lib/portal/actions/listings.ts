@@ -17,6 +17,10 @@ import {
   PlotUnit,
   TitleType,
 } from "@/generated/prisma/enums";
+import { origin } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { sendEmail } from "@/lib/email/send";
+import { listingSubmittedForReviewEmail } from "@/lib/email/templates";
 import { verifyPortalSession } from "@/lib/portal/access";
 import {
   generateListerReference,
@@ -419,7 +423,7 @@ export async function submitListingForReview(formData: FormData): Promise<void> 
 
   const listing = await db.listing.findFirst({
     where: { id: listingId, submittedByUserId: user.id },
-    select: { moderationStatus: true },
+    select: { moderationStatus: true, title: true },
   });
 
   if (!listing) return;
@@ -438,6 +442,19 @@ export async function submitListingForReview(formData: FormData): Promise<void> 
       submittedAt: new Date(),
       rejectionReason: null,
     },
+  });
+
+  const moderation = listingSubmittedForReviewEmail({
+    listingTitle: listing.title,
+    listerName: user.name,
+    listerEmail: user.email,
+    moderationUrl: `${origin()}/admin/moderation`,
+  });
+  void sendEmail({
+    to: site.email,
+    subject: moderation.subject,
+    html: moderation.html,
+    text: moderation.text,
   });
 
   revalidatePath("/portal/listings");

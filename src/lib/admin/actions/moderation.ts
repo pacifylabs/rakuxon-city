@@ -3,9 +3,16 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/lib/admin/access";
+import { origin } from "@/lib/seo";
+import { sendEmail } from "@/lib/email/send";
+import {
+  listingApprovedEmail,
+  listingRejectedEmail,
+} from "@/lib/email/templates";
 import {
   ListingModerationStatus,
   ListingStatus,
+  ListingType,
 } from "@/generated/prisma/enums";
 
 export async function approveListerListing(formData: FormData): Promise<void> {
@@ -18,7 +25,14 @@ export async function approveListerListing(formData: FormData): Promise<void> {
       submittedByUserId: { not: null },
       moderationStatus: ListingModerationStatus.PENDING_REVIEW,
     },
-    select: { id: true, status: true },
+    select: {
+      id: true,
+      status: true,
+      title: true,
+      slug: true,
+      type: true,
+      submitter: { select: { email: true, name: true } },
+    },
   });
 
   if (!listing) return;
@@ -50,6 +64,24 @@ export async function approveListerListing(formData: FormData): Promise<void> {
   revalidatePath("/admin/listings/homes");
   revalidatePath("/land");
   revalidatePath("/homes");
+
+  const lister = listing.submitter;
+  if (lister?.email) {
+    const segment =
+      listing.type === ListingType.LAND ? "land" : "homes";
+    const publicUrl = `${origin()}/${segment}/${listing.slug}`;
+    const message = listingApprovedEmail({
+      name: lister.name,
+      listingTitle: listing.title,
+      publicUrl,
+    });
+    void sendEmail({
+      to: lister.email,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+    });
+  }
 }
 
 export async function rejectListerListing(formData: FormData): Promise<void> {
@@ -65,7 +97,12 @@ export async function rejectListerListing(formData: FormData): Promise<void> {
       submittedByUserId: { not: null },
       moderationStatus: ListingModerationStatus.PENDING_REVIEW,
     },
-    select: { id: true },
+    select: {
+      id: true,
+      title: true,
+      type: true,
+      submitter: { select: { email: true, name: true } },
+    },
   });
 
   if (!listing) return;
@@ -83,4 +120,23 @@ export async function rejectListerListing(formData: FormData): Promise<void> {
 
   revalidatePath("/admin/moderation");
   revalidatePath("/portal/listings");
+
+  const lister = listing.submitter;
+  if (lister?.email) {
+    const segment =
+      listing.type === ListingType.LAND ? "land" : "homes";
+    const editUrl = `${origin()}/portal/listings/${segment}/${listing.id}/edit`;
+    const message = listingRejectedEmail({
+      name: lister.name,
+      listingTitle: listing.title,
+      reason,
+      editUrl,
+    });
+    void sendEmail({
+      to: lister.email,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+    });
+  }
 }

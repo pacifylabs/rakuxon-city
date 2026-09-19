@@ -14,6 +14,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
+    "db:seed:catalog": "SEED_SKIP_USERS=1 prisma db seed",
     "admin:bootstrap": "tsx --require ./scripts/server-only-stub.cjs scripts/bootstrap-admin.ts",
     "db:reset": "prisma migrate reset --force",
     "verify:seed": "tsx scripts/verify-seed.ts",
@@ -33,6 +34,7 @@
     "clsx": "^2.1.1",
     "date-fns": "4.1.0",
     "next": "16.3.2",
+    "nodemailer": "^10.0.10",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "resend": "^6.22.0",
@@ -43,6 +45,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",

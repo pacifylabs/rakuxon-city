@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getPlacement } from "@/lib/media";
 import { checkResetToken } from "@/lib/auth/reset";
+import { completePortalPasswordReset } from "@/lib/portal/actions/reset";
 import { AuthLayout } from "@/components/admin/auth-layout";
-import { completePasswordReset } from "@/lib/admin/actions/reset";
 import { SetNewPasswordForm } from "@/components/admin/reset-forms";
 
 const LOGO_FALLBACK = {
@@ -12,7 +12,7 @@ const LOGO_FALLBACK = {
   height: 724,
 };
 
-export default async function ResetPasswordPage({
+export default async function PortalResetPasswordPage({
   searchParams,
 }: {
   searchParams: Promise<{ token?: string }>;
@@ -20,8 +20,6 @@ export default async function ResetPasswordPage({
   const { token } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
 
-  // Checked, not consumed — the token has to survive being looked at and die
-  // on being used, or a preview fetch would burn the link.
   const check = token ? await checkResetToken(token) : { valid: false as const };
 
   if (!check.valid) {
@@ -32,7 +30,7 @@ export default async function ResetPasswordPage({
         description="Reset links work once and last an hour. Request a fresh one."
       >
         <Link
-          href="/admin/forgot-password"
+          href="/portal/forgot-password"
           className="inline-flex min-h-11 items-center rounded-full bg-primary px-6 text-body text-ivory-light transition-colors hover:bg-primary-hover"
         >
           Request a new link
@@ -49,7 +47,7 @@ export default async function ResetPasswordPage({
     >
       <SetNewPasswordForm
         token={token ?? ""}
-        completeAction={completePasswordReset}
+        completeAction={completePortalPasswordReset}
       />
     </AuthLayout>
   );

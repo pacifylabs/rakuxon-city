@@ -5,33 +5,38 @@ import { useActionState } from "react";
 import { Field, Input } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { FormError, FormSuccess } from "@/components/admin/ui";
-import {
-  requestPasswordReset,
-  completePasswordReset,
-} from "@/lib/admin/actions/reset";
+import type { ResetState } from "@/lib/admin/actions/reset";
+
+type ForgotProps = {
+  emailConfigured: boolean;
+  requestAction: (
+    prev: ResetState,
+    formData: FormData,
+  ) => Promise<ResetState>;
+  backHref: string;
+  staffFallbackHint?: boolean;
+};
 
 export function ForgotPasswordForm({
   emailConfigured,
-}: {
-  emailConfigured: boolean;
-}) {
-  const [state, formAction, pending] = useActionState(
-    requestPasswordReset,
-    null,
-  );
+  requestAction,
+  backHref,
+  staffFallbackHint = false,
+}: ForgotProps) {
+  const [state, formAction, pending] = useActionState(requestAction, null);
 
   if (state?.sent) {
     return (
       <div className="flex flex-col gap-5">
         <FormSuccess message="If that address belongs to an account, a reset link is on its way. It expires in an hour." />
-        {!emailConfigured ? (
+        {!emailConfigured && staffFallbackHint ? (
           <p className="rounded-control border border-line bg-surface px-4 py-3 text-caption text-muted">
             If it does not arrive, ask an admin to reset your password from the
             Team screen.
           </p>
         ) : null}
         <Link
-          href="/admin/login"
+          href={backHref}
           className="text-body text-accent-text underline underline-offset-4"
         >
           Back to sign in
@@ -69,7 +74,7 @@ export function ForgotPasswordForm({
       </button>
 
       <Link
-        href="/admin/login"
+        href={backHref}
         className="text-caption text-muted underline underline-offset-4 hover:text-foreground"
       >
         Back to sign in
@@ -78,11 +83,17 @@ export function ForgotPasswordForm({
   );
 }
 
-export function SetNewPasswordForm({ token }: { token: string }) {
-  const [state, formAction, pending] = useActionState(
-    completePasswordReset,
-    null,
-  );
+export function SetNewPasswordForm({
+  token,
+  completeAction,
+}: {
+  token: string;
+  completeAction: (
+    prev: ResetState,
+    formData: FormData,
+  ) => Promise<ResetState>;
+}) {
+  const [state, formAction, pending] = useActionState(completeAction, null);
 
   return (
     <form action={formAction} className="flex flex-col gap-5">

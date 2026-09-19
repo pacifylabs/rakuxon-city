@@ -1,6 +1,7 @@
 import "server-only";
 import { randomBytes, createHash } from "node:crypto";
 import { db } from "@/lib/db";
+import type { UserRole } from "@/generated/prisma/enums";
 
 /**
  * Password-reset tokens.
@@ -27,12 +28,16 @@ function hash(token: string): string {
  * that says "no account with that email" is a user-enumeration oracle. The
  * page returns the same confirmation either way.
  */
-export async function createResetToken(email: string): Promise<string | null> {
+export async function createResetToken(
+  email: string,
+  opts?: { roles?: UserRole[] },
+): Promise<string | null> {
   const user = await db.user.findUnique({
     where: { email },
-    select: { id: true, isActive: true },
+    select: { id: true, isActive: true, role: true },
   });
   if (!user || !user.isActive) return null;
+  if (opts?.roles?.length && !opts.roles.includes(user.role)) return null;
 
   // One live token per address. Requesting a second link should invalidate
   // the first, or an old email remains usable for the full hour.

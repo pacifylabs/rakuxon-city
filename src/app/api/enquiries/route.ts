@@ -9,6 +9,7 @@ import { sendEmail } from "@/lib/email/send";
 import {
   enquiryAcknowledgement,
   enquiryNotification,
+  listerListingEnquiryEmail,
 } from "@/lib/email/templates";
 import { EnquiryStatus, ListingType } from "@/generated/prisma/enums";
 import { site } from "@/lib/site";
@@ -223,6 +224,21 @@ export async function POST(request: Request) {
     });
 
     const listerEmail = listing?.submitter?.email ?? null;
+    const listerNotice = listerEmail
+      ? listerListingEnquiryEmail({
+          reference,
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          message: input.message,
+          track,
+          listingTitle: listing?.title ?? null,
+          listingPath,
+          pagePath: input.pagePath,
+          preferredInspectionDate: input.preferredInspectionDate ?? null,
+          assignedToName: assignedTo?.name ?? null,
+        })
+      : null;
 
     await Promise.allSettled([
       sendEmail({
@@ -232,13 +248,13 @@ export async function POST(request: Request) {
         text: notification.text,
         replyTo: input.email,
       }),
-      ...(listerEmail
+      ...(listerNotice
         ? [
             sendEmail({
-              to: listerEmail,
-              subject: `[Your listing] ${notification.subject}`,
-              html: notification.html,
-              text: notification.text,
+              to: listerEmail!,
+              subject: listerNotice.subject,
+              html: listerNotice.html,
+              text: listerNotice.text,
               replyTo: input.email,
             }),
           ]

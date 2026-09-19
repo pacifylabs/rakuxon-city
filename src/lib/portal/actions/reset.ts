@@ -9,8 +9,6 @@ import {
   passwordChangedEmail,
   passwordResetEmail,
 } from "@/lib/email/templates";
-import { STAFF_ROLES } from "@/lib/auth/staff-roles";
-import { UserRole } from "@/generated/prisma/enums";
 import {
   createResetToken,
   consumeResetToken,
@@ -19,62 +17,49 @@ import {
   hashPassword,
   validatePasswordStrength,
 } from "@/lib/auth/password";
+import { UserRole } from "@/generated/prisma/enums";
 
 export type ResetState = { error?: string; sent?: boolean } | null;
 
-async function deliverPasswordReset(
-  email: string,
-  resetPath: string,
-  accountLabel: string,
-): Promise<void> {
-  const token = await createResetToken(email, { roles: [...STAFF_ROLES] });
-  if (!token) return;
-
-  const link = `${origin()}${resetPath}?token=${encodeURIComponent(token)}`;
-  const message = passwordResetEmail({ resetUrl: link, accountLabel });
-
-  const result = await sendEmail({
-    to: email,
-    subject: message.subject,
-    html: message.html,
-    text: message.text,
-  });
-
-  if (result.status !== "sent") {
-    console.warn("[admin] reset email not delivered:", result);
-  }
-}
-
-/**
- * Step one — request a link.
- *
- * Always reports the same thing, whether or not the address belongs to an
- * account. Saying "no user with that email" would let anyone test which
- * addresses are staff accounts, which is a real disclosure on a small team
- * whose names are on the About page.
- */
-export async function requestPasswordReset(
+export async function requestPortalPasswordReset(
   _prev: ResetState,
   formData: FormData,
 ): Promise<ResetState> {
   if (!hasDatabase) {
-    return { error: "The admin is not configured." };
+    return { error: "The portal is not configured." };
   }
 
   const email = String(formData.get("email") ?? "")
     .trim()
     .toLowerCase();
   if (!email.includes("@")) {
-    return { error: "Enter the email address you sign in with." };
+    return { error: "Enter the email address you registered with." };
   }
 
-  await deliverPasswordReset(email, "/admin/reset", "admin");
+  const token = await createResetToken(email, { roles: [UserRole.LISTER] });
+  if (token) {
+    const link = `${origin()}/portal/reset?token=${encodeURIComponent(token)}`;
+    const message = passwordResetEmail({
+      resetUrl: link,
+      accountLabel: "lister portal",
+    });
+
+    const result = await sendEmail({
+      to: email,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+    });
+
+    if (result.status !== "sent") {
+      console.warn("[portal] reset email not delivered:", result);
+    }
+  }
 
   return { sent: true };
 }
 
-/** Step two — set the new password against a token. */
-export async function completePasswordReset(
+export async function completePortalPasswordReset(
   _prev: ResetState,
   formData: FormData,
 ): Promise<ResetState> {
@@ -102,10 +87,7 @@ export async function completePasswordReset(
     where: { email: check.email },
     select: { id: true, name: true, role: true },
   });
-  if (!user) {
-    return { error: "That link is no longer valid." };
-  }
-  if (!(STAFF_ROLES as readonly UserRole[]).includes(user.role)) {
+  if (!user || user.role !== UserRole.LISTER) {
     return { error: "That link is no longer valid." };
   }
 
@@ -122,7 +104,7 @@ export async function completePasswordReset(
 
   const changed = passwordChangedEmail({
     name: user.name,
-    signInUrl: `${origin()}/admin/login`,
+    signInUrl: `${origin()}/portal/login`,
   });
   void sendEmail({
     to: check.email,
@@ -131,5 +113,5 @@ export async function completePasswordReset(
     text: changed.text,
   });
 
-  redirect("/admin/login?reset=1");
+  redirect("/portal/login?reset=1");
 }

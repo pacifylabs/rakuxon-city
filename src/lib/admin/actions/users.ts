@@ -8,6 +8,12 @@ import {
   hashPassword,
   generateTemporaryPassword,
 } from "@/lib/auth/password";
+import { origin } from "@/lib/seo";
+import { sendEmail } from "@/lib/email/send";
+import {
+  staffAccountCreatedEmail,
+  staffTemporaryPasswordEmail,
+} from "@/lib/email/templates";
 import { UserRole, SalesTrack } from "@/generated/prisma/enums";
 import { z } from "zod";
 
@@ -96,6 +102,19 @@ export async function createUser(
     console.error("[admin] user create failed", code ?? error);
     return { error: "Could not create the user. Please try again." };
   }
+
+  const created = staffAccountCreatedEmail({
+    name: parsed.data.name,
+    email: parsed.data.email,
+    temporaryPassword,
+    signInUrl: `${origin()}/admin/login`,
+  });
+  void sendEmail({
+    to: parsed.data.email,
+    subject: created.subject,
+    html: created.html,
+    text: created.text,
+  });
 
   revalidatePath("/admin/users");
   return {
@@ -193,7 +212,7 @@ export async function resetUserPassword(
 
   const user = await db.user.findUnique({
     where: { id: userId },
-    select: { name: true },
+    select: { name: true, email: true },
   });
   if (!user) return { error: "User not found." };
 
@@ -209,6 +228,18 @@ export async function resetUserPassword(
   // Every existing session is dropped, or the old one would keep working
   // and the reset would be cosmetic.
   await db.session.deleteMany({ where: { userId } });
+
+  const issued = staffTemporaryPasswordEmail({
+    name: user.name,
+    temporaryPassword,
+    signInUrl: `${origin()}/admin/login`,
+  });
+  void sendEmail({
+    to: user.email,
+    subject: issued.subject,
+    html: issued.html,
+    text: issued.text,
+  });
 
   revalidatePath("/admin/users");
   return {
