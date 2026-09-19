@@ -100,7 +100,12 @@ export function InvestorEnquiryForm() {
           htmlFor="investor-name"
           error={fieldErrors.name}
         >
-          <Input id="investor-name" name="name" autoComplete="name" />
+          <Input
+            id="investor-name"
+            name="name"
+            placeholder="Your name"
+            autoComplete="name"
+          />
         </Field>
 
         <Field
@@ -111,6 +116,7 @@ export function InvestorEnquiryForm() {
           <Input
             id="investor-organisation"
             name="organisation"
+            placeholder="Company or fund name"
             autoComplete="organization"
           />
         </Field>
@@ -124,6 +130,7 @@ export function InvestorEnquiryForm() {
             id="investor-email"
             name="email"
             type="email"
+            placeholder="you@example.com"
             autoComplete="email"
           />
         </Field>

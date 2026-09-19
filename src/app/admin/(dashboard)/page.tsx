@@ -6,6 +6,8 @@ import {
   type ActivityEntry,
 } from "@/lib/admin/queries/dashboard";
 import { cn } from "@/lib/cn";
+import { db } from "@/lib/db";
+import { ListingModerationStatus, UserRole } from "@/generated/prisma/enums";
 
 /**
  * `/admin` — the dashboard.
@@ -26,9 +28,24 @@ import { cn } from "@/lib/cn";
  */
 export default async function AdminDashboardPage() {
   const user = await verifySession();
-  const [metrics, activity] = await Promise.all([
+  const [metrics, activity, portalCounts] = await Promise.all([
     getDashboardMetrics(user),
     getRecentActivity(user),
+    user.role === "ADMIN"
+      ? Promise.all([
+          db.listing.count({
+            where: {
+              moderationStatus: ListingModerationStatus.PENDING_REVIEW,
+            },
+          }),
+          db.user.count({
+            where: { role: UserRole.LISTER, isActive: true },
+          }),
+        ]).then(([pendingModeration, activeListers]) => ({
+          pendingModeration,
+          activeListers,
+        }))
+      : Promise.resolve(null),
   ]);
 
   const trackLabel =
@@ -141,6 +158,31 @@ export default async function AdminDashboardPage() {
               />
             </div>
           </section>
+
+          {portalCounts ? (
+            <section className="min-w-0">
+              <SectionHead
+                title="Lister portal"
+                href="/admin/moderation"
+                linkLabel="Moderation queue"
+              />
+              <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
+                <BigStat
+                  label="Awaiting review"
+                  value={portalCounts.pendingModeration}
+                  href="/admin/moderation"
+                  tone={
+                    portalCounts.pendingModeration > 0 ? "attention" : "quiet"
+                  }
+                />
+                <SmallStat
+                  label="Active listers"
+                  value={portalCounts.activeListers}
+                  href="/admin/listers"
+                />
+              </div>
+            </section>
+          ) : null}
 
           {user.role !== "INVESTOR_MANAGER" ? (
             <section className="min-w-0">
@@ -286,6 +328,8 @@ function QuickActions({
     actions.push({ href: "/admin/listings/homes/new", label: "New home" });
   }
   if (user.role === "ADMIN") {
+    actions.push({ href: "/admin/moderation", label: "Review lister submissions" });
+    actions.push({ href: "/admin/listers", label: "View listers" });
     actions.push({ href: "/admin/estates/new", label: "New estate" });
     actions.push({ href: "/admin/articles/new", label: "New guide" });
     actions.push({ href: "/admin/import", label: "Import a CSV" });

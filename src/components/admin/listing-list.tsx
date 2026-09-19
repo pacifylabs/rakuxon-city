@@ -15,7 +15,12 @@ import {
   PageHeader,
   FormSuccess,
 } from "@/components/admin/ui";
-import { listingStatusLabels, options } from "@/lib/admin/labels";
+import {
+  listingStatusLabels,
+  moderationStatusLabels,
+  options,
+} from "@/lib/admin/labels";
+import type { ListingPostedBy } from "@/lib/admin/queries/listings";
 import { FilterBar, FilterSelect } from "@/components/admin/filter-bar";
 import { RowActions } from "@/components/admin/row-actions";
 import { ConfirmSubmit } from "@/components/admin/confirm-action";
@@ -45,12 +50,15 @@ export async function ListingList({
     getEstateOptions(),
   ]);
 
-  const isFiltered = Boolean(filters.status || filters.estateId || filters.q);
+  const isFiltered = Boolean(
+    filters.status || filters.estateId || filters.q || filters.postedBy,
+  );
 
   const hrefFor = (targetPage: number) => {
     const params = new URLSearchParams();
     if (filters.status) params.set("status", filters.status);
     if (filters.estateId) params.set("estate", filters.estateId);
+    if (filters.postedBy) params.set("postedBy", filters.postedBy);
     if (filters.q) params.set("q", filters.q);
     if (targetPage > 1) params.set("page", String(targetPage));
     const query = params.toString();
@@ -95,7 +103,9 @@ export async function ListingList({
           searchValue={filters.q}
           searchPlaceholder="Reference, title or town"
           activeCount={
-            [filters.q, filters.status, filters.estateId].filter(Boolean).length
+            [filters.q, filters.status, filters.estateId, filters.postedBy].filter(
+              Boolean,
+            ).length
           }
         >
           <FilterSelect
@@ -104,6 +114,16 @@ export async function ListingList({
             value={filters.status}
             anyLabel="Any status"
             options={options(listingStatusLabels)}
+          />
+          <FilterSelect
+            name="postedBy"
+            label="Posted by"
+            value={filters.postedBy}
+            anyLabel="Anyone"
+            options={[
+              { value: "staff", label: "Staff" },
+              { value: "lister", label: "Portal lister" },
+            ]}
           />
           <FilterSelect
             name="estate"
@@ -122,14 +142,18 @@ export async function ListingList({
             "Title",
             "Location",
             "Price",
+            "Posted by",
             "Status",
-            "",
-            "",
+            "Change status",
+            "Actions",
           ]}
           empty={
             rows.length === 0 ? (
               <p className="text-body text-muted">
-                {filters.q || filters.status || filters.estateId
+                {filters.q ||
+                filters.status ||
+                filters.estateId ||
+                filters.postedBy
                   ? "Nothing matches those filters."
                   : `No ${noun}s yet. Create the first one.`}
               </p>
@@ -159,6 +183,25 @@ export async function ListingList({
                   : row.price
                     ? formatNaira(row.price)
                     : "—"}
+              </Td>
+              <Td className="text-muted">
+                {row.submitter ? (
+                  <Link
+                    href={`/admin/listers/${row.submitter.id}`}
+                    className="text-accent-text underline-offset-4 hover:underline"
+                  >
+                    {row.submitter.listerProfile?.displayName ??
+                      row.submitter.name}
+                  </Link>
+                ) : (
+                  "Staff"
+                )}
+                {row.submitter &&
+                row.moderationStatus !== "NOT_REQUIRED" ? (
+                  <span className="mt-0.5 block text-caption text-muted">
+                    {moderationStatusLabels[row.moderationStatus]}
+                  </span>
+                ) : null}
               </Td>
               <Td>
                 <ListingStatusBadge status={row.status} />
@@ -218,6 +261,7 @@ export async function ListingList({
 export function parseListingFilters(query: {
   status?: string | string[];
   estate?: string | string[];
+  postedBy?: string | string[];
   q?: string | string[];
   page?: string | string[];
 }): ListingFilters {
@@ -231,9 +275,16 @@ export function parseListingFilters(query: {
     ? (status as ListingStatus)
     : undefined;
 
+  const postedByRaw = one(query.postedBy);
+  const postedBy: ListingPostedBy | undefined =
+    postedByRaw === "staff" || postedByRaw === "lister"
+      ? postedByRaw
+      : undefined;
+
   return {
     status: validStatus,
     estateId: one(query.estate) || undefined,
+    postedBy,
     q: one(query.q)?.trim() || undefined,
     page: Math.max(1, Number(one(query.page)) || 1),
   };

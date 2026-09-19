@@ -24,10 +24,14 @@ import type { NextRequest } from "next/server";
  */
 export default function proxy(request: NextRequest) {
   const hasSessionCookie = request.cookies.has("session");
+  const path = request.nextUrl.pathname;
 
   if (!hasSessionCookie) {
-    const loginUrl = new URL("/admin/login", request.url);
-    loginUrl.searchParams.set("from", request.nextUrl.pathname);
+    const loginUrl = new URL(
+      path.startsWith("/portal") ? "/portal/login" : "/admin/login",
+      request.url,
+    );
+    loginUrl.searchParams.set("from", path);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -35,14 +39,8 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  /*
-   * Everything under /admin except the signed-out screens.
-   *
-   * `login`, `forgot-password` and `reset` are excluded from the matcher
-   * entirely rather than checked and let through, so there is no redirect
-   * loop to reason about — and, more importantly, so a locked-out user can
-   * actually reach the reset flow. Protecting the page that exists to
-   * recover access would be self-defeating.
-   */
-  matcher: ["/admin/((?!login|forgot-password|reset).*)"],
+  matcher: [
+    "/admin/((?!login|forgot-password|reset).*)",
+    "/portal/((?!login|register).*)",
+  ],
 };

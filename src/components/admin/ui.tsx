@@ -55,9 +55,9 @@ export function DataTable({
       <table className="w-full min-w-[48rem] border-collapse text-left">
         <thead>
           <tr className="border-b border-line">
-            {headers.map((header) => (
+            {headers.map((header, index) => (
               <th
-                key={header}
+                key={`${index}-${header || "col"}`}
                 scope="col"
                 className="px-4 py-3 text-caption font-medium text-muted"
               >

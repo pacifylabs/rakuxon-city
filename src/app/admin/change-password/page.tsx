@@ -6,7 +6,8 @@ import {
   verifyPassword,
   validatePasswordStrength,
 } from "@/lib/auth/password";
-import { Field, Input } from "@/components/ui/field";
+import { Field } from "@/components/ui/field";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Button } from "@/components/ui/button";
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -88,29 +89,29 @@ export default async function ChangePasswordPage({
 
         <form action={changePassword} className="mt-8 flex flex-col gap-5">
           <Field label="Current password" htmlFor="cp-current">
-            <Input
+            <PasswordInput
               id="cp-current"
               name="current"
-              type="password"
+              placeholder="Current password"
               required
               autoComplete="current-password"
             />
           </Field>
           <Field label="New password" htmlFor="cp-next">
-            <Input
+            <PasswordInput
               id="cp-next"
               name="next"
-              type="password"
+              placeholder="At least 12 characters"
               required
               minLength={12}
               autoComplete="new-password"
             />
           </Field>
           <Field label="Confirm new password" htmlFor="cp-confirm">
-            <Input
+            <PasswordInput
               id="cp-confirm"
               name="confirm"
-              type="password"
+              placeholder="Repeat new password"
               required
               minLength={12}
               autoComplete="new-password"

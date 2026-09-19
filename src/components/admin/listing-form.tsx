@@ -77,6 +77,7 @@ function SharedFields({
   priceOnRequest,
   paymentPlanAvailable,
   onPaymentPlanChange,
+  variant = "admin",
 }: {
   values: LandFormValues | HomeFormValues;
   estates: EstateOption[];
@@ -84,29 +85,52 @@ function SharedFields({
   onPriceOnRequestChange: (next: boolean) => void;
   paymentPlanAvailable: boolean;
   onPaymentPlanChange: (next: boolean) => void;
+  variant?: "admin" | "portal";
 }) {
+  const portal = variant === "portal";
+
   return (
     <>
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        <Field label="Reference" htmlFor="reference">
-          <Input
-            id="reference"
-            name="reference"
-            defaultValue={values.reference}
-            required
-          />
-        </Field>
-        <Field
-          label="Slug"
-          htmlFor="slug"
-          hint="Lowercase words separated by hyphens. Becomes the public URL."
-        >
-          <Input id="slug" name="slug" defaultValue={values.slug} required />
-        </Field>
-      </div>
+      {portal ? (
+        <>
+          <input type="hidden" name="reference" value={values.reference} />
+          <input type="hidden" name="slug" value={values.slug} />
+        </>
+      ) : (
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <Field label="Reference" htmlFor="reference">
+            <Input
+              id="reference"
+              name="reference"
+              defaultValue={values.reference}
+              placeholder="e.g. LND-2026-014"
+              required
+            />
+          </Field>
+          <Field
+            label="Slug"
+            htmlFor="slug"
+            hint="Lowercase words separated by hyphens. Becomes the public URL."
+          >
+            <Input
+              id="slug"
+              name="slug"
+              defaultValue={values.slug}
+              placeholder="e.g. emerald-ridge-phase-2"
+              required
+            />
+          </Field>
+        </div>
+      )}
 
       <Field label="Title" htmlFor="title">
-        <Input id="title" name="title" defaultValue={values.title} required />
+        <Input
+          id="title"
+          name="title"
+          defaultValue={values.title}
+          placeholder="Headline buyers see in search results"
+          required
+        />
       </Field>
 
       <Field label="Description" htmlFor="description">
@@ -115,30 +139,38 @@ function SharedFields({
           name="description"
           rows={5}
           defaultValue={values.description}
+          placeholder="Describe the property, access, and what is included"
           required
         />
       </Field>
 
-      <div className="grid gap-5 sm:grid-cols-3">
-        <Field label="Estate" htmlFor="estateId">
-          <Select
-            id="estateId"
-            name="estateId"
-            defaultValue={values.estateId ?? ""}
-          >
-            <option value="">No estate</option>
-            {estates.map((estate) => (
-              <option key={estate.id} value={estate.id}>
-                {estate.name}
-              </option>
-            ))}
-          </Select>
-        </Field>
+      <div
+        className={
+          portal ? "grid gap-5 sm:grid-cols-2" : "grid gap-5 sm:grid-cols-3"
+        }
+      >
+        {!portal ? (
+          <Field label="Estate" htmlFor="estateId">
+            <Select
+              id="estateId"
+              name="estateId"
+              defaultValue={values.estateId ?? ""}
+            >
+              <option value="">No estate</option>
+              {estates.map((estate) => (
+                <option key={estate.id} value={estate.id}>
+                  {estate.name}
+                </option>
+              ))}
+            </Select>
+          </Field>
+        ) : null}
         <Field label="Location" htmlFor="location">
           <Input
             id="location"
             name="location"
             defaultValue={values.location}
+            placeholder="Area or town, e.g. Sabon Lugbe"
             required
           />
         </Field>
@@ -147,6 +179,7 @@ function SharedFields({
             id="state"
             name="state"
             defaultValue={values.state}
+            placeholder="e.g. FCT"
             required
           />
         </Field>
@@ -174,6 +207,7 @@ function SharedFields({
                 min="1"
                 step="1"
                 defaultValue={values.price}
+                placeholder="Amount in naira"
               />
             </Field>
           </div>
@@ -199,6 +233,7 @@ function SharedFields({
                 min="0"
                 max="100"
                 defaultValue={values.depositPercent}
+                placeholder="e.g. 30"
               />
             </Field>
             <Field label="Duration (months)" htmlFor="durationMonths">
@@ -209,6 +244,7 @@ function SharedFields({
                 min="1"
                 max="120"
                 defaultValue={values.durationMonths}
+                placeholder="e.g. 12"
               />
             </Field>
             <Field label="Frequency" htmlFor="frequency">
@@ -228,6 +264,7 @@ function SharedFields({
                   id="planNotes"
                   name="planNotes"
                   defaultValue={values.planNotes}
+                  placeholder="Optional notes shown to buyers"
                 />
               </Field>
             </div>
@@ -235,12 +272,14 @@ function SharedFields({
         ) : null}
       </fieldset>
 
-      <Checkbox
-        id="featured"
-        name="featured"
-        defaultChecked={values.featured}
-        label="Feature this listing on the homepage"
-      />
+      {!portal ? (
+        <Checkbox
+          id="featured"
+          name="featured"
+          defaultChecked={values.featured}
+          label="Feature this listing on the homepage"
+        />
+      ) : null}
     </>
   );
 }
@@ -249,10 +288,12 @@ function FormActions({
   pending,
   cancelHref,
   isNew,
+  variant = "admin",
 }: {
   pending: boolean;
   cancelHref: string;
   isNew: boolean;
+  variant?: "admin" | "portal";
 }) {
   return (
     <div className="flex items-center gap-4 border-t border-line pt-6">
@@ -261,15 +302,16 @@ function FormActions({
         disabled={pending}
         className="min-h-11 cursor-pointer rounded-full bg-primary px-6 text-body text-ivory-light transition-colors hover:bg-primary-hover disabled:cursor-wait disabled:opacity-60"
       >
-        {pending ? "Saving…" : isNew ? "Create as draft" : "Save changes"}
+        {pending ? "Saving…" : isNew ? "Save draft" : "Save changes"}
       </button>
       <Link href={cancelHref} className="text-body text-muted hover:text-foreground">
         Cancel
       </Link>
       {isNew ? (
         <p className="text-caption text-muted">
-          New listings are created as drafts. Publish from the list once the
-          details are right.
+          {variant === "portal"
+            ? "Submit for review when the details are ready. Nothing goes live until our team approves it."
+            : "New listings are created as drafts. Publish from the list once the details are right."}
         </p>
       ) : null}
     </div>
@@ -280,10 +322,14 @@ export function LandListingForm({
   values,
   estates,
   action,
+  variant = "admin",
+  cancelHref = "/admin/listings/land",
 }: {
   values: LandFormValues;
   estates: EstateOption[];
   action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
+  variant?: "admin" | "portal";
+  cancelHref?: string;
 }) {
   const [state, formAction, pending] = useActionState(action, null);
   const [priceOnRequest, setPriceOnRequest] = useState(values.priceOnRequest);
@@ -303,6 +349,7 @@ export function LandListingForm({
         onPriceOnRequestChange={setPriceOnRequest}
         paymentPlanAvailable={planOn}
         onPaymentPlanChange={setPlanOn}
+        variant={variant}
       />
 
       <fieldset className="rounded-card border border-line p-5">
@@ -317,6 +364,7 @@ export function LandListingForm({
               step="0.01"
               min="0.01"
               defaultValue={values.plotSize}
+              placeholder="e.g. 500"
               required
             />
           </Field>
@@ -379,6 +427,7 @@ export function LandListingForm({
               id="surveyNumber"
               name="surveyNumber"
               defaultValue={values.surveyNumber}
+              placeholder="If known"
             />
           </Field>
           <Field label="Topography" htmlFor="topography">
@@ -386,6 +435,7 @@ export function LandListingForm({
               id="topography"
               name="topography"
               defaultValue={values.topography}
+              placeholder="e.g. Flat, gently sloping"
             />
           </Field>
           <Field label="Road access" htmlFor="roadAccess">
@@ -393,6 +443,7 @@ export function LandListingForm({
               id="roadAccess"
               name="roadAccess"
               defaultValue={values.roadAccess}
+              placeholder="e.g. Paved estate road"
             />
           </Field>
         </div>
@@ -448,8 +499,9 @@ export function LandListingForm({
 
       <FormActions
         pending={pending}
-        cancelHref="/admin/listings/land"
+        cancelHref={cancelHref}
         isNew={values.id === null}
+        variant={variant}
       />
     </form>
   );
@@ -459,10 +511,14 @@ export function HomeListingForm({
   values,
   estates,
   action,
+  variant = "admin",
+  cancelHref = "/admin/listings/homes",
 }: {
   values: HomeFormValues;
   estates: EstateOption[];
   action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
+  variant?: "admin" | "portal";
+  cancelHref?: string;
 }) {
   const [state, formAction, pending] = useActionState(action, null);
   const [priceOnRequest, setPriceOnRequest] = useState(values.priceOnRequest);
@@ -482,6 +538,7 @@ export function HomeListingForm({
         onPriceOnRequestChange={setPriceOnRequest}
         paymentPlanAvailable={planOn}
         onPaymentPlanChange={setPlanOn}
+        variant={variant}
       />
 
       <fieldset className="rounded-card border border-line p-5">
@@ -496,6 +553,7 @@ export function HomeListingForm({
               min="1"
               max="20"
               defaultValue={values.bedrooms}
+              placeholder="e.g. 4"
               required
             />
           </Field>
@@ -507,6 +565,7 @@ export function HomeListingForm({
               min="1"
               max="20"
               defaultValue={values.bathrooms}
+              placeholder="e.g. 5"
               required
             />
           </Field>
@@ -561,6 +620,7 @@ export function HomeListingForm({
               step="0.01"
               min="0.01"
               defaultValue={values.builtArea}
+              placeholder="e.g. 280"
               required
             />
           </Field>
@@ -572,6 +632,7 @@ export function HomeListingForm({
               step="0.01"
               min="0.01"
               defaultValue={values.landArea}
+              placeholder="e.g. 600"
               required
             />
           </Field>
@@ -584,6 +645,7 @@ export function HomeListingForm({
               name="finishingSpec"
               rows={4}
               defaultValue={values.finishingSpec}
+              placeholder="Flooring, fittings, kitchen, and other finish details"
               required
             />
           </Field>
@@ -624,8 +686,9 @@ export function HomeListingForm({
 
       <FormActions
         pending={pending}
-        cancelHref="/admin/listings/homes"
+        cancelHref={cancelHref}
         isNew={values.id === null}
+        variant={variant}
       />
     </form>
   );

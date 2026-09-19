@@ -1,5 +1,6 @@
 import "server-only";
 import { redirect } from "next/navigation";
+import { UserRole } from "@/generated/prisma/enums";
 import { getSession, type SessionUser } from "@/lib/auth/session";
 
 /**
@@ -15,6 +16,13 @@ import { getSession, type SessionUser } from "@/lib/auth/session";
 export async function verifySession(): Promise<SessionUser> {
   const user = await getSession();
   if (!user) redirect("/admin/login");
+  return user;
+}
+
+/** Staff admin only — listers use `/portal`. */
+export async function verifyStaffSession(): Promise<SessionUser> {
+  const user = await verifySession();
+  if (user.role === UserRole.LISTER) redirect("/portal");
   return user;
 }
 

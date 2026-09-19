@@ -47,9 +47,15 @@ export type UploadResult = {
  * `folder` separates the two upload surfaces so an avatar can never be
  * offered as listing photography in the media picker.
  */
+/** Cloudinary folder prefix — keeps lister uploads out of the staff media library. */
+export type CloudinaryFolder =
+  | "rakuxon/media"
+  | "rakuxon/avatars"
+  | `rakuxon/listers/${string}`;
+
 export async function uploadToCloudinary(
   file: File,
-  folder: "rakuxon/media" | "rakuxon/avatars",
+  folder: CloudinaryFolder,
 ): Promise<UploadResult> {
   if (!hasCloudinary) {
     throw new Error("Cloudinary is not configured");

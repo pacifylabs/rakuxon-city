@@ -17,10 +17,13 @@ import { canAccessTrack } from "@/lib/admin/access";
  */
 export const ADMIN_PAGE_SIZE = 10;
 
+export type ListingPostedBy = "staff" | "lister";
+
 export type ListingFilters = {
   status?: ListingStatus;
   estateId?: string;
   q?: string;
+  postedBy?: ListingPostedBy;
   page: number;
 };
 
@@ -46,6 +49,11 @@ export async function listListings(
     type,
     ...(filters.status ? { status: filters.status } : {}),
     ...(filters.estateId ? { estateId: filters.estateId } : {}),
+    ...(filters.postedBy === "lister"
+      ? { submittedByUserId: { not: null } }
+      : filters.postedBy === "staff"
+        ? { submittedByUserId: null }
+        : {}),
     ...(filters.q
       ? {
           OR: [
@@ -96,7 +104,17 @@ export async function listListings(
         status: true,
         featured: true,
         updatedAt: true,
+        moderationStatus: true,
+        submittedByUserId: true,
         estate: { select: { name: true } },
+        submitter: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            listerProfile: { select: { displayName: true } },
+          },
+        },
       },
     }),
   ]);
@@ -125,6 +143,14 @@ export async function getListingForEdit(user: SessionUser, id: string) {
       landDetail: { include: { documents: { orderBy: { position: "asc" } } } },
       homeDetail: true,
       media: { orderBy: { position: "asc" }, include: { media: true } },
+      submitter: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          listerProfile: { select: { displayName: true, phone: true } },
+        },
+      },
     },
   });
 

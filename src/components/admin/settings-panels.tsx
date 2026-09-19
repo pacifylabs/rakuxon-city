@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useActionState, useState } from "react";
-import { Field, Input } from "@/components/ui/field";
+import { Field } from "@/components/ui/field";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormError, FormSuccess } from "@/components/admin/ui";
 import { ConfirmAction } from "@/components/admin/confirm-action";
 import {
@@ -181,10 +182,10 @@ export function PasswordPanel() {
         <FormSuccess message={state?.success} />
 
         <Field label="Current password" htmlFor="current">
-          <Input
+          <PasswordInput
             id="current"
             name="current"
-            type="password"
+            placeholder="Current password"
             required
             autoComplete="current-password"
           />
@@ -195,20 +196,20 @@ export function PasswordPanel() {
             page for no reason. */}
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="New password" htmlFor="next">
-            <Input
+            <PasswordInput
               id="next"
               name="next"
-              type="password"
+              placeholder="At least 12 characters"
               required
               minLength={12}
               autoComplete="new-password"
             />
           </Field>
           <Field label="Confirm" htmlFor="confirm">
-            <Input
+            <PasswordInput
               id="confirm"
               name="confirm"
-              type="password"
+              placeholder="Repeat new password"
               required
               minLength={12}
               autoComplete="new-password"

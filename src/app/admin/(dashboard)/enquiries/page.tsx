@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { verifySession } from "@/lib/auth/dal";
+import { requireStaff } from "@/lib/admin/access";
 import { EnquiryStatus } from "@/generated/prisma/enums";
 import {
   listEnquiries,
@@ -48,7 +48,7 @@ export default async function AdminEnquiriesPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const user = await verifySession();
+  const user = await requireStaff();
   const query = await searchParams;
   const filters = parseFilters(query);
 

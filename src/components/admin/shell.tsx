@@ -77,9 +77,21 @@ const NAV_ITEMS: NavItem[] = [
     visible: (u) => u.role === "ADMIN",
   },
   {
+    href: "/admin/listers",
+    label: "Listers",
+    icon: <IconBriefcase />,
+    visible: (u) => u.role === "ADMIN",
+  },
+  {
     href: "/admin/users",
     label: "Team",
     icon: <IconUsers />,
+    visible: (u) => u.role === "ADMIN",
+  },
+  {
+    href: "/admin/moderation",
+    label: "Moderation",
+    icon: <IconInbox />,
     visible: (u) => u.role === "ADMIN",
   },
   {
@@ -301,6 +313,7 @@ const ROLE_LABELS: Record<SessionUser["role"], string> = {
   ADMIN: "Admin",
   SALES: "Sales",
   INVESTOR_MANAGER: "Investor manager",
+  LISTER: "Lister",
 };
 
 function UserCard({ user }: { user: SessionUser }) {

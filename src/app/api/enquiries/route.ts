@@ -124,7 +124,13 @@ export async function POST(request: Request) {
     const listing = input.listingId
       ? await db.listing.findUnique({
           where: { id: input.listingId },
-          select: { id: true, type: true, title: true, slug: true },
+          select: {
+            id: true,
+            type: true,
+            title: true,
+            slug: true,
+            submitter: { select: { email: true, name: true } },
+          },
         })
       : null;
 
@@ -216,15 +222,27 @@ export async function POST(request: Request) {
       listingTitle: listing?.title ?? null,
     });
 
+    const listerEmail = listing?.submitter?.email ?? null;
+
     await Promise.allSettled([
       sendEmail({
         to: assignedTo?.email ?? site.email,
         subject: notification.subject,
         html: notification.html,
         text: notification.text,
-        // So a reply from the sales desk reaches the buyer directly.
         replyTo: input.email,
       }),
+      ...(listerEmail
+        ? [
+            sendEmail({
+              to: listerEmail,
+              subject: `[Your listing] ${notification.subject}`,
+              html: notification.html,
+              text: notification.text,
+              replyTo: input.email,
+            }),
+          ]
+        : []),
       sendEmail({
         to: input.email,
         subject: acknowledgement.subject,

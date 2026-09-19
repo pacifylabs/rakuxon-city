@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Field, Input, Select } from "@/components/ui/field";
 import { FormError, FormSuccess } from "@/components/admin/ui";
 import type { ActionState } from "@/lib/admin/actions/users";
-import { userRoleLabels, salesTrackLabels, options } from "@/lib/admin/labels";
+import { staffUserRoleLabels, salesTrackLabels, options } from "@/lib/admin/labels";
 
 export type UserFormValues = {
   id: string | null;
@@ -54,7 +54,13 @@ export function UserForm({
         ) : null}
 
         <Field label="Name" htmlFor="name">
-          <Input id="name" name="name" defaultValue={values.name} required />
+          <Input
+            id="name"
+            name="name"
+            defaultValue={values.name}
+            placeholder="Full name"
+            required
+          />
         </Field>
 
         <Field label="Email" htmlFor="email">
@@ -63,6 +69,7 @@ export function UserForm({
             name="email"
             type="email"
             defaultValue={values.email}
+            placeholder="name@rakuxoncity.com"
             required
           />
         </Field>
@@ -76,7 +83,7 @@ export function UserForm({
             required
           >
             <option value="">Choose a role</option>
-            {options(userRoleLabels).map((option) => (
+            {options(staffUserRoleLabels).map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>

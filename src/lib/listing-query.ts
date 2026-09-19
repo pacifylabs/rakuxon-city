@@ -7,6 +7,7 @@ import {
   ListingType,
   TitleType,
 } from "@/generated/prisma/enums";
+import { publiclyVisibleListingWhere } from "@/lib/listings/public-visibility";
 
 /**
  * The one place listing filters, sorting and pagination are turned into a
@@ -126,9 +127,9 @@ export function parseListingFilters(
   return parsed.success ? parsed.data : listingFilterSchema.parse({});
 }
 
-/** Drafts never reach a public surface, whatever the URL asks for. */
+/** Drafts and pending lister submissions never reach a public surface. */
 function baseWhere(type: ListingType) {
-  return { type, status: { not: ListingStatus.DRAFT } };
+  return { type, ...publiclyVisibleListingWhere() };
 }
 
 export function buildListingWhere(type: ListingType, filters: ListingFilters) {

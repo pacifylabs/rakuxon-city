@@ -33,6 +33,7 @@ const siteLinks = [
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "List a property", href: "/portal/register" },
 ];
 
 /*

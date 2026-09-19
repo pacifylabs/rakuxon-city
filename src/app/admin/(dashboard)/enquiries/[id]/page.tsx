@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { verifySession } from "@/lib/auth/dal";
+import { requireStaff } from "@/lib/admin/access";
 import { getEnquiry, getAssignableUsers } from "@/lib/admin/queries/enquiries";
 import {
   updateEnquiryStatus,
@@ -20,7 +20,7 @@ export default async function EnquiryDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const user = await verifySession();
+  const user = await requireStaff();
   const { id } = await params;
 
   const enquiry = await getEnquiry(user, id);

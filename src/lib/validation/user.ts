@@ -20,7 +20,11 @@ export const userSchema = z
       });
     }
 
-    if (value.role !== UserRole.SALES && value.salesTrack) {
+    if (
+      value.role !== UserRole.SALES &&
+      value.role !== UserRole.LISTER &&
+      value.salesTrack
+    ) {
       ctx.addIssue({
         code: "custom",
         path: ["salesTrack"],

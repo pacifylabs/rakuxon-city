@@ -23,6 +23,7 @@ import type {
   TitleType,
   VideoKind,
 } from "@/generated/prisma/enums";
+import { isListingPubliclyVisible } from "@/lib/listings/public-visibility";
 
 /**
  * The read path used when no DATABASE_URL is configured.
@@ -75,6 +76,8 @@ type SnapshotListing = {
   paymentPlanAvailable: boolean;
   paymentPlanTerms: unknown;
   featured: boolean;
+  submittedByUserId?: string | null;
+  moderationStatus?: string | null;
   publishedAt: string | null;
   media: MediaLink[];
   landDetail: {
@@ -179,8 +182,14 @@ const testimonials = data.testimonials;
 const placements = data.placements;
 const videos = data.videos;
 
-/** Drafts never reach a public surface, the same rule the Prisma path applies. */
-const published = listings.filter((listing) => listing.status !== "DRAFT");
+/** Drafts and unapproved lister rows, same rule as the Prisma path. */
+const published = listings.filter((listing) =>
+  isListingPubliclyVisible({
+    status: listing.status,
+    submittedByUserId: listing.submittedByUserId ?? null,
+    moderationStatus: listing.moderationStatus ?? null,
+  }),
+);
 
 function toCard(listing: (typeof listings)[number]): ListingCardData {
   return {

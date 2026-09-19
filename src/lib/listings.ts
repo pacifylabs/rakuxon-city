@@ -10,6 +10,7 @@ import {
   buildListingWhere,
   type ListingFilters,
 } from "@/lib/listing-query";
+import { publiclyVisibleListingWhere } from "@/lib/listings/public-visibility";
 
 /**
  * The shape every listing card needs, selected in one place so a card rendered
@@ -104,13 +105,12 @@ function toCard(row: ListingCardRow): ListingCardData {
   };
 }
 
-/**
- * Drafts never reach a public surface. Every public query goes through this
- * filter rather than restating `status != draft` and eventually forgetting to.
- */
-const publiclyVisible = {
-  status: { not: ListingStatus.DRAFT },
-} as const;
+/** Drafts and unapproved lister submissions never reach a public surface. */
+const publiclyVisible = publiclyVisibleListingWhere();
+
+function visibleForType(type: ListingType) {
+  return { type, ...publiclyVisible };
+}
 
 /** Featured stock, mixed across both tracks so a visitor who won't choose a lane still sees inventory. */
 export async function getFeaturedListings(
@@ -262,14 +262,14 @@ export async function getFilterOptions(type: ListingType) {
   if (!hasDatabase) return fixture.getFilterOptions(type);
   const [states, estates] = await Promise.all([
     db.listing.findMany({
-      where: { type, status: { not: ListingStatus.DRAFT } },
+      where: visibleForType(type),
       distinct: ["state"],
       select: { state: true },
       orderBy: { state: "asc" },
     }),
     db.estate.findMany({
       where: {
-        listings: { some: { type, status: { not: ListingStatus.DRAFT } } },
+        listings: { some: visibleForType(type) },
       },
       select: { slug: true, name: true },
       orderBy: { name: "asc" },
@@ -283,7 +283,7 @@ export async function getFilterOptions(type: ListingType) {
 export async function getListingSlugs(type: ListingType): Promise<string[]> {
   if (!hasDatabase) return fixture.getListingSlugs(type);
   const rows = await db.listing.findMany({
-    where: { type, status: { not: ListingStatus.DRAFT } },
+    where: visibleForType(type),
     select: { slug: true },
   });
 
@@ -302,8 +302,7 @@ export async function getRelatedListings(
 
   const shared = {
     id: { not: listingId },
-    type,
-    status: { not: ListingStatus.DRAFT },
+    ...visibleForType(type),
   };
 
   const fromEstate = estateId
@@ -335,7 +334,7 @@ export async function getRelatedListings(
 export async function getListingDetail(slug: string) {
   if (!hasDatabase) return fixture.getListingDetail(slug);
   return db.listing.findFirst({
-    where: { slug, status: { not: ListingStatus.DRAFT } },
+    where: { slug, ...publiclyVisible },
     select: {
       id: true,
       slug: true,
@@ -401,7 +400,7 @@ export async function getListingDetail(slug: string) {
 export async function getEstateListings(estateId: string) {
   if (!hasDatabase) return fixture.getEstateListings(estateId);
   const rows = await db.listing.findMany({
-    where: { estateId, status: { not: ListingStatus.DRAFT } },
+    where: { estateId, ...publiclyVisible },
     select: listingCardSelect,
     orderBy: [{ status: "asc" }, { publishedAt: "desc" }],
   });

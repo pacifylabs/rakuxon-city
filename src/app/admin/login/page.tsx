@@ -7,8 +7,10 @@ import { ensureSuperAdmin, hasNoAdmin } from "@/lib/auth/bootstrap";
 import { getPlacement } from "@/lib/media";
 import { verifyPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
+import { UserRole } from "@/generated/prisma/enums";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { Field, Input } from "@/components/ui/field";
+import { PasswordInput } from "@/components/ui/password-input";
 import { AuthLayout } from "@/components/admin/auth-layout";
 import { FormError, FormSuccess } from "@/components/admin/ui";
 
@@ -96,6 +98,7 @@ export default async function AdminLoginPage({
     if (!valid) redirect("/admin/login?error=invalid");
 
     await createSession(user.id);
+    if (user.role === UserRole.LISTER) redirect("/portal");
     redirect("/admin");
   }
 
@@ -136,10 +139,10 @@ export default async function AdminLoginPage({
 
           <div>
             <Field label="Password" htmlFor="password">
-              <Input
+              <PasswordInput
                 id="password"
                 name="password"
-                type="password"
+                placeholder="Your password"
                 required
                 autoComplete="current-password"
               />

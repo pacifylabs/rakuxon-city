@@ -15,11 +15,17 @@ export type ActionState =
   | { error?: string; success?: string; temporaryPassword?: string }
   | null;
 
+const staffRoles = [
+  UserRole.ADMIN,
+  UserRole.SALES,
+  UserRole.INVESTOR_MANAGER,
+] as const;
+
 const userFormSchema = z
   .object({
     name: z.string().min(2).max(120),
     email: z.email(),
-    role: z.enum(UserRole),
+    role: z.enum(staffRoles),
     salesTrack: z.enum(SalesTrack).nullable(),
   })
   .refine(
@@ -172,6 +178,7 @@ export async function setUserActive(formData: FormData): Promise<void> {
   }
 
   revalidatePath("/admin/users");
+  revalidatePath("/admin/listers");
 }
 
 /** Issues a fresh temporary password and forces a change on next sign-in. */

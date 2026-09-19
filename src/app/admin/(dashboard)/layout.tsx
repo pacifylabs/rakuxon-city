@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
-import { verifySession } from "@/lib/auth/dal";
+import { verifyStaffSession } from "@/lib/auth/dal";
 import { getPlacement } from "@/lib/media";
 import { AdminShell } from "@/components/admin/shell";
 
@@ -29,7 +29,7 @@ export default async function AdminShellLayout({
 }: {
   children: ReactNode;
 }) {
-  const user = await verifySession();
+  const user = await verifyStaffSession();
 
   // FR-M1.1.4 — a temporary password blocks everything else until changed.
   if (user.mustChangePassword) {

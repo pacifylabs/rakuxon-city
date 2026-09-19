@@ -5,7 +5,9 @@ import {
   EnquiryStatus,
   EstateStatus,
   HouseType,
+  ListingModerationStatus,
   ListingStatus,
+  ListerKind,
   PlotUnit,
   SalesTrack,
   TitleType,
@@ -99,6 +101,32 @@ export const userRoleLabels: Record<UserRole, string> = {
   ADMIN: "Admin",
   SALES: "Sales",
   INVESTOR_MANAGER: "Investor manager",
+  LISTER: "Property lister",
+};
+
+/** Roles assignable from the Team user form — listers register via the portal. */
+export const staffUserRoleLabels: Record<
+  Exclude<UserRole, "LISTER">,
+  string
+> = {
+  ADMIN: userRoleLabels.ADMIN,
+  SALES: userRoleLabels.SALES,
+  INVESTOR_MANAGER: userRoleLabels.INVESTOR_MANAGER,
+};
+
+export const moderationStatusLabels: Record<ListingModerationStatus, string> = {
+  NOT_REQUIRED: "Staff listing",
+  DRAFT: "Draft",
+  PENDING_REVIEW: "Awaiting review",
+  APPROVED: "Approved",
+  REJECTED: "Rejected",
+};
+
+export const listerKindLabels: Record<ListerKind, string> = {
+  AGENT: "Agent",
+  DEVELOPER: "Developer",
+  LANDLORD: "Landlord",
+  OWNER: "Owner",
 };
 
 export const salesTrackLabels: Record<SalesTrack, string> = {

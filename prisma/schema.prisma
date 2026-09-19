@@ -106,8 +106,30 @@ enum UserRole {
   ADMIN            @map("admin")
   SALES            @map("sales")
   INVESTOR_MANAGER @map("investor_manager")
+  /// Self-serve property listers — portal only, not staff admin.
+  LISTER           @map("lister")
 
   @@map("user_role")
+}
+
+enum ListerKind {
+  AGENT     @map("agent")
+  DEVELOPER @map("developer")
+  LANDLORD  @map("landlord")
+  OWNER     @map("owner")
+
+  @@map("lister_kind")
+}
+
+/// Lister-owned listings go through review before the public site shows them.
+enum ListingModerationStatus {
+  NOT_REQUIRED   @map("not_required")
+  DRAFT          @map("draft")
+  PENDING_REVIEW @map("pending_review")
+  APPROVED       @map("approved")
+  REJECTED       @map("rejected")
+
+  @@map("listing_moderation_status")
 }
 
 /// Which product track a sales user covers. Null for non-sales roles.
@@ -206,9 +228,26 @@ model User {
   importBatches     ImportBatch[]
   accounts          Account[]
   sessions          Session[]
+  listerProfile     ListerProfile?
+  submittedListings Listing[]      @relation("ListingSubmitter")
+  reviewedListings  Listing[]      @relation("ListingReviewer")
 
   @@index([role, salesTrack, isActive])
   @@map("users")
+}
+
+model ListerProfile {
+  userId       String     @id @map("user_id")
+  displayName  String     @map("display_name")
+  phone        String
+  organisation String?
+  listerKind   ListerKind @map("lister_kind")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("lister_profiles")
 }
 
 /// Auth.js adapter tables
@@ -398,10 +437,19 @@ model Listing {
   /// Phase 2's schedule generator reads it directly rather than parsing prose.
   paymentPlanTerms     Json?         @map("payment_plan_terms")
   featured             Boolean       @default(false)
+  /// Set when a lister submits for review; null for staff-created listings.
+  submittedByUserId    String?       @map("submitted_by_user_id")
+  moderationStatus     ListingModerationStatus @default(NOT_REQUIRED) @map("moderation_status")
+  submittedAt          DateTime?     @map("submitted_at")
+  reviewedAt           DateTime?     @map("reviewed_at")
+  reviewedByUserId     String?       @map("reviewed_by_user_id")
+  rejectionReason      String?       @map("rejection_reason")
   createdAt            DateTime      @default(now()) @map("created_at")
   updatedAt            DateTime      @updatedAt @map("updated_at")
   publishedAt          DateTime?     @map("published_at")
 
+  submitter     User?          @relation("ListingSubmitter", fields: [submittedByUserId], references: [id], onDelete: SetNull)
+  reviewedBy    User?          @relation("ListingReviewer", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
   estate        Estate?        @relation(fields: [estateId], references: [id], onDelete: SetNull)
   landDetail    LandDetail?
   homeDetail    HomeDetail?
@@ -413,6 +461,8 @@ model Listing {
   @@index([type, status])
   @@index([estateId])
   @@index([status, featured])
+  @@index([moderationStatus, submittedAt])
+  @@index([submittedByUserId])
   @@map("listings")
 }
 

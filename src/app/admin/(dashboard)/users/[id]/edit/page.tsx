@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/access";
 import { db } from "@/lib/db";
+import { UserRole } from "@/generated/prisma/enums";
 import { updateUser } from "@/lib/admin/actions/users";
 import { UserForm } from "@/components/admin/user-form";
 import { PageHeader } from "@/components/admin/ui";
@@ -26,7 +27,7 @@ export default async function EditUserPage({
       mustChangePassword: true,
     },
   });
-  if (!user) notFound();
+  if (!user || user.role === UserRole.LISTER) notFound();
 
   return (
     <div>

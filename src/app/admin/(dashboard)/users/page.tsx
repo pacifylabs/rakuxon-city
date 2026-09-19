@@ -9,6 +9,7 @@ import {
   FormSuccess,
   FormError,
 } from "@/components/admin/ui";
+import { UserRole } from "@/generated/prisma/enums";
 import { userRoleLabels, salesTrackLabels } from "@/lib/admin/labels";
 import { RowActions } from "@/components/admin/row-actions";
 import { ConfirmSubmit } from "@/components/admin/confirm-action";
@@ -22,6 +23,7 @@ export default async function AdminUsersPage({
   const query = await searchParams;
 
   const users = await db.user.findMany({
+    where: { role: { not: UserRole.LISTER } },
     orderBy: [{ isActive: "desc" }, { name: "asc" }],
     select: {
       id: true,

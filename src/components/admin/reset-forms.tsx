@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { Field, Input } from "@/components/ui/field";
+import { PasswordInput } from "@/components/ui/password-input";
 import { FormError, FormSuccess } from "@/components/admin/ui";
 import {
   requestPasswordReset,
@@ -52,6 +53,7 @@ export function ForgotPasswordForm({
           id="email"
           name="email"
           type="email"
+          placeholder="you@rakuxoncity.com"
           required
           autoComplete="email"
           autoFocus
@@ -92,10 +94,10 @@ export function SetNewPasswordForm({ token }: { token: string }) {
         htmlFor="next"
         hint="At least 12 characters, with an uppercase letter, a lowercase letter and a number."
       >
-        <Input
+        <PasswordInput
           id="next"
           name="next"
-          type="password"
+          placeholder="At least 12 characters"
           required
           minLength={12}
           autoComplete="new-password"
@@ -104,10 +106,10 @@ export function SetNewPasswordForm({ token }: { token: string }) {
       </Field>
 
       <Field label="Confirm new password" htmlFor="confirm">
-        <Input
+        <PasswordInput
           id="confirm"
           name="confirm"
-          type="password"
+          placeholder="Repeat new password"
           required
           minLength={12}
           autoComplete="new-password"
