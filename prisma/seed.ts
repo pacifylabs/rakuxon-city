@@ -2242,6 +2242,10 @@ export async function runCatalogueSeedMain(): Promise<void> {
   await main();
 }
 
+export async function disconnectSeedPrisma(): Promise<void> {
+  await prisma.$disconnect();
+}
+
 const isSeedCli =
   typeof process.argv[1] === "string" &&
   process.argv[1].replace(/\\/g, "/").endsWith("/prisma/seed.ts");

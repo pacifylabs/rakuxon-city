@@ -66,6 +66,19 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  /*
+   * Admin catalogue seed imports `prisma/seed.ts` at runtime and reads the
+   * photography manifest from `public/`. Include them in the serverless trace
+   * so production deploys (Vercel) have the files tsx would have read locally.
+   */
+  outputFileTracingIncludes: {
+    "/admin/settings": [
+      "./prisma/seed.ts",
+      "./prisma/article-bodies.ts",
+      "./public/images/photography/**/*",
+    ],
+  },
+  serverExternalPackages: ["@prisma/client", "@prisma/adapter-pg"],
   async headers() {
     return [
       {
