@@ -14,6 +14,7 @@
  * Re-runnable: it clears what it owns first.
  *
  *   pnpm db:seed
+ *   SEED_SKIP_USERS=1 pnpm db:seed   — catalogue only; keeps existing users/admins
  */
 
 import "dotenv/config";
@@ -47,6 +48,10 @@ if (!connectionString) {
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString }),
 });
+
+const skipUsers =
+  process.env.SEED_SKIP_USERS === "1" ||
+  process.env.SEED_SKIP_USERS === "true";
 
 /**
  * scrypt from node:crypto rather than bcrypt or argon2: auth is Phase 7 and the
@@ -145,44 +150,83 @@ async function clear() {
   await prisma.testimonial.deleteMany();
   await prisma.importBatch.deleteMany();
   await prisma.media.deleteMany();
-  await prisma.user.deleteMany();
+  if (!skipUsers) {
+    await prisma.user.deleteMany();
+  }
+}
+
+type StaffUsers = {
+  admin: { id: string; email: string };
+  landSales: { id: string; email: string };
+  homesSales: { id: string; email: string };
+};
+
+async function staffUsersForSeed(): Promise<StaffUsers> {
+  if (!skipUsers) {
+    const [admin, landSales, homesSales] = await Promise.all([
+      prisma.user.create({
+        data: {
+          email: "admin@rakuxoncity.com",
+          name: "Adaeze Nwosu",
+          role: UserRole.ADMIN,
+          passwordHash: hashPassword("ChangeMeBeforeLaunch1"),
+        },
+      }),
+      prisma.user.create({
+        data: {
+          email: "land@rakuxoncity.com",
+          name: "Ibrahim Bello",
+          role: UserRole.SALES,
+          salesTrack: SalesTrack.LAND,
+          passwordHash: hashPassword("ChangeMeBeforeLaunch2"),
+        },
+      }),
+      prisma.user.create({
+        data: {
+          email: "homes@rakuxoncity.com",
+          name: "Chidinma Okafor",
+          role: UserRole.SALES,
+          salesTrack: SalesTrack.HOMES,
+          passwordHash: hashPassword("ChangeMeBeforeLaunch3"),
+        },
+      }),
+    ]);
+    return { admin, landSales, homesSales };
+  }
+
+  const [admin, landSales, homesSales] = await Promise.all([
+    prisma.user.findFirst({
+      where: { role: UserRole.ADMIN, isActive: true },
+      select: { id: true, email: true },
+    }),
+    prisma.user.findFirst({
+      where: { role: UserRole.SALES, salesTrack: SalesTrack.LAND, isActive: true },
+      select: { id: true, email: true },
+    }),
+    prisma.user.findFirst({
+      where: { role: UserRole.SALES, salesTrack: SalesTrack.HOMES, isActive: true },
+      select: { id: true, email: true },
+    }),
+  ]);
+
+  const fallback = admin ?? landSales ?? homesSales;
+  if (!fallback) {
+    throw new Error(
+      "SEED_SKIP_USERS is set but no active staff users were found. Create an admin first, or run a full seed.",
+    );
+  }
+
+  return {
+    admin: admin ?? fallback,
+    landSales: landSales ?? fallback,
+    homesSales: homesSales ?? fallback,
+  };
 }
 
 async function main() {
   await clear();
 
-  // -------------------------------------------------------------------------
-  // Staff
-  // -------------------------------------------------------------------------
-
-  const [admin, landSales, homesSales] = await Promise.all([
-    prisma.user.create({
-      data: {
-        email: "admin@rakuxoncity.com",
-        name: "Adaeze Nwosu",
-        role: UserRole.ADMIN,
-        passwordHash: hashPassword("ChangeMeBeforeLaunch1"),
-      },
-    }),
-    prisma.user.create({
-      data: {
-        email: "land@rakuxoncity.com",
-        name: "Ibrahim Bello",
-        role: UserRole.SALES,
-        salesTrack: SalesTrack.LAND,
-        passwordHash: hashPassword("ChangeMeBeforeLaunch2"),
-      },
-    }),
-    prisma.user.create({
-      data: {
-        email: "homes@rakuxoncity.com",
-        name: "Chidinma Okafor",
-        role: UserRole.SALES,
-        salesTrack: SalesTrack.HOMES,
-        passwordHash: hashPassword("ChangeMeBeforeLaunch3"),
-      },
-    }),
-  ]);
+  const { admin, landSales, homesSales } = await staffUsersForSeed();
 
   // -------------------------------------------------------------------------
   // Page furniture — the hero frame and the collage behind the FAQ panel.
@@ -2128,7 +2172,9 @@ async function main() {
   console.log(
     [
       "Seed complete:",
-      `  users          3 (admin ${admin.email}, land ${landSales.email}, homes ${homesSales.email})`,
+      skipUsers
+        ? `  users          kept existing (status history attributed to ${landSales.email} / ${homesSales.email})`
+        : `  users          3 (admin ${admin.email}, land ${landSales.email}, homes ${homesSales.email})`,
       `  estates        ${estateSeeds.length}`,
       `  listings       ${listings} (${landSeeds.length} land, ${homeSeeds.length} homes)`,
       `  price on req.  ${por}`,

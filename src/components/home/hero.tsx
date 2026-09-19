@@ -288,6 +288,23 @@ export function Hero({ slides }: { slides: HeroSlide[] }) {
               Book an inspection
             </Link>
           </div>
+
+          <p className="mt-6 text-caption text-ivory/85">
+            Agent, developer or landowner?{" "}
+            <Link
+              href="/portal/register"
+              className="font-medium text-ivory-light underline-offset-4 hover:underline"
+            >
+              List your property
+            </Link>
+            {" · "}
+            <Link
+              href="/portal/login"
+              className="text-ivory/90 underline-offset-4 hover:text-ivory-light hover:underline"
+            >
+              Sign in
+            </Link>
+          </p>
         </div>
       </div>
 

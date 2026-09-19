@@ -4,6 +4,7 @@ import { Faq } from "@/components/home/faq";
 import { FeaturedEstate } from "@/components/home/featured-estate";
 import { Hero } from "@/components/home/hero";
 import { InvestorStrip } from "@/components/home/investor-strip";
+import { ListerPortalStrip } from "@/components/home/lister-portal-strip";
 import { ResourcesTeaser } from "@/components/home/resources-teaser";
 import { Spotlight } from "@/components/home/spotlight";
 import { Testimonials } from "@/components/home/testimonials";
@@ -100,6 +101,7 @@ export default async function HomePage() {
       <Hero slides={heroSlides} />
       <FeaturedEstate estates={estates} />
       <TwoLane counts={counts} />
+      <ListerPortalStrip />
       <TrustBand deliveredEstates={delivered} />
       <Spotlight listings={spotlight} />
       {/* FR-V1.3 — between Spotlight and Testimonials. */}
