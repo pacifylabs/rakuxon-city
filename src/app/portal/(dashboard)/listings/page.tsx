@@ -18,8 +18,8 @@ export default async function PortalListingsPage({
   const { saved, submitted } = await searchParams;
 
   return (
-    <div>
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
           <h1 className="text-display-m text-foreground">My listings</h1>
           <p className="mt-2 text-body text-muted">
@@ -28,7 +28,7 @@ export default async function PortalListingsPage({
         </div>
         <Link
           href="/portal/listings/new"
-          className="inline-flex min-h-11 items-center rounded-full bg-primary px-6 text-body text-ivory-light hover:bg-primary-hover"
+          className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-6 text-body text-ivory-light hover:bg-primary-hover sm:w-auto"
         >
           Add listing
         </Link>

@@ -1,11 +1,13 @@
 import "server-only";
 import { db, hasDatabase } from "@/lib/db";
 import { env } from "@/lib/env";
+import { origin } from "@/lib/seo";
 import { hashPassword } from "@/lib/auth/password";
+import { createEmailVerificationToken } from "@/lib/auth/email-verification";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { portalRegisterSchema } from "@/lib/validation/portal-register";
 import { sendEmail } from "@/lib/email/send";
-import { portalWelcomeEmail } from "@/lib/email/templates";
+import { emailVerificationEmail } from "@/lib/email/templates";
 import { UserRole } from "@/generated/prisma/enums";
 
 const REGISTER_LIMIT = { limit: 5, windowMs: 15 * 60 * 1000 };
@@ -14,11 +16,29 @@ export type RegisterListerErrorCode =
   | "unavailable"
   | "rate_limited"
   | "invalid"
-  | "duplicate";
+  | "duplicate"
+  | "disposable_email";
 
 export type RegisterListerResult =
-  | { ok: true; userId: string }
+  | { ok: true; email: string }
   | { ok: false; code: RegisterListerErrorCode };
+
+export async function sendListerVerificationEmail(
+  email: string,
+  displayName: string,
+): Promise<void> {
+  const token = await createEmailVerificationToken(email);
+  if (!token) return;
+
+  const verifyUrl = `${origin()}/portal/verify-email?token=${encodeURIComponent(token)}`;
+  const message = emailVerificationEmail({ name: displayName, verifyUrl });
+  void sendEmail({
+    to: email,
+    subject: message.subject,
+    html: message.html,
+    text: message.text,
+  });
+}
 
 /**
  * Shared registration logic — used by the POST route so sign-up does not depend
@@ -50,20 +70,27 @@ export async function registerListerFromForm(
   });
 
   if (!parsed.success) {
-    return { ok: false, code: "invalid" };
+    const disposable = parsed.error.issues.some((i) =>
+      i.message.includes("disposable"),
+    );
+    return { ok: false, code: disposable ? "disposable_email" : "invalid" };
   }
 
   const input = parsed.data;
 
   const existing = await db.user.findUnique({
     where: { email: input.email },
-    select: { id: true },
+    select: { id: true, emailVerified: true },
   });
   if (existing) {
+    if (!existing.emailVerified) {
+      await sendListerVerificationEmail(input.email, input.displayName);
+      return { ok: true, email: input.email };
+    }
     return { ok: false, code: "duplicate" };
   }
 
-  const user = await db.user.create({
+  await db.user.create({
     data: {
       email: input.email,
       passwordHash: hashPassword(input.password),
@@ -80,15 +107,9 @@ export async function registerListerFromForm(
     },
   });
 
-  const welcome = portalWelcomeEmail({ name: input.displayName });
-  void sendEmail({
-    to: input.email,
-    subject: welcome.subject,
-    html: welcome.html,
-    text: welcome.text,
-  });
+  await sendListerVerificationEmail(input.email, input.displayName);
 
-  return { ok: true, userId: user.id };
+  return { ok: true, email: input.email };
 }
 
 export const registerListerErrorMessages: Record<
@@ -99,4 +120,6 @@ export const registerListerErrorMessages: Record<
   rate_limited: "Too many attempts. Wait a few minutes and try again.",
   invalid: "Check the form and try again.",
   duplicate: "An account with this email already exists.",
+  disposable_email:
+    "Use a permanent email address. Temporary or disposable inboxes are not allowed.",
 };

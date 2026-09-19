@@ -9,10 +9,12 @@ import {
   listingApprovedEmail,
   listingRejectedEmail,
 } from "@/lib/email/templates";
+import { createPortalNotification } from "@/lib/portal/notifications";
 import {
   ListingModerationStatus,
   ListingStatus,
   ListingType,
+  PortalNotificationKind,
 } from "@/generated/prisma/enums";
 
 export async function approveListerListing(formData: FormData): Promise<void> {
@@ -31,6 +33,7 @@ export async function approveListerListing(formData: FormData): Promise<void> {
       title: true,
       slug: true,
       type: true,
+      submittedByUserId: true,
       submitter: { select: { email: true, name: true } },
     },
   });
@@ -66,10 +69,20 @@ export async function approveListerListing(formData: FormData): Promise<void> {
   revalidatePath("/homes");
 
   const lister = listing.submitter;
+  const segment = listing.type === ListingType.LAND ? "land" : "homes";
+  const publicUrl = `${origin()}/${segment}/${listing.slug}`;
+
+  if (listing.submittedByUserId) {
+    void createPortalNotification({
+      userId: listing.submittedByUserId,
+      kind: PortalNotificationKind.LISTING_APPROVED,
+      title: `Listing approved: ${listing.title}`,
+      body: "Your listing is now live on Rakuxon City.",
+      href: publicUrl,
+    });
+  }
+
   if (lister?.email) {
-    const segment =
-      listing.type === ListingType.LAND ? "land" : "homes";
-    const publicUrl = `${origin()}/${segment}/${listing.slug}`;
     const message = listingApprovedEmail({
       name: lister.name,
       listingTitle: listing.title,
@@ -82,6 +95,8 @@ export async function approveListerListing(formData: FormData): Promise<void> {
       text: message.text,
     });
   }
+
+  revalidatePath("/portal");
 }
 
 export async function rejectListerListing(formData: FormData): Promise<void> {
@@ -101,6 +116,7 @@ export async function rejectListerListing(formData: FormData): Promise<void> {
       id: true,
       title: true,
       type: true,
+      submittedByUserId: true,
       submitter: { select: { email: true, name: true } },
     },
   });
@@ -122,10 +138,20 @@ export async function rejectListerListing(formData: FormData): Promise<void> {
   revalidatePath("/portal/listings");
 
   const lister = listing.submitter;
+  const segment = listing.type === ListingType.LAND ? "land" : "homes";
+  const editUrl = `${origin()}/portal/listings/${segment}/${listing.id}/edit`;
+
+  if (listing.submittedByUserId) {
+    void createPortalNotification({
+      userId: listing.submittedByUserId,
+      kind: PortalNotificationKind.LISTING_REJECTED,
+      title: `Changes needed: ${listing.title}`,
+      body: reason,
+      href: editUrl,
+    });
+  }
+
   if (lister?.email) {
-    const segment =
-      listing.type === ListingType.LAND ? "land" : "homes";
-    const editUrl = `${origin()}/portal/listings/${segment}/${listing.id}/edit`;
     const message = listingRejectedEmail({
       name: lister.name,
       listingTitle: listing.title,
@@ -139,4 +165,6 @@ export async function rejectListerListing(formData: FormData): Promise<void> {
       text: message.text,
     });
   }
+
+  revalidatePath("/portal");
 }

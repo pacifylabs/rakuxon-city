@@ -1,9 +1,21 @@
 import { z } from "zod";
 import { ListerKind } from "@/generated/prisma/enums";
 import { validatePasswordStrength } from "@/lib/auth/password-policy";
+import { isDisposableEmail } from "@/lib/validation/disposable-email";
 
 export const portalRegisterSchema = z.object({
-  email: z.email().transform((value) => value.trim().toLowerCase()),
+  email: z
+    .email()
+    .transform((value) => value.trim().toLowerCase())
+    .superRefine((value, ctx) => {
+      if (isDisposableEmail(value)) {
+        ctx.addIssue({
+          code: "custom",
+          message:
+            "Use a permanent email address. Temporary or disposable inboxes are not allowed.",
+        });
+      }
+    }),
   password: z
     .string()
     .superRefine((value, ctx) => {

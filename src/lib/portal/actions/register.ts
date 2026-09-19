@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import { createSession } from "@/lib/auth/session";
 import {
   registerListerErrorMessages,
   registerListerFromForm,
@@ -24,6 +23,7 @@ export async function registerLister(
     };
   }
 
-  await createSession(result.userId);
-  redirect("/portal");
+  redirect(
+    `/portal/register/success?email=${encodeURIComponent(result.email)}`,
+  );
 }

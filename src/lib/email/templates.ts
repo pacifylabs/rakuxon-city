@@ -256,6 +256,33 @@ export function investorNotification(enquiry: {
   };
 }
 
+/** Lister portal — confirm email before first sign-in. */
+export function emailVerificationEmail({
+  name,
+  verifyUrl,
+}: {
+  name: string;
+  verifyUrl: string;
+}) {
+  const subject = "Confirm your email — Rakuxon City lister portal";
+  const html = shell(
+    "Confirm your email",
+    `${bodyParagraph(`Hi ${esc(firstName(name))}, thanks for registering as a lister on Rakuxon City.`)}
+     ${bodyParagraph("Confirm your email address to sign in and submit listings for review.")}
+     ${ctaButton(verifyUrl, "Confirm email")}
+     ${bodyParagraph("This link expires in 48 hours. If you did not register, ignore this email.")}`,
+  );
+  const text = [
+    `Hi ${firstName(name)}, thanks for registering on Rakuxon City.`,
+    "",
+    "Confirm your email to sign in:",
+    verifyUrl,
+    "",
+    "This link expires in 48 hours.",
+  ].join("\n");
+  return { subject, html, text };
+}
+
 /** Password reset — admin staff or lister portal. */
 export function passwordResetEmail({
   resetUrl,

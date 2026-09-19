@@ -25,12 +25,12 @@ const LOGO_FALLBACK = {
 export default async function PortalLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string; reset?: string }>;
+  searchParams: Promise<{ error?: string; reset?: string; verified?: string }>;
 }) {
   const session = await getSession();
   if (session?.role === UserRole.LISTER) redirect("/portal");
 
-  const { error, reset } = await searchParams;
+  const { error, reset, verified } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
 
   if (!hasDatabase || !env.AUTH_SECRET) {
@@ -68,6 +68,12 @@ export default async function PortalLoginPage({
 
     if (!valid) redirect("/portal/login?error=invalid");
 
+    if (!user.emailVerified) {
+      redirect(
+        `/portal/register/success?email=${encodeURIComponent(user.email)}`,
+      );
+    }
+
     await createSession(user.id);
     redirect("/portal");
   }
@@ -95,6 +101,9 @@ export default async function PortalLoginPage({
       }
     >
       <div className="flex flex-col gap-5">
+        {verified === "1" ? (
+          <FormSuccess message="Email confirmed. Sign in to open your dashboard." />
+        ) : null}
         {reset === "1" ? (
           <FormSuccess message="Your password was updated. Sign in with your new password." />
         ) : null}

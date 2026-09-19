@@ -52,6 +52,7 @@ export type SessionUser = {
   role: UserRole;
   salesTrack: SalesTrack | null;
   mustChangePassword: boolean;
+  emailVerified: Date | null;
   /** Profile picture, uploaded through Settings. Null until they set one. */
   image: string | null;
 };
@@ -115,6 +116,7 @@ export const getSession = cache(async (): Promise<SessionUser | null> => {
     role: user.role,
     salesTrack: user.salesTrack,
     mustChangePassword: user.mustChangePassword,
+    emailVerified: user.emailVerified,
     image: user.image,
   };
 });

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { createSession } from "@/lib/auth/session";
 import { registerListerFromForm } from "@/lib/portal/register-lister-core";
 
 export async function POST(request: Request) {
@@ -12,6 +11,7 @@ export async function POST(request: Request) {
     return NextResponse.redirect(url, 303);
   }
 
-  await createSession(result.userId);
-  return NextResponse.redirect(new URL("/portal", request.url), 303);
+  const url = new URL("/portal/register/success", request.url);
+  url.searchParams.set("email", result.email);
+  return NextResponse.redirect(url, 303);
 }

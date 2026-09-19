@@ -11,6 +11,7 @@ import {
   PasswordPanel,
   SessionsPanel,
 } from "@/components/admin/settings-panels";
+import { CataloguePurgePanel } from "@/components/admin/catalogue-purge-panel";
 
 /**
  * Settings — three things and nothing else, on one screen.
@@ -186,6 +187,12 @@ export default async function AdminSettingsPage() {
             ))}
           </ul>
         </section>
+      ) : null}
+
+      {isAdmin ? (
+        <div className="mt-6">
+          <CataloguePurgePanel />
+        </div>
       ) : null}
     </div>
   );
