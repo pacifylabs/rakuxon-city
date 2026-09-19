@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { verifySession } from "@/lib/auth/dal";
 import {
@@ -9,23 +10,6 @@ import { cn } from "@/lib/cn";
 import { db } from "@/lib/db";
 import { ListingModerationStatus, UserRole } from "@/generated/prisma/enums";
 
-/**
- * `/admin` — the dashboard.
- *
- * Rebuilt from the flat grid of identical cards it was, which gave a sold
- * listing the same visual weight as an unanswered enquiry and left most of
- * the screen empty. Three changes:
- *
- *   - Enquiries lead, because they are the only thing here that decays. A
- *     listing that sits unedited is fine; an enquiry that sits unanswered is
- *     a lost sale, so "New" and "Unassigned" get the largest treatment and a
- *     link straight into the filtered inbox.
- *   - Every figure is now a link to the view that shows those exact rows.
- *     A dashboard number you cannot click is a number you have to go and
- *     find again.
- *   - Recent activity and quick actions fill the right column —
- *     docs/PHASE_7_ADMIN_DASHBOARD.md §3 asked for both and neither existed.
- */
 export default async function AdminDashboardPage() {
   const user = await verifySession();
   const [metrics, activity, portalCounts] = await Promise.all([
@@ -55,216 +39,211 @@ export default async function AdminDashboardPage() {
         : "Homes"
       : null;
 
+  const listingBase =
+    trackLabel === "Homes" ? "/admin/listings/homes" : "/admin/listings/land";
+
   const firstName = user.name.split(" ")[0];
-  const needsAttention =
+  const enquiryAttention =
     metrics.enquiries.newCount + metrics.enquiries.unassigned;
+  const pendingModeration = portalCounts?.pendingModeration ?? 0;
+
+  const priorities = [
+    {
+      label: "New enquiries",
+      value: metrics.enquiries.newCount,
+      href: "/admin/enquiries?status=NEW",
+      show: user.role !== "INVESTOR_MANAGER",
+    },
+    {
+      label: "Unassigned",
+      value: metrics.enquiries.unassigned,
+      href: "/admin/enquiries?unassigned=1",
+      show: user.role !== "INVESTOR_MANAGER",
+    },
+    {
+      label: "Awaiting review",
+      value: pendingModeration,
+      href: "/admin/moderation",
+      show: user.role === "ADMIN",
+    },
+    {
+      label: "Draft listings",
+      value: metrics.listings.draft,
+      href: `${listingBase}?status=DRAFT`,
+      show: user.role !== "INVESTOR_MANAGER",
+    },
+  ].filter((item) => item.show);
 
   return (
-    <div>
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-eyebrow text-muted">
-            {trackLabel ? `${trackLabel} track` : "All stock"}
-          </p>
-          <h1 className="mt-1 text-balance text-display-m text-foreground">
-            Good to see you, {firstName}
-          </h1>
-          <p className="mt-2 text-body text-muted">
-            {needsAttention > 0
-              ? `${needsAttention} ${needsAttention === 1 ? "enquiry needs" : "enquiries need"} attention.`
-              : "Nothing is waiting on you right now."}
-          </p>
+    <div className="mx-auto max-w-6xl space-y-8">
+      <header className="space-y-1">
+        <p className="text-eyebrow text-muted">
+          {trackLabel ? `${trackLabel} track` : "Overview"}
+        </p>
+        <h1 className="text-balance text-display-m text-foreground sm:text-display-l">
+          Hello, {firstName}
+        </h1>
+        <p className="max-w-prose text-body text-muted">
+          {enquiryAttention > 0
+            ? `${enquiryAttention} ${enquiryAttention === 1 ? "enquiry needs" : "enquiries need"} a response.`
+            : pendingModeration > 0
+              ? `${pendingModeration} ${pendingModeration === 1 ? "listing awaits" : "listings await"} moderation.`
+              : "Your queue is clear."}
+        </p>
+      </header>
+
+      <section aria-label="Priority counts">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {priorities.map((item) => (
+            <PriorityTile
+              key={item.href}
+              label={item.label}
+              value={item.value}
+              href={item.href}
+            />
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/*
-        `min-w-0` on both columns is load-bearing, not decoration.
-
-        A grid item defaults to `min-width: auto`, which means it refuses to
-        shrink below its content's intrinsic minimum — so a long activity
-        entry or an unbreakable label pushed this column to 432px inside a
-        375px viewport and the whole dashboard scrolled sideways on a phone.
-        `min-w-0` lets the track actually honour the viewport, and the
-        truncation already on the activity rows handles the overflow.
-      */}
-      <div className="mt-8 grid gap-6 xl:grid-cols-3">
-        <div className="flex min-w-0 flex-col gap-6 xl:col-span-2">
-          {/* Enquiries lead — the only figures here that decay. */}
-          <section className="min-w-0">
-            <SectionHead
-              title="Enquiries"
-              href="/admin/enquiries"
-              linkLabel="Open inbox"
-            />
-            <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
-              <BigStat
-                label="New"
-                value={metrics.enquiries.newCount}
-                href="/admin/enquiries?status=NEW"
-                tone={metrics.enquiries.newCount > 0 ? "attention" : "quiet"}
+      <div className="grid gap-6 lg:grid-cols-5 lg:gap-8">
+        <div className="flex min-w-0 flex-col gap-6 lg:col-span-3">
+          {user.role !== "INVESTOR_MANAGER" ? (
+            <Panel title="Listings" action={{ href: listingBase, label: "Open" }}>
+              <StatRows
+                rows={[
+                  {
+                    label: "Available",
+                    value: metrics.listings.available,
+                    href: `${listingBase}?status=AVAILABLE`,
+                  },
+                  {
+                    label: "Reserved",
+                    value: metrics.listings.reserved,
+                    href: `${listingBase}?status=RESERVED`,
+                  },
+                  {
+                    label: "Sold",
+                    value: metrics.listings.sold,
+                    href: `${listingBase}?status=SOLD`,
+                  },
+                  {
+                    label: "Draft",
+                    value: metrics.listings.draft,
+                    href: `${listingBase}?status=DRAFT`,
+                    emphasize: metrics.listings.draft > 0,
+                  },
+                ]}
               />
-              <BigStat
-                label="Unassigned"
-                value={metrics.enquiries.unassigned}
-                href="/admin/enquiries?unassigned=1"
-                tone={metrics.enquiries.unassigned > 0 ? "attention" : "quiet"}
-              />
-            </div>
-            {!trackLabel ? (
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
-                <SmallStat
-                  label="Land enquiries"
-                  value={metrics.enquiries.byTrack.land}
-                />
-                <SmallStat
-                  label="Home enquiries"
-                  value={metrics.enquiries.byTrack.homes}
-                />
-              </div>
-            ) : null}
-          </section>
-
-          <section className="min-w-0">
-            <SectionHead
-              title="Listings"
-              href={
-                trackLabel === "Homes"
-                  ? "/admin/listings/homes"
-                  : "/admin/listings/land"
-              }
-              linkLabel="Manage"
-            />
-            <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              <SmallStat
-                label="Available"
-                value={metrics.listings.available}
-                href={`/admin/listings/${trackLabel === "Homes" ? "homes" : "land"}?status=AVAILABLE`}
-              />
-              <SmallStat
-                label="Reserved"
-                value={metrics.listings.reserved}
-                href={`/admin/listings/${trackLabel === "Homes" ? "homes" : "land"}?status=RESERVED`}
-              />
-              <SmallStat
-                label="Sold"
-                value={metrics.listings.sold}
-                href={`/admin/listings/${trackLabel === "Homes" ? "homes" : "land"}?status=SOLD`}
-              />
-              <SmallStat
-                label="Draft"
-                value={metrics.listings.draft}
-                href={`/admin/listings/${trackLabel === "Homes" ? "homes" : "land"}?status=DRAFT`}
-                tone={metrics.listings.draft > 0 ? "attention" : "quiet"}
-              />
-            </div>
-          </section>
-
-          {portalCounts ? (
-            <section className="min-w-0">
-              <SectionHead
-                title="Lister portal"
-                href="/admin/moderation"
-                linkLabel="Moderation queue"
-              />
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4">
-                <BigStat
-                  label="Awaiting review"
-                  value={portalCounts.pendingModeration}
-                  href="/admin/moderation"
-                  tone={
-                    portalCounts.pendingModeration > 0 ? "attention" : "quiet"
-                  }
-                />
-                <SmallStat
-                  label="Active listers"
-                  value={portalCounts.activeListers}
-                  href="/admin/listers"
-                />
-              </div>
-            </section>
+            </Panel>
           ) : null}
 
           {user.role !== "INVESTOR_MANAGER" ? (
-            <section className="min-w-0">
-              <SectionHead
-                title="Estates"
-                href="/admin/estates"
-                linkLabel="Manage"
+            <Panel
+              title="Enquiries"
+              action={{ href: "/admin/enquiries", label: "Inbox" }}
+            >
+              <StatRows
+                rows={[
+                  {
+                    label: "New",
+                    value: metrics.enquiries.newCount,
+                    href: "/admin/enquiries?status=NEW",
+                    emphasize: metrics.enquiries.newCount > 0,
+                  },
+                  {
+                    label: "Unassigned",
+                    value: metrics.enquiries.unassigned,
+                    href: "/admin/enquiries?unassigned=1",
+                    emphasize: metrics.enquiries.unassigned > 0,
+                  },
+                  ...(!trackLabel
+                    ? [
+                        {
+                          label: "Land track",
+                          value: metrics.enquiries.byTrack.land,
+                        },
+                        {
+                          label: "Homes track",
+                          value: metrics.enquiries.byTrack.homes,
+                        },
+                      ]
+                    : []),
+                ]}
               />
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-                <SmallStat label="Active" value={metrics.estates.active} />
-                <SmallStat label="Sold out" value={metrics.estates.soldOut} />
-                <SmallStat label="Delivered" value={metrics.estates.delivered} />
-                <SmallStat label="Total" value={metrics.estates.total} />
-              </div>
-            </section>
+            </Panel>
+          ) : null}
+
+          {user.role === "ADMIN" && portalCounts ? (
+            <Panel
+              title="Lister portal"
+              action={{ href: "/admin/moderation", label: "Moderation" }}
+            >
+              <StatRows
+                rows={[
+                  {
+                    label: "Pending review",
+                    value: portalCounts.pendingModeration,
+                    href: "/admin/moderation",
+                    emphasize: portalCounts.pendingModeration > 0,
+                  },
+                  {
+                    label: "Active listers",
+                    value: portalCounts.activeListers,
+                    href: "/admin/listers",
+                  },
+                ]}
+              />
+            </Panel>
+          ) : null}
+
+          {user.role === "ADMIN" ? (
+            <Panel title="Estates" action={{ href: "/admin/estates", label: "Manage" }}>
+              <StatRows
+                rows={[
+                  { label: "Active", value: metrics.estates.active },
+                  { label: "Sold out", value: metrics.estates.soldOut },
+                  { label: "Delivered", value: metrics.estates.delivered },
+                  { label: "Total", value: metrics.estates.total },
+                ]}
+              />
+            </Panel>
           ) : null}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-6">
+        <aside className="flex min-w-0 flex-col gap-6 lg:col-span-2">
           <QuickActions user={user} trackLabel={trackLabel} />
           <ActivityFeed entries={activity} />
-        </div>
+        </aside>
       </div>
     </div>
   );
 }
 
-function SectionHead({
-  title,
-  href,
-  linkLabel,
-}: {
-  title: string;
-  href: string;
-  linkLabel: string;
-}) {
-  return (
-    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-      <h2 className="text-heading text-foreground">{title}</h2>
-      <Link
-        href={href}
-        className="shrink-0 text-caption text-accent-text underline-offset-4 hover:underline"
-      >
-        {linkLabel}
-      </Link>
-    </div>
-  );
-}
-
-function BigStat({
+function PriorityTile({
   label,
   value,
   href,
-  tone,
 }: {
   label: string;
   value: number;
   href: string;
-  tone: "attention" | "quiet";
 }) {
+  const hot = value > 0;
   return (
     <Link
       href={href}
       className={cn(
-        "rounded-card border p-5 transition-colors",
-        tone === "attention"
-          ? "border-accent-hover bg-accent-tint hover:border-accent-text"
+        "rounded-card border px-4 py-4 transition-colors sm:px-5 sm:py-5",
+        hot
+          ? "border-accent-hover/40 bg-accent-tint/50 hover:border-accent-text/30"
           : "border-line bg-surface hover:border-muted",
       )}
     >
+      <p className="text-caption text-muted">{label}</p>
       <p
         className={cn(
-          "text-caption",
-          tone === "attention" ? "text-accent-text" : "text-muted",
-        )}
-      >
-        {label}
-      </p>
-      <p
-        className={cn(
-          "tabular mt-2 text-display-m sm:text-display-l",
-          tone === "attention" ? "text-accent-text" : "text-foreground",
+          "tabular mt-1 text-display-m sm:text-display-l",
+          hot ? "text-accent-text" : "text-foreground",
         )}
       >
         {value}
@@ -273,42 +252,78 @@ function BigStat({
   );
 }
 
-function SmallStat({
-  label,
-  value,
-  href,
-  tone = "quiet",
+function Panel({
+  title,
+  action,
+  children,
 }: {
-  label: string;
-  value: number;
-  href?: string;
-  tone?: "attention" | "quiet";
+  title: string;
+  action?: { href: string; label: string };
+  children: ReactNode;
 }) {
-  const body = (
-    <>
-      <p className="text-caption text-muted">{label}</p>
-      <p
-        className={cn(
-          "tabular mt-1 text-display-m",
-          tone === "attention" ? "text-accent-text" : "text-foreground",
-        )}
-      >
-        {value}
-      </p>
-    </>
+  return (
+    <section className="rounded-card border border-line bg-surface">
+      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
+        <h2 className="text-body font-medium text-foreground">{title}</h2>
+        {action ? (
+          <Link
+            href={action.href}
+            className="shrink-0 text-caption text-accent-text underline-offset-4 hover:underline"
+          >
+            {action.label}
+          </Link>
+        ) : null}
+      </div>
+      <div className="px-4 py-1 sm:px-5">{children}</div>
+    </section>
   );
+}
 
-  const className = cn(
-    "block rounded-card border border-line bg-surface p-4 transition-colors",
-    href && "hover:border-muted",
-  );
+function StatRows({
+  rows,
+}: {
+  rows: {
+    label: string;
+    value: number;
+    href?: string;
+    emphasize?: boolean;
+  }[];
+}) {
+  return (
+    <ul className="divide-y divide-line">
+      {rows.map((row) => {
+        const inner = (
+          <>
+            <span className="text-body text-muted">{row.label}</span>
+            <span
+              className={cn(
+                "tabular text-body font-medium",
+                row.emphasize ? "text-accent-text" : "text-foreground",
+              )}
+            >
+              {row.value}
+            </span>
+          </>
+        );
 
-  return href ? (
-    <Link href={href} className={className}>
-      {body}
-    </Link>
-  ) : (
-    <div className={className}>{body}</div>
+        return (
+          <li key={row.label}>
+            {row.href ? (
+              <Link
+                href={row.href}
+                className="flex items-center justify-between gap-4 py-3 transition-colors hover:text-accent-text"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div className="flex items-center justify-between gap-4 py-3">
+                {inner}
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -319,93 +334,125 @@ function QuickActions({
   user: { role: string };
   trackLabel: string | null;
 }) {
-  const actions: { href: string; label: string }[] = [];
+  const primary: { href: string; label: string; description: string }[] = [];
 
-  if (trackLabel !== "Homes") {
-    actions.push({ href: "/admin/listings/land/new", label: "New plot" });
+  if (user.role !== "INVESTOR_MANAGER") {
+    if (trackLabel !== "Homes") {
+      primary.push({
+        href: "/admin/enquiries",
+        label: "Enquiries inbox",
+        description: "Reply and assign leads",
+      });
+    }
+    if (user.role === "ADMIN") {
+      primary.push({
+        href: "/admin/moderation",
+        label: "Moderation queue",
+        description: "Approve lister submissions",
+      });
+    }
+    if (trackLabel !== "Homes") {
+      primary.push({
+        href: "/admin/listings/land/new",
+        label: "Add land listing",
+        description: "New plot on the site",
+      });
+    }
+    if (trackLabel !== "Land") {
+      primary.push({
+        href: "/admin/listings/homes/new",
+        label: "Add home listing",
+        description: "New home on the site",
+      });
+    }
   }
-  if (trackLabel !== "Land") {
-    actions.push({ href: "/admin/listings/homes/new", label: "New home" });
-  }
+
+  const secondary: { href: string; label: string }[] = [];
   if (user.role === "ADMIN") {
-    actions.push({ href: "/admin/moderation", label: "Review lister submissions" });
-    actions.push({ href: "/admin/listers", label: "View listers" });
-    actions.push({ href: "/admin/estates/new", label: "New estate" });
-    actions.push({ href: "/admin/articles/new", label: "New guide" });
-    actions.push({ href: "/admin/import", label: "Import a CSV" });
+    secondary.push(
+      { href: "/admin/listers", label: "Listers" },
+      { href: "/admin/estates/new", label: "New estate" },
+      { href: "/admin/articles/new", label: "New guide" },
+      { href: "/admin/import", label: "Import CSV" },
+    );
   }
 
-  if (actions.length === 0) return null;
+  if (primary.length === 0 && secondary.length === 0) return null;
 
   return (
-    <section className="rounded-card border border-line bg-surface p-5">
-      <h2 className="text-heading text-foreground">Quick actions</h2>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {actions.map((action) => (
-          <Link
-            key={action.href}
-            href={action.href}
-            className="inline-flex min-h-10 items-center rounded-full border border-line px-4 text-caption text-foreground transition-colors hover:border-muted hover:bg-surface-muted"
-          >
-            {action.label}
-          </Link>
-        ))}
-      </div>
+    <section className="rounded-card border border-line bg-surface p-4 sm:p-5">
+      <h2 className="text-body font-medium text-foreground">Shortcuts</h2>
+      {primary.length > 0 ? (
+        <ul className="mt-3 flex flex-col gap-2">
+          {primary.map((action) => (
+            <li key={action.href}>
+              <Link
+                href={action.href}
+                className="block rounded-control border border-line px-3 py-2.5 transition-colors hover:border-muted hover:bg-surface-muted"
+              >
+                <span className="block text-body text-foreground">{action.label}</span>
+                <span className="block text-caption text-muted">
+                  {action.description}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {secondary.length > 0 ? (
+        <ul className="mt-4 flex flex-col gap-1 border-t border-line pt-4">
+          {secondary.map((action) => (
+            <li key={action.href}>
+              <Link
+                href={action.href}
+                className="flex min-h-9 items-center text-caption text-accent-text underline-offset-4 hover:underline"
+              >
+                {action.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </section>
   );
 }
 
-const ACTIVITY_TONE: Record<ActivityEntry["kind"], string> = {
-  status: "bg-status-reserved-bg text-status-reserved",
-  enquiry: "bg-accent-tint text-accent-text",
-  note: "bg-surface-muted text-muted",
-};
-
-const ACTIVITY_LABEL: Record<ActivityEntry["kind"], string> = {
-  status: "Status",
-  enquiry: "Enquiry",
-  note: "Note",
-};
-
 function ActivityFeed({ entries }: { entries: ActivityEntry[] }) {
   return (
-    <section className="rounded-card border border-line bg-surface p-5">
-      <h2 className="text-heading text-foreground">Recent activity</h2>
+    <section className="rounded-card border border-line bg-surface p-4 sm:p-5">
+      <h2 className="text-body font-medium text-foreground">Recent activity</h2>
 
       {entries.length === 0 ? (
         <p className="mt-3 text-caption text-muted">
-          Nothing has happened yet. Status changes, enquiries and notes appear
-          here.
+          Status changes, enquiries and notes will show up here.
         </p>
       ) : (
-        <ul className="mt-4 flex flex-col gap-4">
-          {entries.map((entry) => (
-            <li key={entry.id} className="flex gap-3">
-              <span
-                className={cn(
-                  "mt-0.5 h-fit shrink-0 rounded-full px-2 py-0.5 text-caption",
-                  ACTIVITY_TONE[entry.kind],
-                )}
-              >
-                {ACTIVITY_LABEL[entry.kind]}
-              </span>
-              <div className="min-w-0">
-                <p className="truncate text-body text-foreground">
-                  {entry.summary}
-                </p>
-                {entry.detail ? (
-                  <p className="truncate text-caption text-muted">
-                    {entry.detail}
-                  </p>
-                ) : null}
-                <p className="text-caption text-muted">
-                  {entry.actor ? `${entry.actor} · ` : ""}
-                  {new Date(entry.at).toLocaleDateString("en-NG", {
-                    day: "numeric",
-                    month: "short",
-                  })}
-                </p>
-              </div>
+        <ul className="mt-4 flex flex-col gap-0">
+          {entries.map((entry, index) => (
+            <li
+              key={entry.id}
+              className={cn(
+                "relative border-l border-line py-3 pl-4",
+                index === 0 && "pt-0",
+              )}
+            >
+              <p className="truncate text-body text-foreground">{entry.summary}</p>
+              {entry.detail ? (
+                <p className="truncate text-caption text-muted">{entry.detail}</p>
+              ) : null}
+              <p className="mt-1 text-[11px] text-muted">
+                {entry.kind === "enquiry"
+                  ? "Enquiry"
+                  : entry.kind === "status"
+                    ? "Status"
+                    : "Note"}
+                {entry.actor ? ` · ${entry.actor}` : ""}
+                {" · "}
+                {new Date(entry.at).toLocaleDateString("en-NG", {
+                  day: "numeric",
+                  month: "short",
+                })}
+              </p>
             </li>
           ))}
         </ul>

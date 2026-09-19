@@ -30,77 +30,109 @@ type NavItem = {
  * query layer (`lib/admin/access.ts`), because a hidden link stops nobody
  * from typing a URL.
  */
-const NAV_ITEMS: NavItem[] = [
-  { href: "/admin", label: "Dashboard", icon: <IconGrid /> },
+type NavGroup = {
+  label?: string;
+  items: NavItem[];
+};
+
+const NAV_GROUPS: NavGroup[] = [
   {
-    href: "/admin/listings/land",
-    label: "Land",
-    icon: <IconMap />,
-    visible: (u) =>
-      u.role === "ADMIN" || (u.role === "SALES" && u.salesTrack !== "HOMES"),
+    items: [{ href: "/admin", label: "Dashboard", icon: <IconGrid /> }],
   },
   {
-    href: "/admin/listings/homes",
-    label: "Homes",
-    icon: <IconHome />,
-    visible: (u) =>
-      u.role === "ADMIN" || (u.role === "SALES" && u.salesTrack !== "LAND"),
+    label: "Stock",
+    items: [
+      {
+        href: "/admin/listings/land",
+        label: "Land",
+        icon: <IconMap />,
+        visible: (u) =>
+          u.role === "ADMIN" || (u.role === "SALES" && u.salesTrack !== "HOMES"),
+      },
+      {
+        href: "/admin/listings/homes",
+        label: "Homes",
+        icon: <IconHome />,
+        visible: (u) =>
+          u.role === "ADMIN" || (u.role === "SALES" && u.salesTrack !== "LAND"),
+      },
+      {
+        href: "/admin/estates",
+        label: "Estates",
+        icon: <IconLayers />,
+        visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+      },
+    ],
   },
   {
-    href: "/admin/estates",
-    label: "Estates",
-    icon: <IconLayers />,
-    visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+    label: "Inbox",
+    items: [
+      {
+        href: "/admin/enquiries",
+        label: "Enquiries",
+        icon: <IconInbox />,
+        visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+      },
+      {
+        href: "/admin/investor-enquiries",
+        label: "Investors",
+        icon: <IconBriefcase />,
+        visible: (u) => u.role === "ADMIN" || u.role === "INVESTOR_MANAGER",
+      },
+    ],
   },
   {
-    href: "/admin/enquiries",
-    label: "Enquiries",
-    icon: <IconInbox />,
-    visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+    label: "Portal",
+    items: [
+      {
+        href: "/admin/moderation",
+        label: "Moderation",
+        icon: <IconInbox />,
+        visible: (u) => u.role === "ADMIN",
+      },
+      {
+        href: "/admin/listers",
+        label: "Listers",
+        icon: <IconUsers />,
+        visible: (u) => u.role === "ADMIN",
+      },
+    ],
   },
   {
-    href: "/admin/investor-enquiries",
-    label: "Investors",
-    icon: <IconBriefcase />,
-    visible: (u) => u.role === "ADMIN" || u.role === "INVESTOR_MANAGER",
+    label: "Content",
+    items: [
+      {
+        href: "/admin/media",
+        label: "Media",
+        icon: <IconImage />,
+        visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+      },
+      {
+        href: "/admin/articles",
+        label: "Guides",
+        icon: <IconDoc />,
+        visible: (u) => u.role === "ADMIN",
+      },
+      {
+        href: "/admin/import",
+        label: "Import",
+        icon: <IconUpload />,
+        visible: (u) => u.role === "ADMIN",
+      },
+    ],
   },
   {
-    href: "/admin/media",
-    label: "Media",
-    icon: <IconImage />,
-    visible: (u) => u.role === "ADMIN" || u.role === "SALES",
+    label: "Admin",
+    items: [
+      {
+        href: "/admin/users",
+        label: "Team",
+        icon: <IconUsers />,
+        visible: (u) => u.role === "ADMIN",
+      },
+      { href: "/admin/settings", label: "Settings", icon: <IconCog /> },
+    ],
   },
-  {
-    href: "/admin/articles",
-    label: "Guides",
-    icon: <IconDoc />,
-    visible: (u) => u.role === "ADMIN",
-  },
-  {
-    href: "/admin/listers",
-    label: "Listers",
-    icon: <IconBriefcase />,
-    visible: (u) => u.role === "ADMIN",
-  },
-  {
-    href: "/admin/users",
-    label: "Team",
-    icon: <IconUsers />,
-    visible: (u) => u.role === "ADMIN",
-  },
-  {
-    href: "/admin/moderation",
-    label: "Moderation",
-    icon: <IconInbox />,
-    visible: (u) => u.role === "ADMIN",
-  },
-  {
-    href: "/admin/import",
-    label: "Import",
-    icon: <IconUpload />,
-    visible: (u) => u.role === "ADMIN",
-  },
-  { href: "/admin/settings", label: "Settings", icon: <IconCog /> },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -120,8 +152,40 @@ export function AdminShell({
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const items = NAV_ITEMS.filter((item) => item.visible?.(user) ?? true);
+  const groups = NAV_GROUPS.map((group) => ({
+    ...group,
+    items: group.items.filter((item) => item.visible?.(user) ?? true),
+  })).filter((group) => group.items.length > 0);
+
+  const items = groups.flatMap((group) => group.items);
   const current = items.find((item) => isActive(pathname, item.href));
+
+  function NavList({ onNavigate }: { onNavigate?: () => void }) {
+    return (
+      <>
+        {groups.map((group) => (
+          <div key={group.label ?? "main"} className="mb-4 last:mb-0">
+            {group.label ? (
+              <p className="mb-1 px-3 text-[11px] font-medium tracking-wide text-muted uppercase">
+                {group.label}
+              </p>
+            ) : null}
+            <ul className="flex flex-col gap-0.5">
+              {group.items.map((item) => (
+                <li key={item.href}>
+                  <NavLink
+                    item={item}
+                    active={isActive(pathname, item.href)}
+                    onNavigate={onNavigate}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </>
+    );
+  }
 
   return (
     <div className="min-h-svh bg-background">
@@ -138,13 +202,7 @@ export function AdminShell({
         </div>
 
         <nav aria-label="Admin" className="flex-1 overflow-y-auto p-3">
-          <ul className="flex flex-col gap-0.5">
-            {items.map((item) => (
-              <li key={item.href}>
-                <NavLink item={item} active={isActive(pathname, item.href)} />
-              </li>
-            ))}
-          </ul>
+          <NavList />
         </nav>
 
         <div className="shrink-0 border-t border-line p-3">
@@ -177,17 +235,7 @@ export function AdminShell({
               aria-label="Admin, mobile"
               className="flex-1 overflow-y-auto p-3"
             >
-              <ul className="flex flex-col gap-0.5">
-                {items.map((item) => (
-                  <li key={item.href}>
-                    <NavLink
-                      item={item}
-                      active={isActive(pathname, item.href)}
-                      onNavigate={() => setDrawerOpen(false)}
-                    />
-                  </li>
-                ))}
-              </ul>
+              <NavList onNavigate={() => setDrawerOpen(false)} />
             </nav>
             <div className="shrink-0 border-t border-line p-3">
               <UserCard user={user} />
