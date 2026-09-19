@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { validatePasswordStrength } from "@/lib/auth/password";
+import { validatePasswordStrength } from "@/lib/auth/password-policy";
 
 /**
  * The single place `process.env` is read. Everything else imports from here,

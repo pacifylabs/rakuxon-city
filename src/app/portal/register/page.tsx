@@ -4,7 +4,13 @@ import { getPlacement } from "@/lib/media";
 import { getSession } from "@/lib/auth/session";
 import { AuthLayout } from "@/components/admin/auth-layout";
 import { UserRole } from "@/generated/prisma/enums";
+import {
+  registerListerErrorMessages,
+  type RegisterListerErrorCode,
+} from "@/lib/portal/register-lister-core";
 import { RegisterFormInner } from "./register-form";
+
+export const dynamic = "force-dynamic";
 
 const LOGO_FALLBACK = {
   url: "/logo.png",
@@ -13,9 +19,19 @@ const LOGO_FALLBACK = {
   height: 724,
 };
 
-export default async function PortalRegisterPage() {
+export default async function PortalRegisterPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
   const session = await getSession();
   if (session?.role === UserRole.LISTER) redirect("/portal");
+
+  const { error: errorCode } = await searchParams;
+  const errorMessage =
+    errorCode && errorCode in registerListerErrorMessages
+      ? registerListerErrorMessages[errorCode as RegisterListerErrorCode]
+      : undefined;
 
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
 
@@ -33,7 +49,7 @@ export default async function PortalRegisterPage() {
         </p>
       }
     >
-      <RegisterFormInner />
+      <RegisterFormInner errorMessage={errorMessage} />
     </AuthLayout>
   );
 }

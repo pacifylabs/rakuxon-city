@@ -5,7 +5,9 @@ import {
   hashPassword,
   verifyPassword,
   validatePasswordStrength,
+  MIN_PASSWORD_LENGTH,
 } from "@/lib/auth/password";
+import { PASSWORD_REQUIREMENTS_HINT } from "@/lib/auth/password-policy";
 import { Field } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Button } from "@/components/ui/button";
@@ -13,7 +15,7 @@ import { Button } from "@/components/ui/button";
 const ERROR_MESSAGES: Record<string, string> = {
   current: "Current password is incorrect.",
   mismatch: "New password and confirmation don't match.",
-  weak: "New password needs 12+ characters, an uppercase letter, a lowercase letter, and a number.",
+  weak: "New password needs 8+ characters, an uppercase letter, a lowercase letter, and a number.",
 };
 
 /**
@@ -97,13 +99,13 @@ export default async function ChangePasswordPage({
               autoComplete="current-password"
             />
           </Field>
-          <Field label="New password" htmlFor="cp-next">
+          <Field label="New password" htmlFor="cp-next" hint={PASSWORD_REQUIREMENTS_HINT}>
             <PasswordInput
               id="cp-next"
               name="next"
-              placeholder="At least 12 characters"
+              placeholder={`At least ${MIN_PASSWORD_LENGTH} characters`}
               required
-              minLength={12}
+              minLength={MIN_PASSWORD_LENGTH}
               autoComplete="new-password"
             />
           </Field>
@@ -113,7 +115,7 @@ export default async function ChangePasswordPage({
               name="confirm"
               placeholder="Repeat new password"
               required
-              minLength={12}
+              minLength={MIN_PASSWORD_LENGTH}
               autoComplete="new-password"
             />
           </Field>

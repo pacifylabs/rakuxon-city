@@ -6,6 +6,10 @@ import { Field, Input } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { FormError, FormSuccess } from "@/components/admin/ui";
 import type { ResetState } from "@/lib/admin/actions/reset";
+import {
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_REQUIREMENTS_HINT,
+} from "@/lib/auth/password-policy";
 
 type ForgotProps = {
   emailConfigured: boolean;
@@ -103,14 +107,14 @@ export function SetNewPasswordForm({
       <Field
         label="New password"
         htmlFor="next"
-        hint="At least 12 characters, with an uppercase letter, a lowercase letter and a number."
+        hint={PASSWORD_REQUIREMENTS_HINT}
       >
         <PasswordInput
           id="next"
           name="next"
-          placeholder="At least 12 characters"
+          placeholder={`At least ${MIN_PASSWORD_LENGTH} characters`}
           required
-          minLength={12}
+          minLength={MIN_PASSWORD_LENGTH}
           autoComplete="new-password"
           autoFocus
         />
@@ -122,7 +126,7 @@ export function SetNewPasswordForm({
           name="confirm"
           placeholder="Repeat new password"
           required
-          minLength={12}
+          minLength={MIN_PASSWORD_LENGTH}
           autoComplete="new-password"
         />
       </Field>

@@ -1,19 +1,17 @@
-"use client";
-
 import Link from "next/link";
-import { useActionState } from "react";
 import { Field, Input, Select, Checkbox } from "@/components/ui/field";
 import { PasswordInput } from "@/components/ui/password-input";
 import { FormError } from "@/components/admin/ui";
-import { registerLister } from "@/lib/portal/actions/register";
+import {
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_REQUIREMENTS_HINT,
+} from "@/lib/auth/password-policy";
 import { listerKindLabels, options } from "@/lib/admin/labels";
 
-export function RegisterFormInner() {
-  const [state, formAction, pending] = useActionState(registerLister, null);
-
+export function RegisterFormInner({ errorMessage }: { errorMessage?: string }) {
   return (
-    <form action={formAction} className="flex flex-col gap-5">
-      <FormError message={state?.error} />
+    <form action="/api/portal/register" method="post" className="flex flex-col gap-5">
+      <FormError message={errorMessage} />
 
       <Field label="Full name" htmlFor="displayName">
         <Input
@@ -68,14 +66,14 @@ export function RegisterFormInner() {
         />
       </Field>
 
-      <Field label="Password" htmlFor="password">
+      <Field label="Password" htmlFor="password" hint={PASSWORD_REQUIREMENTS_HINT}>
         <PasswordInput
           id="password"
           name="password"
-          placeholder="At least 12 characters"
+          placeholder={`At least ${MIN_PASSWORD_LENGTH} characters`}
           required
           autoComplete="new-password"
-          minLength={12}
+          minLength={MIN_PASSWORD_LENGTH}
         />
       </Field>
 
@@ -95,10 +93,9 @@ export function RegisterFormInner() {
 
       <button
         type="submit"
-        disabled={pending}
-        className="min-h-11 cursor-pointer rounded-full bg-primary px-6 text-body text-ivory-light transition-colors hover:bg-primary-hover disabled:opacity-60"
+        className="min-h-11 cursor-pointer rounded-full bg-primary px-6 text-body text-ivory-light transition-colors hover:bg-primary-hover"
       >
-        {pending ? "Creating account…" : "Create account"}
+        Create account
       </button>
     </form>
   );

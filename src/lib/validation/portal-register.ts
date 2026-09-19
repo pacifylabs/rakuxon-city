@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ListerKind } from "@/generated/prisma/enums";
-import { validatePasswordStrength } from "@/lib/auth/password";
+import { validatePasswordStrength } from "@/lib/auth/password-policy";
 
 export const portalRegisterSchema = z.object({
   email: z.email().transform((value) => value.trim().toLowerCase()),

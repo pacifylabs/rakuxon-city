@@ -12,6 +12,10 @@ import {
   removeProfilePicture,
   signOutEverywhere,
 } from "@/lib/admin/actions/profile";
+import {
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_REQUIREMENTS_HINT,
+} from "@/lib/auth/password-policy";
 
 /**
  * Identity — avatar and name, side by side with the picture control.
@@ -172,10 +176,7 @@ export function PasswordPanel() {
   return (
     <section className="flex h-full flex-col rounded-card border border-line bg-surface p-6">
       <h2 className="text-heading text-foreground">Password</h2>
-      <p className="mt-1 text-caption text-muted">
-        At least 12 characters, with an uppercase letter, a lowercase letter and
-        a number.
-      </p>
+      <p className="mt-1 text-caption text-muted">{PASSWORD_REQUIREMENTS_HINT}</p>
 
       <form action={formAction} className="mt-5 flex flex-col gap-4">
         <FormError message={state?.error} />
@@ -199,9 +200,9 @@ export function PasswordPanel() {
             <PasswordInput
               id="next"
               name="next"
-              placeholder="At least 12 characters"
+              placeholder={`At least ${MIN_PASSWORD_LENGTH} characters`}
               required
-              minLength={12}
+              minLength={MIN_PASSWORD_LENGTH}
               autoComplete="new-password"
             />
           </Field>
@@ -211,7 +212,7 @@ export function PasswordPanel() {
               name="confirm"
               placeholder="Repeat new password"
               required
-              minLength={12}
+              minLength={MIN_PASSWORD_LENGTH}
               autoComplete="new-password"
             />
           </Field>
