@@ -12,6 +12,10 @@ import {
   SessionsPanel,
 } from "@/components/admin/settings-panels";
 import { CataloguePurgePanel } from "@/components/admin/catalogue-purge-panel";
+import { CatalogueSeedPanel } from "@/components/admin/catalogue-seed-panel";
+
+/** Catalogue seed runs the full Prisma seed script and may take up to two minutes. */
+export const maxDuration = 120;
 
 /**
  * Settings — three things and nothing else, on one screen.
@@ -190,7 +194,8 @@ export default async function AdminSettingsPage() {
       ) : null}
 
       {isAdmin ? (
-        <div className="mt-6">
+        <div className="mt-6 space-y-4">
+          <CatalogueSeedPanel />
           <CataloguePurgePanel />
         </div>
       ) : null}

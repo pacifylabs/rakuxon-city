@@ -6,7 +6,7 @@ import { env, hasDatabase, hasSuperAdminConfig } from "@/lib/env";
 import { ensureSuperAdmin, hasNoAdmin } from "@/lib/auth/bootstrap";
 import { getPlacement } from "@/lib/media";
 import { verifyPassword } from "@/lib/auth/password";
-import { createSession } from "@/lib/auth/session";
+import { createSession, getSession } from "@/lib/auth/session";
 import { UserRole } from "@/generated/prisma/enums";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { Field, Input } from "@/components/ui/field";
@@ -41,6 +41,14 @@ export default async function AdminLoginPage({
 }) {
   const { error, reset } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;
+
+  const existingSession = await getSession();
+  if (existingSession?.role === UserRole.LISTER) {
+    redirect("/portal");
+  }
+  if (existingSession) {
+    redirect("/admin");
+  }
 
   /*
    * Self-heal a deployment that has no admin at all.
@@ -104,12 +112,14 @@ export default async function AdminLoginPage({
     // The same outcome whether the account doesn't exist, is deactivated, or
     // the password is wrong — anything else is a user-existence oracle.
     const valid =
-      user && user.isActive && verifyPassword(password, user.passwordHash);
+      user &&
+      user.isActive &&
+      user.role !== UserRole.LISTER &&
+      verifyPassword(password, user.passwordHash);
 
     if (!valid) redirect("/admin/login?error=invalid");
 
     await createSession(user.id);
-    if (user.role === UserRole.LISTER) redirect("/portal");
     redirect("/admin");
   }
 
@@ -120,8 +130,14 @@ export default async function AdminLoginPage({
       description="Staff access to listings, enquiries and content."
       footer={
         <p className="text-caption text-muted">
-          Trouble signing in? Ask an admin to reset your password from the Team
-          screen.
+          Listing a property?{" "}
+          <Link
+            href="/portal/login"
+            className="text-accent-text underline underline-offset-4"
+          >
+            Lister sign in
+          </Link>
+          . Trouble signing in? Ask an admin to reset your password from Team.
         </p>
       }
     >

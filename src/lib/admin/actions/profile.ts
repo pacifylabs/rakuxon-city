@@ -14,7 +14,23 @@ import {
   verifyPassword,
   validatePasswordStrength,
 } from "@/lib/auth/password";
-import { deleteSession } from "@/lib/auth/session";
+import {
+  deleteSession,
+  getSession,
+  type SessionUser,
+} from "@/lib/auth/session";
+import { UserRole } from "@/generated/prisma/enums";
+
+function signOutLoginPath(role: SessionUser["role"] | undefined): string {
+  return role === UserRole.LISTER ? "/portal/login" : "/admin/login";
+}
+
+function signOutDestinationFromForm(formData: FormData): string {
+  const raw = String(formData.get("destination") ?? "").trim();
+  if (raw === "portal") return "/portal/login";
+  if (raw === "admin") return "/admin/login";
+  return "/admin/login";
+}
 
 export type ProfileState = { error?: string; success?: string } | null;
 
@@ -144,9 +160,14 @@ export async function removeProfilePicture(): Promise<void> {
  * only offered the destructive version. Signing off a shared machine should
  * not require ending your session on your own phone too.
  */
-export async function signOut(): Promise<void> {
+export async function signOut(formData: FormData): Promise<void> {
+  const user = await getSession();
   await deleteSession();
-  redirect("/admin/login");
+  redirect(
+    user
+      ? signOutLoginPath(user.role)
+      : signOutDestinationFromForm(formData),
+  );
 }
 
 /** Signs the current user out of every device, including this one. */
@@ -154,4 +175,5 @@ export async function signOutEverywhere(): Promise<void> {
   const user = await verifySession();
   await db.session.deleteMany({ where: { userId: user.id } });
   await deleteSession();
+  redirect(signOutLoginPath(user.role));
 }

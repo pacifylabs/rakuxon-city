@@ -78,6 +78,7 @@ export function PortalShell({
               unreadCount={unreadCount}
             />
             <form action={signOut} className="hidden sm:block">
+              <input type="hidden" name="destination" value="portal" />
               <button
                 type="submit"
                 className="cursor-pointer text-caption text-muted underline underline-offset-4 hover:text-foreground"
@@ -120,6 +121,7 @@ export function PortalShell({
               ))}
             </nav>
             <form action={signOut} className="mt-4 border-t border-line pt-4">
+              <input type="hidden" name="destination" value="portal" />
               <button
                 type="submit"
                 className="cursor-pointer text-body text-muted underline underline-offset-4"

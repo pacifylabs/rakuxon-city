@@ -29,6 +29,7 @@ export default async function PortalLoginPage({
 }) {
   const session = await getSession();
   if (session?.role === UserRole.LISTER) redirect("/portal");
+  if (session) redirect("/admin");
 
   const { error, reset, verified } = await searchParams;
   const logo = (await getPlacement("site.logo")) ?? LOGO_FALLBACK;

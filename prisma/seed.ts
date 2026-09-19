@@ -53,9 +53,12 @@ const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString }),
 });
 
-const skipUsers =
-  process.env.SEED_SKIP_USERS === "1" ||
-  process.env.SEED_SKIP_USERS === "true";
+function shouldSkipUsers(): boolean {
+  return (
+    process.env.SEED_SKIP_USERS === "1" ||
+    process.env.SEED_SKIP_USERS === "true"
+  );
+}
 
 function pickSeedsBySlug<T extends { slug: string }>(
   seeds: T[],
@@ -150,6 +153,7 @@ function terrainPhoto(index: number) {
 
 async function clear() {
   // Order matters: children before parents, and the join tables before both.
+  await prisma.portalNotification.deleteMany();
   await prisma.mediaPlacement.deleteMany();
   await prisma.internalNote.deleteMany();
   await prisma.enquiry.deleteMany();
@@ -167,7 +171,7 @@ async function clear() {
   await prisma.testimonial.deleteMany();
   await prisma.importBatch.deleteMany();
   await prisma.media.deleteMany();
-  if (!skipUsers) {
+  if (!shouldSkipUsers()) {
     await prisma.user.deleteMany();
   }
 }
@@ -179,7 +183,7 @@ type StaffUsers = {
 };
 
 async function staffUsersForSeed(): Promise<StaffUsers> {
-  if (!skipUsers) {
+  if (!shouldSkipUsers()) {
     const [admin, landSales, homesSales] = await Promise.all([
       prisma.user.create({
         data: {
@@ -2218,7 +2222,7 @@ async function main() {
   console.log(
     [
       "Seed complete:",
-      skipUsers
+      shouldSkipUsers()
         ? `  users          kept existing (status history attributed to ${landSales.email} / ${homesSales.email})`
         : `  users          3 (admin ${admin.email}, land ${landSales.email}, homes ${homesSales.email})`,
       `  estates        ${estatesToSeed.length}`,
@@ -2232,10 +2236,22 @@ async function main() {
   );
 }
 
-main()
-  .then(() => prisma.$disconnect())
-  .catch(async (error) => {
-    console.error(error);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+/** Catalogue-only seed for admin UI and `SEED_SKIP_USERS=1 pnpm db:seed`. */
+export async function runCatalogueSeedMain(): Promise<void> {
+  process.env.SEED_SKIP_USERS = "1";
+  await main();
+}
+
+const isSeedCli =
+  typeof process.argv[1] === "string" &&
+  process.argv[1].replace(/\\/g, "/").endsWith("/prisma/seed.ts");
+
+if (isSeedCli) {
+  main()
+    .then(() => prisma.$disconnect())
+    .catch(async (error) => {
+      console.error(error);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+}
